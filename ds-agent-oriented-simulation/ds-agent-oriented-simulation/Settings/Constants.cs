@@ -8,5 +8,6 @@ namespace ds_agent_oriented_simulation.Settings
 {
     class Constants
     {
+        
     }
 }
