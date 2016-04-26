@@ -1,14 +1,12 @@
+using ds_agent_oriented_simulation.Agents;
 using OSPABA;
-using simulation;
-using agents;
-using continualAssistants;
-using instantAssistants;
-namespace managers
+
+namespace ds_agent_oriented_simulation.Managers
 {
 	//meta! id="15"
 	public class ManagerOkolia : Manager
 	{
-		public ManagerOkolia(int id, Simulation mySim, Agent myAgent) :
+		public ManagerOkolia(int id, OSPABA.Simulation mySim, Agent myAgent) :
 			base(id, mySim, myAgent)
 		{
 			Init();

@@ -1,5 +1,6 @@
 using OSPABA;
-namespace simulation
+
+namespace ds_agent_oriented_simulation.Simulation
 {
 	public class Mc : IdList
 	{

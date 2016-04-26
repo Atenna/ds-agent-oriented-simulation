@@ -1,9 +1,10 @@
 using OSPABA;
-namespace simulation
+
+namespace ds_agent_oriented_simulation.Simulation
 {
 	public class MyMessage : MessageForm
 	{
-		public MyMessage(Simulation sim) :
+		public MyMessage(OSPABA.Simulation sim) :
 			base(sim)
 		{
 		}

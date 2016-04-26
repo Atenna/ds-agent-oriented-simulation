@@ -1,8 +1,8 @@
-using OSPABA;
-using agents;
-namespace simulation
+using ds_agent_oriented_simulation.Agents;
+
+namespace ds_agent_oriented_simulation.Simulation
 {
-	public class MySimulation : Simulation
+	public class MySimulation : OSPABA.Simulation
 	{
 		public MySimulation()
 		{

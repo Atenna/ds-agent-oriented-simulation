@@ -1,14 +1,13 @@
+using ds_agent_oriented_simulation.Managers;
+using ds_agent_oriented_simulation.Simulation;
 using OSPABA;
-using simulation;
-using managers;
-using continualAssistants;
-using instantAssistants;
-namespace agents
+
+namespace ds_agent_oriented_simulation.Agents
 {
 	//meta! id="20"
 	public class AgentPrejazdu : Agent
 	{
-		public AgentPrejazdu(int id, Simulation mySim, Agent parent) :
+		public AgentPrejazdu(int id, OSPABA.Simulation mySim, Agent parent) :
 			base(id, mySim, parent)
 		{
 			Init();
