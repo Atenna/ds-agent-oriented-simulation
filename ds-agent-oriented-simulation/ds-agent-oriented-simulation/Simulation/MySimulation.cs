@@ -1,33 +1,36 @@
 using ds_agent_oriented_simulation.Agents;
+using ds_agent_oriented_simulation.Entity;
 
 namespace ds_agent_oriented_simulation.Simulation
 {
 	public class MySimulation : OSPABA.Simulation
 	{
+	    private Statistics statistics;
 		public MySimulation()
 		{
 			Init();
 		}
 
-		override public void PrepareSimulation()
+	    protected override void PrepareSimulation()
 		{
 			base.PrepareSimulation();
 			// Create global statistcis
+            statistics = new Statistics();
 		}
 
-		override public void PrepareReplication()
+	    protected override void PrepareReplication()
 		{
 			base.PrepareReplication();
 			// Reset entities, queues, local statistics, etc...
 		}
 
-		override public void ReplicationFinished()
+	    protected override void ReplicationFinished()
 		{
 			// Collect local statistics into global, update UI, etc...
 			base.ReplicationFinished();
 		}
 
-		override public void SimulationFinished()
+	    protected override void SimulationFinished()
 		{
 			// Dysplay simulation results
 			base.SimulationFinished();
@@ -55,6 +58,19 @@ namespace ds_agent_oriented_simulation.Simulation
 		{ get; set; }
 		public AgentStavby AgentStavby
 		{ get; set; }
-		//meta! tag="end"
-	}
+
+        internal Statistics Statistics
+        {
+            get
+            {
+                return statistics;
+            }
+
+            set
+            {
+                statistics = value;
+            }
+        }
+        //meta! tag="end"
+    }
 }
