@@ -37,6 +37,21 @@ namespace ds_agent_oriented_simulation.Managers
 			}
 		}
 
+		//meta! sender="ProcesVykladacA", id="67", type="Finish"
+		public void ProcessFinishProcesVykladacA(MessageForm message)
+		{
+		}
+
+		//meta! sender="PlanovacOdoberMaterial", id="75", type="Finish"
+		public void ProcessFinishPlanovacOdoberMaterial(MessageForm message)
+		{
+		}
+
+		//meta! sender="ProcesVykladacB", id="72", type="Finish"
+		public void ProcessFinishProcesVykladacB(MessageForm message)
+		{
+		}
+
 		//meta! userInfo="Generated code: do not modify", tag="begin"
 		public void Init()
 		{
@@ -46,6 +61,23 @@ namespace ds_agent_oriented_simulation.Managers
 		{
 			switch (message.Code)
 			{
+			case Mc.Finish:
+				switch (message.Sender.Id)
+				{
+				case SimId.ProcesVykladacA:
+					ProcessFinishProcesVykladacA(message);
+				break;
+
+				case SimId.PlanovacOdoberMaterial:
+					ProcessFinishPlanovacOdoberMaterial(message);
+				break;
+
+				case SimId.ProcesVykladacB:
+					ProcessFinishProcesVykladacB(message);
+				break;
+				}
+			break;
+
 			case Mc.PresunNaStavbu:
 				ProcessPresunNaStavbu(message);
 			break;

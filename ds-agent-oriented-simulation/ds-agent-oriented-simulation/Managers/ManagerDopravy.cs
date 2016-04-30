@@ -24,12 +24,12 @@ namespace ds_agent_oriented_simulation.Managers
 			}
 		}
 
-		//meta! sender="AgentPrejazdu", id="44", type="Notice"
+		//meta! userInfo="Removed from model"
 		public void ProcessPokazenieAuta(MessageForm message)
 		{
 		}
 
-		//meta! sender="AgentPrejazdu", id="40", type="Response"
+		//meta! userInfo="Removed from model"
 		public void ProcessPresunCezPrejazd(MessageForm message)
 		{
 		}
@@ -76,14 +76,6 @@ namespace ds_agent_oriented_simulation.Managers
 
 			case Mc.OdvezMaterial:
 				ProcessOdvezMaterial(message);
-			break;
-
-			case Mc.PokazenieAuta:
-				ProcessPokazenieAuta(message);
-			break;
-
-			case Mc.PresunCezPrejazd:
-				ProcessPresunCezPrejazd(message);
 			break;
 
 			default:

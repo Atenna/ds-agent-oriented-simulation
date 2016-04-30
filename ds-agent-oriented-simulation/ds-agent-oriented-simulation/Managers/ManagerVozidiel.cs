@@ -1,12 +1,14 @@
-using ds_agent_oriented_simulation.Agents;
 using OSPABA;
-
-namespace ds_agent_oriented_simulation.Managers
+using simulation;
+using agents;
+using continualAssistants;
+using instantAssistants;
+namespace managers
 {
-	//meta! id="15"
-	public class ManagerOkolia : Manager
+	//meta! id="57"
+	public class ManagerVozidiel : Manager
 	{
-		public ManagerOkolia(int id, OSPABA.Simulation mySim, Agent myAgent) :
+		public ManagerVozidiel(int id, Simulation mySim, Agent myAgent) :
 			base(id, mySim, myAgent)
 		{
 			Init();
@@ -31,11 +33,6 @@ namespace ds_agent_oriented_simulation.Managers
 			}
 		}
 
-		//meta! sender="PlanovacDovozMaterialu", id="55", type="Finish"
-		public void ProcessFinish(MessageForm message)
-		{
-		}
-
 		//meta! userInfo="Generated code: do not modify", tag="begin"
 		public void Init()
 		{
@@ -45,21 +42,17 @@ namespace ds_agent_oriented_simulation.Managers
 		{
 			switch (message.Code)
 			{
-			case Mc.Finish:
-				ProcessFinish(message);
-			break;
-
 			default:
 				ProcessDefault(message);
 			break;
 			}
 		}
 		//meta! tag="end"
-		public new AgentOkolia MyAgent
+		public new AgentVozidiel MyAgent
 		{
 			get
 			{
-				return (AgentOkolia)base.MyAgent;
+				return (AgentVozidiel)base.MyAgent;
 			}
 		}
 	}

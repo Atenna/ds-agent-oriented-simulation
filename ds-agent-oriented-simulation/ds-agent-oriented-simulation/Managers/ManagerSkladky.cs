@@ -37,6 +37,16 @@ namespace ds_agent_oriented_simulation.Managers
 			}
 		}
 
+		//meta! sender="ProcesNakladacA", id="64", type="Finish"
+		public void ProcessFinishProcesNakladacA(MessageForm message)
+		{
+		}
+
+		//meta! sender="ProcesNakladacB", id="70", type="Finish"
+		public void ProcessFinishProcesNakladacB(MessageForm message)
+		{
+		}
+
 		//meta! userInfo="Generated code: do not modify", tag="begin"
 		public void Init()
 		{
@@ -48,6 +58,19 @@ namespace ds_agent_oriented_simulation.Managers
 			{
 			case Mc.PresunNaSkladku:
 				ProcessPresunNaSkladku(message);
+			break;
+
+			case Mc.Finish:
+				switch (message.Sender.Id)
+				{
+				case SimId.ProcesNakladacA:
+					ProcessFinishProcesNakladacA(message);
+				break;
+
+				case SimId.ProcesNakladacB:
+					ProcessFinishProcesNakladacB(message);
+				break;
+				}
 			break;
 
 			default:
