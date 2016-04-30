@@ -23,8 +23,7 @@ namespace ds_agent_oriented_simulation.Agents
 		private void Init()
 		{
 			new ManagerDopravy(SimId.ManagerDopravy, MySim, this);
-			AddOwnMessage(Mc.PokazenieAuta);
-			AddOwnMessage(Mc.PresunCezPrejazd);
+			new PoradcaDopravy(SimId.PoradcaDopravy, MySim, this);
 			AddOwnMessage(Mc.PresunNaStavbu);
 			AddOwnMessage(Mc.PresunNaSkladku);
 			AddOwnMessage(Mc.OdvezMaterial);

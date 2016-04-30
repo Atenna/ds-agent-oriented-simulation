@@ -23,6 +23,8 @@ namespace ds_agent_oriented_simulation.Agents
 		private void Init()
 		{
 			new ManagerSkladky(SimId.ManagerSkladky, MySim, this);
+			new ProcesNakladacA(SimId.ProcesNakladacA, MySim, this);
+			new ProcesNakladacB(SimId.ProcesNakladacB, MySim, this);
 			AddOwnMessage(Mc.PresunNaSkladku);
 		}
 		//meta! tag="end"

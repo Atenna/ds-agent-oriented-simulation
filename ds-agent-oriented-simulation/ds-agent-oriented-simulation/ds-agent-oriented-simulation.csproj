@@ -57,9 +57,9 @@
     <Compile Include="Agents\AgentDopravy.cs" />
     <Compile Include="Agents\AgentModelu.cs" />
     <Compile Include="Agents\AgentOkolia.cs" />
-    <Compile Include="Agents\AgentPrejazdu.cs" />
     <Compile Include="Agents\AgentSkladky.cs" />
     <Compile Include="Agents\AgentStavby.cs" />
+    <Compile Include="Agents\AgentVozidiel.cs" />
     <Compile Include="Entities\Vehicles\CarD.cs" />
     <Compile Include="Entities\Queue.cs" />
     <Compile Include="Entities\Statistics.cs" />

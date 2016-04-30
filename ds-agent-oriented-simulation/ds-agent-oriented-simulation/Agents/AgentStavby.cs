@@ -23,6 +23,10 @@ namespace ds_agent_oriented_simulation.Agents
 		private void Init()
 		{
 			new ManagerStavby(SimId.ManagerStavby, MySim, this);
+			new ProcesVykladacA(SimId.ProcesVykladacA, MySim, this);
+			new PlanovacOdoberMaterial(SimId.PlanovacOdoberMaterial, MySim, this);
+			new AckciaZakupNakladac(SimId.AckciaZakupNakladac, MySim, this);
+			new ProcesVykladacB(SimId.ProcesVykladacB, MySim, this);
 			AddOwnMessage(Mc.PresunNaStavbu);
 		}
 		//meta! tag="end"

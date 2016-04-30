@@ -1,5 +1,5 @@
 using ds_agent_oriented_simulation.Agents;
-using ds_agent_oriented_simulation.Entity;
+using ds_agent_oriented_simulation.Entities;
 
 namespace ds_agent_oriented_simulation.Simulation
 {
@@ -42,7 +42,7 @@ namespace ds_agent_oriented_simulation.Simulation
 			AgentModelu = new AgentModelu(SimId.AgentModelu, this, null);
 			AgentOkolia = new AgentOkolia(SimId.AgentOkolia, this, AgentModelu);
 			AgentDopravy = new AgentDopravy(SimId.AgentDopravy, this, AgentModelu);
-			AgentPrejazdu = new AgentPrejazdu(SimId.AgentPrejazdu, this, AgentDopravy);
+			AgentVozidiel = new AgentVozidiel(SimId.AgentVozidiel, this, AgentDopravy);
 			AgentSkladky = new AgentSkladky(SimId.AgentSkladky, this, AgentDopravy);
 			AgentStavby = new AgentStavby(SimId.AgentStavby, this, AgentDopravy);
 		}
@@ -52,25 +52,12 @@ namespace ds_agent_oriented_simulation.Simulation
 		{ get; set; }
 		public AgentDopravy AgentDopravy
 		{ get; set; }
-		public AgentPrejazdu AgentPrejazdu
+		public AgentVozidiel AgentVozidiel
 		{ get; set; }
 		public AgentSkladky AgentSkladky
 		{ get; set; }
 		public AgentStavby AgentStavby
 		{ get; set; }
-
-        internal Statistics Statistics
-        {
-            get
-            {
-                return statistics;
-            }
-
-            set
-            {
-                statistics = value;
-            }
-        }
-        //meta! tag="end"
+		//meta! tag="end"
     }
 }

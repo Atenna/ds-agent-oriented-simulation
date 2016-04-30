@@ -23,6 +23,7 @@ namespace ds_agent_oriented_simulation.Agents
 		private void Init()
 		{
 			new ManagerOkolia(SimId.ManagerOkolia, MySim, this);
+			new PlanovacDovozMaterialu(SimId.PlanovacDovozMaterialu, MySim, this);
 		}
 		//meta! tag="end"
 	}
