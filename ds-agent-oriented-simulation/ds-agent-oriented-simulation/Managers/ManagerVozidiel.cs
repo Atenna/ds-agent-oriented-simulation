@@ -1,14 +1,11 @@
 using OSPABA;
-using simulation;
-using agents;
-using continualAssistants;
-using instantAssistants;
-namespace managers
+
+namespace ds_agent_oriented_simulation.Managers
 {
 	//meta! id="57"
 	public class ManagerVozidiel : Manager
 	{
-		public ManagerVozidiel(int id, Simulation mySim, Agent myAgent) :
+		public ManagerVozidiel(int id, OSPABA.Simulation mySim, Agent myAgent) :
 			base(id, mySim, myAgent)
 		{
 			Init();

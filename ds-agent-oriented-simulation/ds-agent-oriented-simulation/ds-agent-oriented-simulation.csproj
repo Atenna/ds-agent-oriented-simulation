@@ -81,6 +81,7 @@
     <Compile Include="Managers\ManagerPrejazdu.cs" />
     <Compile Include="Managers\ManagerSkladky.cs" />
     <Compile Include="Managers\ManagerStavby.cs" />
+    <Compile Include="Managers\ManagerVozidiel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings\Constants.cs" />
