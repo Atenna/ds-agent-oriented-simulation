@@ -1,3 +1,4 @@
+using ds_agent_oriented_simulation.InstantAssistant;
 using ds_agent_oriented_simulation.Managers;
 using ds_agent_oriented_simulation.Simulation;
 using OSPABA;

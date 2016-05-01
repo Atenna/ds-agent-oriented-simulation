@@ -9,6 +9,7 @@ namespace ds_agent_oriented_simulation.Simulation
 		public const int PresunNaSkladku = 1003;
 		public const int PresunNaStavbu = 1004;
 		public const int OdvezMaterial = 1006;
+		public const int Inicializacia = 1013;
 		//meta! tag="end"
 
 		// 1..1000 range reserved for user

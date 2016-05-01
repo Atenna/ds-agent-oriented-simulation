@@ -51,6 +51,11 @@ namespace ds_agent_oriented_simulation.Managers
 		{
 			switch (message.Code)
 			{
+            case Mc.Inicializacia:
+			    message.Addressee = MySim.FindAgent(SimId.AgentOkolia);
+                Call(message);
+            break;
+
 			case Mc.DovozMaterialu:
 				ProcessDovozMaterialu(message);
 			break;
