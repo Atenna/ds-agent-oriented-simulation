@@ -86,7 +86,6 @@
     <Compile Include="Managers\ManagerDopravy.cs" />
     <Compile Include="Managers\ManagerModelu.cs" />
     <Compile Include="Managers\ManagerOkolia.cs" />
-    <Compile Include="Managers\ManagerPrejazdu.cs" />
     <Compile Include="Managers\ManagerSkladky.cs" />
     <Compile Include="Managers\ManagerStavby.cs" />
     <Compile Include="Managers\ManagerVozidiel.cs" />

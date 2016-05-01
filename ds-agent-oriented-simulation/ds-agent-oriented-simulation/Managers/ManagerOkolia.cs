@@ -11,6 +11,7 @@ namespace ds_agent_oriented_simulation.Managers
         // priklad
         EmpiricRNG<int> _empiricRng = new EmpiricRNG<int>(
             new EmpiricPair<int>(new UniformDiscreteRNG(100, 200), 0.2));
+        
 		public ManagerOkolia(int id, OSPABA.Simulation mySim, Agent myAgent) :
 			base(id, mySim, myAgent)
 		{
@@ -42,7 +43,12 @@ namespace ds_agent_oriented_simulation.Managers
 		}
 
 		//meta! sender="AgentModelu", id="86", type="Call"
-		public void ProcessInicializacia(MessageForm message) => StartContinualAssistant(message);
+	    public void ProcessInicializacia(MessageForm message)
+	    {
+            // pre S3 StartContinualAssistant(message);
+
+
+        } 
 
 	    //meta! userInfo="Generated code: do not modify", tag="begin"
 		public void Init()

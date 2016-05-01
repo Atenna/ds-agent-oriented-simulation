@@ -1,4 +1,5 @@
 ﻿using System;
+using OSPRNG;
 
 namespace ds_agent_oriented_simulation.Entities.Vehicles
 {
@@ -95,14 +96,13 @@ namespace ds_agent_oriented_simulation.Entities.Vehicles
             return failed < _probabilityOfCrash;
         }
 
-        public void ResetAttributes(Random failureGeneratorReinit)
+        public void ResetAttributes()
         {
             _timeOfWaitingOnDepo = 0;
             _timeOfWaitingOnBuilding = 0;
             _startOfWaiting = 0;
             _numberOfWaitingOnBuilding = 0;
             _numberOfWaitingOnDepo = 0;
-            _failureGenerator = failureGeneratorReinit;
         }
 
         public override string ToString()

@@ -1,13 +1,18 @@
+using ds_agent_oriented_simulation.ContinualAssistant;
+using ds_agent_oriented_simulation.Entities.Vehicles;
+using ds_agent_oriented_simulation.InstantAssistant;
 using ds_agent_oriented_simulation.Managers;
 using ds_agent_oriented_simulation.Simulation;
 using OSPABA;
+using OSPDataStruct;
 
 namespace ds_agent_oriented_simulation.Agents
 {
 	//meta! id="18"
 	public class AgentStavby : Agent
 	{
-		public AgentStavby(int id, OSPABA.Simulation mySim, Agent parent) :
+        private SimQueue<Vehicle> _queue;
+        public AgentStavby(int id, OSPABA.Simulation mySim, Agent parent) :
 			base(id, mySim, parent)
 		{
 			Init();

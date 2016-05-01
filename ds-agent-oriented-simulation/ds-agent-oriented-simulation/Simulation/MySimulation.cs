@@ -1,14 +1,20 @@
+using System;
+using System.Runtime.InteropServices;
 using ds_agent_oriented_simulation.Agents;
 using ds_agent_oriented_simulation.Entities;
+using OSPRNG;
 
 namespace ds_agent_oriented_simulation.Simulation
 {
 	public class MySimulation : OSPABA.Simulation
 	{
 	    private Statistics statistics;
+	    private Random seedGenerator;
 		public MySimulation()
 		{
 			Init();
+		    seedGenerator = new Random();
+
 		}
 
 	    protected override void PrepareSimulation()
@@ -16,6 +22,9 @@ namespace ds_agent_oriented_simulation.Simulation
 			base.PrepareSimulation();
 			// Create global statistcis
             statistics = new Statistics();
+
+            // inicializacia aut
+            AgentVozidiel.PrepareCars(seedGenerator);
 		}
 
 	    protected override void PrepareReplication()

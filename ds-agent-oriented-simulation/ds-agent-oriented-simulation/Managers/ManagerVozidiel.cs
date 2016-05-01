@@ -1,3 +1,4 @@
+using ds_agent_oriented_simulation.Agents;
 using OSPABA;
 
 namespace ds_agent_oriented_simulation.Managers
