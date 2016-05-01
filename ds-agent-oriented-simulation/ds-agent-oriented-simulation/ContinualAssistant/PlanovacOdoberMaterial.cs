@@ -1,12 +1,13 @@
+using ds_agent_oriented_simulation.Agents;
+using ds_agent_oriented_simulation.Simulation;
 using OSPABA;
-using simulation;
-using agents;
-namespace continualAssistants
+
+namespace ds_agent_oriented_simulation.ContinualAssistant
 {
 	//meta! id="74"
 	public class PlanovacOdoberMaterial : Scheduler
 	{
-		public PlanovacOdoberMaterial(int id, Simulation mySim, CommonAgent myAgent) :
+		public PlanovacOdoberMaterial(int id, OSPABA.Simulation mySim, CommonAgent myAgent) :
 			base(id, mySim, myAgent)
 		{
 		}

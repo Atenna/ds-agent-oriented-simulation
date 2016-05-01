@@ -60,6 +60,12 @@
     <Compile Include="Agents\AgentSkladky.cs" />
     <Compile Include="Agents\AgentStavby.cs" />
     <Compile Include="Agents\AgentVozidiel.cs" />
+    <Compile Include="ContinualAssistant\PlanovacDovozMaterialu.cs" />
+    <Compile Include="ContinualAssistant\PlanovacOdoberMaterial.cs" />
+    <Compile Include="ContinualAssistant\ProcesNakladacA.cs" />
+    <Compile Include="ContinualAssistant\ProcesNakladacB.cs" />
+    <Compile Include="ContinualAssistant\ProcesVykladacA.cs" />
+    <Compile Include="ContinualAssistant\ProcesVykladacB.cs" />
     <Compile Include="Entities\Vehicles\CarD.cs" />
     <Compile Include="Entities\Queue.cs" />
     <Compile Include="Entities\Statistics.cs" />
@@ -75,6 +81,8 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="InstantAssistant\AckciaZakupNakladac.cs" />
+    <Compile Include="InstantAssistant\PoradcaDopravy.cs" />
     <Compile Include="Managers\ManagerDopravy.cs" />
     <Compile Include="Managers\ManagerModelu.cs" />
     <Compile Include="Managers\ManagerOkolia.cs" />
@@ -116,9 +124,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ContinualAssistant\" />
     <Folder Include="GUI\" />
-    <Folder Include="InstantAssistant\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

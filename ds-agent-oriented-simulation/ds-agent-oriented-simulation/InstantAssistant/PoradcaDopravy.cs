@@ -1,12 +1,12 @@
+using ds_agent_oriented_simulation.Agents;
 using OSPABA;
-using simulation;
-using agents;
-namespace instantAssistants
+
+namespace ds_agent_oriented_simulation.InstantAssistant
 {
 	//meta! id="83"
 	public class PoradcaDopravy : Adviser
 	{
-		public PoradcaDopravy(int id, Simulation mySim, CommonAgent myAgent) :
+		public PoradcaDopravy(int id, OSPABA.Simulation mySim, CommonAgent myAgent) :
 			base(id, mySim, myAgent)
 		{
 		}
