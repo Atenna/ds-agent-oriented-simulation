@@ -42,15 +42,12 @@ namespace ds_agent_oriented_simulation.Managers
 		{
 		}
 
-		//meta! sender="AgentModelu", id="86", type="Call"
-	    public void ProcessInicializacia(MessageForm message)
-	    {
-            // pre S3 StartContinualAssistant(message);
+		//meta! sender="AgentModelu", id="88", type="Call"
+		public void ProcessInicializacia(MessageForm message)
+		{
+		}
 
-
-        } 
-
-	    //meta! userInfo="Generated code: do not modify", tag="begin"
+		//meta! userInfo="Generated code: do not modify", tag="begin"
 		public void Init()
 		{
 		}
@@ -59,12 +56,12 @@ namespace ds_agent_oriented_simulation.Managers
 		{
 			switch (message.Code)
 			{
-			case Mc.Finish:
-				ProcessFinish(message);
-			break;
-
 			case Mc.Inicializacia:
 				ProcessInicializacia(message);
+			break;
+
+			case Mc.Finish:
+				ProcessFinish(message);
 			break;
 
 			default:

@@ -20,6 +20,10 @@ namespace ds_agent_oriented_simulation.Agents
             MyMessage Sprava = new MyMessage(MySim);
 		    Sprava.Code = Mc.Inicializacia;
             MyManager.Notice(Sprava);
+
+            Sprava = new MyMessage(MySim);
+		    Sprava.Code = Mc.OdvezMaterial;
+            MyManager.Request(Sprava);
 		}
 
 		//meta! userInfo="Generated code: do not modify", tag="begin"
@@ -28,6 +32,7 @@ namespace ds_agent_oriented_simulation.Agents
 			new ManagerModelu(SimId.ManagerModelu, MySim, this);
 			AddOwnMessage(Mc.DovozMaterialu);
 			AddOwnMessage(Mc.OdvezMaterial);
+            AddOwnMessage(Mc.Inicializacia);
 		}
 		//meta! tag="end"
 	}

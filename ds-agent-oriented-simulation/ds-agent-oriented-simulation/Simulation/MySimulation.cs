@@ -24,7 +24,7 @@ namespace ds_agent_oriented_simulation.Simulation
             statistics = new Statistics();
 
             // inicializacia aut
-            AgentVozidiel.PrepareCars(seedGenerator);
+            AgentDopravy.PrepareCars(seedGenerator);
 		}
 
 	    protected override void PrepareReplication()

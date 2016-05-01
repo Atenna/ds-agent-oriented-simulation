@@ -10,7 +10,7 @@ namespace ds_agent_oriented_simulation.Agents
 	//meta! id="17"
 	public class AgentSkladky : Agent
 	{
-	    private SimQueue<Vehicle> _queue;
+	    public SimQueue<Vehicle> Queue { get; }
 	    private double material = Settings.Constants.MaterialToLoad;
 		public AgentSkladky(int id, OSPABA.Simulation mySim, Agent parent) :
 			base(id, mySim, parent)
@@ -28,9 +28,9 @@ namespace ds_agent_oriented_simulation.Agents
 		private void Init()
 		{
 			new ManagerSkladky(SimId.ManagerSkladky, MySim, this);
-			new ProcesNakladacA(SimId.ProcesNakladacA, MySim, this);
 			new ProcesNakladacB(SimId.ProcesNakladacB, MySim, this);
-			AddOwnMessage(Mc.PresunNaSkladku);
+			new ProcesNakladacA(SimId.ProcesNakladacA, MySim, this);
+			AddOwnMessage(Mc.NalozAuto);
 		}
 		//meta! tag="end"
 	}

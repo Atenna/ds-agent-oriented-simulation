@@ -25,7 +25,7 @@ namespace ds_agent_oriented_simulation.Managers
 		}
 
 		//meta! sender="AgentDopravy", id="37", type="Request"
-		public void ProcessPresunNaStavbu(MessageForm message)
+		public void ProcessVylozAuto(MessageForm message)
 		{
 		}
 
@@ -61,9 +61,17 @@ namespace ds_agent_oriented_simulation.Managers
 		{
 			switch (message.Code)
 			{
+			case Mc.VylozAuto:
+				ProcessVylozAuto(message);
+			break;
+
 			case Mc.Finish:
 				switch (message.Sender.Id)
 				{
+				case SimId.ProcesVykladacB:
+					ProcessFinishProcesVykladacB(message);
+				break;
+
 				case SimId.ProcesVykladacA:
 					ProcessFinishProcesVykladacA(message);
 				break;
@@ -71,15 +79,7 @@ namespace ds_agent_oriented_simulation.Managers
 				case SimId.PlanovacOdoberMaterial:
 					ProcessFinishPlanovacOdoberMaterial(message);
 				break;
-
-				case SimId.ProcesVykladacB:
-					ProcessFinishProcesVykladacB(message);
-				break;
 				}
-			break;
-
-			case Mc.PresunNaStavbu:
-				ProcessPresunNaStavbu(message);
 			break;
 
 			default:

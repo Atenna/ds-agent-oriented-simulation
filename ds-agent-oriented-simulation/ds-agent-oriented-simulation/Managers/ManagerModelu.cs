@@ -1,4 +1,5 @@
 using ds_agent_oriented_simulation.Agents;
+using ds_agent_oriented_simulation.Entities.Vehicles;
 using ds_agent_oriented_simulation.Simulation;
 using OSPABA;
 
@@ -32,6 +33,10 @@ namespace ds_agent_oriented_simulation.Managers
 		//meta! sender="AgentDopravy", id="39", type="Response"
 		public void ProcessOdvezMaterial(MessageForm message)
 		{
+            MyMessage sprava = new MyMessage(MySim, 1);
+		    sprava.Code = Mc.OdvezMaterial;
+            sprava.Addressee = MySim.FindAgent(SimId.AgentDopravy);
+            Request(message);
 		}
 
 		//meta! userInfo="Process messages defined in code", id="0"
@@ -52,16 +57,16 @@ namespace ds_agent_oriented_simulation.Managers
 			switch (message.Code)
 			{
             case Mc.Inicializacia:
-			    message.Addressee = MySim.FindAgent(SimId.AgentOkolia);
+                message.Addressee = MySim.FindAgent(SimId.AgentOkolia);
                 Call(message);
             break;
 
-			case Mc.DovozMaterialu:
-				ProcessDovozMaterialu(message);
-			break;
-
 			case Mc.OdvezMaterial:
 				ProcessOdvezMaterial(message);
+			break;
+
+			case Mc.DovozMaterialu:
+				ProcessDovozMaterialu(message);
 			break;
 
 			default:

@@ -25,8 +25,9 @@ namespace ds_agent_oriented_simulation.Managers
 		}
 
 		//meta! sender="AgentDopravy", id="36", type="Request"
-		public void ProcessPresunNaSkladku(MessageForm message)
+		public void ProcessNalozAuto(MessageForm message)
 		{
+		    MyAgent.Queue.AddLast(((MyMessage)message).Car);
 		}
 
 		//meta! userInfo="Process messages defined in code", id="0"
@@ -56,10 +57,6 @@ namespace ds_agent_oriented_simulation.Managers
 		{
 			switch (message.Code)
 			{
-			case Mc.PresunNaSkladku:
-				ProcessPresunNaSkladku(message);
-			break;
-
 			case Mc.Finish:
 				switch (message.Sender.Id)
 				{
@@ -71,6 +68,10 @@ namespace ds_agent_oriented_simulation.Managers
 					ProcessFinishProcesNakladacB(message);
 				break;
 				}
+			break;
+
+			case Mc.NalozAuto:
+				ProcessNalozAuto(message);
 			break;
 
 			default:

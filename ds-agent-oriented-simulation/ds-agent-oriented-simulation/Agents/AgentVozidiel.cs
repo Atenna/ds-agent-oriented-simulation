@@ -40,6 +40,7 @@ namespace ds_agent_oriented_simulation.Agents
 		private void Init()
 		{
 			new ManagerVozidiel(SimId.ManagerVozidiel, MySim, this);
+			AddOwnMessage(Mc.Inicializacia);
 		}
 		//meta! tag="end"
 	}

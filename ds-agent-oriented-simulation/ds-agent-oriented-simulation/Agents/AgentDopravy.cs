@@ -1,3 +1,5 @@
+using System;
+using ds_agent_oriented_simulation.Entities.Vehicles;
 using ds_agent_oriented_simulation.InstantAssistant;
 using ds_agent_oriented_simulation.Managers;
 using ds_agent_oriented_simulation.Simulation;
@@ -8,13 +10,28 @@ namespace ds_agent_oriented_simulation.Agents
 	//meta! id="19"
 	public class AgentDopravy : Agent
 	{
-		public AgentDopravy(int id, OSPABA.Simulation mySim, Agent parent) :
+	    public Vehicle A { get; private set; }
+	    public Vehicle B { get; private set; }
+	    public Vehicle C { get; private set; }
+	    public Vehicle D { get; private set; }
+	    public Vehicle E { get; private set; }
+
+	    public AgentDopravy(int id, OSPABA.Simulation mySim, Agent parent) :
 			base(id, mySim, parent)
 		{
 			Init();
 		}
 
-		override public void PrepareReplication()
+        public void PrepareCars(Random seedGenerator)
+        {
+            A = new CarA(seedGenerator);
+            B = new CarB(seedGenerator);
+            C = new CarC(seedGenerator);
+            D = new CarD(seedGenerator);
+            E = new CarE(seedGenerator);
+        }
+
+        override public void PrepareReplication()
 		{
 			base.PrepareReplication();
 			// Setup component for the next replication
@@ -25,8 +42,9 @@ namespace ds_agent_oriented_simulation.Agents
 		{
 			new ManagerDopravy(SimId.ManagerDopravy, MySim, this);
 			new PoradcaDopravy(SimId.PoradcaDopravy, MySim, this);
-			AddOwnMessage(Mc.PresunNaStavbu);
-			AddOwnMessage(Mc.PresunNaSkladku);
+			AddOwnMessage(Mc.Inicializacia);
+			AddOwnMessage(Mc.NalozAuto);
+			AddOwnMessage(Mc.VylozAuto);
 			AddOwnMessage(Mc.OdvezMaterial);
 		}
 		//meta! tag="end"
