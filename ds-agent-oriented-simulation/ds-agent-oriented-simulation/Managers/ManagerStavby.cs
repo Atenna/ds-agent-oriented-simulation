@@ -1,4 +1,5 @@
 using ds_agent_oriented_simulation.Agents;
+using ds_agent_oriented_simulation.Entities.Vehicles;
 using ds_agent_oriented_simulation.Simulation;
 using OSPABA;
 
@@ -27,7 +28,16 @@ namespace ds_agent_oriented_simulation.Managers
 		//meta! sender="AgentDopravy", id="37", type="Request"
 		public void ProcessVylozAuto(MessageForm message)
 		{
-		}
+            Vehicle naVylozenie = ((MyMessage)message).Car;
+            if (MyAgent.VykladacIsWorking)
+            {
+                MyAgent.AutaStavbaQueue.AddLast(naVylozenie);
+            }
+            else
+            {
+                // to do 
+            }
+        }
 
 		//meta! userInfo="Process messages defined in code", id="0"
 		public void ProcessDefault(MessageForm message)

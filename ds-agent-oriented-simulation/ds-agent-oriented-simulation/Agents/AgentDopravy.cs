@@ -4,6 +4,7 @@ using ds_agent_oriented_simulation.InstantAssistant;
 using ds_agent_oriented_simulation.Managers;
 using ds_agent_oriented_simulation.Simulation;
 using OSPABA;
+using OSPDataStruct;
 
 namespace ds_agent_oriented_simulation.Agents
 {
@@ -16,7 +17,8 @@ namespace ds_agent_oriented_simulation.Agents
 	    public Vehicle D { get; private set; }
 	    public Vehicle E { get; private set; }
 
-	    public AgentDopravy(int id, OSPABA.Simulation mySim, Agent parent) :
+
+        public AgentDopravy(int id, OSPABA.Simulation mySim, Agent parent) :
 			base(id, mySim, parent)
 		{
 			Init();

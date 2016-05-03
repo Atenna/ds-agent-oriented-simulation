@@ -1,4 +1,5 @@
 ﻿using System;
+using ds_agent_oriented_simulation.Simulation;
 using OSPRNG;
 
 namespace ds_agent_oriented_simulation.Entities.Vehicles
@@ -108,6 +109,21 @@ namespace ds_agent_oriented_simulation.Entities.Vehicles
         public override string ToString()
         {
             return Name + ": [" + RealVolume + "/" + Volume + "], " + Speed + " ";
+        }
+
+        public void NalozAuto(OSPABA.Simulation mySim, double materialToLoad, int nakladacCislo)
+        {
+            // nejaka sprava ktora bude upozornovat na stav nakladania auta - nech je vidno postupne nakladanie auta
+            MyMessage notice = new MyMessage(mySim, this);
+            for (int i = 0; i < materialToLoad; i++)
+            {
+                // tu bude vzorec nakladania pre konkretny nakladac + mnozstvo
+                RealVolume += i;
+                notice.Addressee = mySim.FindAgent(SimId.AgentSkladky);
+                // notice.Code = vymysliet .... upozornenie o stave nakladania
+                
+            // odtialto sa asi nedaju posielat spravy
+            }
         }
     }
 }
