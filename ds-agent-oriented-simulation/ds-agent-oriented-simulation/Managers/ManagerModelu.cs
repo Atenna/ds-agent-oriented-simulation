@@ -1,3 +1,4 @@
+using System;
 using ds_agent_oriented_simulation.Agents;
 using ds_agent_oriented_simulation.Entities.Vehicles;
 using ds_agent_oriented_simulation.Simulation;
@@ -28,11 +29,13 @@ namespace ds_agent_oriented_simulation.Managers
 		//meta! sender="AgentOkolia", id="35", type="Notice"
 		public void ProcessDovozMaterialu(MessageForm message)
 		{
+            // toto je len notice ze na skladku pribudol material
 		}
 
 		//meta! sender="AgentDopravy", id="39", type="Response"
 		public void ProcessOdvezMaterial(MessageForm message)
 		{
+            // posiela v sprave cislo variantu
             MyMessage sprava = new MyMessage(MySim, 1);
 		    sprava.Code = Mc.OdvezMaterial;
             sprava.Addressee = MySim.FindAgent(SimId.AgentDopravy);
@@ -57,8 +60,8 @@ namespace ds_agent_oriented_simulation.Managers
 			switch (message.Code)
 			{
             case Mc.Inicializacia:
-                message.Addressee = MySim.FindAgent(SimId.AgentOkolia);
-                Call(message);
+			        ProcessInicializacia(message);
+
             break;
 
 			case Mc.OdvezMaterial:
@@ -74,8 +77,19 @@ namespace ds_agent_oriented_simulation.Managers
 			break;
 			}
 		}
-		//meta! tag="end"
-		public new AgentModelu MyAgent
+
+        private void ProcessInicializacia(MessageForm message)
+        {
+            // v AgentOkolia sa nainicializuju generatory pre dovozcov materialu
+            message.Addressee = MySim.FindAgent(SimId.AgentOkolia);
+            Call(message);
+            // vytvoria sa auta pre konkretny variant simulacie
+            message.Addressee = MySim.FindAgent(SimId.AgentDopravy);
+            Call(message);
+        }
+
+        //meta! tag="end"
+        public new AgentModelu MyAgent
 		{
 			get
 			{

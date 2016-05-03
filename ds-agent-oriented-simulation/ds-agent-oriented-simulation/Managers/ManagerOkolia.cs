@@ -45,6 +45,7 @@ namespace ds_agent_oriented_simulation.Managers
 		//meta! sender="AgentModelu", id="88", type="Call"
 		public void ProcessInicializacia(MessageForm message)
 		{
+            // nainicializuje generatory na dovoz materialu
 		}
 
 		//meta! userInfo="Generated code: do not modify", tag="begin"

@@ -1,5 +1,7 @@
+using System;
 using ds_agent_oriented_simulation.Agents;
 using ds_agent_oriented_simulation.Entities.Vehicles;
+using ds_agent_oriented_simulation.InstantAssistant;
 using ds_agent_oriented_simulation.Simulation;
 using OSPABA;
 
@@ -40,19 +42,14 @@ namespace ds_agent_oriented_simulation.Managers
 		//meta! sender="AgentSkladky", id="36", type="Response"
 		public void ProcessNalozAuto(MessageForm message)
 		{
+		    
+            
 		}
 
 		//meta! sender="AgentModelu", id="39", type="Request"
 		public void ProcessOdvezMaterial(MessageForm message)
 		{
-		    MyMessage sprava = (MyMessage) message;
-            // case podla variantu
-            enabledCars = new Vehicle[3];
-		    enabledCars[0] = MyAgent.A;
-		    enabledCars[1] = MyAgent.B;
-		    enabledCars[2] = MyAgent.C;
-
-            MyMessage nalozAuto = new MyMessage(MySim, enabledCars[0]);
+		    MyMessage nalozAuto = new MyMessage(MySim, enabledCars[0]);
 		    nalozAuto.Code = Mc.NalozAuto;
 		    nalozAuto.Addressee = MySim.FindAgent(SimId.AgentSkladky);
 
@@ -104,8 +101,41 @@ namespace ds_agent_oriented_simulation.Managers
 			break;
 			}
 		}
-		//meta! tag="end"
-		public new AgentDopravy MyAgent
+
+        private void ProcessInicializacia(MessageForm message)
+        {
+            MyMessage sprava = (MyMessage)message;
+            InicializujAutaPodlaVariantu(sprava.Variant);
+
+            foreach( Vehicle i in enabledCars)
+            {
+                sprava = new MyMessage(MySim, i);
+                sprava.Addressee = MyAgent;
+                sprava.Code = Mc.NalozAuto;
+            }          
+        }
+
+        private void InicializujAutaPodlaVariantu(int variant)
+        {
+            if (variant == 1)
+            {
+                enabledCars = new Vehicle[3];
+                enabledCars[0] = MyAgent.A;
+                enabledCars[1] = MyAgent.B;
+                enabledCars[2] = MyAgent.C;
+            } else if (variant == 2)
+            {
+                enabledCars = new Vehicle[4];
+                enabledCars[0] = MyAgent.A;
+                enabledCars[1] = MyAgent.B;
+                enabledCars[2] = MyAgent.C;
+                enabledCars[3] = MyAgent.D
+            }
+            // etc, to-do
+        }
+
+        //meta! tag="end"
+        public new AgentDopravy MyAgent
 		{
 			get
 			{
