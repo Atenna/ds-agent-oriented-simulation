@@ -1,4 +1,6 @@
 using ds_agent_oriented_simulation.Agents;
+using ds_agent_oriented_simulation.Entities.Vehicles;
+using ds_agent_oriented_simulation.Settings;
 using ds_agent_oriented_simulation.Simulation;
 using OSPABA;
 
@@ -21,6 +23,10 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
 		//meta! sender="AgentSkladky", id="64", type="Start"
 		public void ProcessStart(MessageForm message)
 		{
+            Vehicle naNalozenie = ((MyMessage)message).Car;
+            double timeOfLoading = naNalozenie.Volume / Constants.LoadMachinePerformance;
+		    message.Addressee = MyAgent;
+            Hold(timeOfLoading, message);
 		}
 
 		//meta! userInfo="Process messages defined in code", id="0"

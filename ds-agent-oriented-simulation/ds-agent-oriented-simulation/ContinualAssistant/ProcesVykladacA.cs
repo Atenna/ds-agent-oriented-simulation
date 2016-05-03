@@ -1,4 +1,6 @@
 using ds_agent_oriented_simulation.Agents;
+using ds_agent_oriented_simulation.Entities.Vehicles;
+using ds_agent_oriented_simulation.Settings;
 using ds_agent_oriented_simulation.Simulation;
 using OSPABA;
 
@@ -21,7 +23,11 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
 		//meta! sender="AgentStavby", id="67", type="Start"
 		public void ProcessStart(MessageForm message)
 		{
-		}
+            Vehicle naVylozenie = ((MyMessage)message).Car;
+            double timeOfUnloading = naVylozenie.Volume / Constants.LoadMachinePerformance;
+            message.Addressee = MyAgent;
+            Hold(timeOfUnloading, message);
+        }
 
 		//meta! userInfo="Process messages defined in code", id="0"
 		public void ProcessDefault(MessageForm message)

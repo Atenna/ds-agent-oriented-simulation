@@ -83,7 +83,7 @@ namespace ds_agent_oriented_simulation.Managers
             // v AgentOkolia sa nainicializuju generatory pre dovozcov materialu
             message.Addressee = MySim.FindAgent(SimId.AgentOkolia);
             Call(message);
-            // vytvoria sa auta pre konkretny variant simulacie
+            // vytvoria sa auta pre konkretny variant simulacie a poslu sa spravy na nakladanie auta agentovi skladky
             message.Addressee = MySim.FindAgent(SimId.AgentDopravy);
             Call(message);
         }

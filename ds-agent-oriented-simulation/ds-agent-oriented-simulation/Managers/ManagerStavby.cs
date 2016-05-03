@@ -1,5 +1,6 @@
 using ds_agent_oriented_simulation.Agents;
 using ds_agent_oriented_simulation.Entities.Vehicles;
+using ds_agent_oriented_simulation.Settings;
 using ds_agent_oriented_simulation.Simulation;
 using OSPABA;
 
@@ -29,13 +30,28 @@ namespace ds_agent_oriented_simulation.Managers
 		public void ProcessVylozAuto(MessageForm message)
 		{
             Vehicle naVylozenie = ((MyMessage)message).Car;
-            if (MyAgent.VykladacIsWorking)
+            // to-do
+		    double volumeToUnload = naVylozenie.RealVolume;
+            
+            if (MyAgent.VykladacAIsWorking && MyAgent.VykladacBIsWorking)
             {
                 MyAgent.AutaStavbaQueue.AddLast(naVylozenie);
             }
             else
             {
-                // to do 
+                if (MyAgent.VykladacAIsWorking)
+                {
+                    message.Addressee = MySim.FindAgent(SimId.ProcesVykladacB);
+                    MyAgent.VykladacBIsWorking = true;
+                    StartContinualAssistant(message);
+                }
+                else
+                {
+                    message.Addressee = MySim.FindAgent(SimId.ProcesVykladacA);
+                    MyAgent.VykladacAIsWorking = true;
+                    StartContinualAssistant(message);
+                }
+                
             }
         }
 

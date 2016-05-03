@@ -1,5 +1,6 @@
 using ds_agent_oriented_simulation.Agents;
 using ds_agent_oriented_simulation.Entities.Vehicles;
+using ds_agent_oriented_simulation.Settings;
 using ds_agent_oriented_simulation.Simulation;
 using OSPABA;
 
@@ -29,13 +30,25 @@ namespace ds_agent_oriented_simulation.Managers
 		public void ProcessNalozAuto(MessageForm message)
 		{
             Vehicle naNalozenie = ((MyMessage)message).Car;
-            if (MyAgent.NakladacIsWorking)
+
+            // TO=DO - KOLKO SA BUDE NAKLADAT NA AUTO ak bude na skladke menej materialu? Pocka na dovoz????
+
+            if (MyAgent.NakladacAIsWorking && MyAgent.NakladacBIsWorking)
             {
                 MyAgent.AutaSkladkaQueue.AddLast(naNalozenie);
             }
             else
             {
-                // to do 
+                if (MyAgent.NakladacAIsWorking)
+                {
+                    message.Addressee = MySim.FindAgent(SimId.ProcesNakladacB);
+                    StartContinualAssistant(message);
+                }
+                else
+                {
+                    message.Addressee = MySim.FindAgent(SimId.ProcesNakladacA);
+                    StartContinualAssistant(message);
+                }
             }
         }
 

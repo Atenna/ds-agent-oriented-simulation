@@ -8,7 +8,6 @@ namespace ds_agent_oriented_simulation.Simulation
 		public const int DovozMaterialu = 1002;
 		public const int NalozAuto = 1003;
 		public const int VylozAuto = 1004;
-		public const int OdvezMaterial = 1006;
 		public const int Inicializacia = 1014;
 		//meta! tag="end"
 

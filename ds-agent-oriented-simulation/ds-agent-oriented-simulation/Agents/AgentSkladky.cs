@@ -11,7 +11,8 @@ namespace ds_agent_oriented_simulation.Agents
 	public class AgentSkladky : Agent
 	{
         public SimQueue<Vehicle> AutaSkladkaQueue { get; private set; }
-        public bool NakladacIsWorking { get; internal set; }
+        public bool NakladacAIsWorking { get; internal set; }
+        public bool NakladacBIsWorking { get; internal set; }
 
         private double material = Settings.Constants.MaterialToLoad;
 		public AgentSkladky(int id, OSPABA.Simulation mySim, Agent parent) :

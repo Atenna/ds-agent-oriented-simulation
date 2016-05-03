@@ -10,7 +10,7 @@ namespace ds_agent_oriented_simulation.Managers
 	//meta! id="19"
 	public class ManagerDopravy : Manager
 	{
-	    private Vehicle[] enabledCars;
+	    private Vehicle[] _enabledCars;
 		public ManagerDopravy(int id, OSPABA.Simulation mySim, Agent myAgent) :
 			base(id, mySim, myAgent)
 		{
@@ -28,11 +28,6 @@ namespace ds_agent_oriented_simulation.Managers
 			}
 		}
 
-		//meta! userInfo="Removed from model"
-		public void ProcessPokazenieAuta(MessageForm message)
-		{
-		}
-
 
 		//meta! sender="AgentStavby", id="37", type="Response"
 		public void ProcessVylozAuto(MessageForm message)
@@ -42,26 +37,8 @@ namespace ds_agent_oriented_simulation.Managers
 		//meta! sender="AgentSkladky", id="36", type="Response"
 		public void ProcessNalozAuto(MessageForm message)
 		{
-		    
-            
+		    // pride odpoved
 		}
-
-		//meta! sender="AgentModelu", id="39", type="Request"
-		public void ProcessOdvezMaterial(MessageForm message)
-		{
-		    MyMessage nalozAuto = new MyMessage(MySim, enabledCars[0]);
-		    nalozAuto.Code = Mc.NalozAuto;
-		    nalozAuto.Addressee = MySim.FindAgent(SimId.AgentSkladky);
-
-            Request(nalozAuto);
-
-            nalozAuto = new MyMessage(MySim, enabledCars[1]);
-            Request(nalozAuto);
-
-            nalozAuto = new MyMessage(MySim, enabledCars[2]);
-            Request(nalozAuto);
-
-        }
 
 		//meta! userInfo="Process messages defined in code", id="0"
 		public void ProcessDefault(MessageForm message)
@@ -88,10 +65,6 @@ namespace ds_agent_oriented_simulation.Managers
 				ProcessNalozAuto(message);
 			break;
 
-			case Mc.OdvezMaterial:
-				ProcessOdvezMaterial(message);
-			break;
-
 			case Mc.Inicializacia:
 				ProcessInicializacia(message);
 			break;
@@ -107,11 +80,12 @@ namespace ds_agent_oriented_simulation.Managers
             MyMessage sprava = (MyMessage)message;
             InicializujAutaPodlaVariantu(sprava.Variant);
 
-            foreach( Vehicle i in enabledCars)
+            foreach( Vehicle i in _enabledCars)
             {
                 sprava = new MyMessage(MySim, i);
-                sprava.Addressee = MyAgent;
+                sprava.Addressee = MySim.FindAgent(SimId.AgentSkladky);
                 sprava.Code = Mc.NalozAuto;
+                Request(message);
             }          
         }
 
@@ -119,17 +93,17 @@ namespace ds_agent_oriented_simulation.Managers
         {
             if (variant == 1)
             {
-                enabledCars = new Vehicle[3];
-                enabledCars[0] = MyAgent.A;
-                enabledCars[1] = MyAgent.B;
-                enabledCars[2] = MyAgent.C;
+                _enabledCars = new Vehicle[3];
+                _enabledCars[0] = MyAgent.A;
+                _enabledCars[1] = MyAgent.B;
+                _enabledCars[2] = MyAgent.C;
             } else if (variant == 2)
             {
-                enabledCars = new Vehicle[4];
-                enabledCars[0] = MyAgent.A;
-                enabledCars[1] = MyAgent.B;
-                enabledCars[2] = MyAgent.C;
-                enabledCars[3] = MyAgent.D
+                _enabledCars = new Vehicle[4];
+                _enabledCars[0] = MyAgent.A;
+                _enabledCars[1] = MyAgent.B;
+                _enabledCars[2] = MyAgent.C;
+                _enabledCars[3] = MyAgent.D
             }
             // etc, to-do
         }

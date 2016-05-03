@@ -12,7 +12,8 @@ namespace ds_agent_oriented_simulation.Agents
 	public class AgentStavby : Agent
 	{
         public SimQueue<Vehicle> AutaStavbaQueue { get; private set; }
-        public bool VykladacIsWorking { get; internal set; }
+        public bool VykladacAIsWorking { get; internal set; }
+        public bool VykladacBIsWorking { get; internal set; }
 
         public AgentStavby(int id, OSPABA.Simulation mySim, Agent parent) :
 			base(id, mySim, parent)
