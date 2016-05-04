@@ -32,7 +32,10 @@ namespace ds_agent_oriented_simulation.Agents
 		    NakladacAIsWorking = false;
 		    NakladacBIsWorking = false;
             // odoberie vozidla z radu
-		    AutaSkladkaQueue.Dequeue();
+		    if (!AutaSkladkaQueue.IsEmpty())
+		    {
+		        AutaSkladkaQueue.Dequeue();
+		    }
 		}
 
 		//meta! userInfo="Generated code: do not modify", tag="begin"

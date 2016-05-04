@@ -33,7 +33,11 @@ namespace ds_agent_oriented_simulation.Agents
 		    VykladacAIsWorking = false;
 
             // odobratie prvkov z radu
-		    AutaStavbaQueue.Dequeue();
+            if (!AutaStavbaQueue.IsEmpty())
+            {
+                AutaStavbaQueue.Dequeue();
+            }
+            
 		}
 
 		//meta! userInfo="Generated code: do not modify", tag="begin"
