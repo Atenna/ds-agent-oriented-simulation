@@ -26,5 +26,9 @@ namespace ds_agent_oriented_simulation.Simulation
 		public const int PlanovacDovozMaterialu = 1001;
 		public const int ProcesNakladacA = 1002;
 		//meta! tag="end"
+
+	    public const int ProcesCestaNaPrejazd = 2000;
+	    public const int ProcesCestaNaSkladku = 2001;
+	    public const int ProcesCestaNaStavbu = 2002;
 	}
 }

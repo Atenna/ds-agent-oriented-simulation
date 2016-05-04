@@ -14,6 +14,7 @@ namespace ds_agent_oriented_simulation.Simulation
 		// 1..1000 range reserved for user
 	    public const int NalozenieUkoncene = 16;
         public const int VylozenieUkoncene = 32;
+	    public const int PrejazdUkonceny = 64;
 
-    }
+	}
 }

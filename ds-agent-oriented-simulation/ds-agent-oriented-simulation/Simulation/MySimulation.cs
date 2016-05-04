@@ -51,7 +51,6 @@ namespace ds_agent_oriented_simulation.Simulation
 			AgentModelu = new AgentModelu(SimId.AgentModelu, this, null);
 			AgentOkolia = new AgentOkolia(SimId.AgentOkolia, this, AgentModelu);
 			AgentDopravy = new AgentDopravy(SimId.AgentDopravy, this, AgentModelu);
-			AgentVozidiel = new AgentVozidiel(SimId.AgentVozidiel, this, AgentDopravy);
 			AgentSkladky = new AgentSkladky(SimId.AgentSkladky, this, AgentDopravy);
 			AgentStavby = new AgentStavby(SimId.AgentStavby, this, AgentDopravy);
 		}
@@ -60,8 +59,6 @@ namespace ds_agent_oriented_simulation.Simulation
 		public AgentOkolia AgentOkolia
 		{ get; set; }
 		public AgentDopravy AgentDopravy
-		{ get; set; }
-		public AgentVozidiel AgentVozidiel
 		{ get; set; }
 		public AgentSkladky AgentSkladky
 		{ get; set; }

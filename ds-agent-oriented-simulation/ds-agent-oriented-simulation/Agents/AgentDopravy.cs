@@ -1,4 +1,5 @@
 using System;
+using ds_agent_oriented_simulation.ContinualAssistant;
 using ds_agent_oriented_simulation.Entities.Vehicles;
 using ds_agent_oriented_simulation.InstantAssistant;
 using ds_agent_oriented_simulation.Managers;
@@ -44,9 +45,13 @@ namespace ds_agent_oriented_simulation.Agents
 		{
 			new ManagerDopravy(SimId.ManagerDopravy, MySim, this);
 			new PoradcaDopravy(SimId.PoradcaDopravy, MySim, this);
+		    new ProcesCestaNaPrejazd(SimId.ProcesCestaNaPrejazd, MySim, this);
+		    new ProcesCestaNaSkladku(SimId.ProcesCestaNaSkladku, MySim, this);
+		    new ProcesCestaNaStavbu(SimId.ProcesCestaNaStavbu, MySim, this);
 			AddOwnMessage(Mc.Inicializacia);
 			AddOwnMessage(Mc.NalozAuto);
 			AddOwnMessage(Mc.VylozAuto);
+            AddOwnMessage(Mc.PrejazdUkonceny);
 		}
 		//meta! tag="end"
 	}
