@@ -24,7 +24,11 @@ namespace ds_agent_oriented_simulation.Managers
 			{
 				PetriNet.Clear();
 			}
-		}
+
+            MyMessage Sprava = new MyMessage(MySim, 1);
+            Sprava.Code = Mc.Inicializacia;
+            Sprava.Addressee = MySim.FindAgent(SimId.AgentModelu);
+        }
 
 		//meta! sender="AgentOkolia", id="35", type="Notice"
 		public void ProcessDovozMaterialu(MessageForm message)
@@ -51,7 +55,7 @@ namespace ds_agent_oriented_simulation.Managers
 			switch (message.Code)
 			{
             case Mc.Inicializacia:
-			        ProcessInicializacia(message);
+			    ProcessInicializacia(message);
 
             break;
 

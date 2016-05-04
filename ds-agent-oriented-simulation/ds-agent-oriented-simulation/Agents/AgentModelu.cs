@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 using ds_agent_oriented_simulation.Managers;
 using ds_agent_oriented_simulation.Simulation;
 using OSPABA;
@@ -17,9 +18,6 @@ namespace ds_agent_oriented_simulation.Agents
 		{
 			base.PrepareReplication();
 			// Setup component for the next replication
-            MyMessage Sprava = new MyMessage(MySim);
-		    Sprava.Code = Mc.Inicializacia;
-            MyManager.Call(Sprava);
 		}
 
 		//meta! userInfo="Generated code: do not modify", tag="begin"
