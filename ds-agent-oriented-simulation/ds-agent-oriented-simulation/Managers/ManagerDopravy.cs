@@ -1,4 +1,5 @@
 using System;
+using System.Windows.Forms;
 using ds_agent_oriented_simulation.Agents;
 using ds_agent_oriented_simulation.Entities.Vehicles;
 using ds_agent_oriented_simulation.InstantAssistant;
@@ -11,6 +12,7 @@ namespace ds_agent_oriented_simulation.Managers
 	public class ManagerDopravy : Manager
 	{
 	    private Vehicle[] _enabledCars;
+	    private MyMessage requestCopyMessage;
 	    
 		public ManagerDopravy(int id, OSPABA.Simulation mySim, Agent myAgent) :
 			base(id, mySim, myAgent)
@@ -28,32 +30,68 @@ namespace ds_agent_oriented_simulation.Managers
 				PetriNet.Clear();
 			}
 		}
+        //meta! sender="AgentSkladky", id="36", type="Response"
+        public void ProcessNalozAuto(MessageForm message)
+        {
+            // auto skoncilo nakladanie
+            Console.WriteLine("Auto nalozene");
+            requestCopyMessage = (MyMessage)message.CreateCopy();
+            requestCopyMessage.Code = Mc.VylozAuto;
+            requestCopyMessage.Addressee = MySim.FindAgent(SimId.AgentStavby);
 
+            message.Addressee = MySim.FindAgent(SimId.ProcesCestaNaStavbu);
+            StartContinualAssistant(message);
+        }
 
-		//meta! sender="AgentStavby", id="37", type="Response"
-		public void ProcessVylozAuto(MessageForm message)
+        //meta! sender="ProcesCestaNaStavbu", id="neviem", type="Finish"
+        public void ProcessFinishProcesCestaNaStavbu(MessageForm message)
+        {
+            Console.WriteLine("Auto na stavbe");
+            // agent stavby vyloz auto
+            Request(requestCopyMessage);
+        }
+
+        //meta! sender="AgentStavby", id="37", type="Response"
+        public void ProcessVylozAuto(MessageForm message)
 		{
+            Console.WriteLine("Auto vylozene");
+            // vytvori sa kopia spravy, ktoru bude poslana potom s autom na skladku
+            requestCopyMessage = (MyMessage) message;
+            requestCopyMessage.Code = Mc.NalozAuto;
+            requestCopyMessage.Addressee = MySim.FindAgent(SimId.AgentStavby);
+            // vykladanie skoncilo, auto pojde na prejazd
+            message.Addressee = MySim.FindAgent(SimId.ProcesCestaNaPrejazd);
+            StartContinualAssistant(message);
 		}
 
-		//meta! sender="AgentSkladky", id="36", type="Response"
-		public void ProcessNalozAuto(MessageForm message)
-		{
-		    message.Code = Mc.VylozAuto;
-		    message.Addressee = MySim.FindAgent(SimId.AgentStavby);
-            // nastavit dlzku cesty
-            Request(message);
-		}
+        //meta! sender="ProcesCestaNaPrejazd", id="neviem", type="Finish"
+        public void ProcessFinishProcesCestaNaPrejazd(MessageForm message)
+        {
+            Console.WriteLine("Auto na prejazde");
+            message.Addressee = MySim.FindAgent(SimId.ProcesCestaNaSkladku);
+            StartContinualAssistant(message);
+        }
 
-		//meta! userInfo="Process messages defined in code", id="0"
-		public void ProcessDefault(MessageForm message)
+        //meta! sender="CestaNaSkladku", id="neviem", type="Finish"
+        public void ProcessFinishProcesCestaNaSkladku(MessageForm message)
+        {
+            Console.WriteLine("Auto na skladke");
+            Request(requestCopyMessage);
+        }
+
+        
+
+        //meta! userInfo="Process messages defined in code", id="0"
+        public void ProcessDefault(MessageForm message)
 		{
 			switch (message.Code)
 			{
 			}
 		}
 
-		//meta! userInfo="Generated code: do not modify", tag="begin"
-		public void Init()
+
+        //meta! userInfo="Generated code: do not modify", tag="begin"
+        public void Init()
 		{
 		}
 
@@ -73,7 +111,24 @@ namespace ds_agent_oriented_simulation.Managers
 				ProcessInicializacia(message);
 			break;
 
-			default:
+            case Mc.Finish:
+                switch (message.Sender.Id)
+                {
+                    case SimId.ProcesCestaNaSkladku:
+                        ProcessFinishProcesCestaNaSkladku(message);
+                    break;
+
+                    case SimId.ProcesCestaNaStavbu:
+                        ProcessFinishProcesCestaNaStavbu(message);
+                    break;
+
+                    case SimId.ProcesCestaNaPrejazd:
+                        ProcessFinishProcesCestaNaPrejazd(message);
+                    break;
+                }
+            break;
+
+            default:
 				ProcessDefault(message);
 			break;
 			}
@@ -95,21 +150,25 @@ namespace ds_agent_oriented_simulation.Managers
 
         private void InicializujAutaPodlaVariantu(int variant)
         {
-            if (variant == 1)
+            if (_enabledCars == null)
             {
-                _enabledCars = new Vehicle[3];
-                _enabledCars[0] = MyAgent.A;
-                _enabledCars[1] = MyAgent.B;
-                _enabledCars[2] = MyAgent.C;
-            } else if (variant == 2)
-            {
-                _enabledCars = new Vehicle[4];
-                _enabledCars[0] = MyAgent.A;
-                _enabledCars[1] = MyAgent.B;
-                _enabledCars[2] = MyAgent.C;
-                _enabledCars[3] = MyAgent.D;
+                if (variant == 1)
+                {
+                    _enabledCars = new Vehicle[1];
+                    _enabledCars[0] = MyAgent.A;
+                    //_enabledCars[1] = MyAgent.B;
+                    //_enabledCars[2] = MyAgent.C;
+                }
+                else if (variant == 2)
+                {
+                    _enabledCars = new Vehicle[4];
+                    _enabledCars[0] = MyAgent.A;
+                    _enabledCars[1] = MyAgent.B;
+                    _enabledCars[2] = MyAgent.C;
+                    _enabledCars[3] = MyAgent.D;
+                }
+                // etc, to-do
             }
-            // etc, to-do
         }
 
         //meta! tag="end"
