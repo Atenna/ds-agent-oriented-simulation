@@ -38,7 +38,10 @@ namespace ds_agent_oriented_simulation.Managers
 		//meta! sender="AgentSkladky", id="36", type="Response"
 		public void ProcessNalozAuto(MessageForm message)
 		{
-		    // pride odpoved
+		    message.Code = Mc.VylozAuto;
+		    message.Addressee = MySim.FindAgent(SimId.AgentStavby);
+            // nastavit dlzku cesty
+            Request(message);
 		}
 
 		//meta! userInfo="Process messages defined in code", id="0"
@@ -104,7 +107,7 @@ namespace ds_agent_oriented_simulation.Managers
                 _enabledCars[0] = MyAgent.A;
                 _enabledCars[1] = MyAgent.B;
                 _enabledCars[2] = MyAgent.C;
-                _enabledCars[3] = MyAgent.D
+                _enabledCars[3] = MyAgent.D;
             }
             // etc, to-do
         }

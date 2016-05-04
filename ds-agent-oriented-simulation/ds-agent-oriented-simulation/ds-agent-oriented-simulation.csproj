@@ -59,9 +59,11 @@
     <Compile Include="Agents\AgentOkolia.cs" />
     <Compile Include="Agents\AgentSkladky.cs" />
     <Compile Include="Agents\AgentStavby.cs" />
-    <Compile Include="Agents\AgentVozidiel.cs" />
     <Compile Include="ContinualAssistant\PlanovacDovozMaterialu.cs" />
     <Compile Include="ContinualAssistant\PlanovacOdoberMaterial.cs" />
+    <Compile Include="ContinualAssistant\ProcesCestaNaPrejazd.cs" />
+    <Compile Include="ContinualAssistant\ProcesCestaNaSkladku.cs" />
+    <Compile Include="ContinualAssistant\ProcesCestaNaStavbu.cs" />
     <Compile Include="ContinualAssistant\ProcesNakladacA.cs" />
     <Compile Include="ContinualAssistant\ProcesNakladacB.cs" />
     <Compile Include="ContinualAssistant\ProcesVykladacA.cs" />
@@ -88,7 +90,6 @@
     <Compile Include="Managers\ManagerOkolia.cs" />
     <Compile Include="Managers\ManagerSkladky.cs" />
     <Compile Include="Managers\ManagerStavby.cs" />
-    <Compile Include="Managers\ManagerVozidiel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings\Constants.cs" />

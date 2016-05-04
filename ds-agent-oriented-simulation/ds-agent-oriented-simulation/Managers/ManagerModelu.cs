@@ -32,15 +32,6 @@ namespace ds_agent_oriented_simulation.Managers
             // toto je len notice ze na skladku pribudol material
 		}
 
-		//meta! sender="AgentDopravy", id="39", type="Response"
-		public void ProcessOdvezMaterial(MessageForm message)
-		{
-            // posiela v sprave cislo variantu
-            MyMessage sprava = new MyMessage(MySim, 1);
-		    sprava.Code = Mc.OdvezMaterial;
-            sprava.Addressee = MySim.FindAgent(SimId.AgentDopravy);
-            Request(message);
-		}
 
 		//meta! userInfo="Process messages defined in code", id="0"
 		public void ProcessDefault(MessageForm message)
@@ -63,10 +54,6 @@ namespace ds_agent_oriented_simulation.Managers
 			        ProcessInicializacia(message);
 
             break;
-
-			case Mc.OdvezMaterial:
-				ProcessOdvezMaterial(message);
-			break;
 
 			case Mc.DovozMaterialu:
 				ProcessDovozMaterialu(message);

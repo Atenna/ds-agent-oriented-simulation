@@ -25,8 +25,8 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
 		{
             Vehicle naVylozenie = ((MyMessage)message).Car;
             double timeOfUnloading = naVylozenie.Volume / Constants.LoadMachinePerformance;
+            message.Code = Mc.VylozenieUkoncene;
             Hold(timeOfUnloading, message);
-            AssistantFinished(message);
         }
 
 		//meta! userInfo="Process messages defined in code", id="0"
@@ -34,7 +34,10 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
 		{
 			switch (message.Code)
 			{
-			}
+                case Mc.VylozenieUkoncene:
+                    AssistantFinished(message);
+                break;
+            }
 		}
 
 		//meta! userInfo="Generated code: do not modify", tag="begin"
