@@ -25,16 +25,19 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
 		{
             Vehicle naNalozenie = ((MyMessage)message).Car;
             double timeOfLoading = naNalozenie.Volume / Constants.LoadMachinePerformance;
-		    message.Addressee = MyAgent;
+            message.Code = Mc.NalozenieUkoncene;
             Hold(timeOfLoading, message);
-		}
+        }
 
 		//meta! userInfo="Process messages defined in code", id="0"
 		public void ProcessDefault(MessageForm message)
 		{
 			switch (message.Code)
 			{
-			}
+                case Mc.NalozenieUkoncene:
+                    AssistantFinished(message);
+                break;
+            }
 		}
 
 		//meta! userInfo="Generated code: do not modify", tag="begin"

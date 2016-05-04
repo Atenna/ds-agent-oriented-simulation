@@ -11,6 +11,7 @@ namespace ds_agent_oriented_simulation.Managers
 	public class ManagerDopravy : Manager
 	{
 	    private Vehicle[] _enabledCars;
+	    
 		public ManagerDopravy(int id, OSPABA.Simulation mySim, Agent myAgent) :
 			base(id, mySim, myAgent)
 		{

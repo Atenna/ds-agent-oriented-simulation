@@ -9,7 +9,8 @@ namespace ds_agent_oriented_simulation.Managers
 	//meta! id="18"
 	public class ManagerStavby : Manager
 	{
-		public ManagerStavby(int id, OSPABA.Simulation mySim, Agent myAgent) :
+        private MyMessage requestCopyMessage;
+        public ManagerStavby(int id, OSPABA.Simulation mySim, Agent myAgent) :
 			base(id, mySim, myAgent)
 		{
 			Init();
@@ -30,6 +31,9 @@ namespace ds_agent_oriented_simulation.Managers
 		public void ProcessVylozAuto(MessageForm message)
 		{
             Vehicle naVylozenie = ((MyMessage)message).Car;
+
+		    requestCopyMessage = (MyMessage) message.CreateCopy();
+
             // to-do
 		    double volumeToUnload = naVylozenie.RealVolume;
             
@@ -66,17 +70,22 @@ namespace ds_agent_oriented_simulation.Managers
 		//meta! sender="ProcesVykladacA", id="67", type="Finish"
 		public void ProcessFinishProcesVykladacA(MessageForm message)
 		{
+		    MyAgent.VykladacAIsWorking = false;
+            Response(requestCopyMessage);
 		}
 
 		//meta! sender="PlanovacOdoberMaterial", id="75", type="Finish"
 		public void ProcessFinishPlanovacOdoberMaterial(MessageForm message)
 		{
+		   
 		}
 
 		//meta! sender="ProcesVykladacB", id="72", type="Finish"
 		public void ProcessFinishProcesVykladacB(MessageForm message)
 		{
-		}
+            MyAgent.VykladacBIsWorking = false;
+            Response(requestCopyMessage);
+        }
 
 		//meta! userInfo="Generated code: do not modify", tag="begin"
 		public void Init()

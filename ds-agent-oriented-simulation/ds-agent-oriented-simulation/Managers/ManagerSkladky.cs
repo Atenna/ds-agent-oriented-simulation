@@ -9,6 +9,7 @@ namespace ds_agent_oriented_simulation.Managers
 	//meta! id="17"
 	public class ManagerSkladky : Manager
 	{
+	    private MyMessage requestCopyMessage;
 		public ManagerSkladky(int id, OSPABA.Simulation mySim, Agent myAgent) :
 			base(id, mySim, myAgent)
 		{
@@ -30,6 +31,7 @@ namespace ds_agent_oriented_simulation.Managers
 		public void ProcessNalozAuto(MessageForm message)
 		{
             Vehicle naNalozenie = ((MyMessage)message).Car;
+		    requestCopyMessage = (MyMessage)message.CreateCopy();
 
             // TO=DO - KOLKO SA BUDE NAKLADAT NA AUTO ak bude na skladke menej materialu? Pocka na dovoz????
 
@@ -63,12 +65,16 @@ namespace ds_agent_oriented_simulation.Managers
 		//meta! sender="ProcesNakladacA", id="64", type="Finish"
 		public void ProcessFinishProcesNakladacA(MessageForm message)
 		{
+		    MyAgent.NakladacAIsWorking = false;
+            Response(requestCopyMessage);
 		}
 
 		//meta! sender="ProcesNakladacB", id="70", type="Finish"
 		public void ProcessFinishProcesNakladacB(MessageForm message)
 		{
-		}
+		    MyAgent.NakladacBIsWorking = false;
+            Response(requestCopyMessage);
+        }
 
 		//meta! userInfo="Generated code: do not modify", tag="begin"
 		public void Init()

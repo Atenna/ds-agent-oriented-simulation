@@ -12,5 +12,8 @@ namespace ds_agent_oriented_simulation.Simulation
 		//meta! tag="end"
 
 		// 1..1000 range reserved for user
-	}
+	    public const int NalozenieUkoncene = 16;
+        public const int VylozenieUkoncene = 32;
+
+    }
 }

@@ -47,7 +47,6 @@ namespace ds_agent_oriented_simulation.Agents
 			AddOwnMessage(Mc.Inicializacia);
 			AddOwnMessage(Mc.NalozAuto);
 			AddOwnMessage(Mc.VylozAuto);
-			AddOwnMessage(Mc.OdvezMaterial);
 		}
 		//meta! tag="end"
 	}

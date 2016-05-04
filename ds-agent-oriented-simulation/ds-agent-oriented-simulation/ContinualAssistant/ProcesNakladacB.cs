@@ -25,7 +25,7 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
 		{
             Vehicle naNalozenie = ((MyMessage)message).Car;
             double timeOfLoading = naNalozenie.Volume / Constants.LoadMachine2Performance;
-            message.Addressee = MyAgent;
+            message.Code = Mc.NalozenieUkoncene;
             Hold(timeOfLoading, message);
         }
 
@@ -34,7 +34,10 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
 		{
 			switch (message.Code)
 			{
-			}
+                case Mc.NalozenieUkoncene:
+                    AssistantFinished(message);
+                break;
+            }
 		}
 
 		//meta! userInfo="Generated code: do not modify", tag="begin"

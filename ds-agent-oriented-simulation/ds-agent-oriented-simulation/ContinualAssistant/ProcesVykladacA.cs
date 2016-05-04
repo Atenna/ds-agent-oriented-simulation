@@ -25,8 +25,8 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
 		{
             Vehicle naVylozenie = ((MyMessage)message).Car;
             double timeOfUnloading = naVylozenie.Volume / Constants.LoadMachinePerformance;
-            message.Addressee = MyAgent;
             Hold(timeOfUnloading, message);
+            AssistantFinished(message);
         }
 
 		//meta! userInfo="Process messages defined in code", id="0"
