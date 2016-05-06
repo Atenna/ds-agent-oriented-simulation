@@ -1,82 +1,180 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
+using ds_agent_oriented_simulation.Settings;
 
 namespace ds_agent_oriented_simulation
 {
-    public partial class Form1 : Form
+    public partial class FormAgentSimulation : Form
     {
-        public Form1()
+        public FormAgentSimulation()
         {
             InitializeComponent();
-            ToolTip toolTip1 = new ToolTip();
+            InitializeToolTips();
+            InitializeColorSchema();
+        }
+
+        private Color ArrowHoverButtonsColor { get; set; }
+        private Color ArrowButtonsColor { get; set; }
+
+        private void InitializeColorSchema()
+        {
+            ArrowHoverButtonsColor = Color.LightGray;
+            removeCarE.BackColor = Color.White;
+        }
+
+        private void InitializeToolTips()
+        {
+            ToolTip toolTipOverCars = new ToolTip();
 
             // Set up the delays for the ToolTip.
-            toolTip1.AutoPopDelay = 5000;
-            toolTip1.InitialDelay = 1000;
-            toolTip1.ReshowDelay = 500;
+            toolTipOverCars.AutoPopDelay = 5000;
+            toolTipOverCars.InitialDelay = 1000;
+            toolTipOverCars.ReshowDelay = 500;
+
             // Force the ToolTip text to be displayed whether or not the form is active.
-            toolTip1.ShowAlways = true;
-            toolTip1.IsBalloon = true;
+            toolTipOverCars.ShowAlways = true;
+            toolTipOverCars.IsBalloon = true;
 
             // Set up the ToolTip text for the Button and Checkbox.
-            toolTip1.SetToolTip(this.pictureBox10, "Volume: 10, Speed: 60");
-            toolTip1.SetToolTip(this.pictureBox9, "Volume: 20, Speed: 50");
-            toolTip1.SetToolTip(this.pictureBox8, "Volume: 25, Speed: 45");
-            toolTip1.SetToolTip(this.pictureBox6, "Volume: 5, Speed: 70");
-            toolTip1.SetToolTip(this.pictureBox7, "Volume: 40, Speed: 30");
+            toolTipOverCars.SetToolTip(this.pictureCarA, "Volume: " + Constants.VolumeOfVehicleA + ", Speed: " + Constants.SpeedOfVehicleA);
+            toolTipOverCars.SetToolTip(this.pictureCarB, "Volume: " + Constants.VolumeOfVehicleB + ", Speed: " + Constants.VolumeOfVehicleB);
+            toolTipOverCars.SetToolTip(this.pictureCarC, "Volume: " + Constants.VolumeOfVehicleC + ", Speed: " + Constants.VolumeOfVehicleC);
+            toolTipOverCars.SetToolTip(this.pictureCarD, "Volume: " + Constants.VolumeOfVehicleD + ", Speed: " + Constants.VolumeOfVehicleD);
+            toolTipOverCars.SetToolTip(this.pictureCarE, "Volume: " + Constants.VolumeOfVehicleE + ", Speed: " + Constants.VolumeOfVehicleE);
         }
 
-        private void label5_MouseHover(object sender, System.EventArgs e)
+        private void ArrowRemoveCarEHover(object sender, System.EventArgs e)
         {
-            label5.BackColor = Color.LightGray;
-            ;
+            removeCarE.BackColor = ArrowHoverButtonsColor;
         }
 
-        private void label5_MouseLeave(object sender, System.EventArgs e)
+        private void ArrowRemoveCarELeave(object sender, System.EventArgs e)
         {
-            label5.BackColor = Color.White;
+            removeCarE.BackColor = ArrowButtonsColor;
         }
 
-        private void label6_MouseHover(object sender, System.EventArgs e)
+        private void ArrowAddCarEHover(object sender, System.EventArgs e)
         {
-            label6.BackColor = Color.LightGray;
+            addCarE.BackColor = ArrowHoverButtonsColor;
         }
 
-        private void label6_MouseLeave(object sender, System.EventArgs e)
+        private void ArrowAddCarELeave(object sender, System.EventArgs e)
         {
-            label6.BackColor = Color.White;
+            addCarE.BackColor = ArrowButtonsColor;
         }
 
-        private void label4_MouseHover(object sender, System.EventArgs e)
+        private void ArrowRemoveCarAHover(object sender, System.EventArgs e)
         {
-            label4.BackColor = Color.LightGray;
+            removeCarA.BackColor = ArrowHoverButtonsColor;
         }
 
-        private void label4_MouseLeave(object sender, System.EventArgs e)
+        private void ArrowRemoveCarALeave(object sender, System.EventArgs e)
         {
-            label4.BackColor = Color.White;
+            removeCarA.BackColor = ArrowButtonsColor;
         }
 
-        private void label3_MouseHover(object sender, System.EventArgs e)
+        private void ArrowAddCarAHover(object sender, System.EventArgs e)
         {
-            label3.BackColor = Color.LightGray;
+            addCarA.BackColor = ArrowHoverButtonsColor;
         }
 
-        private void label3_MouseLeave(object sender, System.EventArgs e)
+        private void ArrowAddCarALeave(object sender, System.EventArgs e)
         {
-            label3.BackColor = Color.White;
+            addCarA.BackColor = ArrowButtonsColor;
         }
 
-        private void label6_Click(object sender, System.EventArgs e)
+        private void AddCarEClick(object sender, System.EventArgs e)
         {
-            label2.Text = "1/2";
-            checkBox6.Checked = true;
+            if (CurrentRun.CarE && CurrentRun.CarsE < Constants.MaxNumberOfCarsE && CurrentRun.CarsE > 0)
+            {
+                CurrentRun.CarsE++;
+                labelCarsE.Text = CurrentRun.CarsE + "/" + Constants.MaxNumberOfCarsE;
+            }
+            else if(!CurrentRun.CarE)
+            {
+                CurrentRun.CarE = true;
+                checkBoxCarE.Checked = true;
+                CurrentRun.CarsE++;
+                labelCarsE.Text = CurrentRun.CarsE + "/" + Constants.MaxNumberOfCarsE;
+            }
         }
 
-        private void label5_Click(object sender, System.EventArgs e)
+        private void RemoveCarEClick(object sender, System.EventArgs e)
         {
-            label2.Text = "0/2";
-            checkBox6.Checked = false;
+            if (CurrentRun.CarE && CurrentRun.CarsE > 1 && CurrentRun.CarsE <= Constants.MaxNumberOfCarsE)
+            {
+                CurrentRun.CarsE--;
+                labelCarsE.Text = CurrentRun.CarsE + "/" + Constants.MaxNumberOfCarsE;
+            }
+            else if (CurrentRun.CarsE == 1)
+            {
+                CurrentRun.CarE = false;
+                checkBoxCarE.Checked = false;
+                CurrentRun.CarsE = 0;
+                labelCarsE.Text = CurrentRun.CarsE + "/" + Constants.MaxNumberOfCarsE;
+            }
+        }
+
+        private void IsUsedCarEChanged(object sender, System.EventArgs e)
+        {
+            if (checkBoxCarE.Checked)
+            {
+                AddCarEClick(sender,e);
+                CurrentRun.CarE = true;
+            }
+            else
+            {
+                CurrentRun.CarsE = 0;
+                CurrentRun.CarE = false;
+                labelCarsE.Text = CurrentRun.CarsE + "/" + Constants.MaxNumberOfCarsE;
+            }
+        }
+
+        private void addCarA_Click(object sender, System.EventArgs e)
+        {
+            if (CurrentRun.CarA && CurrentRun.CarsA < Constants.MaxNumberOfCarsA && CurrentRun.CarsA > 0)
+            {
+                CurrentRun.CarsA++;
+                labelCarsA.Text = CurrentRun.CarsA + "/" + Constants.MaxNumberOfCarsA;
+            }
+            else if (!CurrentRun.CarA)
+            {
+                CurrentRun.CarA = true;
+                checkBoxCarA.Checked = true;
+                CurrentRun.CarsA++;
+                labelCarsA.Text = CurrentRun.CarsA + "/" + Constants.MaxNumberOfCarsA;
+            }
+        }
+
+        private void removeCarA_Click(object sender, System.EventArgs e)
+        {
+            if (CurrentRun.CarA && CurrentRun.CarsA > 1 && CurrentRun.CarsA <= Constants.MaxNumberOfCarsA)
+            {
+                CurrentRun.CarsA--;
+                labelCarsA.Text = CurrentRun.CarsA + "/" + Constants.MaxNumberOfCarsA;
+            }
+            else if (CurrentRun.CarsA == 1)
+            {
+                CurrentRun.CarA = false;
+                checkBoxCarA.Checked = false;
+                CurrentRun.CarsA = 0;
+                labelCarsA.Text = CurrentRun.CarsA + "/" + Constants.MaxNumberOfCarsA;
+            }
+        }
+
+        private void checkBoxCarA_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (checkBoxCarA.Checked)
+            {
+                addCarA_Click(sender, e);
+                CurrentRun.CarA = true;
+            }
+            else
+            {
+                CurrentRun.CarsA = 0;
+                CurrentRun.CarA = false;
+                labelCarsA.Text = CurrentRun.CarsA + "/" + Constants.MaxNumberOfCarsA;
+            }
         }
     }
 }

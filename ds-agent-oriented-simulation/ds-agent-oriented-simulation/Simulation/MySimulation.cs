@@ -2,6 +2,7 @@ using System;
 using System.Runtime.InteropServices;
 using ds_agent_oriented_simulation.Agents;
 using ds_agent_oriented_simulation.Entities;
+using ds_agent_oriented_simulation.Settings;
 using OSPRNG;
 
 namespace ds_agent_oriented_simulation.Simulation
@@ -20,7 +21,10 @@ namespace ds_agent_oriented_simulation.Simulation
 	    protected override void PrepareSimulation()
 		{
 			base.PrepareSimulation();
-			// Create global statistcis
+            // Create global statistcis
+
+            CurrentRun.initializeCurrentRun();
+
             statistics = new Statistics();
 
             // inicializacia aut

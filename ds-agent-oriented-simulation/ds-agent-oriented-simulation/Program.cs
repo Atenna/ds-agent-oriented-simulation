@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using ds_agent_oriented_simulation.Settings;
 using ds_agent_oriented_simulation.Simulation;
 
 namespace ds_agent_oriented_simulation
@@ -14,8 +15,7 @@ namespace ds_agent_oriented_simulation
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
-
+            Application.Run(new FormAgentSimulation());
             MySimulation sim = new MySimulation();
             sim.Simulate(1);
         }
