@@ -34,5 +34,8 @@
         public const int TimeOfRepairOfVehicleC = 100;
         public const int TimeOfRepairOfVehicleD = 44;
         public const int TimeOfRepairOfVehicleE = 170;
+
+        public const int MaxNumberOfCarsA = 3;
+        public const int MaxNumberOfCarsE = 2;
     }
 }
