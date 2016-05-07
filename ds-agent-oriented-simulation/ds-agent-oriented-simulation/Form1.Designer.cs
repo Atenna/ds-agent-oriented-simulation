@@ -56,12 +56,6 @@
             this.labelReplications = new System.Windows.Forms.Label();
             this.TextBoxReplications = new System.Windows.Forms.TextBox();
             this.groupBoxSim = new System.Windows.Forms.GroupBox();
-            this.buttonStop = new System.Windows.Forms.Button();
-            this.buttonSlowUp = new System.Windows.Forms.Button();
-            this.buttonRun = new System.Windows.Forms.Button();
-            this.buttonPause = new System.Windows.Forms.Button();
-            this.buttonSlowDown = new System.Windows.Forms.Button();
-            this.groupBoxStats = new System.Windows.Forms.GroupBox();
             this.labelQueueUnload = new System.Windows.Forms.Label();
             this.labelQueueLoad = new System.Windows.Forms.Label();
             this.labelUnloaderB = new System.Windows.Forms.Label();
@@ -72,6 +66,12 @@
             this.pictureUnloaderA = new System.Windows.Forms.PictureBox();
             this.pictureLoaderB = new System.Windows.Forms.PictureBox();
             this.pictureLoaderA = new System.Windows.Forms.PictureBox();
+            this.buttonStop = new System.Windows.Forms.Button();
+            this.buttonSlowUp = new System.Windows.Forms.Button();
+            this.buttonRun = new System.Windows.Forms.Button();
+            this.buttonPause = new System.Windows.Forms.Button();
+            this.buttonSlowDown = new System.Windows.Forms.Button();
+            this.groupBoxStats = new System.Windows.Forms.GroupBox();
             this.groupBoxVehicles.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureCarD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureCarE)).BeginInit();
@@ -403,6 +403,101 @@
             this.groupBoxSim.TabStop = false;
             this.groupBoxSim.Text = "Simulation";
             // 
+            // labelQueueUnload
+            // 
+            this.labelQueueUnload.AutoSize = true;
+            this.labelQueueUnload.Location = new System.Drawing.Point(25, 325);
+            this.labelQueueUnload.Name = "labelQueueUnload";
+            this.labelQueueUnload.Size = new System.Drawing.Size(194, 29);
+            this.labelQueueUnload.TabIndex = 24;
+            this.labelQueueUnload.Text = "Rad na vykladke:";
+            // 
+            // labelQueueLoad
+            // 
+            this.labelQueueLoad.AutoSize = true;
+            this.labelQueueLoad.Location = new System.Drawing.Point(25, 89);
+            this.labelQueueLoad.Name = "labelQueueLoad";
+            this.labelQueueLoad.Size = new System.Drawing.Size(193, 29);
+            this.labelQueueLoad.TabIndex = 23;
+            this.labelQueueLoad.Text = "Queue at Loader";
+            // 
+            // labelUnloaderB
+            // 
+            this.labelUnloaderB.AutoSize = true;
+            this.labelUnloaderB.Location = new System.Drawing.Point(207, 466);
+            this.labelUnloaderB.Name = "labelUnloaderB";
+            this.labelUnloaderB.Size = new System.Drawing.Size(155, 29);
+            this.labelUnloaderB.TabIndex = 22;
+            this.labelUnloaderB.Text = ":Vyklada auto";
+            // 
+            // labelUnloaderA
+            // 
+            this.labelUnloaderA.AutoSize = true;
+            this.labelUnloaderA.Location = new System.Drawing.Point(202, 400);
+            this.labelUnloaderA.Name = "labelUnloaderA";
+            this.labelUnloaderA.Size = new System.Drawing.Size(155, 29);
+            this.labelUnloaderA.TabIndex = 21;
+            this.labelUnloaderA.Text = ":Vyklada auto";
+            // 
+            // labelLoaderB
+            // 
+            this.labelLoaderB.AutoSize = true;
+            this.labelLoaderB.Location = new System.Drawing.Point(154, 234);
+            this.labelLoaderB.Name = "labelLoaderB";
+            this.labelLoaderB.Size = new System.Drawing.Size(123, 29);
+            this.labelLoaderB.TabIndex = 20;
+            this.labelLoaderB.Text = "Loads Car";
+            // 
+            // labelLoaderA
+            // 
+            this.labelLoaderA.AutoSize = true;
+            this.labelLoaderA.Location = new System.Drawing.Point(154, 152);
+            this.labelLoaderA.Name = "labelLoaderA";
+            this.labelLoaderA.Size = new System.Drawing.Size(135, 29);
+            this.labelLoaderA.TabIndex = 19;
+            this.labelLoaderA.Text = "Loads Car: ";
+            // 
+            // pictureUnloaderB
+            // 
+            this.pictureUnloaderB.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureUnloaderB.BackgroundImage")));
+            this.pictureUnloaderB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureUnloaderB.Location = new System.Drawing.Point(368, 451);
+            this.pictureUnloaderB.Name = "pictureUnloaderB";
+            this.pictureUnloaderB.Size = new System.Drawing.Size(103, 69);
+            this.pictureUnloaderB.TabIndex = 18;
+            this.pictureUnloaderB.TabStop = false;
+            // 
+            // pictureUnloaderA
+            // 
+            this.pictureUnloaderA.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.pictureUnloaderA.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureUnloaderA.BackgroundImage")));
+            this.pictureUnloaderA.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureUnloaderA.Location = new System.Drawing.Point(368, 376);
+            this.pictureUnloaderA.Name = "pictureUnloaderA";
+            this.pictureUnloaderA.Size = new System.Drawing.Size(103, 69);
+            this.pictureUnloaderA.TabIndex = 17;
+            this.pictureUnloaderA.TabStop = false;
+            // 
+            // pictureLoaderB
+            // 
+            this.pictureLoaderB.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureLoaderB.BackgroundImage")));
+            this.pictureLoaderB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureLoaderB.Location = new System.Drawing.Point(30, 207);
+            this.pictureLoaderB.Name = "pictureLoaderB";
+            this.pictureLoaderB.Size = new System.Drawing.Size(118, 85);
+            this.pictureLoaderB.TabIndex = 16;
+            this.pictureLoaderB.TabStop = false;
+            // 
+            // pictureLoaderA
+            // 
+            this.pictureLoaderA.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureLoaderA.BackgroundImage")));
+            this.pictureLoaderA.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureLoaderA.Location = new System.Drawing.Point(30, 137);
+            this.pictureLoaderA.Name = "pictureLoaderA";
+            this.pictureLoaderA.Size = new System.Drawing.Size(118, 64);
+            this.pictureLoaderA.TabIndex = 15;
+            this.pictureLoaderA.TabStop = false;
+            // 
             // buttonStop
             // 
             this.buttonStop.BackColor = System.Drawing.Color.White;
@@ -487,101 +582,6 @@
             this.groupBoxStats.TabIndex = 4;
             this.groupBoxStats.TabStop = false;
             this.groupBoxStats.Text = "Statistics";
-            // 
-            // labelQueueUnload
-            // 
-            this.labelQueueUnload.AutoSize = true;
-            this.labelQueueUnload.Location = new System.Drawing.Point(25, 325);
-            this.labelQueueUnload.Name = "labelQueueUnload";
-            this.labelQueueUnload.Size = new System.Drawing.Size(194, 29);
-            this.labelQueueUnload.TabIndex = 24;
-            this.labelQueueUnload.Text = "Rad na vykladke:";
-            // 
-            // labelQueueLoad
-            // 
-            this.labelQueueLoad.AutoSize = true;
-            this.labelQueueLoad.Location = new System.Drawing.Point(25, 89);
-            this.labelQueueLoad.Name = "labelQueueLoad";
-            this.labelQueueLoad.Size = new System.Drawing.Size(198, 29);
-            this.labelQueueLoad.TabIndex = 23;
-            this.labelQueueLoad.Text = "Rad na nakladke:";
-            // 
-            // labelUnloaderB
-            // 
-            this.labelUnloaderB.AutoSize = true;
-            this.labelUnloaderB.Location = new System.Drawing.Point(207, 466);
-            this.labelUnloaderB.Name = "labelUnloaderB";
-            this.labelUnloaderB.Size = new System.Drawing.Size(155, 29);
-            this.labelUnloaderB.TabIndex = 22;
-            this.labelUnloaderB.Text = ":Vyklada auto";
-            // 
-            // labelUnloaderA
-            // 
-            this.labelUnloaderA.AutoSize = true;
-            this.labelUnloaderA.Location = new System.Drawing.Point(202, 400);
-            this.labelUnloaderA.Name = "labelUnloaderA";
-            this.labelUnloaderA.Size = new System.Drawing.Size(155, 29);
-            this.labelUnloaderA.TabIndex = 21;
-            this.labelUnloaderA.Text = ":Vyklada auto";
-            // 
-            // labelLoaderB
-            // 
-            this.labelLoaderB.AutoSize = true;
-            this.labelLoaderB.Location = new System.Drawing.Point(154, 234);
-            this.labelLoaderB.Name = "labelLoaderB";
-            this.labelLoaderB.Size = new System.Drawing.Size(160, 29);
-            this.labelLoaderB.TabIndex = 20;
-            this.labelLoaderB.Text = "Naklada auto:";
-            // 
-            // labelLoaderA
-            // 
-            this.labelLoaderA.AutoSize = true;
-            this.labelLoaderA.Location = new System.Drawing.Point(154, 152);
-            this.labelLoaderA.Name = "labelLoaderA";
-            this.labelLoaderA.Size = new System.Drawing.Size(160, 29);
-            this.labelLoaderA.TabIndex = 19;
-            this.labelLoaderA.Text = "Naklada auto:";
-            // 
-            // pictureUnloaderB
-            // 
-            this.pictureUnloaderB.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureUnloaderB.BackgroundImage")));
-            this.pictureUnloaderB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureUnloaderB.Location = new System.Drawing.Point(368, 451);
-            this.pictureUnloaderB.Name = "pictureUnloaderB";
-            this.pictureUnloaderB.Size = new System.Drawing.Size(103, 69);
-            this.pictureUnloaderB.TabIndex = 18;
-            this.pictureUnloaderB.TabStop = false;
-            // 
-            // pictureUnloaderA
-            // 
-            this.pictureUnloaderA.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.pictureUnloaderA.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureUnloaderA.BackgroundImage")));
-            this.pictureUnloaderA.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureUnloaderA.Location = new System.Drawing.Point(368, 376);
-            this.pictureUnloaderA.Name = "pictureUnloaderA";
-            this.pictureUnloaderA.Size = new System.Drawing.Size(103, 69);
-            this.pictureUnloaderA.TabIndex = 17;
-            this.pictureUnloaderA.TabStop = false;
-            // 
-            // pictureLoaderB
-            // 
-            this.pictureLoaderB.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureLoaderB.BackgroundImage")));
-            this.pictureLoaderB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureLoaderB.Location = new System.Drawing.Point(30, 207);
-            this.pictureLoaderB.Name = "pictureLoaderB";
-            this.pictureLoaderB.Size = new System.Drawing.Size(118, 85);
-            this.pictureLoaderB.TabIndex = 16;
-            this.pictureLoaderB.TabStop = false;
-            // 
-            // pictureLoaderA
-            // 
-            this.pictureLoaderA.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureLoaderA.BackgroundImage")));
-            this.pictureLoaderA.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureLoaderA.Location = new System.Drawing.Point(30, 137);
-            this.pictureLoaderA.Name = "pictureLoaderA";
-            this.pictureLoaderA.Size = new System.Drawing.Size(118, 64);
-            this.pictureLoaderA.TabIndex = 15;
-            this.pictureLoaderA.TabStop = false;
             // 
             // FormAgentSimulation
             // 
