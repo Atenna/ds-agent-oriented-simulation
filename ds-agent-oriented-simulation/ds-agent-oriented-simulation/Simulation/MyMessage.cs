@@ -5,8 +5,8 @@ namespace ds_agent_oriented_simulation.Simulation
 {
 	public class MyMessage : MessageForm
 	{
-	    public Vehicle Car { get; set; }
-	    public int Variant { get; set; }
+	    public Vehicle Car { get; }
+	    public int Variant { get; }
 
 	    public MyMessage(OSPABA.Simulation sim) :
 			base(sim)
@@ -43,8 +43,6 @@ namespace ds_agent_oriented_simulation.Simulation
 			base.Copy(message);
 			MyMessage original = (MyMessage)message;
 			// Copy attributes
-		    original.Car = ((MyMessage) message).Car;
-            original.Variant = ((MyMessage)message).Variant;
-        }
+		}
 	}
 }

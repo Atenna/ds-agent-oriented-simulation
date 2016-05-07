@@ -11,11 +11,13 @@ namespace ds_agent_oriented_simulation
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        public static void Main()
+        static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FormAgentSimulation());
+            MySimulation sim = new MySimulation();
+            sim.Simulate(1);
         }
     }
 }

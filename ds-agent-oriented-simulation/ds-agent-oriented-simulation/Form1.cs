@@ -1,7 +1,6 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 using ds_agent_oriented_simulation.Settings;
-using ds_agent_oriented_simulation.Simulation;
 
 namespace ds_agent_oriented_simulation
 {
@@ -176,13 +175,6 @@ namespace ds_agent_oriented_simulation
                 CurrentRun.CarA = false;
                 labelCarsA.Text = CurrentRun.CarsA + "/" + Constants.MaxNumberOfCarsA;
             }
-        }
-
-        private void buttonRun_Click(object sender, System.EventArgs e)
-        {
-            // simulation start
-            MySimulation sim = new MySimulation();
-            sim.Simulate(1);
         }
     }
 }

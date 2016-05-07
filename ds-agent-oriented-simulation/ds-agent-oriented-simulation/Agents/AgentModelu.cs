@@ -17,12 +17,8 @@ namespace ds_agent_oriented_simulation.Agents
 		override public void PrepareReplication()
 		{
 			base.PrepareReplication();
-            // Setup component for the next replication
-            MyMessage Sprava = new MyMessage(MySim, 1);
-            Sprava.Code = Mc.Inicializacia;
-            Sprava.Addressee = MySim.FindAgent(SimId.AgentModelu);
-            MyManager.Call(Sprava);
-        }
+			// Setup component for the next replication
+		}
 
 		//meta! userInfo="Generated code: do not modify", tag="begin"
 		private void Init()

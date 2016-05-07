@@ -31,8 +31,7 @@ namespace ds_agent_oriented_simulation.Managers
 		public void ProcessNalozAuto(MessageForm message)
 		{
             Vehicle naNalozenie = ((MyMessage)message).Car;
-		    requestCopyMessage = (MyMessage) ((MyMessage)message).CreateCopy();
-		    requestCopyMessage.Car = naNalozenie;
+		    requestCopyMessage = (MyMessage)message.CreateCopy();
 
             // TO=DO - KOLKO SA BUDE NAKLADAT NA AUTO ak bude na skladke menej materialu? Pocka na dovoz????
 
