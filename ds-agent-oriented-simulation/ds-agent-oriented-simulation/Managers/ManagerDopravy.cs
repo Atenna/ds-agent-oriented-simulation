@@ -144,7 +144,7 @@ namespace ds_agent_oriented_simulation.Managers
                 sprava = new MyMessage(MySim, i);
                 sprava.Addressee = MySim.FindAgent(SimId.AgentSkladky);
                 sprava.Code = Mc.NalozAuto;
-                Request(message);
+                Request(sprava);
             }          
         }
 
@@ -156,6 +156,7 @@ namespace ds_agent_oriented_simulation.Managers
                 {
                     _enabledCars = new Vehicle[1];
                     _enabledCars[0] = MyAgent.A;
+                    
                     //_enabledCars[1] = MyAgent.B;
                     //_enabledCars[2] = MyAgent.C;
                 }
