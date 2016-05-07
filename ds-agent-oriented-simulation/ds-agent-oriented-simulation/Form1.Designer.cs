@@ -408,9 +408,9 @@
             this.labelQueueUnload.AutoSize = true;
             this.labelQueueUnload.Location = new System.Drawing.Point(25, 325);
             this.labelQueueUnload.Name = "labelQueueUnload";
-            this.labelQueueUnload.Size = new System.Drawing.Size(194, 29);
+            this.labelQueueUnload.Size = new System.Drawing.Size(216, 29);
             this.labelQueueUnload.TabIndex = 24;
-            this.labelQueueUnload.Text = "Rad na vykladke:";
+            this.labelQueueUnload.Text = "Queue at Unloader";
             // 
             // labelQueueLoad
             // 
@@ -426,18 +426,18 @@
             this.labelUnloaderB.AutoSize = true;
             this.labelUnloaderB.Location = new System.Drawing.Point(207, 466);
             this.labelUnloaderB.Name = "labelUnloaderB";
-            this.labelUnloaderB.Size = new System.Drawing.Size(155, 29);
+            this.labelUnloaderB.Size = new System.Drawing.Size(152, 29);
             this.labelUnloaderB.TabIndex = 22;
-            this.labelUnloaderB.Text = ":Vyklada auto";
+            this.labelUnloaderB.Text = ":Unloads Car";
             // 
             // labelUnloaderA
             // 
             this.labelUnloaderA.AutoSize = true;
             this.labelUnloaderA.Location = new System.Drawing.Point(202, 400);
             this.labelUnloaderA.Name = "labelUnloaderA";
-            this.labelUnloaderA.Size = new System.Drawing.Size(155, 29);
+            this.labelUnloaderA.Size = new System.Drawing.Size(152, 29);
             this.labelUnloaderA.TabIndex = 21;
-            this.labelUnloaderA.Text = ":Vyklada auto";
+            this.labelUnloaderA.Text = ":Unloads Car";
             // 
             // labelLoaderB
             // 
@@ -507,7 +507,7 @@
             this.buttonStop.FlatAppearance.BorderSize = 0;
             this.buttonStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonStop.ForeColor = System.Drawing.Color.White;
-            this.buttonStop.Location = new System.Drawing.Point(319, 841);
+            this.buttonStop.Location = new System.Drawing.Point(328, 556);
             this.buttonStop.Name = "buttonStop";
             this.buttonStop.Size = new System.Drawing.Size(49, 49);
             this.buttonStop.TabIndex = 4;
@@ -522,7 +522,7 @@
             this.buttonSlowUp.FlatAppearance.BorderSize = 0;
             this.buttonSlowUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonSlowUp.ForeColor = System.Drawing.Color.White;
-            this.buttonSlowUp.Location = new System.Drawing.Point(264, 841);
+            this.buttonSlowUp.Location = new System.Drawing.Point(273, 556);
             this.buttonSlowUp.Name = "buttonSlowUp";
             this.buttonSlowUp.Size = new System.Drawing.Size(49, 49);
             this.buttonSlowUp.TabIndex = 3;
@@ -537,7 +537,7 @@
             this.buttonRun.FlatAppearance.BorderSize = 0;
             this.buttonRun.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonRun.ForeColor = System.Drawing.Color.White;
-            this.buttonRun.Location = new System.Drawing.Point(99, 841);
+            this.buttonRun.Location = new System.Drawing.Point(108, 556);
             this.buttonRun.Name = "buttonRun";
             this.buttonRun.Size = new System.Drawing.Size(49, 49);
             this.buttonRun.TabIndex = 2;
@@ -553,7 +553,7 @@
             this.buttonPause.FlatAppearance.BorderSize = 0;
             this.buttonPause.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonPause.ForeColor = System.Drawing.Color.White;
-            this.buttonPause.Location = new System.Drawing.Point(209, 841);
+            this.buttonPause.Location = new System.Drawing.Point(218, 556);
             this.buttonPause.Name = "buttonPause";
             this.buttonPause.Size = new System.Drawing.Size(49, 49);
             this.buttonPause.TabIndex = 1;
@@ -568,7 +568,7 @@
             this.buttonSlowDown.FlatAppearance.BorderSize = 0;
             this.buttonSlowDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonSlowDown.ForeColor = System.Drawing.Color.White;
-            this.buttonSlowDown.Location = new System.Drawing.Point(154, 841);
+            this.buttonSlowDown.Location = new System.Drawing.Point(163, 556);
             this.buttonSlowDown.Name = "buttonSlowDown";
             this.buttonSlowDown.Size = new System.Drawing.Size(49, 49);
             this.buttonSlowDown.TabIndex = 0;
