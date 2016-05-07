@@ -22,3 +22,5 @@ The main goal of this project is to identify the most efficient solution for a c
 
 ## Preview
 <img src="https://github.com/Atenna/ds-agent-oriented-simulation/blob/master/ds-agent-oriented-simulation/ds-agent-oriented-simulation/GUI/images/2016-05-06.png" width="120"/>
+
+<img src="https://github.com/Atenna/ds-agent-oriented-simulation/blob/master/ds-agent-oriented-simulation/ds-agent-oriented-simulation/GUI/images/2016-05-07.png" width="180">
