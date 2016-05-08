@@ -33,13 +33,14 @@ namespace ds_agent_oriented_simulation.Managers
         //meta! sender="AgentSkladky", id="36", type="Response"
         public void ProcessNalozAuto(MessageForm message)
         {
-            // auto skoncilo nakladanie
+            // auto skoncilo nakladanie 
             Console.WriteLine("Auto nalozene");
             requestCopyMessage = (MyMessage)message.CreateCopy();
+            requestCopyMessage.Car = ((MyMessage) message).Car;
             requestCopyMessage.Code = Mc.VylozAuto;
             requestCopyMessage.Addressee = MySim.FindAgent(SimId.AgentStavby);
 
-            message.Addressee = MySim.FindAgent(SimId.ProcesCestaNaStavbu);
+            message.Addressee = ((AgentDopravy)MyAgent).ProcesCestaNaStavbu;
             StartContinualAssistant(message);
         }
 
@@ -60,7 +61,7 @@ namespace ds_agent_oriented_simulation.Managers
             requestCopyMessage.Code = Mc.NalozAuto;
             requestCopyMessage.Addressee = MySim.FindAgent(SimId.AgentStavby);
             // vykladanie skoncilo, auto pojde na prejazd
-            message.Addressee = MySim.FindAgent(SimId.ProcesCestaNaPrejazd);
+            message.Addressee = ((AgentDopravy)MyAgent).ProcesCestaNaPrejazd;
             StartContinualAssistant(message);
 		}
 
@@ -68,7 +69,8 @@ namespace ds_agent_oriented_simulation.Managers
         public void ProcessFinishProcesCestaNaPrejazd(MessageForm message)
         {
             Console.WriteLine("Auto na prejazde");
-            message.Addressee = MySim.FindAgent(SimId.ProcesCestaNaSkladku);
+            message.Addressee = ((AgentDopravy)MyAgent).ProcesCestaNaSkladku;
+            message.Code = Mc.NalozAuto;
             StartContinualAssistant(message);
         }
 
@@ -76,6 +78,8 @@ namespace ds_agent_oriented_simulation.Managers
         public void ProcessFinishProcesCestaNaSkladku(MessageForm message)
         {
             Console.WriteLine("Auto na skladke");
+            requestCopyMessage.Code = Mc.NalozAuto;
+            requestCopyMessage.Addressee = MySim.FindAgent(SimId.AgentSkladky);
             Request(requestCopyMessage);
         }
 

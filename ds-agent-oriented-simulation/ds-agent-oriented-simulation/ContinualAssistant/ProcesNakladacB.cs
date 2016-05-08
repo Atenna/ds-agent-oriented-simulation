@@ -24,6 +24,7 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
 		public void ProcessStart(MessageForm message)
 		{
             Vehicle naNalozenie = ((MyMessage)message).Car;
+            MyAgent.carAtLoaderB = naNalozenie;
             double timeOfLoading = naNalozenie.Volume / Constants.LoadMachine2Performance;
             message.Code = Mc.NalozenieUkoncene;
             Hold(timeOfLoading, message);
@@ -35,6 +36,7 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
 			switch (message.Code)
 			{
                 case Mc.NalozenieUkoncene:
+                    MyAgent.carAtLoaderB = null;
                     AssistantFinished(message);
                 break;
             }

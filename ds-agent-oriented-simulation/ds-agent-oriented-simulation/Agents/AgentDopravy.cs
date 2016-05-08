@@ -18,6 +18,9 @@ namespace ds_agent_oriented_simulation.Agents
 	    public Vehicle D { get; private set; }
 	    public Vehicle E { get; private set; }
 
+        public ProcesCestaNaPrejazd ProcesCestaNaPrejazd { get; private set; }
+        public ProcesCestaNaSkladku ProcesCestaNaSkladku { get; private set; }
+        public ProcesCestaNaStavbu ProcesCestaNaStavbu { get; private set; }
 
         public AgentDopravy(int id, OSPABA.Simulation mySim, Agent parent) :
 			base(id, mySim, parent)
@@ -44,10 +47,10 @@ namespace ds_agent_oriented_simulation.Agents
 		private void Init()
 		{
 			new ManagerDopravy(SimId.ManagerDopravy, MySim, this);
-			new PoradcaDopravy(SimId.PoradcaDopravy, MySim, this);
-		    new ProcesCestaNaPrejazd(SimId.ProcesCestaNaPrejazd, MySim, this);
-		    new ProcesCestaNaSkladku(SimId.ProcesCestaNaSkladku, MySim, this);
-		    new ProcesCestaNaStavbu(SimId.ProcesCestaNaStavbu, MySim, this);
+			//new PoradcaDopravy(SimId.PoradcaDopravy, MySim, this);
+		    ProcesCestaNaPrejazd = new ProcesCestaNaPrejazd(SimId.ProcesCestaNaPrejazd, MySim, this);
+            ProcesCestaNaSkladku = new ProcesCestaNaSkladku(SimId.ProcesCestaNaSkladku, MySim, this);
+            ProcesCestaNaStavbu = new ProcesCestaNaStavbu(SimId.ProcesCestaNaStavbu, MySim, this);
 			AddOwnMessage(Mc.Inicializacia);
 			AddOwnMessage(Mc.NalozAuto);
 			AddOwnMessage(Mc.VylozAuto);

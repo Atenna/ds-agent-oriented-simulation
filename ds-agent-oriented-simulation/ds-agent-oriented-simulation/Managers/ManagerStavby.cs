@@ -33,6 +33,7 @@ namespace ds_agent_oriented_simulation.Managers
             Vehicle naVylozenie = ((MyMessage)message).Car;
 
 		    requestCopyMessage = (MyMessage) message.CreateCopy();
+		    requestCopyMessage.Car = naVylozenie;
 
             // to-do
 		    double volumeToUnload = naVylozenie.RealVolume;
@@ -45,13 +46,13 @@ namespace ds_agent_oriented_simulation.Managers
             {
                 if (MyAgent.VykladacAIsWorking)
                 {
-                    message.Addressee = MySim.FindAgent(SimId.ProcesVykladacB);
+                    message.Addressee = ((AgentStavby)MyAgent).ProcesVykladacB;
                     MyAgent.VykladacBIsWorking = true;
                     StartContinualAssistant(message);
                 }
                 else
                 {
-                    message.Addressee = MySim.FindAgent(SimId.ProcesVykladacA);
+                    message.Addressee = ((AgentStavby)MyAgent).ProcesVykladacA;
                     MyAgent.VykladacAIsWorking = true;
                     StartContinualAssistant(message);
                 }

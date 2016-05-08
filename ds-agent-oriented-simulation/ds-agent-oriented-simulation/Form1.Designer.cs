@@ -56,6 +56,7 @@
             this.labelReplications = new System.Windows.Forms.Label();
             this.TextBoxReplications = new System.Windows.Forms.TextBox();
             this.groupBoxSim = new System.Windows.Forms.GroupBox();
+            this.labelSimTime = new System.Windows.Forms.Label();
             this.labelQueueUnload = new System.Windows.Forms.Label();
             this.labelQueueLoad = new System.Windows.Forms.Label();
             this.labelUnloaderB = new System.Windows.Forms.Label();
@@ -381,6 +382,7 @@
             // 
             // groupBoxSim
             // 
+            this.groupBoxSim.Controls.Add(this.labelSimTime);
             this.groupBoxSim.Controls.Add(this.labelQueueUnload);
             this.groupBoxSim.Controls.Add(this.labelQueueLoad);
             this.groupBoxSim.Controls.Add(this.labelUnloaderB);
@@ -403,41 +405,50 @@
             this.groupBoxSim.TabStop = false;
             this.groupBoxSim.Text = "Simulation";
             // 
+            // labelSimTime
+            // 
+            this.labelSimTime.AutoSize = true;
+            this.labelSimTime.Location = new System.Drawing.Point(41, 659);
+            this.labelSimTime.Name = "labelSimTime";
+            this.labelSimTime.Size = new System.Drawing.Size(184, 29);
+            this.labelSimTime.TabIndex = 25;
+            this.labelSimTime.Text = "Simulation time:";
+            // 
             // labelQueueUnload
             // 
             this.labelQueueUnload.AutoSize = true;
             this.labelQueueUnload.Location = new System.Drawing.Point(25, 325);
             this.labelQueueUnload.Name = "labelQueueUnload";
-            this.labelQueueUnload.Size = new System.Drawing.Size(216, 29);
+            this.labelQueueUnload.Size = new System.Drawing.Size(222, 29);
             this.labelQueueUnload.TabIndex = 24;
-            this.labelQueueUnload.Text = "Queue at Unloader";
+            this.labelQueueUnload.Text = "Queue at Unloader:";
             // 
             // labelQueueLoad
             // 
             this.labelQueueLoad.AutoSize = true;
             this.labelQueueLoad.Location = new System.Drawing.Point(25, 89);
             this.labelQueueLoad.Name = "labelQueueLoad";
-            this.labelQueueLoad.Size = new System.Drawing.Size(193, 29);
+            this.labelQueueLoad.Size = new System.Drawing.Size(199, 29);
             this.labelQueueLoad.TabIndex = 23;
-            this.labelQueueLoad.Text = "Queue at Loader";
+            this.labelQueueLoad.Text = "Queue at Loader:";
             // 
             // labelUnloaderB
             // 
             this.labelUnloaderB.AutoSize = true;
-            this.labelUnloaderB.Location = new System.Drawing.Point(207, 466);
+            this.labelUnloaderB.Location = new System.Drawing.Point(41, 469);
             this.labelUnloaderB.Name = "labelUnloaderB";
             this.labelUnloaderB.Size = new System.Drawing.Size(152, 29);
             this.labelUnloaderB.TabIndex = 22;
-            this.labelUnloaderB.Text = ":Unloads Car";
+            this.labelUnloaderB.Text = "Unloads Car:";
             // 
             // labelUnloaderA
             // 
             this.labelUnloaderA.AutoSize = true;
-            this.labelUnloaderA.Location = new System.Drawing.Point(202, 400);
+            this.labelUnloaderA.Location = new System.Drawing.Point(41, 403);
             this.labelUnloaderA.Name = "labelUnloaderA";
             this.labelUnloaderA.Size = new System.Drawing.Size(152, 29);
             this.labelUnloaderA.TabIndex = 21;
-            this.labelUnloaderA.Text = ":Unloads Car";
+            this.labelUnloaderA.Text = "Unloads Car:";
             // 
             // labelLoaderB
             // 
@@ -527,6 +538,7 @@
             this.buttonSlowUp.Size = new System.Drawing.Size(49, 49);
             this.buttonSlowUp.TabIndex = 3;
             this.buttonSlowUp.UseVisualStyleBackColor = false;
+            this.buttonSlowUp.Click += new System.EventHandler(this.buttonSlowUp_Click);
             // 
             // buttonRun
             // 
@@ -650,16 +662,17 @@
         private System.Windows.Forms.GroupBox groupBoxStats;
         private System.Windows.Forms.Button buttonStop;
         private System.Windows.Forms.Button buttonSlowUp;
-        private System.Windows.Forms.Label labelQueueUnload;
-        private System.Windows.Forms.Label labelQueueLoad;
-        private System.Windows.Forms.Label labelUnloaderB;
-        private System.Windows.Forms.Label labelUnloaderA;
-        private System.Windows.Forms.Label labelLoaderB;
-        private System.Windows.Forms.Label labelLoaderA;
         private System.Windows.Forms.PictureBox pictureUnloaderB;
         private System.Windows.Forms.PictureBox pictureUnloaderA;
         private System.Windows.Forms.PictureBox pictureLoaderB;
         private System.Windows.Forms.PictureBox pictureLoaderA;
+        public System.Windows.Forms.Label labelSimTime;
+        public System.Windows.Forms.Label labelQueueUnload;
+        public System.Windows.Forms.Label labelQueueLoad;
+        public System.Windows.Forms.Label labelUnloaderB;
+        public System.Windows.Forms.Label labelUnloaderA;
+        public System.Windows.Forms.Label labelLoaderB;
+        public System.Windows.Forms.Label labelLoaderA;
     }
 }
 

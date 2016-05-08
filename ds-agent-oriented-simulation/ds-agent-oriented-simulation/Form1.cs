@@ -7,6 +7,7 @@ namespace ds_agent_oriented_simulation
 {
     public partial class FormAgentSimulation : Form
     {
+        public MySimulation sim { get; private set; }
         public FormAgentSimulation()
         {
             InitializeComponent();
@@ -181,8 +182,29 @@ namespace ds_agent_oriented_simulation
         private void buttonRun_Click(object sender, System.EventArgs e)
         {
             // simulation start
-            MySimulation sim = new MySimulation();
-            sim.Simulate(1);
+            System.Action<MySimulation> updateGuiAction = new System.Action<MySimulation>((s) => updateGUI(s));
+            sim = new MySimulation();
+            sim.SetSimSpeed(1, 2);
+            sim.OnRefreshUI(s => this.Invoke(updateGuiAction, s));
+            sim.SimulateAsync(1);
+        }
+
+        private void updateGUI(MySimulation mySimulation)
+        {
+            this.labelSimTime.Text = "Simulation time: " + sim.CurrentTime.ToString("#.000");
+            if (sim.AgentSkladky.AutaSkladkaQueue != null && sim.AgentSkladky.AutaSkladkaQueue.First != null)
+            {
+                this.labelQueueLoad.Text = "Queue at Loader: " + sim.AgentSkladky.AutaSkladkaQueue.First.Value.ToString();
+            }
+            this.labelLoaderA.Text = sim.AgentSkladky.carAtLoaderA != null ? "Loads Car: " + sim.AgentSkladky.carAtLoaderA.ToString() : "Loads Car: empty";
+            this.labelLoaderB.Text = sim.AgentSkladky.carAtLoaderB != null ? "Loads Car: " + sim.AgentSkladky.carAtLoaderB.ToString() : "Loads Car: empty";
+            this.labelUnloaderA.Text = sim.AgentStavby.carAtUnloaderA != null ? "Unloads Car: " + sim.AgentStavby.carAtUnloaderA.ToString() : "Unloads Car: empty";
+            this.labelUnloaderB.Text = sim.AgentStavby.carAtUnloaderB != null ? "Unloads Car: " + sim.AgentStavby.carAtUnloaderB.ToString() : "Unloads Car: empty";
+        }
+
+        private void buttonSlowUp_Click(object sender, System.EventArgs e)
+        {
+            sim.SetSimSpeed(1,0.2);
         }
     }
 }

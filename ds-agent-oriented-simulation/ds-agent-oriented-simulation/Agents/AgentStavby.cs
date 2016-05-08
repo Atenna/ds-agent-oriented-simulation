@@ -12,10 +12,15 @@ namespace ds_agent_oriented_simulation.Agents
 	//meta! id="18"
 	public class AgentStavby : Agent
 	{
+	    public Vehicle carAtUnloaderB { get; set; }
+        public Vehicle carAtUnloaderA { get; set; }
         public SimQueue<Vehicle> AutaStavbaQueue { get; private set; }
         public WStat StavbaWStat { get; internal set; }
         public bool VykladacAIsWorking { get; internal set; }
         public bool VykladacBIsWorking { get; internal set; }
+
+        public ProcesVykladacA ProcesVykladacA { get; private set; }
+        public ProcesVykladacB ProcesVykladacB { get; private set; }
 
         public AgentStavby(int id, OSPABA.Simulation mySim, Agent parent) :
 			base(id, mySim, parent)
@@ -44,10 +49,10 @@ namespace ds_agent_oriented_simulation.Agents
 		private void Init()
 		{
 			new ManagerStavby(SimId.ManagerStavby, MySim, this);
-			new ProcesVykladacB(SimId.ProcesVykladacB, MySim, this);
+			ProcesVykladacB = new ProcesVykladacB(SimId.ProcesVykladacB, MySim, this);
 			new PlanovacOdoberMaterial(SimId.PlanovacOdoberMaterial, MySim, this);
-			new ProcesVykladacA(SimId.ProcesVykladacA, MySim, this);
-			new AckciaZakupNakladac(SimId.AckciaZakupNakladac, MySim, this);
+			ProcesVykladacA = new ProcesVykladacA(SimId.ProcesVykladacA, MySim, this);
+			//new AckciaZakupNakladac(SimId.AckciaZakupNakladac, MySim, this);
 			AddOwnMessage(Mc.VylozAuto);
             AddOwnMessage(Mc.VylozenieUkoncene);
         }

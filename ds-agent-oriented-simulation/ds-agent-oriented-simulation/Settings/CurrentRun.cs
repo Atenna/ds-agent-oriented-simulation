@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ds_agent_oriented_simulation.Entities.Vehicles;
-
-namespace ds_agent_oriented_simulation.Settings
+﻿namespace ds_agent_oriented_simulation.Settings
 {
     public static class CurrentRun
     {

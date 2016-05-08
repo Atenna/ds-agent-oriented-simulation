@@ -42,9 +42,6 @@ namespace ds_agent_oriented_simulation.Simulation
 		{
 			base.Copy(message);
 			MyMessage original = (MyMessage)message;
-			// Copy attributes
-		    original.Car = ((MyMessage) message).Car;
-            original.Variant = ((MyMessage)message).Variant;
         }
 	}
 }

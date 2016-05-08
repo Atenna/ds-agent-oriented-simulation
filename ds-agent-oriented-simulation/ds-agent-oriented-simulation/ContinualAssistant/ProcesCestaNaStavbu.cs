@@ -6,7 +6,7 @@ using OSPABA;
 
 namespace ds_agent_oriented_simulation.ContinualAssistant
 {
-    class ProcesCestaNaStavbu : Process
+    public class ProcesCestaNaStavbu : Process
     {
         public ProcesCestaNaStavbu(int id, OSPABA.Simulation mySim, CommonAgent myAgent) :
 			base(id, mySim, myAgent)

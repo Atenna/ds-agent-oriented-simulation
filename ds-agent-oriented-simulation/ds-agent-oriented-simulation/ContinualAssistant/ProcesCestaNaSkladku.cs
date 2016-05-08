@@ -11,7 +11,7 @@ using OSPABA;
 
 namespace ds_agent_oriented_simulation.ContinualAssistant
 {
-    class ProcesCestaNaSkladku : Process
+    public class ProcesCestaNaSkladku : Process
     {
         public ProcesCestaNaSkladku(int id, OSPABA.Simulation mySim, CommonAgent myAgent) :
 			base(id, mySim, myAgent)
@@ -28,6 +28,7 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
         public void ProcessStart(MessageForm message)
         {
             Vehicle naVylozenie = ((MyMessage)message).Car;
+            // premenovat na naNalozenie
             double casPrejazdu = (Constants.CaLength/(double) (naVylozenie.Speed/60.0));
             message.Code = Mc.PrejazdUkonceny;
             Hold(casPrejazdu, message);
