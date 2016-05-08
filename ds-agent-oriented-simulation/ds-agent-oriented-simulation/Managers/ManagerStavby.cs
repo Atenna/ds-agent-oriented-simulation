@@ -88,13 +88,13 @@ namespace ds_agent_oriented_simulation.Managers
             {
                 if (MyAgent.VykladacAIsWorking)
                 {
-                    message.Addressee = MySim.FindAgent(SimId.ProcesVykladacB);
+                    message.Addressee = MyAgent.FindAssistant(SimId.ProcesVykladacB);
                     MyAgent.VykladacBIsWorking = true;
                     StartContinualAssistant(message);
                 }
                 else
                 {
-                    message.Addressee = MySim.FindAgent(SimId.ProcesVykladacA);
+                    message.Addressee = MyAgent.FindAssistant(SimId.ProcesVykladacA);
                     MyAgent.VykladacAIsWorking = true;
                     StartContinualAssistant(message);
                 }

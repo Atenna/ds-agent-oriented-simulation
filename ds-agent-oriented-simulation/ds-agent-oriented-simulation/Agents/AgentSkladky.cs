@@ -49,6 +49,7 @@ namespace ds_agent_oriented_simulation.Agents
             new ProcesNakladacA(SimId.ProcesNakladacA, MySim, this);
             new ProcesNakladacB(SimId.ProcesNakladacB, MySim, this);
             AddOwnMessage(Mc.NalozAuto);
+            AddOwnMessage(Mc.NalozenieUkoncene);
         }
         //meta! tag="end"
     }
