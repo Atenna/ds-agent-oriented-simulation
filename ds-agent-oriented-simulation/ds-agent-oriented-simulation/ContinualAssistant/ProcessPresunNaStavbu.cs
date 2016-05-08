@@ -6,11 +6,12 @@ using OSPABA;
 
 namespace ds_agent_oriented_simulation.ContinualAssistant
 {
-    public class ProcesCestaNaStavbu : Process
+    //meta! id="107"
+    public class ProcessPresunNaStavbu : Process
     {
-        public ProcesCestaNaStavbu(int id, OSPABA.Simulation mySim, CommonAgent myAgent) :
-			base(id, mySim, myAgent)
-		{
+        public ProcessPresunNaStavbu(int id, OSPABA.Simulation mySim, CommonAgent myAgent) :
+            base(id, mySim, myAgent)
+        {
         }
 
         override public void PrepareReplication()
@@ -19,7 +20,7 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
             // Setup component for the next replication
         }
 
-        //meta! sender="AgentStavby", id="72", type="Start"
+        //meta! sender="AgentDopravy", id="108", type="Start"
         public void ProcessStart(MessageForm message)
         {
             Vehicle naVylozenie = ((MyMessage)message).Car;
@@ -35,7 +36,7 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
             {
                 case Mc.PrejazdUkonceny:
                     AssistantFinished(message);
-                break;
+                    break;
             }
         }
 

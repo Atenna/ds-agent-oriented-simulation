@@ -6,25 +6,26 @@ using OSPABA;
 
 namespace ds_agent_oriented_simulation.ContinualAssistant
 {
-	//meta! id="71"
-	public class ProcesVykladacB : Process
-	{
+    //meta! id="71"
+    public class ProcesVykladacB : Process
+    {
+
         private Vehicle _naVylozenie;
 
         public ProcesVykladacB(int id, OSPABA.Simulation mySim, CommonAgent myAgent) :
-			base(id, mySim, myAgent)
-		{
-		}
+            base(id, mySim, myAgent)
+        {
+        }
 
-		override public void PrepareReplication()
-		{
-			base.PrepareReplication();
-			// Setup component for the next replication
-		}
+        override public void PrepareReplication()
+        {
+            base.PrepareReplication();
+            // Setup component for the next replication
+        }
 
-		//meta! sender="AgentStavby", id="72", type="Start"
-		public void ProcessStart(MessageForm message)
-		{
+        //meta! sender="AgentStavby", id="72", type="Start"
+        public void ProcessStart(MessageForm message)
+        {
             MyAgent.VykladacBIsWorking = true;
             _naVylozenie = ((MyMessage)message).Car;
             _naVylozenie.jeVykladane = true;
@@ -35,40 +36,40 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
             Hold(timeOfUnloading, message);
         }
 
-		//meta! userInfo="Process messages defined in code", id="0"
-		public void ProcessDefault(MessageForm message)
-		{
-			switch (message.Code)
-			{
+        //meta! userInfo="Process messages defined in code", id="0"
+        public void ProcessDefault(MessageForm message)
+        {
+            switch (message.Code)
+            {
                 case Mc.VylozenieUkoncene:
-			        MyAgent.CarAtUnloaderB = null;
-			        _naVylozenie.jeVykladane = false;
+                    MyAgent.CarAtUnloaderB = null;
+                    _naVylozenie.jeVykladane = false;
                     AssistantFinished(message);
-                break;
+                    break;
             }
-		}
+        }
 
-		//meta! userInfo="Generated code: do not modify", tag="begin"
-		override public void ProcessMessage(MessageForm message)
-		{
-			switch (message.Code)
-			{
-			case Mc.Start:
-				ProcessStart(message);
-			break;
+        //meta! userInfo="Generated code: do not modify", tag="begin"
+        override public void ProcessMessage(MessageForm message)
+        {
+            switch (message.Code)
+            {
+                case Mc.Start:
+                    ProcessStart(message);
+                    break;
 
-			default:
-				ProcessDefault(message);
-			break;
-			}
-		}
-		//meta! tag="end"
-		public new AgentStavby MyAgent
-		{
-			get
-			{
-				return (AgentStavby)base.MyAgent;
-			}
-		}
-	}
+                default:
+                    ProcessDefault(message);
+                    break;
+            }
+        }
+        //meta! tag="end"
+        public new AgentStavby MyAgent
+        {
+            get
+            {
+                return (AgentStavby)base.MyAgent;
+            }
+        }
+    }
 }

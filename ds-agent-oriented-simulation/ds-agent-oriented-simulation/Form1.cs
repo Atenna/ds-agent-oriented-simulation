@@ -7,7 +7,7 @@ namespace ds_agent_oriented_simulation
 {
     public partial class FormAgentSimulation : Form
     {
-        public MySimulation sim { get; private set; }
+        public MySimulation Sim { get; private set; }
         public FormAgentSimulation()
         {
             InitializeComponent();
@@ -182,36 +182,36 @@ namespace ds_agent_oriented_simulation
         private void buttonRun_Click(object sender, System.EventArgs e)
         {
             // simulation start
-            System.Action<MySimulation> updateGuiAction = new System.Action<MySimulation>((s) => updateGUI(s));
-            sim = new MySimulation();
-            sim.SetSimSpeed(0.5, 2);
-            sim.OnRefreshUI(s => this.Invoke(updateGuiAction, s));
-            sim.SimulateAsync(1);
+            System.Action<MySimulation> updateGuiAction = new System.Action<MySimulation>((s) => UpdateGui(s));
+            Sim = new MySimulation();
+            Sim.SetSimSpeed(0.5, 2);
+            Sim.OnRefreshUI(s => this.Invoke(updateGuiAction, s));
+            Sim.SimulateAsync(1);
         }
 
-        private void updateGUI(MySimulation mySimulation)
+        private void UpdateGui(MySimulation mySimulation)
         {
-            this.labelSimTime.Text = "Simulation time: " + sim.CurrentTime.ToString("#.000");
+            this.labelSimTime.Text = "Simulation time: " + Sim.CurrentTime.ToString("#.000");
             this.labelQueueLoad.Text = "Queue at Loader: ";
-            if (sim.AgentSkladky.AutaSkladkaQueue != null && sim.AgentSkladky.AutaSkladkaQueue.First != null)
+            if (Sim.AgentSkladky.AutaSkladkaQueue != null && Sim.AgentSkladky.AutaSkladkaQueue.First != null)
             {
-                foreach (var Vehicle in sim.AgentSkladky.AutaSkladkaQueue)
+                foreach (var vehicle in Sim.AgentSkladky.AutaSkladkaQueue)
                 {
-                    labelQueueLoad.Text += Vehicle.Name + " ";
+                    labelQueueLoad.Text += vehicle.Name + " ";
                 }
                  
             }
-            this.labelLoaderA.Text = sim.AgentSkladky.CarAtLoaderA != null ? "Loads Car: " + sim.AgentSkladky.CarAtLoaderA.ToString() : "Loads Car: empty";
-            this.labelLoaderB.Text = sim.AgentSkladky.CarAtLoaderB != null ? "Loads Car: " + sim.AgentSkladky.CarAtLoaderB.ToString() : "Loads Car: empty";
-            this.labelUnloaderA.Text = sim.AgentStavby.CarAtUnloaderA != null ? "Unloads Car: " + sim.AgentStavby.CarAtUnloaderA.ToString() : "Unloads Car: empty";
-            this.labelUnloaderB.Text = sim.AgentStavby.CarAtUnloaderB != null ? "Unloads Car: " + sim.AgentStavby.CarAtUnloaderB.ToString() : "Unloads Car: empty";
+            this.labelLoaderA.Text = Sim.AgentSkladky.CarAtLoaderA != null ? "Loads Car: " + Sim.AgentSkladky.CarAtLoaderA.ToString() : "Loads Car: empty";
+            this.labelLoaderB.Text = Sim.AgentSkladky.CarAtLoaderB != null ? "Loads Car: " + Sim.AgentSkladky.CarAtLoaderB.ToString() : "Loads Car: empty";
+            this.labelUnloaderA.Text = Sim.AgentStavby.CarAtUnloaderA != null ? "Unloads Car: " + Sim.AgentStavby.CarAtUnloaderA.ToString() : "Unloads Car: empty";
+            this.labelUnloaderB.Text = Sim.AgentStavby.CarAtUnloaderB != null ? "Unloads Car: " + Sim.AgentStavby.CarAtUnloaderB.ToString() : "Unloads Car: empty";
 
             this.labelQueueLoad.Text = "Queue at Unoader: ";
-            if (sim.AgentStavby.AutaStavbaQueue != null && sim.AgentStavby.AutaStavbaQueue.First != null)
+            if (Sim.AgentStavby.AutaStavbaQueue != null && Sim.AgentStavby.AutaStavbaQueue.First != null)
             {
-                foreach (var Vehicle in sim.AgentStavby.AutaStavbaQueue)
+                foreach (var vehicle in Sim.AgentStavby.AutaStavbaQueue)
                 {
-                    labelQueueUnload.Text += Vehicle.Name + " ";
+                    labelQueueUnload.Text += vehicle.Name + " ";
                 }
 
             }
@@ -219,30 +219,30 @@ namespace ds_agent_oriented_simulation
 
         private void buttonSlowUp_Click(object sender, System.EventArgs e)
         {
-            sim.SetSimSpeed(0.5,0.2);
+            Sim.SetSimSpeed(0.5,0.2);
         }
 
         private void buttonPause_Click(object sender, System.EventArgs e)
         {
-            if (sim.IsPaused())
+            if (Sim.IsPaused())
             {
-                sim.ResumeSimulation();
+                Sim.ResumeSimulation();
             }
             else
             {
-                sim.PauseSimulation();
+                Sim.PauseSimulation();
             }
         }
 
         private void buttonStop_Click(object sender, System.EventArgs e)
         {
-            sim.StopSimulation();
+            Sim.StopSimulation();
             resetGUI();
         }
 
         private void buttonSlowDown_Click(object sender, System.EventArgs e)
         {
-            sim.SetSimSpeed(0.5, 2);
+            Sim.SetSimSpeed(0.5, 2);
         }
 
         private void resetGUI()

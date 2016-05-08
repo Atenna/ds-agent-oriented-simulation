@@ -60,10 +60,10 @@
     <Compile Include="Agents\AgentSkladky.cs" />
     <Compile Include="Agents\AgentStavby.cs" />
     <Compile Include="ContinualAssistant\PlanovacDovozMaterialu.cs" />
-    <Compile Include="ContinualAssistant\PlanovacOdoberMaterial.cs" />
-    <Compile Include="ContinualAssistant\ProcesCestaNaPrejazd.cs" />
-    <Compile Include="ContinualAssistant\ProcesCestaNaSkladku.cs" />
-    <Compile Include="ContinualAssistant\ProcesCestaNaStavbu.cs" />
+    <Compile Include="ContinualAssistant\PlanovacOdvozMaterialu.cs" />
+    <Compile Include="ContinualAssistant\ProcessPresunNaPrejazd.cs" />
+    <Compile Include="ContinualAssistant\ProcessPresunNaSkladku.cs" />
+    <Compile Include="ContinualAssistant\ProcessPresunNaStavbu.cs" />
     <Compile Include="ContinualAssistant\ProcesNakladacA.cs" />
     <Compile Include="ContinualAssistant\ProcesNakladacB.cs" />
     <Compile Include="ContinualAssistant\ProcesVykladacA.cs" />
@@ -83,8 +83,6 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="InstantAssistant\AckciaZakupNakladac.cs" />
-    <Compile Include="InstantAssistant\PoradcaDopravy.cs" />
     <Compile Include="Managers\ManagerDopravy.cs" />
     <Compile Include="Managers\ManagerModelu.cs" />
     <Compile Include="Managers\ManagerOkolia.cs" />

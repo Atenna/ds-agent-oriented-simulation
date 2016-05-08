@@ -6,38 +6,80 @@ using OSPABA;
 
 namespace ds_agent_oriented_simulation.Managers
 {
-	//meta! id="18"
-	public class ManagerStavby : Manager
-	{
-        private MyMessage requestCopyMessage;
+    //meta! id="18"
+    public class ManagerStavby : Manager
+    {
         public ManagerStavby(int id, OSPABA.Simulation mySim, Agent myAgent) :
-			base(id, mySim, myAgent)
-		{
-			Init();
-		}
+            base(id, mySim, myAgent)
+        {
+            Init();
+        }
 
-		override public void PrepareReplication()
-		{
-			base.PrepareReplication();
-			// Setup component for the next replication
+        override public void PrepareReplication()
+        {
+            base.PrepareReplication();
+            // Setup component for the next replication
 
-			if (PetriNet != null)
-			{
-				PetriNet.Clear();
-			}
-		}
+            if (PetriNet != null)
+            {
+                PetriNet.Clear();
+            }
+        }
 
-		//meta! sender="AgentDopravy", id="37", type="Request"
-		public void ProcessVylozAuto(MessageForm message)
-		{
+        //meta! sender="ProcesVykladacA", id="67", type="Finish"
+        public void ProcessFinishProcesVykladacA(MessageForm message)
+        {
+            MyAgent.VykladacAIsWorking = false;
+            message.Code = Mc.VylozAuto;
+            message.Addressee = MySim.FindAgent(SimId.AgentDopravy);
+            Response(message);
+
+            if (!MyAgent.AutaStavbaQueue.IsEmpty())
+            {
+                Vehicle naVylozenie;
+                lock (Constants.queue2Lock)
+                {
+                    naVylozenie = MyAgent.AutaStavbaQueue.First.Value;
+                    MyAgent.AutaStavbaQueue.RemoveFirst();
+                }
+                MyMessage msg = new MyMessage(MySim, naVylozenie);
+                msg.Code = Mc.NalozAuto;
+                msg.Addressee = MySim.FindAgent(SimId.AgentSkladky);
+                Request(msg);
+            }
+        }
+
+        //meta! sender="ProcesVykladacB", id="72", type="Finish"
+        public void ProcessFinishProcesVykladacB(MessageForm message)
+        {
+            MyAgent.VykladacBIsWorking = false;
+            message.Code = Mc.VylozAuto;
+            message.Addressee = MySim.FindAgent(SimId.AgentDopravy);
+            Response(message);
+
+            if (!MyAgent.AutaStavbaQueue.IsEmpty())
+            {
+                Vehicle naVylozenie;
+                lock (Constants.queue2Lock)
+                {
+                    naVylozenie = MyAgent.AutaStavbaQueue.First.Value;
+                    MyAgent.AutaStavbaQueue.RemoveFirst();
+                }
+                MyMessage msg = new MyMessage(MySim, naVylozenie);
+                msg.Code = Mc.NalozAuto;
+                msg.Addressee = MySim.FindAgent(SimId.AgentSkladky);
+                Request(msg);
+            }
+        }
+
+        //meta! sender="AgentDopravy", id="37", type="Request"
+        public void ProcessVylozAuto(MessageForm message)
+        {
             Vehicle naVylozenie = ((MyMessage)message).Car;
 
-		    requestCopyMessage = (MyMessage) message.CreateCopy();
-		    requestCopyMessage.Car = naVylozenie;
-
             // to-do
-		    double volumeToUnload = naVylozenie.RealVolume;
-            
+            double volumeToUnload = naVylozenie.RealVolume;
+
             if (MyAgent.VykladacAIsWorking && MyAgent.VykladacBIsWorking)
             {
                 MyAgent.AutaStavbaQueue.AddLast(naVylozenie);
@@ -46,118 +88,66 @@ namespace ds_agent_oriented_simulation.Managers
             {
                 if (MyAgent.VykladacAIsWorking)
                 {
-                    message.Addressee = ((AgentStavby)MyAgent).ProcesVykladacB;
+                    message.Addressee = MySim.FindAgent(SimId.ProcesVykladacB);
                     MyAgent.VykladacBIsWorking = true;
                     StartContinualAssistant(message);
                 }
                 else
                 {
-                    message.Addressee = ((AgentStavby)MyAgent).ProcesVykladacA;
+                    message.Addressee = MySim.FindAgent(SimId.ProcesVykladacA);
                     MyAgent.VykladacAIsWorking = true;
                     StartContinualAssistant(message);
                 }
-                
+
             }
         }
 
-		//meta! userInfo="Process messages defined in code", id="0"
-		public void ProcessDefault(MessageForm message)
-		{
-			switch (message.Code)
-			{
-			}
-		}
-
-		//meta! sender="ProcesVykladacA", id="67", type="Finish"
-		public void ProcessFinishProcesVykladacA(MessageForm message)
-		{
-		    MyAgent.VykladacAIsWorking = false;
-            Response(requestCopyMessage);
-
-            if (!MyAgent.AutaStavbaQueue.IsEmpty())
+        //meta! userInfo="Process messages defined in code", id="0"
+        public void ProcessDefault(MessageForm message)
+        {
+            switch (message.Code)
             {
-                Vehicle naVylozenie;
-                lock (Constants.queue2Lock)
-                {
-                    naVylozenie = MyAgent.AutaStavbaQueue.First.Value;
-                    MyAgent.AutaStavbaQueue.RemoveFirst();
-                }
-                MyMessage msg = new MyMessage(MySim, naVylozenie);
-                msg.Code = Mc.NalozAuto;
-                msg.Addressee = MySim.FindAgent(SimId.AgentSkladky);
-                Request(msg);
             }
         }
 
-		//meta! sender="PlanovacOdoberMaterial", id="75", type="Finish"
-		public void ProcessFinishPlanovacOdoberMaterial(MessageForm message)
-		{
-		   
-		}
+        //meta! userInfo="Generated code: do not modify", tag="begin"
+        public void Init()
+        {
+        }
 
-		//meta! sender="ProcesVykladacB", id="72", type="Finish"
-		public void ProcessFinishProcesVykladacB(MessageForm message)
-		{
-            MyAgent.VykladacBIsWorking = false;
-            Response(requestCopyMessage);
-
-            if (!MyAgent.AutaStavbaQueue.IsEmpty())
+        override public void ProcessMessage(MessageForm message)
+        {
+            switch (message.Code)
             {
-                Vehicle naVylozenie;
-                lock (Constants.queue2Lock)
-                {
-                    naVylozenie = MyAgent.AutaStavbaQueue.First.Value;
-                    MyAgent.AutaStavbaQueue.RemoveFirst();
-                }
-                MyMessage msg = new MyMessage(MySim, naVylozenie);
-                msg.Code = Mc.NalozAuto;
-                msg.Addressee = MySim.FindAgent(SimId.AgentSkladky);
-                Request(msg);
+                case Mc.VylozAuto:
+                    ProcessVylozAuto(message);
+                    break;
+
+                case Mc.Finish:
+                    switch (message.Sender.Id)
+                    {
+                        case SimId.ProcesVykladacA:
+                            ProcessFinishProcesVykladacA(message);
+                            break;
+
+                        case SimId.ProcesVykladacB:
+                            ProcessFinishProcesVykladacB(message);
+                            break;
+                    }
+                    break;
+
+                default:
+                    ProcessDefault(message);
+                    break;
             }
         }
-
-		//meta! userInfo="Generated code: do not modify", tag="begin"
-		public void Init()
-		{
-		}
-
-		override public void ProcessMessage(MessageForm message)
-		{
-			switch (message.Code)
-			{
-			case Mc.VylozAuto:
-				ProcessVylozAuto(message);
-			break;
-
-			case Mc.Finish:
-				switch (message.Sender.Id)
-				{
-				case SimId.ProcesVykladacB:
-					ProcessFinishProcesVykladacB(message);
-				break;
-
-				case SimId.ProcesVykladacA:
-					ProcessFinishProcesVykladacA(message);
-				break;
-
-				case SimId.PlanovacOdoberMaterial:
-					ProcessFinishPlanovacOdoberMaterial(message);
-				break;
-				}
-			break;
-
-			default:
-				ProcessDefault(message);
-			break;
-			}
-		}
-		//meta! tag="end"
-		public new AgentStavby MyAgent
-		{
-			get
-			{
-				return (AgentStavby)base.MyAgent;
-			}
-		}
-	}
+        //meta! tag="end"
+        public new AgentStavby MyAgent
+        {
+            get
+            {
+                return (AgentStavby)base.MyAgent;
+            }
+        }
+    }
 }

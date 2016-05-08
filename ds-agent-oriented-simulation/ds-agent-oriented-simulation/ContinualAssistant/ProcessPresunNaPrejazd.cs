@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ds_agent_oriented_simulation.Agents;
+﻿using ds_agent_oriented_simulation.Agents;
 using ds_agent_oriented_simulation.Entities.Vehicles;
 using ds_agent_oriented_simulation.Settings;
 using ds_agent_oriented_simulation.Simulation;
@@ -11,11 +6,12 @@ using OSPABA;
 
 namespace ds_agent_oriented_simulation.ContinualAssistant
 {
-    public class ProcesCestaNaSkladku : Process
+    //meta! id="109"
+    public class ProcessPresunNaPrejazd : Process
     {
-        public ProcesCestaNaSkladku(int id, OSPABA.Simulation mySim, CommonAgent myAgent) :
-			base(id, mySim, myAgent)
-		{
+        public ProcessPresunNaPrejazd(int id, OSPABA.Simulation mySim, CommonAgent myAgent) :
+            base(id, mySim, myAgent)
+        {
         }
 
         override public void PrepareReplication()
@@ -24,12 +20,15 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
             // Setup component for the next replication
         }
 
-        //meta! sender="AgentStavby", id="72", type="Start"
+        //meta! sender="AgentDopravy", id="110", type="Start"
         public void ProcessStart(MessageForm message)
         {
-            Vehicle naNalozenie = ((MyMessage)message).Car;
-            // premenovat na naNalozenie
-            double casPrejazdu = (Constants.CaLength/(double) (naNalozenie.Speed/60.0));
+            Vehicle naVylozenie = ((MyMessage)message).Car;
+            double casPrejazdu = (Constants.BcLength / (double)(naVylozenie.Speed / 60.0));
+            if (naVylozenie.HasFailed())
+            {
+                casPrejazdu += naVylozenie.GetTimeOfRepair();
+            }
             message.Code = Mc.PrejazdUkonceny;
             Hold(casPrejazdu, message);
         }
@@ -41,7 +40,7 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
             {
                 case Mc.PrejazdUkonceny:
                     AssistantFinished(message);
-                break;
+                    break;
             }
         }
 

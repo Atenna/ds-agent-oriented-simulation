@@ -6,26 +6,27 @@ using OSPABA;
 
 namespace ds_agent_oriented_simulation.ContinualAssistant
 {
-	//meta! id="69"
-	public class ProcesNakladacB : Process
-	{
-	    private Vehicle _naNalozenie;
+    //meta! id="69"
+    public class ProcesNakladacB : Process
+    {
+
+        private Vehicle _naNalozenie;
 
         public ProcesNakladacB(int id, OSPABA.Simulation mySim, CommonAgent myAgent) :
-			base(id, mySim, myAgent)
-		{
-		}
+            base(id, mySim, myAgent)
+        {
+        }
 
-		override public void PrepareReplication()
-		{
-			base.PrepareReplication();
-			// Setup component for the next replication
-		}
+        override public void PrepareReplication()
+        {
+            base.PrepareReplication();
+            // Setup component for the next replication
+        }
 
-		//meta! sender="AgentSkladky", id="70", type="Start"
-		public void ProcessStart(MessageForm message)
-		{
-		    MyAgent.NakladacBIsWorking = true;
+        //meta! sender="AgentSkladky", id="70", type="Start"
+        public void ProcessStart(MessageForm message)
+        {
+            MyAgent.NakladacBIsWorking = true;
             _naNalozenie = ((MyMessage)message).Car;
             _naNalozenie.jeNakladane = true;
             MyAgent.CarAtLoaderB = _naNalozenie;
@@ -35,40 +36,40 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
             Hold(timeOfLoading, message);
         }
 
-		//meta! userInfo="Process messages defined in code", id="0"
-		public void ProcessDefault(MessageForm message)
-		{
-			switch (message.Code)
-			{
+        //meta! userInfo="Process messages defined in code", id="0"
+        public void ProcessDefault(MessageForm message)
+        {
+            switch (message.Code)
+            {
                 case Mc.NalozenieUkoncene:
                     MyAgent.CarAtLoaderB = null;
                     _naNalozenie.jeNakladane = false;
                     AssistantFinished(message);
-                break;
+                    break;
             }
-		}
+        }
 
-		//meta! userInfo="Generated code: do not modify", tag="begin"
-		override public void ProcessMessage(MessageForm message)
-		{
-			switch (message.Code)
-			{
-			case Mc.Start:
-				ProcessStart(message);
-			break;
+        //meta! userInfo="Generated code: do not modify", tag="begin"
+        override public void ProcessMessage(MessageForm message)
+        {
+            switch (message.Code)
+            {
+                case Mc.Start:
+                    ProcessStart(message);
+                    break;
 
-			default:
-				ProcessDefault(message);
-			break;
-			}
-		}
-		//meta! tag="end"
-		public new AgentSkladky MyAgent
-		{
-			get
-			{
-				return (AgentSkladky)base.MyAgent;
-			}
-		}
-	}
+                default:
+                    ProcessDefault(message);
+                    break;
+            }
+        }
+        //meta! tag="end"
+        public new AgentSkladky MyAgent
+        {
+            get
+            {
+                return (AgentSkladky)base.MyAgent;
+            }
+        }
+    }
 }

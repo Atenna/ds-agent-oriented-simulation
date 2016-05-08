@@ -11,17 +11,16 @@ namespace ds_agent_oriented_simulation.Agents
     //meta! id="17"
     public class AgentSkladky : Agent
     {
+
         public SimQueue<Vehicle> AutaSkladkaQueue { get; private set; }
         public WStat SkladkaWStat { get; internal set; }
         public bool NakladacAIsWorking { get; internal set; }
         public bool NakladacBIsWorking { get; internal set; }
-        public ProcesNakladacB procesNakladacB { get; private set; }
-        public ProcesNakladacA procesNakladacA { get; private set; }
-
         public Vehicle CarAtLoaderA { get; set; }
         public Vehicle CarAtLoaderB { get; set; }
 
-        private double material = Settings.Constants.MaterialToLoad;
+        private double _material = Settings.Constants.MaterialToLoad;
+
         public AgentSkladky(int id, OSPABA.Simulation mySim, Agent parent) :
             base(id, mySim, parent)
         {
@@ -47,10 +46,9 @@ namespace ds_agent_oriented_simulation.Agents
         private void Init()
         {
             new ManagerSkladky(SimId.ManagerSkladky, MySim, this);
-            procesNakladacB = new ProcesNakladacB(SimId.ProcesNakladacB, MySim, this);
-            procesNakladacA = new ProcesNakladacA(SimId.ProcesNakladacA, MySim, this);
+            new ProcesNakladacA(SimId.ProcesNakladacA, MySim, this);
+            new ProcesNakladacB(SimId.ProcesNakladacB, MySim, this);
             AddOwnMessage(Mc.NalozAuto);
-            AddOwnMessage(Mc.NalozenieUkoncene);
         }
         //meta! tag="end"
     }
