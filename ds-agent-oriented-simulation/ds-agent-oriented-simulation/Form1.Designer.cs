@@ -47,7 +47,7 @@
             this.checkBoxCarB = new System.Windows.Forms.CheckBox();
             this.checkBoxCarA = new System.Windows.Forms.CheckBox();
             this.groupBoxSetup = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBoxSeed = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -290,7 +290,7 @@
             // 
             // groupBoxSetup
             // 
-            this.groupBoxSetup.Controls.Add(this.textBox1);
+            this.groupBoxSetup.Controls.Add(this.textBoxSeed);
             this.groupBoxSetup.Controls.Add(this.label4);
             this.groupBoxSetup.Controls.Add(this.label3);
             this.groupBoxSetup.Controls.Add(this.label1);
@@ -305,12 +305,12 @@
             this.groupBoxSetup.TabStop = false;
             this.groupBoxSetup.Text = "Simulation Setup";
             // 
-            // textBox1
+            // textBoxSeed
             // 
-            this.textBox1.Location = new System.Drawing.Point(38, 206);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(260, 35);
-            this.textBox1.TabIndex = 20;
+            this.textBoxSeed.Location = new System.Drawing.Point(38, 206);
+            this.textBoxSeed.Name = "textBoxSeed";
+            this.textBoxSeed.Size = new System.Drawing.Size(260, 35);
+            this.textBoxSeed.TabIndex = 20;
             // 
             // label4
             // 
@@ -656,7 +656,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBoxSeed;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.GroupBox groupBoxSim;
         private System.Windows.Forms.Button buttonRun;

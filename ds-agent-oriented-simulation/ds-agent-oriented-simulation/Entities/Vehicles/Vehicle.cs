@@ -1,4 +1,5 @@
 ﻿using System;
+using ds_agent_oriented_simulation.Settings;
 using ds_agent_oriented_simulation.Simulation;
 
 namespace ds_agent_oriented_simulation.Entities.Vehicles

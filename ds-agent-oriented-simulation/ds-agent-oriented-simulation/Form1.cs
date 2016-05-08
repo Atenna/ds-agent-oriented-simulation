@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 using ds_agent_oriented_simulation.Settings;
 using ds_agent_oriented_simulation.Simulation;
@@ -182,6 +183,16 @@ namespace ds_agent_oriented_simulation
         private void buttonRun_Click(object sender, System.EventArgs e)
         {
             // simulation start
+            int userSeed = 0;
+            if (userSeed > 0 || textBoxSeed.Text != "")
+            {
+                Constants.Seed = userSeed;
+            }
+            else
+            {
+                Constants.Seed = 0;
+            }
+
             System.Action<MySimulation> updateGuiAction = new System.Action<MySimulation>((s) => UpdateGui(s));
             Sim = new MySimulation();
             Sim.SetSimSpeed(0.5, 2);

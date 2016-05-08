@@ -40,5 +40,6 @@
 
         public static readonly object queueLock = new object();
         public static readonly object queue2Lock = new object();
+        public static int Seed { get; set; }
     }
 }

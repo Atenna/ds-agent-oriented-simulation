@@ -34,7 +34,7 @@ namespace ds_agent_oriented_simulation.Managers
         public void ProcessFinishProcessPresunNaPrejazd(MessageForm message)
         {
             Console.WriteLine("Auto na prejazde");
-            message.Addressee = MySim.FindAgent(SimId.ProcessPresunNaSkladku);
+            message.Addressee = MyAgent.FindAssistant(SimId.ProcessPresunNaSkladku);
             message.Code = Mc.NalozAuto;
             StartContinualAssistant(message);
         }
@@ -83,7 +83,7 @@ namespace ds_agent_oriented_simulation.Managers
             requestCopyMessage.Code = Mc.VylozAuto;
             requestCopyMessage.Addressee = MySim.FindAgent(SimId.AgentStavby);
 
-            message.Addressee = MySim.FindAgent(SimId.ProcessPresunNaSkladku);
+            message.Addressee = MyAgent.FindAssistant(SimId.ProcessPresunNaStavbu);
             StartContinualAssistant(message);
         }
 
@@ -96,7 +96,7 @@ namespace ds_agent_oriented_simulation.Managers
             requestCopyMessage.Code = Mc.NalozAuto;
             requestCopyMessage.Addressee = MySim.FindAgent(SimId.AgentStavby);
             // vykladanie skoncilo, auto pojde na prejazd
-            message.Addressee = MySim.FindAgent(SimId.ProcessPresunNaPrejazd);
+            message.Addressee = MyAgent.FindAssistant(SimId.ProcessPresunNaPrejazd);
             StartContinualAssistant(message);
         }
 
