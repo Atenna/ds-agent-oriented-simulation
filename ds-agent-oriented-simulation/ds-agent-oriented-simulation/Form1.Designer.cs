@@ -523,6 +523,7 @@
             this.buttonStop.Size = new System.Drawing.Size(49, 49);
             this.buttonStop.TabIndex = 4;
             this.buttonStop.UseVisualStyleBackColor = false;
+            this.buttonStop.Click += new System.EventHandler(this.buttonStop_Click);
             // 
             // buttonSlowUp
             // 
@@ -570,6 +571,7 @@
             this.buttonPause.Size = new System.Drawing.Size(49, 49);
             this.buttonPause.TabIndex = 1;
             this.buttonPause.UseVisualStyleBackColor = false;
+            this.buttonPause.Click += new System.EventHandler(this.buttonPause_Click);
             // 
             // buttonSlowDown
             // 
@@ -585,6 +587,7 @@
             this.buttonSlowDown.Size = new System.Drawing.Size(49, 49);
             this.buttonSlowDown.TabIndex = 0;
             this.buttonSlowDown.UseVisualStyleBackColor = false;
+            this.buttonSlowDown.Click += new System.EventHandler(this.buttonSlowDown_Click);
             // 
             // groupBoxStats
             // 

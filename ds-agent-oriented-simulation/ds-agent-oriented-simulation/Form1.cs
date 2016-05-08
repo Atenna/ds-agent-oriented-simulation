@@ -221,5 +221,40 @@ namespace ds_agent_oriented_simulation
         {
             sim.SetSimSpeed(0.5,0.2);
         }
+
+        private void buttonPause_Click(object sender, System.EventArgs e)
+        {
+            if (sim.IsPaused())
+            {
+                sim.ResumeSimulation();
+            }
+            else
+            {
+                sim.PauseSimulation();
+            }
+        }
+
+        private void buttonStop_Click(object sender, System.EventArgs e)
+        {
+            sim.StopSimulation();
+            resetGUI();
+        }
+
+        private void buttonSlowDown_Click(object sender, System.EventArgs e)
+        {
+            sim.SetSimSpeed(0.5, 2);
+        }
+
+        private void resetGUI()
+        {
+            this.labelSimTime.Text = "Simulation time: ";
+            this.labelQueueLoad.Text = "Queue at Loader: ";
+
+            this.labelLoaderA.Text = "Loads Car: ";
+            this.labelLoaderB.Text = "Loads Car: ";
+            this.labelUnloaderA.Text = "Unloads Car: ";
+            this.labelUnloaderB.Text = "Unloads Car: ";
+            this.labelQueueLoad.Text = "Queue at Unoader: ";
+        }
     }
 }
