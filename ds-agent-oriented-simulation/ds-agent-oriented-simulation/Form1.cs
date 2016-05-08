@@ -184,7 +184,7 @@ namespace ds_agent_oriented_simulation
             // simulation start
             System.Action<MySimulation> updateGuiAction = new System.Action<MySimulation>((s) => updateGUI(s));
             sim = new MySimulation();
-            sim.SetSimSpeed(1, 2);
+            sim.SetSimSpeed(0.5, 2);
             sim.OnRefreshUI(s => this.Invoke(updateGuiAction, s));
             sim.SimulateAsync(1);
         }
@@ -192,19 +192,34 @@ namespace ds_agent_oriented_simulation
         private void updateGUI(MySimulation mySimulation)
         {
             this.labelSimTime.Text = "Simulation time: " + sim.CurrentTime.ToString("#.000");
+            this.labelQueueLoad.Text = "Queue at Loader: ";
             if (sim.AgentSkladky.AutaSkladkaQueue != null && sim.AgentSkladky.AutaSkladkaQueue.First != null)
             {
-                this.labelQueueLoad.Text = "Queue at Loader: " + sim.AgentSkladky.AutaSkladkaQueue.First.Value.ToString();
+                foreach (var Vehicle in sim.AgentSkladky.AutaSkladkaQueue)
+                {
+                    labelQueueLoad.Text += Vehicle.Name + " ";
+                }
+                 
             }
-            this.labelLoaderA.Text = sim.AgentSkladky.carAtLoaderA != null ? "Loads Car: " + sim.AgentSkladky.carAtLoaderA.ToString() : "Loads Car: empty";
-            this.labelLoaderB.Text = sim.AgentSkladky.carAtLoaderB != null ? "Loads Car: " + sim.AgentSkladky.carAtLoaderB.ToString() : "Loads Car: empty";
-            this.labelUnloaderA.Text = sim.AgentStavby.carAtUnloaderA != null ? "Unloads Car: " + sim.AgentStavby.carAtUnloaderA.ToString() : "Unloads Car: empty";
-            this.labelUnloaderB.Text = sim.AgentStavby.carAtUnloaderB != null ? "Unloads Car: " + sim.AgentStavby.carAtUnloaderB.ToString() : "Unloads Car: empty";
+            this.labelLoaderA.Text = sim.AgentSkladky.CarAtLoaderA != null ? "Loads Car: " + sim.AgentSkladky.CarAtLoaderA.ToString() : "Loads Car: empty";
+            this.labelLoaderB.Text = sim.AgentSkladky.CarAtLoaderB != null ? "Loads Car: " + sim.AgentSkladky.CarAtLoaderB.ToString() : "Loads Car: empty";
+            this.labelUnloaderA.Text = sim.AgentStavby.CarAtUnloaderA != null ? "Unloads Car: " + sim.AgentStavby.CarAtUnloaderA.ToString() : "Unloads Car: empty";
+            this.labelUnloaderB.Text = sim.AgentStavby.CarAtUnloaderB != null ? "Unloads Car: " + sim.AgentStavby.CarAtUnloaderB.ToString() : "Unloads Car: empty";
+
+            this.labelQueueLoad.Text = "Queue at Unoader: ";
+            if (sim.AgentStavby.AutaStavbaQueue != null && sim.AgentStavby.AutaStavbaQueue.First != null)
+            {
+                foreach (var Vehicle in sim.AgentStavby.AutaStavbaQueue)
+                {
+                    labelQueueUnload.Text += Vehicle.Name + " ";
+                }
+
+            }
         }
 
         private void buttonSlowUp_Click(object sender, System.EventArgs e)
         {
-            sim.SetSimSpeed(1,0.2);
+            sim.SetSimSpeed(0.5,0.2);
         }
     }
 }

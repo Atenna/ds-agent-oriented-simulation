@@ -49,7 +49,9 @@ namespace ds_agent_oriented_simulation.Managers
         {
             Console.WriteLine("Auto na stavbe");
             // agent stavby vyloz auto
-            Request(requestCopyMessage);
+            message.Addressee = MySim.FindAgent(SimId.AgentStavby);
+            message.Code = Mc.VylozAuto;
+            Request(message);
         }
 
         //meta! sender="AgentStavby", id="37", type="Response"
@@ -78,9 +80,9 @@ namespace ds_agent_oriented_simulation.Managers
         public void ProcessFinishProcesCestaNaSkladku(MessageForm message)
         {
             Console.WriteLine("Auto na skladke");
-            requestCopyMessage.Code = Mc.NalozAuto;
-            requestCopyMessage.Addressee = MySim.FindAgent(SimId.AgentSkladky);
-            Request(requestCopyMessage);
+            message.Code = Mc.NalozAuto;
+            message.Addressee = MySim.FindAgent(SimId.AgentSkladky);
+            Request(message);
         }
 
         

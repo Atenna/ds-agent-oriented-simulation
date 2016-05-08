@@ -12,8 +12,8 @@ namespace ds_agent_oriented_simulation.Agents
 	//meta! id="18"
 	public class AgentStavby : Agent
 	{
-	    public Vehicle carAtUnloaderB { get; set; }
-        public Vehicle carAtUnloaderA { get; set; }
+	    public Vehicle CarAtUnloaderB { get; set; }
+        public Vehicle CarAtUnloaderA { get; set; }
         public SimQueue<Vehicle> AutaStavbaQueue { get; private set; }
         public WStat StavbaWStat { get; internal set; }
         public bool VykladacAIsWorking { get; internal set; }

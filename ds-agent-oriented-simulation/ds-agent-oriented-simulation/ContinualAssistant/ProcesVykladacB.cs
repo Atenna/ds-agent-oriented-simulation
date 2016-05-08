@@ -9,7 +9,9 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
 	//meta! id="71"
 	public class ProcesVykladacB : Process
 	{
-		public ProcesVykladacB(int id, OSPABA.Simulation mySim, CommonAgent myAgent) :
+        private Vehicle _naVylozenie;
+
+        public ProcesVykladacB(int id, OSPABA.Simulation mySim, CommonAgent myAgent) :
 			base(id, mySim, myAgent)
 		{
 		}
@@ -23,10 +25,13 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
 		//meta! sender="AgentStavby", id="72", type="Start"
 		public void ProcessStart(MessageForm message)
 		{
-            Vehicle naVylozenie = ((MyMessage)message).Car;
-		    MyAgent.carAtUnloaderB = naVylozenie;
-            double timeOfUnloading = naVylozenie.Volume / Constants.LoadMachine2Performance;
+            MyAgent.VykladacBIsWorking = true;
+            _naVylozenie = ((MyMessage)message).Car;
+            _naVylozenie.jeVykladane = true;
+            MyAgent.CarAtUnloaderB = _naVylozenie;
+            double timeOfUnloading = _naVylozenie.RealVolume / Constants.LoadMachinePerformance;
             message.Code = Mc.VylozenieUkoncene;
+            _naVylozenie.RealVolume = 0;
             Hold(timeOfUnloading, message);
         }
 
@@ -36,7 +41,8 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
 			switch (message.Code)
 			{
                 case Mc.VylozenieUkoncene:
-			        MyAgent.carAtUnloaderB = null;
+			        MyAgent.CarAtUnloaderB = null;
+			        _naVylozenie.jeVykladane = false;
                     AssistantFinished(message);
                 break;
             }

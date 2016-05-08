@@ -9,7 +9,9 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
 	//meta! id="69"
 	public class ProcesNakladacB : Process
 	{
-		public ProcesNakladacB(int id, OSPABA.Simulation mySim, CommonAgent myAgent) :
+	    private Vehicle _naNalozenie;
+
+        public ProcesNakladacB(int id, OSPABA.Simulation mySim, CommonAgent myAgent) :
 			base(id, mySim, myAgent)
 		{
 		}
@@ -23,9 +25,12 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
 		//meta! sender="AgentSkladky", id="70", type="Start"
 		public void ProcessStart(MessageForm message)
 		{
-            Vehicle naNalozenie = ((MyMessage)message).Car;
-            MyAgent.carAtLoaderB = naNalozenie;
-            double timeOfLoading = naNalozenie.Volume / Constants.LoadMachine2Performance;
+		    MyAgent.NakladacBIsWorking = true;
+            _naNalozenie = ((MyMessage)message).Car;
+            _naNalozenie.jeNakladane = true;
+            MyAgent.CarAtLoaderB = _naNalozenie;
+            _naNalozenie.RealVolume = _naNalozenie.Volume;
+            double timeOfLoading = _naNalozenie.Volume / Constants.LoadMachine2Performance;
             message.Code = Mc.NalozenieUkoncene;
             Hold(timeOfLoading, message);
         }
@@ -36,7 +41,8 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
 			switch (message.Code)
 			{
                 case Mc.NalozenieUkoncene:
-                    MyAgent.carAtLoaderB = null;
+                    MyAgent.CarAtLoaderB = null;
+                    _naNalozenie.jeNakladane = false;
                     AssistantFinished(message);
                 break;
             }

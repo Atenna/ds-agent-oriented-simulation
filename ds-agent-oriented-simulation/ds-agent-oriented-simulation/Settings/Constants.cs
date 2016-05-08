@@ -37,5 +37,8 @@
 
         public const int MaxNumberOfCarsA = 3;
         public const int MaxNumberOfCarsE = 2;
+
+        public static readonly object queueLock = new object();
+        public static readonly object queue2Lock = new object();
     }
 }

@@ -1,3 +1,5 @@
+using System;
+using System.CodeDom;
 using ds_agent_oriented_simulation.Agents;
 using ds_agent_oriented_simulation.Entities.Vehicles;
 using ds_agent_oriented_simulation.Settings;
@@ -38,18 +40,23 @@ namespace ds_agent_oriented_simulation.Managers
 
             if (MyAgent.NakladacAIsWorking && MyAgent.NakladacBIsWorking)
             {
-                MyAgent.AutaSkladkaQueue.AddLast(naNalozenie);
+                lock (naNalozenie)
+                {
+                    MyAgent.AutaSkladkaQueue.AddLast(naNalozenie);
+                }
             }
             else
             {
                 if (MyAgent.NakladacAIsWorking)
                 {
                     message.Addressee = ((AgentSkladky)MyAgent).procesNakladacB;
+                    MyAgent.NakladacBIsWorking = true;
                     StartContinualAssistant(message);
                 }
                 else
                 {
                     message.Addressee = ((AgentSkladky)MyAgent).procesNakladacA;
+                    MyAgent.NakladacAIsWorking = true;
                     StartContinualAssistant(message);
                 }
             }
@@ -67,14 +74,63 @@ namespace ds_agent_oriented_simulation.Managers
         public void ProcessFinishProcesNakladacA(MessageForm message)
         {
             MyAgent.NakladacAIsWorking = false;
-            Response(requestCopyMessage);
+            message.Addressee = MySim.FindAgent(SimId.AgentDopravy);
+            message.Code = Mc.NalozAuto;
+            try
+            {
+                Response(message);
+            }
+            catch (System.ArgumentOutOfRangeException e)
+            {
+
+            }
+
+            // ak v rade niekto dalsi caka, zacne sa znova nakladanie
+            lock (Constants.queueLock)
+            {
+                if (!MyAgent.AutaSkladkaQueue.IsEmpty())
+                {
+                    var naNalozenie = MyAgent.AutaSkladkaQueue.First.Value;
+                    MyAgent.AutaSkladkaQueue.RemoveFirst();
+
+                    MyMessage msg = new MyMessage(MySim, naNalozenie);
+                    msg.Code = Mc.NalozAuto;
+                    msg.Addressee = MySim.FindAgent(SimId.AgentSkladky);
+                    Request(msg);
+                }
+            }
         }
 
         //meta! sender="ProcesNakladacB", id="70", type="Finish"
-        public void ProcessFinishProcesNakladacB(MessageForm message)
+        public void ProcessFinishProcesNakladacB(MessageForm message) 
         {
             MyAgent.NakladacBIsWorking = false;
-            Response(requestCopyMessage);
+            message.Addressee = MySim.FindAgent(SimId.AgentDopravy);
+            message.Code = Mc.NalozAuto;
+            try
+            {
+                Response(message);
+            }
+            catch (System.ArgumentOutOfRangeException e)
+            {
+
+            }
+            
+
+            // ak v rade niekto dalsi caka, zacne sa znova nakladanie
+            lock (Constants.queueLock)
+            {
+                if (!MyAgent.AutaSkladkaQueue.IsEmpty())
+                {
+                    var naNalozenie = MyAgent.AutaSkladkaQueue.First.Value;
+                    MyAgent.AutaSkladkaQueue.RemoveFirst();
+
+                    MyMessage msg = new MyMessage(MySim, naNalozenie);
+                    msg.Code = Mc.NalozAuto;
+                    msg.Addressee = MySim.FindAgent(SimId.AgentSkladky);
+                    Request(msg);
+                }
+            }
         }
 
         //meta! userInfo="Generated code: do not modify", tag="begin"

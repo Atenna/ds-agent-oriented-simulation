@@ -27,9 +27,9 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
         //meta! sender="AgentStavby", id="72", type="Start"
         public void ProcessStart(MessageForm message)
         {
-            Vehicle naVylozenie = ((MyMessage)message).Car;
+            Vehicle naNalozenie = ((MyMessage)message).Car;
             // premenovat na naNalozenie
-            double casPrejazdu = (Constants.CaLength/(double) (naVylozenie.Speed/60.0));
+            double casPrejazdu = (Constants.CaLength/(double) (naNalozenie.Speed/60.0));
             message.Code = Mc.PrejazdUkonceny;
             Hold(casPrejazdu, message);
         }

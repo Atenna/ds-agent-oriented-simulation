@@ -20,6 +20,8 @@ namespace ds_agent_oriented_simulation.Entities.Vehicles
 
         private double _numberOfWaitingOnDepo = 0;
         private double _numberOfWaitingOnBuilding = 0;
+        public bool jeNakladane { get; set; }
+        public bool jeVykladane { get; set; }
 
         public Vehicle(string name, int pVolume, int pSpeed, double pProbability, int pTime, Random generator)
         {
@@ -30,6 +32,8 @@ namespace ds_agent_oriented_simulation.Entities.Vehicles
             this._timeOfRepair = pTime;
             this._failureGenerator = generator;
             this.RealVolume = 0;
+            this.jeNakladane = false;
+            this.jeVykladane = false;
         }
 
         public int GetVolume()

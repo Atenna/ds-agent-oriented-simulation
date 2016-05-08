@@ -73,7 +73,21 @@ namespace ds_agent_oriented_simulation.Managers
 		{
 		    MyAgent.VykladacAIsWorking = false;
             Response(requestCopyMessage);
-		}
+
+            if (!MyAgent.AutaStavbaQueue.IsEmpty())
+            {
+                Vehicle naVylozenie;
+                lock (Constants.queue2Lock)
+                {
+                    naVylozenie = MyAgent.AutaStavbaQueue.First.Value;
+                    MyAgent.AutaStavbaQueue.RemoveFirst();
+                }
+                MyMessage msg = new MyMessage(MySim, naVylozenie);
+                msg.Code = Mc.NalozAuto;
+                msg.Addressee = MySim.FindAgent(SimId.AgentSkladky);
+                Request(msg);
+            }
+        }
 
 		//meta! sender="PlanovacOdoberMaterial", id="75", type="Finish"
 		public void ProcessFinishPlanovacOdoberMaterial(MessageForm message)
@@ -86,6 +100,20 @@ namespace ds_agent_oriented_simulation.Managers
 		{
             MyAgent.VykladacBIsWorking = false;
             Response(requestCopyMessage);
+
+            if (!MyAgent.AutaStavbaQueue.IsEmpty())
+            {
+                Vehicle naVylozenie;
+                lock (Constants.queue2Lock)
+                {
+                    naVylozenie = MyAgent.AutaStavbaQueue.First.Value;
+                    MyAgent.AutaStavbaQueue.RemoveFirst();
+                }
+                MyMessage msg = new MyMessage(MySim, naVylozenie);
+                msg.Code = Mc.NalozAuto;
+                msg.Addressee = MySim.FindAgent(SimId.AgentSkladky);
+                Request(msg);
+            }
         }
 
 		//meta! userInfo="Generated code: do not modify", tag="begin"
