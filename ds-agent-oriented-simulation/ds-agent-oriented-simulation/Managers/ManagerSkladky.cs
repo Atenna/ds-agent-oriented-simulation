@@ -1,3 +1,4 @@
+using System.Windows.Forms.VisualStyles;
 using ds_agent_oriented_simulation.Agents;
 using ds_agent_oriented_simulation.Entities.Vehicles;
 using ds_agent_oriented_simulation.Settings;
@@ -42,18 +43,20 @@ namespace ds_agent_oriented_simulation.Managers
             }
 
             // ak v rade niekto dalsi caka, zacne sa znova nakladanie
-            lock (Constants.queueLock)
+            Vehicle naNalozenie;
+            if (!MyAgent.AutaSkladkaQueue.IsEmpty())
             {
-                if (!MyAgent.AutaSkladkaQueue.IsEmpty())
+                lock (Constants.queueLock)
                 {
-                    var naNalozenie = MyAgent.AutaSkladkaQueue.First.Value;
+                    naNalozenie = MyAgent.AutaSkladkaQueue.First.Value;
                     MyAgent.AutaSkladkaQueue.RemoveFirst();
-
-                    MyMessage msg = new MyMessage(MySim, naNalozenie);
-                    msg.Code = Mc.NalozAuto;
-                    msg.Addressee = MySim.FindAgent(SimId.AgentSkladky);
-                    Request(msg);
                 }
+                MyMessage zFrontu = new MyMessage(MySim, naNalozenie);
+                zFrontu.Addressee = MyAgent.FindAssistant(SimId.ProcesNakladacA);
+                zFrontu.Code = Mc.NalozAuto;
+                zFrontu.Car = naNalozenie;
+                MyAgent.NakladacAIsWorking = true;
+                StartContinualAssistant(zFrontu);
             }
         }
 
@@ -72,20 +75,20 @@ namespace ds_agent_oriented_simulation.Managers
 
             }
 
-
-            // ak v rade niekto dalsi caka, zacne sa znova nakladanie
-            lock (Constants.queueLock)
+            Vehicle naNalozenie;
+            if (!MyAgent.AutaSkladkaQueue.IsEmpty())
             {
-                if (!MyAgent.AutaSkladkaQueue.IsEmpty())
+                lock (Constants.queueLock)
                 {
-                    var naNalozenie = MyAgent.AutaSkladkaQueue.First.Value;
+                    naNalozenie = MyAgent.AutaSkladkaQueue.First.Value;
                     MyAgent.AutaSkladkaQueue.RemoveFirst();
-
-                    MyMessage msg = new MyMessage(MySim, naNalozenie);
-                    msg.Code = Mc.NalozAuto;
-                    msg.Addressee = MySim.FindAgent(SimId.AgentSkladky);
-                    Request(msg);
                 }
+                MyMessage zFrontu = new MyMessage(MySim, naNalozenie);
+                zFrontu.Addressee = MyAgent.FindAssistant(SimId.ProcesNakladacB);
+                zFrontu.Code = Mc.NalozAuto;
+                zFrontu.Car = naNalozenie;
+                MyAgent.NakladacBIsWorking = true;
+                StartContinualAssistant(zFrontu);
             }
         }
 

@@ -44,7 +44,7 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
                     MyAgent.CarAtLoaderA = null;
                     _naNalozenie.jeNakladane = false;
                     AssistantFinished(message);
-                    break;
+                break;
             }
         }
 

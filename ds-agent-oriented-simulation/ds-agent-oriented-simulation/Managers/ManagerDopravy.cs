@@ -11,7 +11,6 @@ namespace ds_agent_oriented_simulation.Managers
     {
 
         private Vehicle[] _enabledCars;
-        private MyMessage requestCopyMessage;
 
         public ManagerDopravy(int id, OSPABA.Simulation mySim, Agent myAgent) :
             base(id, mySim, myAgent)
@@ -78,11 +77,6 @@ namespace ds_agent_oriented_simulation.Managers
         {
             // auto skoncilo nakladanie 
             Console.WriteLine("Auto nalozene");
-            requestCopyMessage = (MyMessage)message.CreateCopy();
-            requestCopyMessage.Car = ((MyMessage)message).Car;
-            requestCopyMessage.Code = Mc.VylozAuto;
-            requestCopyMessage.Addressee = MySim.FindAgent(SimId.AgentStavby);
-
             message.Addressee = MyAgent.FindAssistant(SimId.ProcessPresunNaStavbu);
             StartContinualAssistant(message);
         }
@@ -91,10 +85,6 @@ namespace ds_agent_oriented_simulation.Managers
         public void ProcessVylozAuto(MessageForm message)
         {
             Console.WriteLine("Auto vylozene");
-            // vytvori sa kopia spravy, ktoru bude poslana potom s autom na skladku
-            requestCopyMessage = (MyMessage)message;
-            requestCopyMessage.Code = Mc.NalozAuto;
-            requestCopyMessage.Addressee = MySim.FindAgent(SimId.AgentStavby);
             // vykladanie skoncilo, auto pojde na prejazd
             message.Addressee = MyAgent.FindAssistant(SimId.ProcessPresunNaPrejazd);
             StartContinualAssistant(message);

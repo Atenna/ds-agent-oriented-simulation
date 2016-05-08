@@ -217,7 +217,7 @@ namespace ds_agent_oriented_simulation
             this.labelUnloaderA.Text = Sim.AgentStavby.CarAtUnloaderA != null ? "Unloads Car: " + Sim.AgentStavby.CarAtUnloaderA.ToString() : "Unloads Car: empty";
             this.labelUnloaderB.Text = Sim.AgentStavby.CarAtUnloaderB != null ? "Unloads Car: " + Sim.AgentStavby.CarAtUnloaderB.ToString() : "Unloads Car: empty";
 
-            this.labelQueueLoad.Text = "Queue at Unoader: ";
+            this.labelQueueUnload.Text = "Queue at Unloader: ";
             if (Sim.AgentStavby.AutaStavbaQueue != null && Sim.AgentStavby.AutaStavbaQueue.First != null)
             {
                 foreach (var vehicle in Sim.AgentStavby.AutaStavbaQueue)
