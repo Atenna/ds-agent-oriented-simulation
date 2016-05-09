@@ -4,7 +4,7 @@
     {
         public const double MaterialToLoad = 5000;
         public const double LoadMachinePerformance = 180 / 60.0;
-        public const double LoadMachine2Performance = 250 / 60.0;
+        public const double LoadMachine2Performance = 180 / 60.0; //250 / 60.0;
         public const double UnloadMachinePerformance = 190 / 60.0;
 
         public const int AbLength = 45;
@@ -41,5 +41,7 @@
         public static readonly object queueLock = new object();
         public static readonly object queue2Lock = new object();
         public static int Seed { get; set; }
+        public static double MaterialAtDepo = 3500;
+        public static double MaterialAtBuilding = 1500;
     }
 }

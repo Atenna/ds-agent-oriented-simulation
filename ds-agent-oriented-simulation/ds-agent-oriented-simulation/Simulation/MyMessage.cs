@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using ds_agent_oriented_simulation.Entities.Vehicles;
 using OSPABA;
 
@@ -10,6 +12,10 @@ namespace ds_agent_oriented_simulation.Simulation
         public int Variant { get; set; }
 
         public string Name { get; set; }
+        public double Volume { get; set; }
+        public double Time { get; set; }
+
+        public LinkedList<Vehicle> cars { get; set; }
 
         public MyMessage(OSPABA.Simulation sim) :
             base(sim)
@@ -50,6 +56,11 @@ namespace ds_agent_oriented_simulation.Simulation
             base.Copy(message);
             MyMessage original = (MyMessage)message;
             // Copy attributes
+        }
+
+        public void ResetList()
+        {
+            this.cars = new LinkedList<Vehicle>();
         }
     }
 }

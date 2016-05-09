@@ -27,16 +27,44 @@ namespace ds_agent_oriented_simulation.Managers
         //meta! sender="PlanovacDovozMaterialu", id="55", type="Finish"
         public void ProcessFinishPlanovacDovozMaterialu(MessageForm message)
         {
+            message.Code = Mc.DovozMaterialu;
+            message.Addressee = MySim.FindAgent(SimId.AgentModelu);
+            Notice(message);
+
+            MyMessage sprava = new MyMessage(MySim);
+            sprava.Name = ((MyMessage)message).Name;
+            sprava.Addressee = MyAgent.FindAssistant(SimId.PlanovacDovozMaterialu);
+            StartContinualAssistant(sprava);
         }
 
         //meta! sender="PlanovacOdvozMaterialu", id="125", type="Finish"
         public void ProcessFinishPlanovacOdvozMaterialu(MessageForm message)
         {
+            // notice agentovi modelu -> dopravy -> skladky
+           
         }
 
         //meta! sender="AgentModelu", id="88", type="Call"
         public void ProcessInicializacia(MessageForm message)
         {
+            // zaciatok planovania dovozu materialu
+            message.Code = Mc.NalozAuto;
+            message.Addressee = MyAgent.FindAssistant(SimId.PlanovacDovozMaterialu);
+            ((MyMessage) message).Name = "A";
+            StartContinualAssistant(message);
+
+            MyMessage sprava2 = new MyMessage(MySim);
+            sprava2.Code = Mc.NalozAuto;
+            sprava2.Addressee = MyAgent.FindAssistant(SimId.PlanovacDovozMaterialu);
+            sprava2.Name = "B";
+            StartContinualAssistant(sprava2);
+
+            MyMessage sprava3 = new MyMessage(MySim);
+            sprava3.Code = Mc.NalozAuto;
+            sprava3.Addressee = MyAgent.FindAssistant(SimId.PlanovacDovozMaterialu);
+            sprava3.Name = "C";
+            StartContinualAssistant(sprava3);
+
         }
 
         //meta! userInfo="Process messages defined in code", id="0"
@@ -44,6 +72,8 @@ namespace ds_agent_oriented_simulation.Managers
         {
             switch (message.Code)
             {
+                
+
             }
         }
 

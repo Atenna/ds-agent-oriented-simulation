@@ -17,6 +17,8 @@ namespace ds_agent_oriented_simulation.Agents
         public Vehicle D { get; private set; }
         public Vehicle E { get; private set; }
 
+        public Vehicle X { get; private set; }
+
         public AgentDopravy(int id, OSPABA.Simulation mySim, Agent parent) :
             base(id, mySim, parent)
         {
@@ -30,6 +32,7 @@ namespace ds_agent_oriented_simulation.Agents
             C = new CarC(seedGenerator);
             D = new CarD(seedGenerator);
             E = new CarE(seedGenerator);
+            X = new CarA(seedGenerator);
         }
 
         override public void PrepareReplication()
@@ -49,6 +52,7 @@ namespace ds_agent_oriented_simulation.Agents
             AddOwnMessage(Mc.NalozAuto);
             AddOwnMessage(Mc.VylozAuto);
             AddOwnMessage(Mc.PrejazdUkonceny);
+            AddOwnMessage(Mc.DovozMaterialu);
         }
         //meta! tag="end"
     }

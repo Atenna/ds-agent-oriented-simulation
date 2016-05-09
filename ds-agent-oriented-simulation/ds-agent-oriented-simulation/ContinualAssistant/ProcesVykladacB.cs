@@ -30,7 +30,7 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
             _naVylozenie = ((MyMessage)message).Car;
             _naVylozenie.jeVykladane = true;
             MyAgent.CarAtUnloaderB = _naVylozenie;
-            double timeOfUnloading = _naVylozenie.RealVolume / Constants.LoadMachinePerformance;
+            double timeOfUnloading = _naVylozenie.RealVolume / Constants.UnloadMachinePerformance;
             message.Code = Mc.VylozenieUkoncene;
             _naVylozenie.RealVolume = 0;
             Hold(timeOfUnloading, message);

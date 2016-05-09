@@ -32,6 +32,8 @@ namespace ds_agent_oriented_simulation.Managers
         //meta! sender="AgentOkolia", id="35", type="Notice"
         public void ProcessDovozMaterialu(MessageForm message)
         {
+            message.Addressee = MySim.FindAgent(SimId.AgentDopravy);
+            Notice(message);
         }
 
         //meta! userInfo="Process messages defined in code", id="0"
@@ -72,12 +74,14 @@ namespace ds_agent_oriented_simulation.Managers
 
         private void ProcessInicializacia(MessageForm message)
         {
-            // v AgentOkolia sa nainicializuju generatory pre dovozcov materialu
-            message.Addressee = MySim.FindAgent(SimId.AgentOkolia);
-            Call(message);
             // vytvoria sa auta pre konkretny variant simulacie a poslu sa spravy na nakladanie auta agentovi skladky
             message.Addressee = MySim.FindAgent(SimId.AgentDopravy);
             Call(message);
+            // v AgentOkolia sa nainicializuju generatory pre dovozcov materialu
+            MyMessage sprava = new MyMessage(MySim);
+            sprava.Code = Mc.Inicializacia;
+            sprava.Addressee = MySim.FindAgent(SimId.AgentOkolia);
+            Call(sprava);
         }
 
         //meta! tag="end"

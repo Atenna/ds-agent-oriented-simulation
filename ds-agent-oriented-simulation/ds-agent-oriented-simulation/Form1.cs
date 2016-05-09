@@ -226,6 +226,8 @@ namespace ds_agent_oriented_simulation
                 }
 
             }
+
+            this.labelMaterialSkladka.Text = Sim.AgentSkladky.MaterialNaSkladke.ToString("####.0");
         }
 
         private void buttonSlowUp_Click(object sender, System.EventArgs e)

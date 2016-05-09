@@ -41,20 +41,27 @@ namespace ds_agent_oriented_simulation.Managers
         //meta! sender="ProcessPresunNaStavbu", id="108", type="Finish"
         public void ProcessFinishProcessPresunNaStavbu(MessageForm message)
         {
-            Console.WriteLine("Auto na stavbe");
-            // agent stavby vyloz auto
-            message.Addressee = MySim.FindAgent(SimId.AgentStavby);
-            message.Code = Mc.VylozAuto;
-            Request(message);
+            foreach (Vehicle car in ((MyMessage)message).cars)
+            {
+                MyMessage sprava = new MyMessage(MySim);
+                sprava.Code = Mc.VylozAuto;
+                sprava.Car = car;
+                sprava.Addressee = MySim.FindAgent(SimId.AgentStavby);
+                Request(sprava);
+            }
         }
 
         //meta! sender="ProcessPresunNaSkladku", id="106", type="Finish"
         public void ProcessFinishProcessPresunNaSkladku(MessageForm message)
         {
-            Console.WriteLine("Auto na skladke");
-            message.Code = Mc.NalozAuto;
-            message.Addressee = MySim.FindAgent(SimId.AgentSkladky);
-            Request(message);
+            foreach (Vehicle car in ((MyMessage)message).cars)
+            {
+                MyMessage sprava = new MyMessage(MySim);
+                sprava.Code = Mc.NalozAuto;
+                sprava.Car = car;
+                sprava.Addressee = MySim.FindAgent(SimId.AgentSkladky);
+                Request(sprava);
+            }
         }
 
         //meta! sender="AgentModelu", id="91", type="Call"
@@ -95,7 +102,16 @@ namespace ds_agent_oriented_simulation.Managers
         {
             switch (message.Code)
             {
+                case Mc.DovozMaterialu:
+                    ProcessDovozMaterialu(message);
+                    break;
             }
+        }
+
+        private void ProcessDovozMaterialu(MessageForm message)
+        {
+            message.Addressee = MySim.FindAgent(SimId.AgentSkladky);
+            Notice(message);
         }
 
         //meta! userInfo="Generated code: do not modify", tag="begin"
@@ -174,7 +190,7 @@ namespace ds_agent_oriented_simulation.Managers
                 {
                     _enabledCars = new Vehicle[2];
                     _enabledCars[0] = MyAgent.A;
-                    _enabledCars[1] = MyAgent.B;
+                    _enabledCars[1] = MyAgent.X;
                 }
             }
         }

@@ -17,7 +17,7 @@ namespace ds_agent_oriented_simulation.Agents
         {
             base.PrepareReplication();
             // Setup component for the next replication
-            MyMessage Sprava = new MyMessage(MySim, 2);
+            MyMessage Sprava = new MyMessage(MySim, 3);
             Sprava.Code = Mc.Inicializacia;
             Sprava.Addressee = MySim.FindAgent(SimId.AgentModelu);
             MyManager.Call(Sprava);

@@ -17,6 +17,9 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
         public OSPRNG.ExponentialRNG GenCasC;
         public OSPRNG.EmpiricRNG<double> GenMaterialC;
 
+        private double volumeA, volumeB, volumeC;
+        private double timeA, timeB, timeC;
+
         public PlanovacDovozMaterialu(int id, OSPABA.Simulation mySim, CommonAgent myAgent) :
             base(id, mySim, myAgent)
         {
@@ -93,6 +96,46 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
         //meta! sender="AgentOkolia", id="55", type="Start"
         public void ProcessStart(MessageForm message)
         {
+            string comp = ((MyMessage) message).Name;
+            switch (comp)
+            {
+                case "A":
+                    NaplanujA((MyMessage)message);
+                    break;
+                case "B":
+                    NaplanujB((MyMessage)message);
+                    break;
+                case "C":
+                    NaplanujC((MyMessage)message);
+                    break;
+                default:
+                    // process default
+                    break;
+            }
+        }
+
+        private void NaplanujC(MyMessage message)
+        {
+            message.Volume = GenMaterialC.Sample();
+            message.Time = GenCasC.Sample();
+            message.Code = Mc.DovozMaterialu;
+            Hold(message.Time, message);
+        }
+
+        private void NaplanujB(MyMessage message)
+        {
+            message.Volume = GenMaterialB.Sample();
+            message.Time = GenCasB.Sample();
+            message.Code = Mc.DovozMaterialu;
+            Hold(message.Time, message);
+        }
+
+        private void NaplanujA(MyMessage message)
+        {
+            message.Volume = GenMaterialA.Sample();
+            message.Time = GenCasA.Sample();
+            message.Code = Mc.DovozMaterialu;
+            Hold(message.Time, message);
         }
 
         //meta! userInfo="Process messages defined in code", id="0"
@@ -100,7 +143,16 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
         {
             switch (message.Code)
             {
+                case Mc.DovozMaterialu:
+                    //ProcessDovozMaterialu((MyMessage)message);
+                    AssistantFinished(message);
+                    break;
             }
+        }
+
+        private void ProcessDovozMaterialu(MyMessage message)
+        {
+            
         }
 
         //meta! userInfo="Generated code: do not modify", tag="begin"

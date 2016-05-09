@@ -73,6 +73,8 @@
             this.buttonPause = new System.Windows.Forms.Button();
             this.buttonSlowDown = new System.Windows.Forms.Button();
             this.groupBoxStats = new System.Windows.Forms.GroupBox();
+            this.labelMaterialSkladka = new System.Windows.Forms.Label();
+            this.labelMaterialStavba = new System.Windows.Forms.Label();
             this.groupBoxVehicles.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureCarD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureCarE)).BeginInit();
@@ -382,6 +384,8 @@
             // 
             // groupBoxSim
             // 
+            this.groupBoxSim.Controls.Add(this.labelMaterialStavba);
+            this.groupBoxSim.Controls.Add(this.labelMaterialSkladka);
             this.groupBoxSim.Controls.Add(this.labelSimTime);
             this.groupBoxSim.Controls.Add(this.labelQueueUnload);
             this.groupBoxSim.Controls.Add(this.labelQueueLoad);
@@ -408,7 +412,7 @@
             // labelSimTime
             // 
             this.labelSimTime.AutoSize = true;
-            this.labelSimTime.Location = new System.Drawing.Point(41, 659);
+            this.labelSimTime.Location = new System.Drawing.Point(41, 710);
             this.labelSimTime.Name = "labelSimTime";
             this.labelSimTime.Size = new System.Drawing.Size(184, 29);
             this.labelSimTime.TabIndex = 25;
@@ -417,7 +421,7 @@
             // labelQueueUnload
             // 
             this.labelQueueUnload.AutoSize = true;
-            this.labelQueueUnload.Location = new System.Drawing.Point(25, 325);
+            this.labelQueueUnload.Location = new System.Drawing.Point(29, 376);
             this.labelQueueUnload.Name = "labelQueueUnload";
             this.labelQueueUnload.Size = new System.Drawing.Size(222, 29);
             this.labelQueueUnload.TabIndex = 24;
@@ -426,7 +430,7 @@
             // labelQueueLoad
             // 
             this.labelQueueLoad.AutoSize = true;
-            this.labelQueueLoad.Location = new System.Drawing.Point(25, 89);
+            this.labelQueueLoad.Location = new System.Drawing.Point(25, 105);
             this.labelQueueLoad.Name = "labelQueueLoad";
             this.labelQueueLoad.Size = new System.Drawing.Size(199, 29);
             this.labelQueueLoad.TabIndex = 23;
@@ -435,7 +439,7 @@
             // labelUnloaderB
             // 
             this.labelUnloaderB.AutoSize = true;
-            this.labelUnloaderB.Location = new System.Drawing.Point(41, 469);
+            this.labelUnloaderB.Location = new System.Drawing.Point(41, 520);
             this.labelUnloaderB.Name = "labelUnloaderB";
             this.labelUnloaderB.Size = new System.Drawing.Size(152, 29);
             this.labelUnloaderB.TabIndex = 22;
@@ -444,7 +448,7 @@
             // labelUnloaderA
             // 
             this.labelUnloaderA.AutoSize = true;
-            this.labelUnloaderA.Location = new System.Drawing.Point(41, 403);
+            this.labelUnloaderA.Location = new System.Drawing.Point(41, 454);
             this.labelUnloaderA.Name = "labelUnloaderA";
             this.labelUnloaderA.Size = new System.Drawing.Size(152, 29);
             this.labelUnloaderA.TabIndex = 21;
@@ -453,7 +457,7 @@
             // labelLoaderB
             // 
             this.labelLoaderB.AutoSize = true;
-            this.labelLoaderB.Location = new System.Drawing.Point(154, 234);
+            this.labelLoaderB.Location = new System.Drawing.Point(154, 250);
             this.labelLoaderB.Name = "labelLoaderB";
             this.labelLoaderB.Size = new System.Drawing.Size(123, 29);
             this.labelLoaderB.TabIndex = 20;
@@ -462,7 +466,7 @@
             // labelLoaderA
             // 
             this.labelLoaderA.AutoSize = true;
-            this.labelLoaderA.Location = new System.Drawing.Point(154, 152);
+            this.labelLoaderA.Location = new System.Drawing.Point(154, 168);
             this.labelLoaderA.Name = "labelLoaderA";
             this.labelLoaderA.Size = new System.Drawing.Size(135, 29);
             this.labelLoaderA.TabIndex = 19;
@@ -472,7 +476,7 @@
             // 
             this.pictureUnloaderB.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureUnloaderB.BackgroundImage")));
             this.pictureUnloaderB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureUnloaderB.Location = new System.Drawing.Point(368, 451);
+            this.pictureUnloaderB.Location = new System.Drawing.Point(368, 502);
             this.pictureUnloaderB.Name = "pictureUnloaderB";
             this.pictureUnloaderB.Size = new System.Drawing.Size(103, 69);
             this.pictureUnloaderB.TabIndex = 18;
@@ -483,7 +487,7 @@
             this.pictureUnloaderA.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.pictureUnloaderA.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureUnloaderA.BackgroundImage")));
             this.pictureUnloaderA.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureUnloaderA.Location = new System.Drawing.Point(368, 376);
+            this.pictureUnloaderA.Location = new System.Drawing.Point(368, 427);
             this.pictureUnloaderA.Name = "pictureUnloaderA";
             this.pictureUnloaderA.Size = new System.Drawing.Size(103, 69);
             this.pictureUnloaderA.TabIndex = 17;
@@ -493,7 +497,7 @@
             // 
             this.pictureLoaderB.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureLoaderB.BackgroundImage")));
             this.pictureLoaderB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureLoaderB.Location = new System.Drawing.Point(30, 207);
+            this.pictureLoaderB.Location = new System.Drawing.Point(30, 223);
             this.pictureLoaderB.Name = "pictureLoaderB";
             this.pictureLoaderB.Size = new System.Drawing.Size(118, 85);
             this.pictureLoaderB.TabIndex = 16;
@@ -503,7 +507,7 @@
             // 
             this.pictureLoaderA.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureLoaderA.BackgroundImage")));
             this.pictureLoaderA.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureLoaderA.Location = new System.Drawing.Point(30, 137);
+            this.pictureLoaderA.Location = new System.Drawing.Point(30, 153);
             this.pictureLoaderA.Name = "pictureLoaderA";
             this.pictureLoaderA.Size = new System.Drawing.Size(118, 64);
             this.pictureLoaderA.TabIndex = 15;
@@ -518,7 +522,7 @@
             this.buttonStop.FlatAppearance.BorderSize = 0;
             this.buttonStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonStop.ForeColor = System.Drawing.Color.White;
-            this.buttonStop.Location = new System.Drawing.Point(328, 556);
+            this.buttonStop.Location = new System.Drawing.Point(328, 607);
             this.buttonStop.Name = "buttonStop";
             this.buttonStop.Size = new System.Drawing.Size(49, 49);
             this.buttonStop.TabIndex = 4;
@@ -534,7 +538,7 @@
             this.buttonSlowUp.FlatAppearance.BorderSize = 0;
             this.buttonSlowUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonSlowUp.ForeColor = System.Drawing.Color.White;
-            this.buttonSlowUp.Location = new System.Drawing.Point(273, 556);
+            this.buttonSlowUp.Location = new System.Drawing.Point(273, 607);
             this.buttonSlowUp.Name = "buttonSlowUp";
             this.buttonSlowUp.Size = new System.Drawing.Size(49, 49);
             this.buttonSlowUp.TabIndex = 3;
@@ -550,7 +554,7 @@
             this.buttonRun.FlatAppearance.BorderSize = 0;
             this.buttonRun.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonRun.ForeColor = System.Drawing.Color.White;
-            this.buttonRun.Location = new System.Drawing.Point(108, 556);
+            this.buttonRun.Location = new System.Drawing.Point(108, 607);
             this.buttonRun.Name = "buttonRun";
             this.buttonRun.Size = new System.Drawing.Size(49, 49);
             this.buttonRun.TabIndex = 2;
@@ -566,7 +570,7 @@
             this.buttonPause.FlatAppearance.BorderSize = 0;
             this.buttonPause.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonPause.ForeColor = System.Drawing.Color.White;
-            this.buttonPause.Location = new System.Drawing.Point(218, 556);
+            this.buttonPause.Location = new System.Drawing.Point(218, 607);
             this.buttonPause.Name = "buttonPause";
             this.buttonPause.Size = new System.Drawing.Size(49, 49);
             this.buttonPause.TabIndex = 1;
@@ -582,7 +586,7 @@
             this.buttonSlowDown.FlatAppearance.BorderSize = 0;
             this.buttonSlowDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonSlowDown.ForeColor = System.Drawing.Color.White;
-            this.buttonSlowDown.Location = new System.Drawing.Point(163, 556);
+            this.buttonSlowDown.Location = new System.Drawing.Point(163, 607);
             this.buttonSlowDown.Name = "buttonSlowDown";
             this.buttonSlowDown.Size = new System.Drawing.Size(49, 49);
             this.buttonSlowDown.TabIndex = 0;
@@ -597,6 +601,24 @@
             this.groupBoxStats.TabIndex = 4;
             this.groupBoxStats.TabStop = false;
             this.groupBoxStats.Text = "Statistics";
+            // 
+            // labelMaterialSkladka
+            // 
+            this.labelMaterialSkladka.AutoSize = true;
+            this.labelMaterialSkladka.Location = new System.Drawing.Point(25, 64);
+            this.labelMaterialSkladka.Name = "labelMaterialSkladka";
+            this.labelMaterialSkladka.Size = new System.Drawing.Size(105, 29);
+            this.labelMaterialSkladka.TabIndex = 26;
+            this.labelMaterialSkladka.Text = "Material:";
+            // 
+            // labelMaterialStavba
+            // 
+            this.labelMaterialStavba.AutoSize = true;
+            this.labelMaterialStavba.Location = new System.Drawing.Point(29, 336);
+            this.labelMaterialStavba.Name = "labelMaterialStavba";
+            this.labelMaterialStavba.Size = new System.Drawing.Size(105, 29);
+            this.labelMaterialStavba.TabIndex = 27;
+            this.labelMaterialStavba.Text = "Material:";
             // 
             // FormAgentSimulation
             // 
@@ -676,6 +698,8 @@
         public System.Windows.Forms.Label labelUnloaderA;
         public System.Windows.Forms.Label labelLoaderB;
         public System.Windows.Forms.Label labelLoaderA;
+        private System.Windows.Forms.Label labelMaterialStavba;
+        private System.Windows.Forms.Label labelMaterialSkladka;
     }
 }
 

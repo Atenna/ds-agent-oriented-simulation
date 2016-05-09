@@ -117,7 +117,15 @@ namespace ds_agent_oriented_simulation.Managers
         {
             switch (message.Code)
             {
+                case Mc.DovozMaterialu:
+                    ProcessDovozMaterialu((MyMessage)message);
+                    break;
             }
+        }
+
+        private void ProcessDovozMaterialu(MyMessage message)
+        {
+            MyAgent.MaterialNaSkladke += message.Volume;
         }
 
         //meta! userInfo="Generated code: do not modify", tag="begin"

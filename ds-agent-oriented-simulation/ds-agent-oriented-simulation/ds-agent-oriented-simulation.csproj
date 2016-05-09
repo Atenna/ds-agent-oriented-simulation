@@ -68,6 +68,8 @@
     <Compile Include="ContinualAssistant\ProcesNakladacB.cs" />
     <Compile Include="ContinualAssistant\ProcesVykladacA.cs" />
     <Compile Include="ContinualAssistant\ProcesVykladacB.cs" />
+    <Compile Include="Entities\OneLane.cs" />
+    <Compile Include="Entities\OneLaneRoad.cs" />
     <Compile Include="Entities\Vehicles\CarD.cs" />
     <Compile Include="Entities\Queue.cs" />
     <Compile Include="Entities\Statistics.cs" />

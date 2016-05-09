@@ -1,4 +1,5 @@
 ﻿using ds_agent_oriented_simulation.Agents;
+using ds_agent_oriented_simulation.Entities;
 using ds_agent_oriented_simulation.Entities.Vehicles;
 using ds_agent_oriented_simulation.Settings;
 using ds_agent_oriented_simulation.Simulation;
@@ -9,9 +10,12 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
     //meta! id="105"
     public class ProcessPresunNaSkladku : Process
     {
+        private OneLaneRoad cesta;
+
         public ProcessPresunNaSkladku(int id, OSPABA.Simulation mySim, CommonAgent myAgent) :
             base(id, mySim, myAgent)
         {
+            cesta = new OneLaneRoad(Constants.CaLength);
         }
 
         override public void PrepareReplication()
@@ -24,10 +28,13 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
         public void ProcessStart(MessageForm message)
         {
             Vehicle naNalozenie = ((MyMessage)message).Car;
-            // premenovat na naNalozenie
-            double casPrejazdu = (Constants.CaLength / (double)(naNalozenie.Speed / 60.0));
-            message.Code = Mc.PrejazdUkonceny;
-            Hold(casPrejazdu, message);
+            
+            double holdTime = cesta.AddCar(naNalozenie, MySim.CurrentTime);
+            if (holdTime != -1)
+            {
+                message.Code = Mc.PrejazdUkonceny;
+                Hold(holdTime, message);
+            }
         }
 
         //meta! userInfo="Process messages defined in code", id="0"
@@ -36,9 +43,15 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
             switch (message.Code)
             {
                 case Mc.PrejazdUkonceny:
-                    AssistantFinished(message);
+                    ProcessPrejazdUkonceny(message);
                     break;
             }
+        }
+
+        private void ProcessPrejazdUkonceny(MessageForm message)
+        {
+            ((MyMessage)message).cars = cesta.GetFirstLane().cars;
+            AssistantFinished(message);
         }
 
         //meta! userInfo="Generated code: do not modify", tag="begin"

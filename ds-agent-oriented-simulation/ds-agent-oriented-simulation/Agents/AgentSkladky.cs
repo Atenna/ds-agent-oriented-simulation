@@ -1,6 +1,7 @@
 using ds_agent_oriented_simulation.ContinualAssistant;
 using ds_agent_oriented_simulation.Entities.Vehicles;
 using ds_agent_oriented_simulation.Managers;
+using ds_agent_oriented_simulation.Settings;
 using ds_agent_oriented_simulation.Simulation;
 using OSPABA;
 using OSPDataStruct;
@@ -19,6 +20,7 @@ namespace ds_agent_oriented_simulation.Agents
         public bool NakladacBIsWorking { get; internal set; }
         public Vehicle CarAtLoaderA { get; set; }
         public Vehicle CarAtLoaderB { get; set; }
+        public double MaterialNaSkladke { get; set; }
 
         private double _material = Settings.Constants.MaterialToLoad;
 
@@ -29,6 +31,7 @@ namespace ds_agent_oriented_simulation.Agents
             SkladkaWStat = new WStat(mySim);
             AutaSkladkaQueue = new SimQueue<Vehicle>(SkladkaWStat);
             MessageSkladkaQueue = new SimQueue<MyMessage>(SkladkaWStat);
+            MaterialNaSkladke = Constants.MaterialAtDepo;
         }
 
         override public void PrepareReplication()
@@ -52,6 +55,7 @@ namespace ds_agent_oriented_simulation.Agents
             new ProcesNakladacB(SimId.ProcesNakladacB, MySim, this);
             AddOwnMessage(Mc.NalozAuto);
             AddOwnMessage(Mc.NalozenieUkoncene);
+            AddOwnMessage(Mc.DovozMaterialu);
         }
         //meta! tag="end"
     }
