@@ -4,7 +4,7 @@
     {
         public const double MaterialToLoad = 5000;
         public const double LoadMachinePerformance = 180 / 60.0;
-        public const double LoadMachine2Performance = 180 / 60.0; //250 / 60.0;
+        public const double LoadMachine2Performance = 250 / 60.0;
         public const double UnloadMachinePerformance = 190 / 60.0;
 
         public const int AbLength = 45;
