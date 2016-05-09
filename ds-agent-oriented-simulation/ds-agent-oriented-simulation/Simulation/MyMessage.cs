@@ -9,6 +9,8 @@ namespace ds_agent_oriented_simulation.Simulation
         public Vehicle Car { get; set; }
         public int Variant { get; set; }
 
+        public string Name { get; set; }
+
         public MyMessage(OSPABA.Simulation sim) :
             base(sim)
         {
@@ -30,6 +32,12 @@ namespace ds_agent_oriented_simulation.Simulation
             base(sim)
         {
             this.Variant = variant;
+        }
+
+        public MyMessage(OSPABA.Simulation sim, string name) :
+            base(sim)
+        {
+            this.Name = name;
         }
 
         override public MessageForm CreateCopy()
