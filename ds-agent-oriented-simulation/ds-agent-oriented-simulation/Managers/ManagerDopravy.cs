@@ -170,7 +170,12 @@ namespace ds_agent_oriented_simulation.Managers
                     _enabledCars[2] = MyAgent.C;
                     _enabledCars[3] = MyAgent.D;
                 }
-                // etc, to-do
+                else if (variant == 3)
+                {
+                    _enabledCars = new Vehicle[2];
+                    _enabledCars[0] = MyAgent.A;
+                    _enabledCars[1] = MyAgent.B;
+                }
             }
         }
     }

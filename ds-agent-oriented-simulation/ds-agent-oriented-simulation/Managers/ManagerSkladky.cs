@@ -33,14 +33,7 @@ namespace ds_agent_oriented_simulation.Managers
             MyAgent.NakladacAIsWorking = false;
             message.Addressee = MySim.FindAgent(SimId.AgentDopravy);
             message.Code = Mc.NalozAuto;
-            try
-            {
-                Response(message);
-            }
-            catch (System.ArgumentOutOfRangeException e)
-            {
-
-            }
+            Response(message);
 
             // ak v rade niekto dalsi caka, zacne sa znova nakladanie
             Vehicle naNalozenie;
@@ -51,7 +44,8 @@ namespace ds_agent_oriented_simulation.Managers
                     naNalozenie = MyAgent.AutaSkladkaQueue.First.Value;
                     MyAgent.AutaSkladkaQueue.RemoveFirst();
                 }
-                MyMessage zFrontu = new MyMessage(MySim, naNalozenie);
+                MyMessage zFrontu = MyAgent.MessageSkladkaQueue.First.Value;
+                MyAgent.MessageSkladkaQueue.RemoveFirst();
                 zFrontu.Addressee = MyAgent.FindAssistant(SimId.ProcesNakladacA);
                 zFrontu.Code = Mc.NalozAuto;
                 zFrontu.Car = naNalozenie;
@@ -66,14 +60,7 @@ namespace ds_agent_oriented_simulation.Managers
             MyAgent.NakladacBIsWorking = false;
             message.Addressee = MySim.FindAgent(SimId.AgentDopravy);
             message.Code = Mc.NalozAuto;
-            try
-            {
-                Response(message);
-            }
-            catch (System.ArgumentOutOfRangeException e)
-            {
-
-            }
+            Response(message);
 
             Vehicle naNalozenie;
             if (!MyAgent.AutaSkladkaQueue.IsEmpty())
@@ -83,7 +70,8 @@ namespace ds_agent_oriented_simulation.Managers
                     naNalozenie = MyAgent.AutaSkladkaQueue.First.Value;
                     MyAgent.AutaSkladkaQueue.RemoveFirst();
                 }
-                MyMessage zFrontu = new MyMessage(MySim, naNalozenie);
+                MyMessage zFrontu = MyAgent.MessageSkladkaQueue.First.Value;
+                MyAgent.MessageSkladkaQueue.RemoveFirst();
                 zFrontu.Addressee = MyAgent.FindAssistant(SimId.ProcesNakladacB);
                 zFrontu.Code = Mc.NalozAuto;
                 zFrontu.Car = naNalozenie;
@@ -104,6 +92,7 @@ namespace ds_agent_oriented_simulation.Managers
                 lock (naNalozenie)
                 {
                     MyAgent.AutaSkladkaQueue.AddLast(naNalozenie);
+                    MyAgent.MessageSkladkaQueue.AddLast((MyMessage)message);
                 }
             }
             else

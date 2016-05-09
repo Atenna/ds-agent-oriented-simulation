@@ -42,7 +42,9 @@ namespace ds_agent_oriented_simulation.Managers
                     naVylozenie = MyAgent.AutaStavbaQueue.First.Value;
                     MyAgent.AutaStavbaQueue.RemoveFirst();
                 }
-                MyMessage msg = new MyMessage(MySim, naVylozenie);
+                MyMessage msg = MyAgent.MessageSkladkaQueue.First.Value;
+                MyAgent.MessageSkladkaQueue.RemoveFirst();
+                msg.Car = naVylozenie;
                 msg.Code = Mc.NalozAuto;
                 msg.Addressee = MySim.FindAgent(SimId.AgentSkladky);
                 Request(msg);
@@ -65,7 +67,9 @@ namespace ds_agent_oriented_simulation.Managers
                     naVylozenie = MyAgent.AutaStavbaQueue.First.Value;
                     MyAgent.AutaStavbaQueue.RemoveFirst();
                 }
-                MyMessage msg = new MyMessage(MySim, naVylozenie);
+                MyMessage msg = MyAgent.MessageSkladkaQueue.First.Value;
+                MyAgent.MessageSkladkaQueue.RemoveFirst();
+                msg.Car = naVylozenie;
                 msg.Code = Mc.NalozAuto;
                 msg.Addressee = MySim.FindAgent(SimId.AgentSkladky);
                 Request(msg);
@@ -83,6 +87,7 @@ namespace ds_agent_oriented_simulation.Managers
             if (MyAgent.VykladacAIsWorking && MyAgent.VykladacBIsWorking)
             {
                 MyAgent.AutaStavbaQueue.AddLast(naVylozenie);
+                MyAgent.MessageSkladkaQueue.AddLast((MyMessage)message);
             }
             else
             {
