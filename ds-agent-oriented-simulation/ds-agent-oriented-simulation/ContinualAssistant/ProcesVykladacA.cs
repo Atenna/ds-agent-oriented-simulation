@@ -11,16 +11,21 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
     {
 
         private Vehicle _naVylozenie;
+        public double StartsAt { get; private set; }
+        public double EndsAt { get; private set; }
 
         public ProcesVykladacA(int id, OSPABA.Simulation mySim, CommonAgent myAgent) :
             base(id, mySim, myAgent)
         {
+            StartsAt = Constants.VykladacAStartsAt;
+            EndsAt = Constants.VykladacAEndsAt;
         }
 
         override public void PrepareReplication()
         {
             base.PrepareReplication();
             // Setup component for the next replication
+            
         }
 
         //meta! sender="AgentStavby", id="67", type="Start"

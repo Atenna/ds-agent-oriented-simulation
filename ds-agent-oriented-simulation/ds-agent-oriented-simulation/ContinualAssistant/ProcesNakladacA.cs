@@ -10,16 +10,20 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
     public class ProcesNakladacA : Process
     {
         private Vehicle _naNalozenie;
-
+        public double StartsAt { get; private set; }
+        public double EndsAt { get; private set; }
         public ProcesNakladacA(int id, OSPABA.Simulation mySim, CommonAgent myAgent) :
             base(id, mySim, myAgent)
         {
+            StartsAt = Constants.NakladacAStartsAt;
+            EndsAt = Constants.NakladacAEndsAt;
         }
 
         override public void PrepareReplication()
         {
             base.PrepareReplication();
             // Setup component for the next replication
+            
         }
 
         //meta! sender="AgentSkladky", id="64", type="Start"

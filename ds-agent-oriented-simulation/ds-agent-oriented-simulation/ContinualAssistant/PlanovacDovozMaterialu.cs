@@ -11,11 +11,11 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
     {
 
         public OSPRNG.ExponentialRNG GenCasA;
-        public OSPRNG.EmpiricRNG<double> GenMaterialA;
+        public OSPRNG.EmpiricRNG<int> GenMaterialA;
         public OSPRNG.ExponentialRNG GenCasB;
-        public OSPRNG.EmpiricRNG<double> GenMaterialB;
+        public OSPRNG.EmpiricRNG<int> GenMaterialB;
         public OSPRNG.ExponentialRNG GenCasC;
-        public OSPRNG.EmpiricRNG<double> GenMaterialC;
+        public OSPRNG.EmpiricRNG<int> GenMaterialC;
 
         private double volumeA, volumeB, volumeC;
         private double timeA, timeB, timeC;
@@ -33,65 +33,62 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
             GenCasB = new ExponentialRNG(36.8, 3);
             GenCasC = new ExponentialRNG(25.8, 0.99);
 
-            GenMaterialA = new EmpiricRNG<double>(
-                new EmpiricPair<double>(new UniformContinuousRNG(4, 4.5), 0),
-                new EmpiricPair<double>(new UniformContinuousRNG(4.5, 5.5), 0.03),
-                new EmpiricPair<double>(new UniformContinuousRNG(5.5, 6.5), 0.016),
-                new EmpiricPair<double>(new UniformContinuousRNG(6.5, 7.5), 0.055),
-                new EmpiricPair<double>(new UniformContinuousRNG(7.5, 8.5), 0.105),
-                new EmpiricPair<double>(new UniformContinuousRNG(8.5, 9.5), 0.167),
-                new EmpiricPair<double>(new UniformContinuousRNG(9.5, 10.5), 0.242),
-                new EmpiricPair<double>(new UniformContinuousRNG(10.5, 11.5), 0.337),
-                new EmpiricPair<double>(new UniformContinuousRNG(11.5, 12.5), 0.444),
-                new EmpiricPair<double>(new UniformContinuousRNG(12.5, 13.5), 0.575),
-                new EmpiricPair<double>(new UniformContinuousRNG(13.5, 14.5), 0.724),
-                new EmpiricPair<double>(new UniformContinuousRNG(14.5, 15.5), 0.884),
-                new EmpiricPair<double>(new UniformContinuousRNG(15.5, 16.5), 1.000),
-                new EmpiricPair<double>(new UniformContinuousRNG(16.5, 17.5), 1.000),
-                new EmpiricPair<double>(new UniformContinuousRNG(17.5, 18.5), 1.000)
-            );
-            GenMaterialB = new EmpiricRNG<double>(
-                new EmpiricPair<double>(new UniformContinuousRNG(4.5, 5.5), 0),
-                new EmpiricPair<double>(new UniformContinuousRNG(5.5, 6.5), 0),
-                new EmpiricPair<double>(new UniformContinuousRNG(6.5, 7.5), 0.001),
-                new EmpiricPair<double>(new UniformContinuousRNG(7.5, 8.5), 0.004),
-                new EmpiricPair<double>(new UniformContinuousRNG(8.5, 9.5), 0.007),
-                new EmpiricPair<double>(new UniformContinuousRNG(9.5, 10.5), 0.012),
-                new EmpiricPair<double>(new UniformContinuousRNG(10.5, 11.5), 0.019),
-                new EmpiricPair<double>(new UniformContinuousRNG(11.5, 12.5), 0.026),
-                new EmpiricPair<double>(new UniformContinuousRNG(12.5, 13.5), 0.034),
-                new EmpiricPair<double>(new UniformContinuousRNG(13.5, 14.5), 0.046),
-                new EmpiricPair<double>(new UniformContinuousRNG(14.5, 15.5), 0.056),
-                new EmpiricPair<double>(new UniformContinuousRNG(15.5, 16.5), 0.120),
-                new EmpiricPair<double>(new UniformContinuousRNG(16.5, 17.5), 0.303),
-                new EmpiricPair<double>(new UniformContinuousRNG(17.5, 18.5), 0.497),
-                new EmpiricPair<double>(new UniformContinuousRNG(18.5, 19.5), 0.707),
-                new EmpiricPair<double>(new UniformContinuousRNG(19.5, 20.5), 0.929),
-                new EmpiricPair<double>(new UniformContinuousRNG(20.5, 21.5), 1.000)
-            );
-            GenMaterialC = new EmpiricRNG<double>(
-                new EmpiricPair<double>(new UniformContinuousRNG(4.5, 5.5), 0),
-                new EmpiricPair<double>(new UniformContinuousRNG(5.5, 6.5), 0.004),
-                new EmpiricPair<double>(new UniformContinuousRNG(6.5, 7.5), 0.007),
-                new EmpiricPair<double>(new UniformContinuousRNG(7.5, 8.5), 0.013),
-                new EmpiricPair<double>(new UniformContinuousRNG(8.5, 9.5), 0.024),
-                new EmpiricPair<double>(new UniformContinuousRNG(9.5, 10.5), 0.031),
-                new EmpiricPair<double>(new UniformContinuousRNG(10.5, 11.5), 0.047),
-                new EmpiricPair<double>(new UniformContinuousRNG(11.5, 12.5), 0.066),
-                new EmpiricPair<double>(new UniformContinuousRNG(12.5, 13.5), 0.085),
-                new EmpiricPair<double>(new UniformContinuousRNG(13.5, 14.5), 0.103),
-                new EmpiricPair<double>(new UniformContinuousRNG(14.5, 15.5), 0.125),
-                new EmpiricPair<double>(new UniformContinuousRNG(15.5, 16.5), 0.148),
-                new EmpiricPair<double>(new UniformContinuousRNG(16.5, 17.5), 0.166),
-                new EmpiricPair<double>(new UniformContinuousRNG(17.5, 18.5), 0.191),
-                new EmpiricPair<double>(new UniformContinuousRNG(18.5, 19.5), 0.217),
-                new EmpiricPair<double>(new UniformContinuousRNG(19.5, 20.5), 0.238),
-                new EmpiricPair<double>(new UniformContinuousRNG(20.5, 21.5), 0.382),
-                new EmpiricPair<double>(new UniformContinuousRNG(21.5, 22.5), 0.588),
-                new EmpiricPair<double>(new UniformContinuousRNG(22.5, 23.5), 0.813),
-                new EmpiricPair<double>(new UniformContinuousRNG(23.5, 24.5), 0.813)
-            );
-        }
+            GenMaterialA = new EmpiricRNG<int>(
+                new EmpiricPair<int>(new UniformDiscreteRNG(4, 4), 0),
+                new EmpiricPair<int>(new UniformDiscreteRNG(5, 5), 0.0033085),
+                new EmpiricPair<int>(new UniformDiscreteRNG(6, 6), 0.0128205),
+                new EmpiricPair<int>(new UniformDiscreteRNG(7, 7), 0.0384615),
+                new EmpiricPair<int>(new UniformDiscreteRNG(8, 8), 0.0500414),
+                new EmpiricPair<int>(new UniformDiscreteRNG(9, 9), 0.0624483),
+                new EmpiricPair<int>(new UniformDiscreteRNG(10, 10), 0.0744417),
+                new EmpiricPair<int>(new UniformDiscreteRNG(11, 11), 0.0959471),
+                new EmpiricPair<int>(new UniformDiscreteRNG(12, 12), 0.1066998),
+                new EmpiricPair<int>(new UniformDiscreteRNG(13, 13), 0.1306865),
+                new EmpiricPair<int>(new UniformDiscreteRNG(14, 14), 0.1488834),
+                new EmpiricPair<int>(new UniformDiscreteRNG(15, 15), 0.1600496),
+                new EmpiricPair<int>(new UniformDiscreteRNG(16, 16), 0.115798),
+                new EmpiricPair<int>(new UniformDiscreteRNG(19, 19), 0.0004136));
+
+
+            GenMaterialB = new EmpiricRNG<int>(
+                new EmpiricPair<int>(new UniformDiscreteRNG(6, 6), 0.0003509),
+                    new EmpiricPair<int>(new UniformDiscreteRNG(7, 7), 0.0010526),
+                    new EmpiricPair<int>(new UniformDiscreteRNG(8, 8), 0.0028070),
+                    new EmpiricPair<int>(new UniformDiscreteRNG(9, 9), 0.0031579),
+                    new EmpiricPair<int>(new UniformDiscreteRNG(10, 10), 0.0045614),
+                    new EmpiricPair<int>(new UniformDiscreteRNG(11, 11), 0.0073684),
+                    new EmpiricPair<int>(new UniformDiscreteRNG(12, 12), 0.0070175),
+                    new EmpiricPair<int>(new UniformDiscreteRNG(13, 13), 0.0077193),
+                    new EmpiricPair<int>(new UniformDiscreteRNG(14, 14), 0.0115789),
+                    new EmpiricPair<int>(new UniformDiscreteRNG(15, 15), 0.0105263),
+                    new EmpiricPair<int>(new UniformDiscreteRNG(16, 16), 0.0638596),
+                    new EmpiricPair<int>(new UniformDiscreteRNG(17, 17), 0.1828070),
+                    new EmpiricPair<int>(new UniformDiscreteRNG(18, 18), 0.1940351),
+                    new EmpiricPair<int>(new UniformDiscreteRNG(19, 19), 0.2098246),
+                    new EmpiricPair<int>(new UniformDiscreteRNG(20, 20), 0.2224561),
+                    new EmpiricPair<int>(new UniformDiscreteRNG(21, 11), 0.0708772));
+
+            GenMaterialC = new EmpiricRNG<int>(
+                new EmpiricPair<int>(new UniformDiscreteRNG(5, 5), 0.0004735),
+                    new EmpiricPair<int>(new UniformDiscreteRNG(6, 6), 0.0030777),
+                    new EmpiricPair<int>(new UniformDiscreteRNG(7, 7), 0.0037879),
+                    new EmpiricPair<int>(new UniformDiscreteRNG(8, 8), 0.0059186),
+                    new EmpiricPair<int>(new UniformDiscreteRNG(9, 9), 0.0104167),
+                    new EmpiricPair<int>(new UniformDiscreteRNG(10, 10), 0.0073390),
+                    new EmpiricPair<int>(new UniformDiscreteRNG(11, 11), 0.0163352),
+                    new EmpiricPair<int>(new UniformDiscreteRNG(12, 12), 0.0187027),
+                    new EmpiricPair<int>(new UniformDiscreteRNG(13, 13), 0.0184660),
+                    new EmpiricPair<int>(new UniformDiscreteRNG(14, 14), 0.0184659),
+                    new EmpiricPair<int>(new UniformDiscreteRNG(15, 15), 0.0217803),
+                    new EmpiricPair<int>(new UniformDiscreteRNG(16, 16), 0.0229640),
+                    new EmpiricPair<int>(new UniformDiscreteRNG(17, 17), 0.0187027),
+                    new EmpiricPair<int>(new UniformDiscreteRNG(18, 18), 0.0246212),
+                    new EmpiricPair<int>(new UniformDiscreteRNG(19, 19), 0.0262784),
+                    new EmpiricPair<int>(new UniformDiscreteRNG(20, 20), 0.0210701),
+                    new EmpiricPair<int>(new UniformDiscreteRNG(21, 21), 0.1439394),
+                    new EmpiricPair<int>(new UniformDiscreteRNG(22, 22), 0.2057292),
+                    new EmpiricPair<int>(new UniformDiscreteRNG(23, 23), 0.2249053),
+                    new EmpiricPair<int>(new UniformDiscreteRNG(24, 24), 0.1870265));        }
 
         //meta! sender="AgentOkolia", id="55", type="Start"
         public void ProcessStart(MessageForm message)
