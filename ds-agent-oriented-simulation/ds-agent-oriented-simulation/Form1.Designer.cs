@@ -30,12 +30,11 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAgentSimulation));
             this.groupBoxVehicles = new System.Windows.Forms.GroupBox();
-            this.removeCarE = new System.Windows.Forms.Label();
-            this.addCarE = new System.Windows.Forms.Label();
-            this.removeCarA = new System.Windows.Forms.Label();
-            this.addCarA = new System.Windows.Forms.Label();
-            this.labelCarsE = new System.Windows.Forms.Label();
-            this.labelCarsA = new System.Windows.Forms.Label();
+            this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.checkBoxCarE = new System.Windows.Forms.CheckBox();
             this.pictureCarD = new System.Windows.Forms.PictureBox();
             this.pictureCarE = new System.Windows.Forms.PictureBox();
@@ -56,6 +55,8 @@
             this.labelReplications = new System.Windows.Forms.Label();
             this.TextBoxReplications = new System.Windows.Forms.TextBox();
             this.groupBoxSim = new System.Windows.Forms.GroupBox();
+            this.labelMaterialStavba = new System.Windows.Forms.Label();
+            this.labelMaterialSkladka = new System.Windows.Forms.Label();
             this.labelSimTime = new System.Windows.Forms.Label();
             this.labelQueueUnload = new System.Windows.Forms.Label();
             this.labelQueueLoad = new System.Windows.Forms.Label();
@@ -73,9 +74,12 @@
             this.buttonPause = new System.Windows.Forms.Button();
             this.buttonSlowDown = new System.Windows.Forms.Button();
             this.groupBoxStats = new System.Windows.Forms.GroupBox();
-            this.labelMaterialSkladka = new System.Windows.Forms.Label();
-            this.labelMaterialStavba = new System.Windows.Forms.Label();
             this.groupBoxVehicles.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureCarD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureCarE)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureCarC)).BeginInit();
@@ -92,12 +96,11 @@
             // groupBoxVehicles
             // 
             this.groupBoxVehicles.BackColor = System.Drawing.Color.White;
-            this.groupBoxVehicles.Controls.Add(this.removeCarE);
-            this.groupBoxVehicles.Controls.Add(this.addCarE);
-            this.groupBoxVehicles.Controls.Add(this.removeCarA);
-            this.groupBoxVehicles.Controls.Add(this.addCarA);
-            this.groupBoxVehicles.Controls.Add(this.labelCarsE);
-            this.groupBoxVehicles.Controls.Add(this.labelCarsA);
+            this.groupBoxVehicles.Controls.Add(this.numericUpDown5);
+            this.groupBoxVehicles.Controls.Add(this.numericUpDown4);
+            this.groupBoxVehicles.Controls.Add(this.numericUpDown3);
+            this.groupBoxVehicles.Controls.Add(this.numericUpDown2);
+            this.groupBoxVehicles.Controls.Add(this.numericUpDown1);
             this.groupBoxVehicles.Controls.Add(this.checkBoxCarE);
             this.groupBoxVehicles.Controls.Add(this.pictureCarD);
             this.groupBoxVehicles.Controls.Add(this.pictureCarE);
@@ -110,88 +113,70 @@
             this.groupBoxVehicles.Controls.Add(this.checkBoxCarA);
             this.groupBoxVehicles.Location = new System.Drawing.Point(12, 12);
             this.groupBoxVehicles.Name = "groupBoxVehicles";
-            this.groupBoxVehicles.Size = new System.Drawing.Size(355, 444);
+            this.groupBoxVehicles.Size = new System.Drawing.Size(355, 483);
             this.groupBoxVehicles.TabIndex = 1;
             this.groupBoxVehicles.TabStop = false;
             this.groupBoxVehicles.Text = "Vehicles";
             // 
-            // removeCarE
+            // numericUpDown5
             // 
-            this.removeCarE.AutoSize = true;
-            this.removeCarE.BackColor = System.Drawing.Color.White;
-            this.removeCarE.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.removeCarE.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.removeCarE.Location = new System.Drawing.Point(305, 403);
-            this.removeCarE.Name = "removeCarE";
-            this.removeCarE.Size = new System.Drawing.Size(22, 22);
-            this.removeCarE.TabIndex = 15;
-            this.removeCarE.Text = "˅";
-            this.removeCarE.Click += new System.EventHandler(this.RemoveCarEClick);
-            this.removeCarE.MouseLeave += new System.EventHandler(this.ArrowRemoveCarELeave);
-            this.removeCarE.MouseHover += new System.EventHandler(this.ArrowRemoveCarEHover);
+            this.numericUpDown5.Location = new System.Drawing.Point(237, 383);
+            this.numericUpDown5.Maximum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.numericUpDown5.Name = "numericUpDown5";
+            this.numericUpDown5.Size = new System.Drawing.Size(87, 35);
+            this.numericUpDown5.TabIndex = 13;
             // 
-            // addCarE
+            // numericUpDown4
             // 
-            this.addCarE.AutoSize = true;
-            this.addCarE.BackColor = System.Drawing.Color.White;
-            this.addCarE.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.addCarE.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.addCarE.Location = new System.Drawing.Point(305, 370);
-            this.addCarE.Name = "addCarE";
-            this.addCarE.Size = new System.Drawing.Size(22, 22);
-            this.addCarE.TabIndex = 14;
-            this.addCarE.Text = "˄";
-            this.addCarE.Click += new System.EventHandler(this.AddCarEClick);
-            this.addCarE.MouseLeave += new System.EventHandler(this.ArrowAddCarELeave);
-            this.addCarE.MouseHover += new System.EventHandler(this.ArrowAddCarEHover);
+            this.numericUpDown4.Location = new System.Drawing.Point(237, 315);
+            this.numericUpDown4.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
+            this.numericUpDown4.Name = "numericUpDown4";
+            this.numericUpDown4.Size = new System.Drawing.Size(87, 35);
+            this.numericUpDown4.TabIndex = 12;
             // 
-            // removeCarA
+            // numericUpDown3
             // 
-            this.removeCarA.AutoSize = true;
-            this.removeCarA.BackColor = System.Drawing.Color.White;
-            this.removeCarA.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.removeCarA.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.removeCarA.Location = new System.Drawing.Point(305, 122);
-            this.removeCarA.Name = "removeCarA";
-            this.removeCarA.Size = new System.Drawing.Size(22, 22);
-            this.removeCarA.TabIndex = 13;
-            this.removeCarA.Text = "˅";
-            this.removeCarA.Click += new System.EventHandler(this.removeCarA_Click);
-            this.removeCarA.MouseLeave += new System.EventHandler(this.ArrowRemoveCarALeave);
-            this.removeCarA.MouseHover += new System.EventHandler(this.ArrowRemoveCarAHover);
+            this.numericUpDown3.Location = new System.Drawing.Point(237, 247);
+            this.numericUpDown3.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
+            this.numericUpDown3.Name = "numericUpDown3";
+            this.numericUpDown3.Size = new System.Drawing.Size(87, 35);
+            this.numericUpDown3.TabIndex = 11;
             // 
-            // addCarA
+            // numericUpDown2
             // 
-            this.addCarA.AutoSize = true;
-            this.addCarA.BackColor = System.Drawing.Color.White;
-            this.addCarA.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.addCarA.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.addCarA.Location = new System.Drawing.Point(305, 89);
-            this.addCarA.Name = "addCarA";
-            this.addCarA.Size = new System.Drawing.Size(22, 22);
-            this.addCarA.TabIndex = 2;
-            this.addCarA.Text = "˄";
-            this.addCarA.Click += new System.EventHandler(this.addCarA_Click);
-            this.addCarA.MouseLeave += new System.EventHandler(this.ArrowAddCarALeave);
-            this.addCarA.MouseHover += new System.EventHandler(this.ArrowAddCarAHover);
+            this.numericUpDown2.Location = new System.Drawing.Point(237, 179);
+            this.numericUpDown2.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
+            this.numericUpDown2.Name = "numericUpDown2";
+            this.numericUpDown2.Size = new System.Drawing.Size(87, 35);
+            this.numericUpDown2.TabIndex = 10;
             // 
-            // labelCarsE
+            // numericUpDown1
             // 
-            this.labelCarsE.AutoSize = true;
-            this.labelCarsE.Location = new System.Drawing.Point(238, 395);
-            this.labelCarsE.Name = "labelCarsE";
-            this.labelCarsE.Size = new System.Drawing.Size(46, 29);
-            this.labelCarsE.TabIndex = 12;
-            this.labelCarsE.Text = "0/2";
-            // 
-            // labelCarsA
-            // 
-            this.labelCarsA.AutoSize = true;
-            this.labelCarsA.Location = new System.Drawing.Point(238, 123);
-            this.labelCarsA.Name = "labelCarsA";
-            this.labelCarsA.Size = new System.Drawing.Size(46, 29);
-            this.labelCarsA.TabIndex = 11;
-            this.labelCarsA.Text = "0/3";
+            this.numericUpDown1.Location = new System.Drawing.Point(237, 111);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(87, 35);
+            this.numericUpDown1.TabIndex = 0;
             // 
             // checkBoxCarE
             // 
@@ -201,7 +186,6 @@
             this.checkBoxCarE.Size = new System.Drawing.Size(28, 27);
             this.checkBoxCarE.TabIndex = 4;
             this.checkBoxCarE.UseVisualStyleBackColor = true;
-            this.checkBoxCarE.CheckedChanged += new System.EventHandler(this.IsUsedCarEChanged);
             // 
             // pictureCarD
             // 
@@ -288,7 +272,6 @@
             this.checkBoxCarA.Size = new System.Drawing.Size(28, 27);
             this.checkBoxCarA.TabIndex = 0;
             this.checkBoxCarA.UseVisualStyleBackColor = true;
-            this.checkBoxCarA.CheckedChanged += new System.EventHandler(this.checkBoxCarA_CheckedChanged);
             // 
             // groupBoxSetup
             // 
@@ -300,7 +283,7 @@
             this.groupBoxSetup.Controls.Add(this.label2);
             this.groupBoxSetup.Controls.Add(this.labelReplications);
             this.groupBoxSetup.Controls.Add(this.TextBoxReplications);
-            this.groupBoxSetup.Location = new System.Drawing.Point(12, 462);
+            this.groupBoxSetup.Location = new System.Drawing.Point(12, 511);
             this.groupBoxSetup.Name = "groupBoxSetup";
             this.groupBoxSetup.Size = new System.Drawing.Size(355, 444);
             this.groupBoxSetup.TabIndex = 2;
@@ -404,10 +387,28 @@
             this.groupBoxSim.Controls.Add(this.buttonSlowDown);
             this.groupBoxSim.Location = new System.Drawing.Point(392, 12);
             this.groupBoxSim.Name = "groupBoxSim";
-            this.groupBoxSim.Size = new System.Drawing.Size(492, 894);
+            this.groupBoxSim.Size = new System.Drawing.Size(492, 943);
             this.groupBoxSim.TabIndex = 3;
             this.groupBoxSim.TabStop = false;
             this.groupBoxSim.Text = "Simulation";
+            // 
+            // labelMaterialStavba
+            // 
+            this.labelMaterialStavba.AutoSize = true;
+            this.labelMaterialStavba.Location = new System.Drawing.Point(29, 336);
+            this.labelMaterialStavba.Name = "labelMaterialStavba";
+            this.labelMaterialStavba.Size = new System.Drawing.Size(105, 29);
+            this.labelMaterialStavba.TabIndex = 27;
+            this.labelMaterialStavba.Text = "Material:";
+            // 
+            // labelMaterialSkladka
+            // 
+            this.labelMaterialSkladka.AutoSize = true;
+            this.labelMaterialSkladka.Location = new System.Drawing.Point(25, 64);
+            this.labelMaterialSkladka.Name = "labelMaterialSkladka";
+            this.labelMaterialSkladka.Size = new System.Drawing.Size(105, 29);
+            this.labelMaterialSkladka.TabIndex = 26;
+            this.labelMaterialSkladka.Text = "Material:";
             // 
             // labelSimTime
             // 
@@ -597,28 +598,10 @@
             // 
             this.groupBoxStats.Location = new System.Drawing.Point(904, 12);
             this.groupBoxStats.Name = "groupBoxStats";
-            this.groupBoxStats.Size = new System.Drawing.Size(644, 894);
+            this.groupBoxStats.Size = new System.Drawing.Size(705, 943);
             this.groupBoxStats.TabIndex = 4;
             this.groupBoxStats.TabStop = false;
             this.groupBoxStats.Text = "Statistics";
-            // 
-            // labelMaterialSkladka
-            // 
-            this.labelMaterialSkladka.AutoSize = true;
-            this.labelMaterialSkladka.Location = new System.Drawing.Point(25, 64);
-            this.labelMaterialSkladka.Name = "labelMaterialSkladka";
-            this.labelMaterialSkladka.Size = new System.Drawing.Size(105, 29);
-            this.labelMaterialSkladka.TabIndex = 26;
-            this.labelMaterialSkladka.Text = "Material:";
-            // 
-            // labelMaterialStavba
-            // 
-            this.labelMaterialStavba.AutoSize = true;
-            this.labelMaterialStavba.Location = new System.Drawing.Point(29, 336);
-            this.labelMaterialStavba.Name = "labelMaterialStavba";
-            this.labelMaterialStavba.Size = new System.Drawing.Size(105, 29);
-            this.labelMaterialStavba.TabIndex = 27;
-            this.labelMaterialStavba.Text = "Material:";
             // 
             // FormAgentSimulation
             // 
@@ -626,7 +609,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1560, 921);
+            this.ClientSize = new System.Drawing.Size(1621, 967);
             this.Controls.Add(this.groupBoxStats);
             this.Controls.Add(this.groupBoxSim);
             this.Controls.Add(this.groupBoxSetup);
@@ -636,6 +619,11 @@
             this.Text = "Agent Based Simulation";
             this.groupBoxVehicles.ResumeLayout(false);
             this.groupBoxVehicles.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureCarD)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureCarE)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureCarC)).EndInit();
@@ -665,12 +653,6 @@
         private System.Windows.Forms.PictureBox pictureCarA;
         private System.Windows.Forms.CheckBox checkBoxCarB;
         private System.Windows.Forms.CheckBox checkBoxCarA;
-        private System.Windows.Forms.Label labelCarsE;
-        private System.Windows.Forms.Label labelCarsA;
-        private System.Windows.Forms.Label addCarA;
-        private System.Windows.Forms.Label removeCarA;
-        private System.Windows.Forms.Label removeCarE;
-        private System.Windows.Forms.Label addCarE;
         private System.Windows.Forms.GroupBox groupBoxSetup;
         private System.Windows.Forms.TextBox TextBoxReplications;
         private System.Windows.Forms.CheckBox checkBoxVizual;
@@ -700,6 +682,11 @@
         public System.Windows.Forms.Label labelLoaderA;
         private System.Windows.Forms.Label labelMaterialStavba;
         private System.Windows.Forms.Label labelMaterialSkladka;
+        private System.Windows.Forms.NumericUpDown numericUpDown5;
+        private System.Windows.Forms.NumericUpDown numericUpDown4;
+        private System.Windows.Forms.NumericUpDown numericUpDown3;
+        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
     }
 }
 

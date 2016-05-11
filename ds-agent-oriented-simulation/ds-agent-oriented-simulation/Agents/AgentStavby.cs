@@ -1,6 +1,7 @@
 using ds_agent_oriented_simulation.ContinualAssistant;
 using ds_agent_oriented_simulation.Entities.Vehicles;
 using ds_agent_oriented_simulation.Managers;
+using ds_agent_oriented_simulation.Settings;
 using ds_agent_oriented_simulation.Simulation;
 using OSPABA;
 using OSPDataStruct;
@@ -19,6 +20,7 @@ namespace ds_agent_oriented_simulation.Agents
         public WStat StavbaWStat { get; internal set; }
         public bool VykladacAIsWorking { get; internal set; }
         public bool VykladacBIsWorking { get; internal set; }
+        public double MaterialNaStavbe { get; set; }
 
         public AgentStavby(int id, OSPABA.Simulation mySim, Agent parent) :
             base(id, mySim, parent)
@@ -41,6 +43,8 @@ namespace ds_agent_oriented_simulation.Agents
             {
                 AutaStavbaQueue.Dequeue();
             }
+
+            MaterialNaStavbe = Constants.MaterialAtBuilding;
         }
 
         //meta! userInfo="Generated code: do not modify", tag="begin"

@@ -13,17 +13,11 @@ namespace ds_agent_oriented_simulation
         {
             InitializeComponent();
             InitializeToolTips();
-            InitializeColorSchema();
         }
 
         private Color ArrowHoverButtonsColor { get; set; }
         private Color ArrowButtonsColor { get; set; }
 
-        private void InitializeColorSchema()
-        {
-            ArrowHoverButtonsColor = Color.LightGray;
-            removeCarE.BackColor = Color.White;
-        }
 
         private void InitializeToolTips()
         {
@@ -46,139 +40,6 @@ namespace ds_agent_oriented_simulation
             toolTipOverCars.SetToolTip(this.pictureCarE, "Volume: " + Constants.VolumeOfVehicleE + ", Speed: " + Constants.VolumeOfVehicleE);
         }
 
-        private void ArrowRemoveCarEHover(object sender, System.EventArgs e)
-        {
-            removeCarE.BackColor = ArrowHoverButtonsColor;
-        }
-
-        private void ArrowRemoveCarELeave(object sender, System.EventArgs e)
-        {
-            removeCarE.BackColor = ArrowButtonsColor;
-        }
-
-        private void ArrowAddCarEHover(object sender, System.EventArgs e)
-        {
-            addCarE.BackColor = ArrowHoverButtonsColor;
-        }
-
-        private void ArrowAddCarELeave(object sender, System.EventArgs e)
-        {
-            addCarE.BackColor = ArrowButtonsColor;
-        }
-
-        private void ArrowRemoveCarAHover(object sender, System.EventArgs e)
-        {
-            removeCarA.BackColor = ArrowHoverButtonsColor;
-        }
-
-        private void ArrowRemoveCarALeave(object sender, System.EventArgs e)
-        {
-            removeCarA.BackColor = ArrowButtonsColor;
-        }
-
-        private void ArrowAddCarAHover(object sender, System.EventArgs e)
-        {
-            addCarA.BackColor = ArrowHoverButtonsColor;
-        }
-
-        private void ArrowAddCarALeave(object sender, System.EventArgs e)
-        {
-            addCarA.BackColor = ArrowButtonsColor;
-        }
-
-        private void AddCarEClick(object sender, System.EventArgs e)
-        {
-            if (CurrentRun.CarE && CurrentRun.CarsE < Constants.MaxNumberOfCarsE && CurrentRun.CarsE > 0)
-            {
-                CurrentRun.CarsE++;
-                labelCarsE.Text = CurrentRun.CarsE + "/" + Constants.MaxNumberOfCarsE;
-            }
-            else if(!CurrentRun.CarE)
-            {
-                CurrentRun.CarE = true;
-                checkBoxCarE.Checked = true;
-                CurrentRun.CarsE++;
-                labelCarsE.Text = CurrentRun.CarsE + "/" + Constants.MaxNumberOfCarsE;
-            }
-        }
-
-        private void RemoveCarEClick(object sender, System.EventArgs e)
-        {
-            if (CurrentRun.CarE && CurrentRun.CarsE > 1 && CurrentRun.CarsE <= Constants.MaxNumberOfCarsE)
-            {
-                CurrentRun.CarsE--;
-                labelCarsE.Text = CurrentRun.CarsE + "/" + Constants.MaxNumberOfCarsE;
-            }
-            else if (CurrentRun.CarsE == 1)
-            {
-                CurrentRun.CarE = false;
-                checkBoxCarE.Checked = false;
-                CurrentRun.CarsE = 0;
-                labelCarsE.Text = CurrentRun.CarsE + "/" + Constants.MaxNumberOfCarsE;
-            }
-        }
-
-        private void IsUsedCarEChanged(object sender, System.EventArgs e)
-        {
-            if (checkBoxCarE.Checked)
-            {
-                AddCarEClick(sender,e);
-                CurrentRun.CarE = true;
-            }
-            else
-            {
-                CurrentRun.CarsE = 0;
-                CurrentRun.CarE = false;
-                labelCarsE.Text = CurrentRun.CarsE + "/" + Constants.MaxNumberOfCarsE;
-            }
-        }
-
-        private void addCarA_Click(object sender, System.EventArgs e)
-        {
-            if (CurrentRun.CarA && CurrentRun.CarsA < Constants.MaxNumberOfCarsA && CurrentRun.CarsA > 0)
-            {
-                CurrentRun.CarsA++;
-                labelCarsA.Text = CurrentRun.CarsA + "/" + Constants.MaxNumberOfCarsA;
-            }
-            else if (!CurrentRun.CarA)
-            {
-                CurrentRun.CarA = true;
-                checkBoxCarA.Checked = true;
-                CurrentRun.CarsA++;
-                labelCarsA.Text = CurrentRun.CarsA + "/" + Constants.MaxNumberOfCarsA;
-            }
-        }
-
-        private void removeCarA_Click(object sender, System.EventArgs e)
-        {
-            if (CurrentRun.CarA && CurrentRun.CarsA > 1 && CurrentRun.CarsA <= Constants.MaxNumberOfCarsA)
-            {
-                CurrentRun.CarsA--;
-                labelCarsA.Text = CurrentRun.CarsA + "/" + Constants.MaxNumberOfCarsA;
-            }
-            else if (CurrentRun.CarsA == 1)
-            {
-                CurrentRun.CarA = false;
-                checkBoxCarA.Checked = false;
-                CurrentRun.CarsA = 0;
-                labelCarsA.Text = CurrentRun.CarsA + "/" + Constants.MaxNumberOfCarsA;
-            }
-        }
-
-        private void checkBoxCarA_CheckedChanged(object sender, System.EventArgs e)
-        {
-            if (checkBoxCarA.Checked)
-            {
-                addCarA_Click(sender, e);
-                CurrentRun.CarA = true;
-            }
-            else
-            {
-                CurrentRun.CarsA = 0;
-                CurrentRun.CarA = false;
-                labelCarsA.Text = CurrentRun.CarsA + "/" + Constants.MaxNumberOfCarsA;
-            }
-        }
 
         private void buttonRun_Click(object sender, System.EventArgs e)
         {
@@ -228,6 +89,7 @@ namespace ds_agent_oriented_simulation
             }
 
             this.labelMaterialSkladka.Text = Sim.AgentSkladky.MaterialNaSkladke.ToString("####.0");
+            this.labelMaterialStavba.Text = Sim.AgentStavby.MaterialNaStavbe.ToString("####.0");
         }
 
         private void buttonSlowUp_Click(object sender, System.EventArgs e)
