@@ -1,12 +1,7 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ds_agent_oriented_simulation.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ds_agent_oriented_simulation.Entities;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ds_agent_oriented_simulation.Entities.Tests
+namespace ds_agent_oriented_simulationTests.Entities
 {
     [TestClass()]
     public class TimerTests

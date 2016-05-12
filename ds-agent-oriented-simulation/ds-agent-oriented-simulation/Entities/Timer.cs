@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ds_agent_oriented_simulation.Simulation;
 
 namespace ds_agent_oriented_simulation.Entities
 {
@@ -16,12 +10,14 @@ namespace ds_agent_oriented_simulation.Entities
             var hours = Math.Floor(ToHours(currentTime));
             var minutes = currentTime%60;
 
-            // find closest 7am
+            // find closest e.g. 7am
             var next = ((days*24*60) + ToMinutes(startsAt));
             if (next >= currentTime)
             {
+                // if it's still today
                 return next;
             }
+            // it it's tomorrow
             next += LengthOfOneDay();
             return next;
         }
