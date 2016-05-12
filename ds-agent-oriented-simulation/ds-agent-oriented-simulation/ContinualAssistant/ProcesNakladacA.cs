@@ -45,8 +45,9 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
             switch (message.Code)
             {
                 case Mc.NalozenieUkoncene:
-                    MyAgent.CarAtLoaderA = null;
                     _naNalozenie.jeNakladane = false;
+                    MyAgent.MaterialNaSkladke -= MyAgent.CarAtLoaderA.RealVolume;
+                    MyAgent.CarAtLoaderA = null;
                     AssistantFinished(message);
                 break;
             }

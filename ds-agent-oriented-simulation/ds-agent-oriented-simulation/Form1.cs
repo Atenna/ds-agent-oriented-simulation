@@ -117,7 +117,7 @@ namespace ds_agent_oriented_simulation
 
         private void buttonSlowDown_Click(object sender, System.EventArgs e)
         {
-            Sim.SetSimSpeed(0.5, 2);
+            Sim.SetSimSpeed(0.2, 10);
         }
 
         private void resetGUI()
