@@ -55,6 +55,7 @@ namespace ds_agent_oriented_simulation.Agents
             new ProcesVykladacB(SimId.ProcesVykladacB, MySim, this);
             AddOwnMessage(Mc.VylozAuto);
             AddOwnMessage(Mc.VylozenieUkoncene);
+            AddOwnMessage(Mc.OdvozMaterialu);
         }
         //meta! tag="end"
     }
