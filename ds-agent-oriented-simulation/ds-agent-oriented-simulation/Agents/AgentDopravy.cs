@@ -53,6 +53,7 @@ namespace ds_agent_oriented_simulation.Agents
             AddOwnMessage(Mc.VylozAuto);
             AddOwnMessage(Mc.PrejazdUkonceny);
             AddOwnMessage(Mc.DovozMaterialu);
+            AddOwnMessage(Mc.OdvozMaterialu);
         }
         //meta! tag="end"
     }

@@ -16,5 +16,6 @@ namespace ds_agent_oriented_simulation.Simulation
         public const int NalozenieUkoncene = 600;
         public const int VylozenieUkoncene = 700;
         public const int PrejazdUkonceny = 800;
+        public const int ExportUkonceny = 900;
     }
 }

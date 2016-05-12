@@ -21,6 +21,7 @@ namespace ds_agent_oriented_simulation.Agents
         public Vehicle CarAtLoaderA { get; set; }
         public Vehicle CarAtLoaderB { get; set; }
         public double MaterialNaSkladke { get; set; }
+        public double MaterialNaStavbe { get; set; }
 
         private double _material = Settings.Constants.MaterialToLoad;
 
@@ -32,6 +33,7 @@ namespace ds_agent_oriented_simulation.Agents
             AutaSkladkaQueue = new SimQueue<Vehicle>(SkladkaWStat);
             MessageSkladkaQueue = new SimQueue<MyMessage>(SkladkaWStat);
             MaterialNaSkladke = Constants.MaterialAtDepo;
+            MaterialNaStavbe = Constants.MaterialAtBuilding;
         }
 
         override public void PrepareReplication()

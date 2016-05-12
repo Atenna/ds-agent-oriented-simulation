@@ -40,8 +40,19 @@ namespace ds_agent_oriented_simulation.Managers
         //meta! sender="PlanovacOdvozMaterialu", id="125", type="Finish"
         public void ProcessFinishPlanovacOdvozMaterialu(MessageForm message)
         {
-            // notice agentovi modelu -> dopravy -> skladky
-           
+            // notice agentovi modelu -> dopravy -> Stavby
+
+            MyMessage spravaDoprava = new MyMessage(MySim);
+            spravaDoprava.Volume = ((MyMessage) message).Volume;
+            spravaDoprava.Code = Mc.OdvozMaterialu;
+            spravaDoprava.Addressee = MySim.FindAgent(SimId.AgentDopravy);
+            Notice(spravaDoprava);
+
+            // naplanovat dalsi proces
+            MyMessage novyOdvoz = new MyMessage(MySim);
+            novyOdvoz.Code = Mc.OdvozMaterialu;
+            novyOdvoz.Addressee = MyAgent.FindAssistant(SimId.PlanovacOdvozMaterialu);
+            StartContinualAssistant(novyOdvoz);
         }
 
         //meta! sender="AgentModelu", id="88", type="Call"

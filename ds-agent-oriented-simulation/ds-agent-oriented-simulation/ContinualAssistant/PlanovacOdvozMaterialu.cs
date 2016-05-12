@@ -1,7 +1,10 @@
+using System.Windows.Forms;
 using ds_agent_oriented_simulation.Agents;
+using ds_agent_oriented_simulation.Settings;
 using ds_agent_oriented_simulation.Simulation;
 using OSPABA;
 using OSPRNG;
+using Timer = ds_agent_oriented_simulation.Entities.Timer;
 
 namespace ds_agent_oriented_simulation.ContinualAssistant
 {
@@ -28,6 +31,10 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
         //meta! sender="AgentOkolia", id="125", type="Start"
         public void ProcessStart(MessageForm message)
         {
+            MyMessage sprava = new MyMessage(MySim);
+            sprava.Code = Mc.ExportUkonceny;
+            sprava.Volume = GenCas.Sample();
+            Hold(Constants.TimeBetweenExports, sprava);
         }
 
         //meta! userInfo="Process messages defined in code", id="0"
@@ -35,7 +42,43 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
         {
             switch (message.Code)
             {
+                case Mc.ExportUkonceny:
+                    // to-do
+                    // poslat spravu agentovi okolia
+                    ProcessExportDokonceny((MyMessage)message);
+                    break;
             }
+        }
+
+        private void ProcessExportDokonceny(MyMessage message)
+        {
+            // ak je v pracovnej dobe, posle sa assistant finished
+            if (IsWorking(MySim.CurrentTime))
+            {
+                AssistantFinished(message);
+            }
+            // ak je noc, hold do noveho dna
+            else
+            {
+                Hold(GetNextWorkingTime(MySim.CurrentTime), message);
+            }
+        }
+
+        private double GetNextWorkingTime(double currentTime)
+        {
+            double future = Timer.NewWorkDayStartsAt(MySim.CurrentTime, Constants.ExportStartsAt);
+
+            return (future-currentTime);
+        }
+
+        private bool IsWorking(double currentTime)
+        {
+            //ak je currentTime medzi 7:00 a 10:00
+            if (Timer.ToHours(currentTime) >= 7.0 && Timer.ToHours(currentTime) <= 22.0)
+            {
+                return true;
+            }
+            return false;
         }
 
         //meta! userInfo="Generated code: do not modify", tag="begin"

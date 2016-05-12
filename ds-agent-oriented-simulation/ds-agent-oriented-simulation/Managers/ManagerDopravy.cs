@@ -105,7 +105,19 @@ namespace ds_agent_oriented_simulation.Managers
                 case Mc.DovozMaterialu:
                     ProcessDovozMaterialu(message);
                     break;
+                case Mc.OdvozMaterialu:
+                    ProcessOdvozMaterialu(message);
+                    break;
             }
+        }
+
+        private void ProcessOdvozMaterialu(MessageForm message)
+        {
+            MyMessage spravaDolava = new MyMessage(MySim);
+            spravaDolava.Code = Mc.OdvozMaterialu;
+            spravaDolava.Volume = ((MyMessage) message).Volume;
+            spravaDolava.Addressee = MySim.FindAgent(SimId.AgentSkladky);
+            Notice(spravaDolava);
         }
 
         private void ProcessDovozMaterialu(MessageForm message)

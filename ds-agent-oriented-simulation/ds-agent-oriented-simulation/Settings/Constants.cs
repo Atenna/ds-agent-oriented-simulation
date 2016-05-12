@@ -41,6 +41,8 @@
         public static readonly object queueLock = new object();
         public static readonly object queue2Lock = new object();
         public static int Seed { get; set; }
+        
+
         public static double NakladacAStartsAt = 7;
         public static double NakladacAEndsAt = 22;
         public static double NakladacBStartsAt = 7;
@@ -52,5 +54,9 @@
 
         public static double MaterialAtDepo = 3500;
         public static double MaterialAtBuilding = 1500;
+
+        public const double TimeBetweenExports = 0.5;
+        public static double ExportStartsAt = 7;
+        public static double ExportEndsAt = 22;
     }
 }

@@ -28,6 +28,7 @@ namespace ds_agent_oriented_simulation.Agents
             new PlanovacDovozMaterialu(SimId.PlanovacDovozMaterialu, MySim, this);
             AddOwnMessage(Mc.Inicializacia);
             AddOwnMessage(Mc.DovozMaterialu);
+            AddOwnMessage(Mc.ExportUkonceny);
         }
         //meta! tag="end"
     }

@@ -120,7 +120,15 @@ namespace ds_agent_oriented_simulation.Managers
                 case Mc.DovozMaterialu:
                     ProcessDovozMaterialu((MyMessage)message);
                     break;
+                case Mc.OdvozMaterialu:
+                    ProcessOdvozMaterialu((MyMessage)message);
+                    break;
             }
+        }
+
+        private void ProcessOdvozMaterialu(MyMessage message)
+        {
+            MyAgent.MaterialNaStavbe -= message.Volume;
         }
 
         private void ProcessDovozMaterialu(MyMessage message)
