@@ -26,7 +26,7 @@ namespace ds_agent_oriented_simulation.Entities
 
         public static double LengthOfOneDay()
         {
-            return 24*60;
+            return ToMinutes(24);
         }
     }
 }
