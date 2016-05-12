@@ -76,6 +76,10 @@ namespace ds_agent_oriented_simulation.Managers
             sprava3.Name = "C";
             StartContinualAssistant(sprava3);
 
+            MyMessage sprava4 = new MyMessage(MySim);
+            sprava4.Code = Mc.OdvozMaterialu;
+            sprava4.Addressee = MyAgent.FindAssistant(SimId.PlanovacOdvozMaterialu);
+            StartContinualAssistant(sprava4);
         }
 
         //meta! userInfo="Process messages defined in code", id="0"

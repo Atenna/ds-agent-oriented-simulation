@@ -116,7 +116,7 @@ namespace ds_agent_oriented_simulation.Managers
             MyMessage spravaDolava = new MyMessage(MySim);
             spravaDolava.Code = Mc.OdvozMaterialu;
             spravaDolava.Volume = ((MyMessage) message).Volume;
-            spravaDolava.Addressee = MySim.FindAgent(SimId.AgentSkladky);
+            spravaDolava.Addressee = MySim.FindAgent(SimId.AgentStavby);
             Notice(spravaDolava);
         }
 
