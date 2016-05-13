@@ -112,7 +112,16 @@ namespace ds_agent_oriented_simulation.Managers
         {
             switch (message.Code)
             {
+                case Mc.OdvozMaterialu:
+                    ProcessOdvozMaterialu(message);
+                    break;
             }
+        }
+
+        private void ProcessOdvozMaterialu(MessageForm message)
+        {
+            // tu sa od materialu odpocita objem
+            MyAgent.MaterialNaStavbe -= ((MyMessage) message).Volume;
         }
 
         //meta! userInfo="Generated code: do not modify", tag="begin"
