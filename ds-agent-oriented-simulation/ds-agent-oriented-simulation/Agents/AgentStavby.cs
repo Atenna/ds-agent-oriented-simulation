@@ -17,7 +17,9 @@ namespace ds_agent_oriented_simulation.Agents
         public Vehicle CarAtUnloaderA { get; set; }
         public SimQueue<Vehicle> AutaStavbaQueue { get; private set; }
         public SimQueue<MyMessage> MessageSkladkaQueue { get; private set; }
-        public WStat StavbaWStat { get; internal set; }
+        public WStat WaitingTimeInQueue { get; internal set; }
+        public WStat WaitingTimePerCar { get; internal set; }
+        public Stat LengthOfQueue { get; internal set; }
         public bool VykladacAIsWorking { get; internal set; }
         public bool VykladacBIsWorking { get; internal set; }
         public double MaterialNaStavbe { get; set; }
@@ -26,9 +28,9 @@ namespace ds_agent_oriented_simulation.Agents
             base(id, mySim, parent)
         {
             Init();
-            StavbaWStat = new WStat(MySim);
-            AutaStavbaQueue = new SimQueue<Vehicle>(StavbaWStat);
-            MessageSkladkaQueue = new SimQueue<MyMessage>(StavbaWStat);
+            WaitingTimeInQueue = new WStat(MySim);
+            AutaStavbaQueue = new SimQueue<Vehicle>(WaitingTimeInQueue);
+            MessageSkladkaQueue = new SimQueue<MyMessage>(WaitingTimeInQueue);
         }
 
         override public void PrepareReplication()
