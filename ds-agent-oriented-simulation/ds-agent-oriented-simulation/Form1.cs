@@ -9,10 +9,12 @@ namespace ds_agent_oriented_simulation
     public partial class FormAgentSimulation : Form
     {
         public MySimulation Sim { get; private set; }
+        public static int[] SelectedCars { get; private set; }
         public FormAgentSimulation()
         {
             InitializeComponent();
             InitializeToolTips();
+            SelectedCars = new int[5];
         }
 
         private Color ArrowHoverButtonsColor { get; set; }
@@ -34,10 +36,10 @@ namespace ds_agent_oriented_simulation
 
             // Set up the ToolTip text for the Button and Checkbox.
             toolTipOverCars.SetToolTip(this.pictureCarA, "Volume: " + Constants.VolumeOfVehicleA + ", Speed: " + Constants.SpeedOfVehicleA);
-            toolTipOverCars.SetToolTip(this.pictureCarB, "Volume: " + Constants.VolumeOfVehicleB + ", Speed: " + Constants.VolumeOfVehicleB);
-            toolTipOverCars.SetToolTip(this.pictureCarC, "Volume: " + Constants.VolumeOfVehicleC + ", Speed: " + Constants.VolumeOfVehicleC);
-            toolTipOverCars.SetToolTip(this.pictureCarD, "Volume: " + Constants.VolumeOfVehicleD + ", Speed: " + Constants.VolumeOfVehicleD);
-            toolTipOverCars.SetToolTip(this.pictureCarE, "Volume: " + Constants.VolumeOfVehicleE + ", Speed: " + Constants.VolumeOfVehicleE);
+            toolTipOverCars.SetToolTip(this.pictureCarB, "Volume: " + Constants.VolumeOfVehicleB + ", Speed: " + Constants.SpeedOfVehicleB);
+            toolTipOverCars.SetToolTip(this.pictureCarC, "Volume: " + Constants.VolumeOfVehicleC + ", Speed: " + Constants.SpeedOfVehicleC);
+            toolTipOverCars.SetToolTip(this.pictureCarD, "Volume: " + Constants.VolumeOfVehicleD + ", Speed: " + Constants.SpeedOfVehicleD);
+            toolTipOverCars.SetToolTip(this.pictureCarE, "Volume: " + Constants.VolumeOfVehicleE + ", Speed: " + Constants.SpeedOfVehicleE);
         }
 
 
@@ -130,6 +132,92 @@ namespace ds_agent_oriented_simulation
             this.labelUnloaderA.Text = "Unloads Car: ";
             this.labelUnloaderB.Text = "Unloads Car: ";
             this.labelQueueLoad.Text = "Queue at Unoader: ";
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked)
+            {
+                pictureUnloaderB.Image = ds_agent_oriented_simulation.Properties.Resources.l_Vykladac_A;
+                pictureUnloaderB.SizeMode = PictureBoxSizeMode.StretchImage;
+                labelUnloaderB.ForeColor = Color.Black;
+            }
+            else
+            {
+                pictureUnloaderB.Image = ds_agent_oriented_simulation.Properties.Resources.l_Vykladac_A_grey;
+                pictureUnloaderB.SizeMode = PictureBoxSizeMode.StretchImage;
+                labelUnloaderB.ForeColor = Color.DarkGray;
+            }
+        }
+
+        private void buttonSaveSettings_Click(object sender, EventArgs e)
+        {
+            // save settings
+            SelectedCars[0] = (int) numericUpDown1.Value;
+            SelectedCars[1] = (int) numericUpDown2.Value;
+            SelectedCars[2] = (int) numericUpDown3.Value;
+            SelectedCars[3] = (int) numericUpDown4.Value;
+            SelectedCars[4] = (int) numericUpDown5.Value;
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            if (numericUpDown1.Value > 0)
+            {
+                checkBoxCarA.Checked = true;
+            }
+            else
+            {
+                checkBoxCarA.Checked = false;
+            }
+        }
+
+        private void numericUpDown2_ValueChanged(object sender, EventArgs e)
+        {
+            if (numericUpDown2.Value > 0)
+            {
+                checkBoxCarB.Checked = true;
+            }
+            else
+            {
+                checkBoxCarB.Checked = false;
+            }
+        }
+
+        private void numericUpDown3_ValueChanged(object sender, EventArgs e)
+        {
+            if (numericUpDown3.Value > 0)
+            {
+                checkBoxCarC.Checked = true;
+            }
+            else
+            {
+                checkBoxCarC.Checked = false;
+            }
+        }
+
+        private void numericUpDown4_ValueChanged(object sender, EventArgs e)
+        {
+            if (numericUpDown4.Value > 0)
+            {
+                checkBoxCarD.Checked = true;
+            }
+            else
+            {
+                checkBoxCarD.Checked = false;
+            }
+        }
+
+        private void numericUpDown5_ValueChanged(object sender, EventArgs e)
+        {
+            if (numericUpDown5.Value > 0)
+            {
+                checkBoxCarE.Checked = true;
+            }
+            else
+            {
+                checkBoxCarE.Checked = false;
+            }
         }
     }
 }
