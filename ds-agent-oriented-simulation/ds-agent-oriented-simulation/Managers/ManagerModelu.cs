@@ -27,6 +27,11 @@ namespace ds_agent_oriented_simulation.Managers
         //meta! sender="AgentOkolia", id="116", type="Notice"
         public void ProcessOdvozMaterialu(MessageForm message)
         {
+            MyMessage spravaDoprava = new MyMessage(MySim);
+            spravaDoprava.Volume = ((MyMessage)message).Volume;
+            spravaDoprava.Code = Mc.OdvozMaterialu;
+            spravaDoprava.Addressee = MySim.FindAgent(SimId.AgentDopravy);
+            Notice(spravaDoprava);
         }
 
         //meta! sender="AgentOkolia", id="35", type="Notice"
