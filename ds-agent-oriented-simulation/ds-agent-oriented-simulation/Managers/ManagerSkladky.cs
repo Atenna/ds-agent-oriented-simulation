@@ -31,6 +31,7 @@ namespace ds_agent_oriented_simulation.Managers
         public void ProcessFinishProcesNakladacA(MessageForm message)
         {
             MyAgent.NakladacAIsWorking = false;
+
             message.Addressee = MySim.FindAgent(SimId.AgentDopravy);
             message.Code = Mc.NalozAuto;
             Response(message);

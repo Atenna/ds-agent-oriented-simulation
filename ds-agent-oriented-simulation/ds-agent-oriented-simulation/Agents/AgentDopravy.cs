@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using ds_agent_oriented_simulation.ContinualAssistant;
 using ds_agent_oriented_simulation.Entities.Vehicles;
 using ds_agent_oriented_simulation.Managers;
@@ -11,34 +12,47 @@ namespace ds_agent_oriented_simulation.Agents
     public class AgentDopravy : Agent
     {
 
-        public Vehicle A { get; private set; }
-        public Vehicle B { get; private set; }
-        public Vehicle C { get; private set; }
-        public Vehicle D { get; private set; }
-        public Vehicle E { get; private set; }
-
-        public Vehicle X { get; private set; }
-
+        public List<Vehicle> EnabledCars;
+        private readonly MySimulation _mine;
         public AgentDopravy(int id, OSPABA.Simulation mySim, Agent parent) :
             base(id, mySim, parent)
         {
             Init();
+            _mine = (MySimulation) mySim;
         }
 
-        public void PrepareCars(Random seedGenerator)
+        public void PrepareCars(int count, int type)
         {
-            A = new CarA(seedGenerator);
-            B = new CarB(seedGenerator);
-            C = new CarC(seedGenerator);
-            D = new CarD(seedGenerator);
-            E = new CarE(seedGenerator);
-            X = new CarA(seedGenerator);
+            for (int i = 0; i < count; i++)
+            {
+                if (type == 0)
+                {
+                    EnabledCars.Add(new CarA(_mine.SeedGenerator));
+                }
+                if (type == 1) 
+                {
+                    EnabledCars.Add(new CarB(_mine.SeedGenerator));
+                }
+                if (type == 2)
+                {
+                    EnabledCars.Add(new CarC(_mine.SeedGenerator));
+                }
+                if (type == 3)
+                {
+                    EnabledCars.Add(new CarD(_mine.SeedGenerator));
+                }
+                if (type == 4)
+                {
+                    EnabledCars.Add(new CarE(_mine.SeedGenerator));
+                }
+            }
         }
 
-        override public void PrepareReplication()
+        public override void PrepareReplication()
         {
             base.PrepareReplication();
             // Setup component for the next replication
+            EnabledCars = new List<Vehicle>();
         }
 
         //meta! userInfo="Generated code: do not modify", tag="begin"

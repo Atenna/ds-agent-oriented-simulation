@@ -120,7 +120,7 @@ namespace ds_agent_oriented_simulation.Managers
 
         private void ProcessOdvozMaterialu(MessageForm message)
         {
-            // tu sa od materialu odpocita objem
+            // tu sa od materialu odpocita objem a posle sa spat sprava, kolko je materialu
             MyAgent.MaterialNaStavbe -= ((MyMessage) message).Volume;
         }
 
