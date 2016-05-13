@@ -67,7 +67,7 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
                     new EmpiricPair<int>(new UniformDiscreteRNG(18, 18), 0.1940351),
                     new EmpiricPair<int>(new UniformDiscreteRNG(19, 19), 0.2098246),
                     new EmpiricPair<int>(new UniformDiscreteRNG(20, 20), 0.2224561),
-                    new EmpiricPair<int>(new UniformDiscreteRNG(21, 11), 0.0708772));
+                    new EmpiricPair<int>(new UniformDiscreteRNG(21, 21), 0.0708772));
 
             GenMaterialC = new EmpiricRNG<int>(
                 new EmpiricPair<int>(new UniformDiscreteRNG(5, 5), 0.0004735),
@@ -114,6 +114,7 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
 
         private void NaplanujC(MyMessage message)
         {
+            // to-do ak je na stavbe menej materialu ako je vygenerovane, auto bude cakat, kym sa privezie dalsi material???
             message.Volume = GeneratorSample(GenMaterialC);
             message.Time = GeneratorTimeSample(GenCasC);
             message.Code = Mc.DovozMaterialu;
