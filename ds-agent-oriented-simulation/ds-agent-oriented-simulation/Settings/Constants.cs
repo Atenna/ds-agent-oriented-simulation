@@ -56,7 +56,7 @@
         public static double MaterialAtBuilding = 1500;
 
         public const double TimeBetweenExports = 0.5;
-        public static double ExportStartsAt = 7;
+        public static double ExportStartsAt = 1;
         public static double ExportEndsAt = 22;
     }
 }
