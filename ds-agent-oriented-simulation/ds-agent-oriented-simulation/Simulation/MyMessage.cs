@@ -14,6 +14,7 @@ namespace ds_agent_oriented_simulation.Simulation
         public string Name { get; set; }
         public double Volume { get; set; }
         public double Time { get; set; }
+        public int[] SelectedCars { get; private set; }
 
         public LinkedList<Vehicle> cars { get; set; }
 
@@ -32,6 +33,12 @@ namespace ds_agent_oriented_simulation.Simulation
             base(sim)
         {
             this.Car = car;
+        }
+
+        public MyMessage(OSPABA.Simulation sim, int[] setup) :
+            base(sim)
+        {
+            SelectedCars = setup;
         }
 
         public MyMessage(OSPABA.Simulation sim, int variant) :

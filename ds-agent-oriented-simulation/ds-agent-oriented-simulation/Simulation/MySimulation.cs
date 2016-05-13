@@ -9,7 +9,7 @@ namespace ds_agent_oriented_simulation.Simulation
     {
 
         private Statistics _statistics;
-        private Random _seedGenerator;
+        public Random SeedGenerator { get; private set; }
 
         public MySimulation()
         {
@@ -23,9 +23,10 @@ namespace ds_agent_oriented_simulation.Simulation
             CurrentRun.initializeCurrentRun();
 
             _statistics = new Statistics();
-            _seedGenerator = new Random(Constants.Seed);
+            SeedGenerator = new Random(Constants.Seed);
             // inicializacia aut
-            AgentDopravy.PrepareCars(_seedGenerator);
+            // 
+            //AgentDopravy.PrepareCars(SeedGenerator);
         }
 
         protected override void PrepareReplication()

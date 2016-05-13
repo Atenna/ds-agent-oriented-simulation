@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using ds_agent_oriented_simulation.Agents;
 using ds_agent_oriented_simulation.Entities.Vehicles;
 using ds_agent_oriented_simulation.Simulation;
@@ -9,8 +10,6 @@ namespace ds_agent_oriented_simulation.Managers
     //meta! id="19"
     public class ManagerDopravy : Manager
     {
-
-        private Vehicle[] _enabledCars;
 
         public ManagerDopravy(int id, OSPABA.Simulation mySim, Agent myAgent) :
             base(id, mySim, myAgent)
@@ -68,9 +67,9 @@ namespace ds_agent_oriented_simulation.Managers
         public void ProcessInicializacia(MessageForm message)
         {
             MyMessage sprava = (MyMessage)message;
-            InicializujAutaPodlaVariantu(sprava.Variant);
+            InicializujAuta(sprava.SelectedCars);
 
-            foreach (Vehicle i in _enabledCars)
+            foreach (Vehicle i in MyAgent.EnabledCars)
             {
                 sprava = new MyMessage(MySim, i);
                 sprava.Addressee = MySim.FindAgent(SimId.AgentSkladky);
@@ -84,8 +83,12 @@ namespace ds_agent_oriented_simulation.Managers
         {
             // auto skoncilo nakladanie 
             Console.WriteLine("Auto nalozene");
-            message.Addressee = MyAgent.FindAssistant(SimId.ProcessPresunNaStavbu);
-            StartContinualAssistant(message);
+
+            MyMessage sprava = new MyMessage(MySim);
+            sprava.Volume = ((MyMessage) message).Volume;
+            sprava.Car = ((MyMessage)message).Car;
+            sprava.Addressee = MyAgent.FindAssistant(SimId.ProcessPresunNaStavbu);
+            StartContinualAssistant(sprava);
         }
 
         //meta! sender="AgentStavby", id="37", type="Response"
@@ -178,32 +181,11 @@ namespace ds_agent_oriented_simulation.Managers
             }
         }
 
-        private void InicializujAutaPodlaVariantu(int variant)
+        private void InicializujAuta(int[] setup)
         {
-            if (_enabledCars == null)
+            for (int i = 0; i < setup.Length; i++)
             {
-                if (variant == 1)
-                {
-                    _enabledCars = new Vehicle[1];
-                    _enabledCars[0] = MyAgent.A;
-
-                    //_enabledCars[1] = MyAgent.B;
-                    //_enabledCars[2] = MyAgent.C;
-                }
-                else if (variant == 2)
-                {
-                    _enabledCars = new Vehicle[4];
-                    _enabledCars[0] = MyAgent.A;
-                    _enabledCars[1] = MyAgent.B;
-                    _enabledCars[2] = MyAgent.C;
-                    _enabledCars[3] = MyAgent.D;
-                }
-                else if (variant == 3)
-                {
-                    _enabledCars = new Vehicle[2];
-                    _enabledCars[0] = MyAgent.A;
-                    _enabledCars[1] = MyAgent.X;
-                }
+                MyAgent.PrepareCars(setup[i], i);
             }
         }
     }
