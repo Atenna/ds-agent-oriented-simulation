@@ -114,24 +114,24 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
 
         private void NaplanujC(MyMessage message)
         {
-            message.Volume = GenMaterialC.Sample();
-            message.Time = GenCasC.Sample();
+            message.Volume = GeneratorSample(GenMaterialC);
+            message.Time = GeneratorTimeSample(GenCasC);
             message.Code = Mc.DovozMaterialu;
             Hold(message.Time, message);
         }
 
         private void NaplanujB(MyMessage message)
         {
-            message.Volume = GenMaterialB.Sample();
-            message.Time = GenCasB.Sample();
+            message.Volume = GeneratorSample(GenMaterialB);
+            message.Time = GeneratorTimeSample(GenCasB);
             message.Code = Mc.DovozMaterialu;
             Hold(message.Time, message);
         }
 
         private void NaplanujA(MyMessage message)
         {
-            message.Volume = GenMaterialA.Sample();
-            message.Time = GenCasA.Sample();
+            message.Volume = GeneratorSample(GenMaterialA);
+            message.Time = GeneratorTimeSample(GenCasA);
             message.Code = Mc.DovozMaterialu;
             Hold(message.Time, message);
         }
@@ -166,6 +166,16 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
                     ProcessDefault(message);
                     break;
             }
+        }
+
+        private double GeneratorSample(EmpiricRNG<int> gen)
+        {
+            return Math.Abs(gen.Sample());
+        }
+
+        private double GeneratorTimeSample(ExponentialRNG gen)
+        {
+            return Math.Abs(gen.Sample());
         }
         //meta! tag="end"
         public new AgentOkolia MyAgent

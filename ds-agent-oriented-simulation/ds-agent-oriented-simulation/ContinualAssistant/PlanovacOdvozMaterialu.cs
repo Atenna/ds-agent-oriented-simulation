@@ -34,7 +34,7 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
             MyMessage sprava = new MyMessage(MySim);
             sprava.Code = Mc.ExportUkonceny;
             sprava.Volume = GenCas.Sample();
-            Hold(Constants.TimeBetweenExports, sprava);
+            Hold(Timer.ToMinutes(Constants.TimeBetweenExports), sprava);
         }
 
         //meta! userInfo="Process messages defined in code", id="0"
@@ -53,6 +53,7 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
         private void ProcessExportDokonceny(MyMessage message)
         {
             // ak je v pracovnej dobe, posle sa assistant finished
+            // To=DO podmienka ci je na stavbe aj material, ktory mozme odviezt
             if (IsWorking(MySim.CurrentTime))
             {
                 AssistantFinished(message);
@@ -74,7 +75,7 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
         private bool IsWorking(double currentTime)
         {
             //ak je currentTime medzi 7:00 a 10:00
-            if (Timer.ToHours(currentTime) >= 7.0 && Timer.ToHours(currentTime) <= 22.0)
+            if (Timer.ToHours(currentTime) >= Constants.ExportStartsAt && Timer.ToHours(currentTime) <= Constants.ExportEndsAt)
             {
                 return true;
             }
