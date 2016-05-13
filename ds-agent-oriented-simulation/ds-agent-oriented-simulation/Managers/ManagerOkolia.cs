@@ -45,10 +45,10 @@ namespace ds_agent_oriented_simulation.Managers
             MyMessage spravaDoprava = new MyMessage(MySim);
             spravaDoprava.Volume = ((MyMessage) message).Volume;
             spravaDoprava.Code = Mc.OdvozMaterialu;
-            spravaDoprava.Addressee = MySim.FindAgent(SimId.AgentDopravy);
+            spravaDoprava.Addressee = MySim.FindAgent(SimId.AgentModelu);
             Notice(spravaDoprava);
 
-            // naplanovat dalsi proces
+            // naplanovat dalsi proces - ak je na stavbe dostatok materialu, TO-DO 
             MyMessage novyOdvoz = new MyMessage(MySim);
             novyOdvoz.Code = Mc.OdvozMaterialu;
             novyOdvoz.Addressee = MyAgent.FindAssistant(SimId.PlanovacOdvozMaterialu);
@@ -75,11 +75,12 @@ namespace ds_agent_oriented_simulation.Managers
             sprava3.Addressee = MyAgent.FindAssistant(SimId.PlanovacDovozMaterialu);
             sprava3.Name = "C";
             StartContinualAssistant(sprava3);
-
+            
             MyMessage sprava4 = new MyMessage(MySim);
-            sprava4.Code = Mc.OdvozMaterialu;
+            sprava4.Code = Mc.ExportZacaty;
             sprava4.Addressee = MyAgent.FindAssistant(SimId.PlanovacOdvozMaterialu);
-            StartContinualAssistant(sprava4);
+            //StartContinualAssistant(sprava4);
+            Notice(sprava4);
         }
 
         //meta! userInfo="Process messages defined in code", id="0"
@@ -88,7 +89,8 @@ namespace ds_agent_oriented_simulation.Managers
             switch (message.Code)
             {
                 
-
+                // proces notice od agenta modelu <- dopravy <- stavby
+                // kolko materialu je na stavbe.. je to aktualne?
             }
         }
 
