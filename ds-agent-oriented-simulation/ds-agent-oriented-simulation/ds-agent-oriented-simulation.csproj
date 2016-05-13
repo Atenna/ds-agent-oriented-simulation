@@ -86,6 +86,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Generators\EmpiricGenerator.cs" />
     <Compile Include="Managers\ManagerDopravy.cs" />
     <Compile Include="Managers\ManagerModelu.cs" />
     <Compile Include="Managers\ManagerOkolia.cs" />
@@ -110,6 +111,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -126,8 +128,76 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="GUI\" />
-    <Folder Include="Tests\" />
+    <None Include="GUI\images\save.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\l_car_a.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GUI\images\fast.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GUI\images\koniec.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GUI\images\l_car_A.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GUI\images\l_car_B.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GUI\images\l_car_C.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GUI\images\l_car_D.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GUI\images\l_car_E.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GUI\images\l_Vykladac_A.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GUI\images\l_Vykladac_A_grey.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GUI\images\p_car_A.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GUI\images\p_car_B.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GUI\images\p_car_C.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GUI\images\p_car_D.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GUI\images\p_car_E.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GUI\images\p_Nakladac_A.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GUI\images\p_Nakladac_B.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GUI\images\pause.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GUI\images\pauza.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GUI\images\play.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GUI\images\slow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GUI\images\stop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GUI\images\zaciatok.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

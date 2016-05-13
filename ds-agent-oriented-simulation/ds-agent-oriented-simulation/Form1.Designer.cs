@@ -30,28 +30,21 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAgentSimulation));
             this.groupBoxVehicles = new System.Windows.Forms.GroupBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.checkBoxCarE = new System.Windows.Forms.CheckBox();
-            this.pictureCarD = new System.Windows.Forms.PictureBox();
-            this.pictureCarE = new System.Windows.Forms.PictureBox();
             this.checkBoxCarD = new System.Windows.Forms.CheckBox();
-            this.pictureCarC = new System.Windows.Forms.PictureBox();
             this.checkBoxCarC = new System.Windows.Forms.CheckBox();
-            this.pictureCarB = new System.Windows.Forms.PictureBox();
-            this.pictureCarA = new System.Windows.Forms.PictureBox();
             this.checkBoxCarB = new System.Windows.Forms.CheckBox();
             this.checkBoxCarA = new System.Windows.Forms.CheckBox();
             this.groupBoxSetup = new System.Windows.Forms.GroupBox();
             this.textBoxSeed = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.checkBoxVizual = new System.Windows.Forms.CheckBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.labelReplications = new System.Windows.Forms.Label();
             this.TextBoxReplications = new System.Windows.Forms.TextBox();
             this.groupBoxSim = new System.Windows.Forms.GroupBox();
@@ -64,6 +57,9 @@
             this.labelUnloaderA = new System.Windows.Forms.Label();
             this.labelLoaderB = new System.Windows.Forms.Label();
             this.labelLoaderA = new System.Windows.Forms.Label();
+            this.groupBoxStats = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.numericUpDown6 = new System.Windows.Forms.NumericUpDown();
             this.pictureUnloaderB = new System.Windows.Forms.PictureBox();
             this.pictureUnloaderA = new System.Windows.Forms.PictureBox();
             this.pictureLoaderB = new System.Windows.Forms.PictureBox();
@@ -73,29 +69,39 @@
             this.buttonRun = new System.Windows.Forms.Button();
             this.buttonPause = new System.Windows.Forms.Button();
             this.buttonSlowDown = new System.Windows.Forms.Button();
-            this.groupBoxStats = new System.Windows.Forms.GroupBox();
+            this.buttonSaveSettings = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureCarD = new System.Windows.Forms.PictureBox();
+            this.pictureCarE = new System.Windows.Forms.PictureBox();
+            this.pictureCarC = new System.Windows.Forms.PictureBox();
+            this.pictureCarB = new System.Windows.Forms.PictureBox();
+            this.pictureCarA = new System.Windows.Forms.PictureBox();
             this.groupBoxVehicles.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.groupBoxSetup.SuspendLayout();
+            this.groupBoxSim.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureUnloaderB)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureUnloaderA)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureLoaderB)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureLoaderA)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureCarD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureCarE)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureCarC)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureCarB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureCarA)).BeginInit();
-            this.groupBoxSetup.SuspendLayout();
-            this.groupBoxSim.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureUnloaderB)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureUnloaderA)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureLoaderB)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureLoaderA)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBoxVehicles
             // 
             this.groupBoxVehicles.BackColor = System.Drawing.Color.White;
+            this.groupBoxVehicles.Controls.Add(this.checkBox1);
+            this.groupBoxVehicles.Controls.Add(this.pictureBox1);
             this.groupBoxVehicles.Controls.Add(this.numericUpDown5);
             this.groupBoxVehicles.Controls.Add(this.numericUpDown4);
             this.groupBoxVehicles.Controls.Add(this.numericUpDown3);
@@ -118,9 +124,19 @@
             this.groupBoxVehicles.TabStop = false;
             this.groupBoxVehicles.Text = "Vehicles";
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(197, 423);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(28, 27);
+            this.checkBox1.TabIndex = 29;
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
             // numericUpDown5
             // 
-            this.numericUpDown5.Location = new System.Drawing.Point(237, 383);
+            this.numericUpDown5.Location = new System.Drawing.Point(240, 347);
             this.numericUpDown5.Maximum = new decimal(new int[] {
             2,
             0,
@@ -129,10 +145,11 @@
             this.numericUpDown5.Name = "numericUpDown5";
             this.numericUpDown5.Size = new System.Drawing.Size(87, 35);
             this.numericUpDown5.TabIndex = 13;
+            this.numericUpDown5.ValueChanged += new System.EventHandler(this.numericUpDown5_ValueChanged);
             // 
             // numericUpDown4
             // 
-            this.numericUpDown4.Location = new System.Drawing.Point(237, 315);
+            this.numericUpDown4.Location = new System.Drawing.Point(240, 279);
             this.numericUpDown4.Maximum = new decimal(new int[] {
             9999,
             0,
@@ -141,10 +158,11 @@
             this.numericUpDown4.Name = "numericUpDown4";
             this.numericUpDown4.Size = new System.Drawing.Size(87, 35);
             this.numericUpDown4.TabIndex = 12;
+            this.numericUpDown4.ValueChanged += new System.EventHandler(this.numericUpDown4_ValueChanged);
             // 
             // numericUpDown3
             // 
-            this.numericUpDown3.Location = new System.Drawing.Point(237, 247);
+            this.numericUpDown3.Location = new System.Drawing.Point(240, 211);
             this.numericUpDown3.Maximum = new decimal(new int[] {
             9999,
             0,
@@ -153,10 +171,11 @@
             this.numericUpDown3.Name = "numericUpDown3";
             this.numericUpDown3.Size = new System.Drawing.Size(87, 35);
             this.numericUpDown3.TabIndex = 11;
+            this.numericUpDown3.ValueChanged += new System.EventHandler(this.numericUpDown3_ValueChanged);
             // 
             // numericUpDown2
             // 
-            this.numericUpDown2.Location = new System.Drawing.Point(237, 179);
+            this.numericUpDown2.Location = new System.Drawing.Point(240, 143);
             this.numericUpDown2.Maximum = new decimal(new int[] {
             9999,
             0,
@@ -165,10 +184,11 @@
             this.numericUpDown2.Name = "numericUpDown2";
             this.numericUpDown2.Size = new System.Drawing.Size(87, 35);
             this.numericUpDown2.TabIndex = 10;
+            this.numericUpDown2.ValueChanged += new System.EventHandler(this.numericUpDown2_ValueChanged);
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(237, 111);
+            this.numericUpDown1.Location = new System.Drawing.Point(240, 75);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             3,
             0,
@@ -177,88 +197,39 @@
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(87, 35);
             this.numericUpDown1.TabIndex = 0;
+            this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
             // 
             // checkBoxCarE
             // 
             this.checkBoxCarE.AutoSize = true;
-            this.checkBoxCarE.Location = new System.Drawing.Point(194, 391);
+            this.checkBoxCarE.Location = new System.Drawing.Point(197, 355);
             this.checkBoxCarE.Name = "checkBoxCarE";
             this.checkBoxCarE.Size = new System.Drawing.Size(28, 27);
             this.checkBoxCarE.TabIndex = 4;
             this.checkBoxCarE.UseVisualStyleBackColor = true;
             // 
-            // pictureCarD
-            // 
-            this.pictureCarD.Image = ((System.Drawing.Image)(resources.GetObject("pictureCarD.Image")));
-            this.pictureCarD.Location = new System.Drawing.Point(73, 289);
-            this.pictureCarD.Name = "pictureCarD";
-            this.pictureCarD.Size = new System.Drawing.Size(93, 64);
-            this.pictureCarD.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureCarD.TabIndex = 8;
-            this.pictureCarD.TabStop = false;
-            // 
-            // pictureCarE
-            // 
-            this.pictureCarE.Image = ((System.Drawing.Image)(resources.GetObject("pictureCarE.Image")));
-            this.pictureCarE.Location = new System.Drawing.Point(18, 357);
-            this.pictureCarE.Name = "pictureCarE";
-            this.pictureCarE.Size = new System.Drawing.Size(148, 67);
-            this.pictureCarE.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureCarE.TabIndex = 9;
-            this.pictureCarE.TabStop = false;
-            // 
             // checkBoxCarD
             // 
             this.checkBoxCarD.AutoSize = true;
-            this.checkBoxCarD.Location = new System.Drawing.Point(194, 323);
+            this.checkBoxCarD.Location = new System.Drawing.Point(197, 287);
             this.checkBoxCarD.Name = "checkBoxCarD";
             this.checkBoxCarD.Size = new System.Drawing.Size(28, 27);
             this.checkBoxCarD.TabIndex = 3;
             this.checkBoxCarD.UseVisualStyleBackColor = true;
             // 
-            // pictureCarC
-            // 
-            this.pictureCarC.Image = ((System.Drawing.Image)(resources.GetObject("pictureCarC.Image")));
-            this.pictureCarC.Location = new System.Drawing.Point(33, 223);
-            this.pictureCarC.Name = "pictureCarC";
-            this.pictureCarC.Size = new System.Drawing.Size(133, 60);
-            this.pictureCarC.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureCarC.TabIndex = 7;
-            this.pictureCarC.TabStop = false;
-            // 
             // checkBoxCarC
             // 
             this.checkBoxCarC.AutoSize = true;
-            this.checkBoxCarC.Location = new System.Drawing.Point(194, 255);
+            this.checkBoxCarC.Location = new System.Drawing.Point(197, 219);
             this.checkBoxCarC.Name = "checkBoxCarC";
             this.checkBoxCarC.Size = new System.Drawing.Size(28, 27);
             this.checkBoxCarC.TabIndex = 2;
             this.checkBoxCarC.UseVisualStyleBackColor = true;
             // 
-            // pictureCarB
-            // 
-            this.pictureCarB.Image = ((System.Drawing.Image)(resources.GetObject("pictureCarB.Image")));
-            this.pictureCarB.Location = new System.Drawing.Point(47, 158);
-            this.pictureCarB.Name = "pictureCarB";
-            this.pictureCarB.Size = new System.Drawing.Size(119, 59);
-            this.pictureCarB.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureCarB.TabIndex = 6;
-            this.pictureCarB.TabStop = false;
-            // 
-            // pictureCarA
-            // 
-            this.pictureCarA.Image = ((System.Drawing.Image)(resources.GetObject("pictureCarA.Image")));
-            this.pictureCarA.Location = new System.Drawing.Point(72, 88);
-            this.pictureCarA.Name = "pictureCarA";
-            this.pictureCarA.Size = new System.Drawing.Size(94, 64);
-            this.pictureCarA.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureCarA.TabIndex = 5;
-            this.pictureCarA.TabStop = false;
-            // 
             // checkBoxCarB
             // 
             this.checkBoxCarB.AutoSize = true;
-            this.checkBoxCarB.Location = new System.Drawing.Point(194, 187);
+            this.checkBoxCarB.Location = new System.Drawing.Point(197, 151);
             this.checkBoxCarB.Name = "checkBoxCarB";
             this.checkBoxCarB.Size = new System.Drawing.Size(28, 27);
             this.checkBoxCarB.TabIndex = 1;
@@ -267,7 +238,7 @@
             // checkBoxCarA
             // 
             this.checkBoxCarA.AutoSize = true;
-            this.checkBoxCarA.Location = new System.Drawing.Point(194, 119);
+            this.checkBoxCarA.Location = new System.Drawing.Point(197, 83);
             this.checkBoxCarA.Name = "checkBoxCarA";
             this.checkBoxCarA.Size = new System.Drawing.Size(28, 27);
             this.checkBoxCarA.TabIndex = 0;
@@ -275,12 +246,12 @@
             // 
             // groupBoxSetup
             // 
+            this.groupBoxSetup.Controls.Add(this.buttonSaveSettings);
+            this.groupBoxSetup.Controls.Add(this.numericUpDown6);
             this.groupBoxSetup.Controls.Add(this.textBoxSeed);
             this.groupBoxSetup.Controls.Add(this.label4);
             this.groupBoxSetup.Controls.Add(this.label3);
-            this.groupBoxSetup.Controls.Add(this.label1);
             this.groupBoxSetup.Controls.Add(this.checkBoxVizual);
-            this.groupBoxSetup.Controls.Add(this.label2);
             this.groupBoxSetup.Controls.Add(this.labelReplications);
             this.groupBoxSetup.Controls.Add(this.TextBoxReplications);
             this.groupBoxSetup.Location = new System.Drawing.Point(12, 511);
@@ -306,27 +277,6 @@
             this.label4.TabIndex = 19;
             this.label4.Text = "Generator Seed";
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(71, 351);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(117, 29);
-            this.label3.TabIndex = 18;
-            this.label3.Text = "Trim 40%";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.White;
-            this.label1.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label1.Location = new System.Drawing.Point(34, 370);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(22, 22);
-            this.label1.TabIndex = 17;
-            this.label1.Text = "˅";
-            // 
             // checkBoxVizual
             // 
             this.checkBoxVizual.AutoSize = true;
@@ -336,18 +286,6 @@
             this.checkBoxVizual.TabIndex = 2;
             this.checkBoxVizual.Text = "Vizualize";
             this.checkBoxVizual.UseVisualStyleBackColor = true;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.White;
-            this.label2.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label2.Location = new System.Drawing.Point(34, 337);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(22, 22);
-            this.label2.TabIndex = 16;
-            this.label2.Text = "˄";
             // 
             // labelReplications
             // 
@@ -440,6 +378,7 @@
             // labelUnloaderB
             // 
             this.labelUnloaderB.AutoSize = true;
+            this.labelUnloaderB.ForeColor = System.Drawing.Color.DarkGray;
             this.labelUnloaderB.Location = new System.Drawing.Point(41, 520);
             this.labelUnloaderB.Name = "labelUnloaderB";
             this.labelUnloaderB.Size = new System.Drawing.Size(152, 29);
@@ -473,11 +412,43 @@
             this.labelLoaderA.TabIndex = 19;
             this.labelLoaderA.Text = "Loads Car: ";
             // 
+            // groupBoxStats
+            // 
+            this.groupBoxStats.Location = new System.Drawing.Point(904, 12);
+            this.groupBoxStats.Name = "groupBoxStats";
+            this.groupBoxStats.Size = new System.Drawing.Size(705, 943);
+            this.groupBoxStats.TabIndex = 4;
+            this.groupBoxStats.TabStop = false;
+            this.groupBoxStats.Text = "Statistics";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(33, 337);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(63, 29);
+            this.label3.TabIndex = 18;
+            this.label3.Text = "Trim";
+            // 
+            // numericUpDown6
+            // 
+            this.numericUpDown6.Location = new System.Drawing.Point(102, 335);
+            this.numericUpDown6.Maximum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.numericUpDown6.Name = "numericUpDown6";
+            this.numericUpDown6.Size = new System.Drawing.Size(87, 35);
+            this.numericUpDown6.TabIndex = 30;
+            // 
             // pictureUnloaderB
             // 
             this.pictureUnloaderB.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureUnloaderB.BackgroundImage")));
             this.pictureUnloaderB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureUnloaderB.Location = new System.Drawing.Point(368, 502);
+            this.pictureUnloaderB.MaximumSize = new System.Drawing.Size(103, 69);
+            this.pictureUnloaderB.MinimumSize = new System.Drawing.Size(103, 69);
             this.pictureUnloaderB.Name = "pictureUnloaderB";
             this.pictureUnloaderB.Size = new System.Drawing.Size(103, 69);
             this.pictureUnloaderB.TabIndex = 18;
@@ -594,14 +565,81 @@
             this.buttonSlowDown.UseVisualStyleBackColor = false;
             this.buttonSlowDown.Click += new System.EventHandler(this.buttonSlowDown_Click);
             // 
-            // groupBoxStats
+            // buttonSaveSettings
             // 
-            this.groupBoxStats.Location = new System.Drawing.Point(904, 12);
-            this.groupBoxStats.Name = "groupBoxStats";
-            this.groupBoxStats.Size = new System.Drawing.Size(705, 943);
-            this.groupBoxStats.TabIndex = 4;
-            this.groupBoxStats.TabStop = false;
-            this.groupBoxStats.Text = "Statistics";
+            this.buttonSaveSettings.BackColor = System.Drawing.Color.White;
+            this.buttonSaveSettings.BackgroundImage = global::ds_agent_oriented_simulation.Properties.Resources.save;
+            this.buttonSaveSettings.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.buttonSaveSettings.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.buttonSaveSettings.FlatAppearance.BorderSize = 0;
+            this.buttonSaveSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSaveSettings.ForeColor = System.Drawing.Color.White;
+            this.buttonSaveSettings.Location = new System.Drawing.Point(278, 375);
+            this.buttonSaveSettings.Name = "buttonSaveSettings";
+            this.buttonSaveSettings.Size = new System.Drawing.Size(49, 49);
+            this.buttonSaveSettings.TabIndex = 28;
+            this.buttonSaveSettings.UseVisualStyleBackColor = false;
+            this.buttonSaveSettings.Click += new System.EventHandler(this.buttonSaveSettings_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.Location = new System.Drawing.Point(66, 394);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(103, 69);
+            this.pictureBox1.TabIndex = 28;
+            this.pictureBox1.TabStop = false;
+            // 
+            // pictureCarD
+            // 
+            this.pictureCarD.Image = ((System.Drawing.Image)(resources.GetObject("pictureCarD.Image")));
+            this.pictureCarD.Location = new System.Drawing.Point(76, 253);
+            this.pictureCarD.Name = "pictureCarD";
+            this.pictureCarD.Size = new System.Drawing.Size(93, 64);
+            this.pictureCarD.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureCarD.TabIndex = 8;
+            this.pictureCarD.TabStop = false;
+            // 
+            // pictureCarE
+            // 
+            this.pictureCarE.Image = ((System.Drawing.Image)(resources.GetObject("pictureCarE.Image")));
+            this.pictureCarE.Location = new System.Drawing.Point(21, 321);
+            this.pictureCarE.Name = "pictureCarE";
+            this.pictureCarE.Size = new System.Drawing.Size(148, 67);
+            this.pictureCarE.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureCarE.TabIndex = 9;
+            this.pictureCarE.TabStop = false;
+            // 
+            // pictureCarC
+            // 
+            this.pictureCarC.Image = ((System.Drawing.Image)(resources.GetObject("pictureCarC.Image")));
+            this.pictureCarC.Location = new System.Drawing.Point(36, 187);
+            this.pictureCarC.Name = "pictureCarC";
+            this.pictureCarC.Size = new System.Drawing.Size(133, 60);
+            this.pictureCarC.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureCarC.TabIndex = 7;
+            this.pictureCarC.TabStop = false;
+            // 
+            // pictureCarB
+            // 
+            this.pictureCarB.Image = ((System.Drawing.Image)(resources.GetObject("pictureCarB.Image")));
+            this.pictureCarB.Location = new System.Drawing.Point(50, 122);
+            this.pictureCarB.Name = "pictureCarB";
+            this.pictureCarB.Size = new System.Drawing.Size(119, 59);
+            this.pictureCarB.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureCarB.TabIndex = 6;
+            this.pictureCarB.TabStop = false;
+            // 
+            // pictureCarA
+            // 
+            this.pictureCarA.Image = ((System.Drawing.Image)(resources.GetObject("pictureCarA.Image")));
+            this.pictureCarA.Location = new System.Drawing.Point(75, 52);
+            this.pictureCarA.Name = "pictureCarA";
+            this.pictureCarA.Size = new System.Drawing.Size(94, 64);
+            this.pictureCarA.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureCarA.TabIndex = 5;
+            this.pictureCarA.TabStop = false;
             // 
             // FormAgentSimulation
             // 
@@ -624,19 +662,21 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            this.groupBoxSetup.ResumeLayout(false);
+            this.groupBoxSetup.PerformLayout();
+            this.groupBoxSim.ResumeLayout(false);
+            this.groupBoxSim.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureUnloaderB)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureUnloaderA)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureLoaderB)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureLoaderA)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureCarD)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureCarE)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureCarC)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureCarB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureCarA)).EndInit();
-            this.groupBoxSetup.ResumeLayout(false);
-            this.groupBoxSetup.PerformLayout();
-            this.groupBoxSim.ResumeLayout(false);
-            this.groupBoxSim.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureUnloaderB)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureUnloaderA)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureLoaderB)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureLoaderA)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -657,9 +697,6 @@
         private System.Windows.Forms.TextBox TextBoxReplications;
         private System.Windows.Forms.CheckBox checkBoxVizual;
         private System.Windows.Forms.Label labelReplications;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBoxSeed;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.GroupBox groupBoxSim;
@@ -687,6 +724,11 @@
         private System.Windows.Forms.NumericUpDown numericUpDown3;
         private System.Windows.Forms.NumericUpDown numericUpDown2;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.NumericUpDown numericUpDown6;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button buttonSaveSettings;
     }
 }
 
