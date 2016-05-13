@@ -42,12 +42,24 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
         {
             switch (message.Code)
             {
+                case Mc.ExportZacaty:
+                    ProcessExportZacaty(message);
+                    break;
+
                 case Mc.ExportUkonceny:
                     // to-do
                     // poslat spravu agentovi okolia
                     ProcessExportDokonceny((MyMessage)message);
                     break;
             }
+        }
+
+        private void ProcessExportZacaty(MessageForm message)
+        {
+            MyMessage sprava = new MyMessage(MySim);
+            sprava.Code = Mc.ExportUkonceny;
+            sprava.Volume = GenCas.Sample();
+            Hold(Timer.NewWorkDayStartsAt(MySim.CurrentTime, Constants.ExportStartsAt), sprava);
         }
 
         private void ProcessExportDokonceny(MyMessage message)
