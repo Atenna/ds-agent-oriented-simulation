@@ -82,6 +82,10 @@
             this.groupBoxUnloaderStats = new System.Windows.Forms.GroupBox();
             this.labelUnloaderStatsLen = new System.Windows.Forms.Label();
             this.labelUnloaderStatsTime = new System.Windows.Forms.Label();
+            this.labelSaveSettings = new System.Windows.Forms.Label();
+            this.labelWayToUnloader = new System.Windows.Forms.Label();
+            this.labelWayToCrossing = new System.Windows.Forms.Label();
+            this.labelWayToLoader = new System.Windows.Forms.Label();
             this.groupBoxVehicles.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
@@ -315,6 +319,7 @@
             // 
             // groupBoxSetup
             // 
+            this.groupBoxSetup.Controls.Add(this.labelSaveSettings);
             this.groupBoxSetup.Controls.Add(this.buttonSaveSettings);
             this.groupBoxSetup.Controls.Add(this.numericUpDown6);
             this.groupBoxSetup.Controls.Add(this.textBoxSeed);
@@ -411,6 +416,9 @@
             // 
             // groupBoxSim
             // 
+            this.groupBoxSim.Controls.Add(this.labelWayToLoader);
+            this.groupBoxSim.Controls.Add(this.labelWayToCrossing);
+            this.groupBoxSim.Controls.Add(this.labelWayToUnloader);
             this.groupBoxSim.Controls.Add(this.labelMaterialStavba);
             this.groupBoxSim.Controls.Add(this.labelMaterialSkladka);
             this.groupBoxSim.Controls.Add(this.labelSimTime);
@@ -439,7 +447,7 @@
             // labelMaterialStavba
             // 
             this.labelMaterialStavba.AutoSize = true;
-            this.labelMaterialStavba.Location = new System.Drawing.Point(41, 404);
+            this.labelMaterialStavba.Location = new System.Drawing.Point(43, 451);
             this.labelMaterialStavba.Name = "labelMaterialStavba";
             this.labelMaterialStavba.Size = new System.Drawing.Size(105, 29);
             this.labelMaterialStavba.TabIndex = 27;
@@ -448,7 +456,7 @@
             // labelMaterialSkladka
             // 
             this.labelMaterialSkladka.AutoSize = true;
-            this.labelMaterialSkladka.Location = new System.Drawing.Point(25, 105);
+            this.labelMaterialSkladka.Location = new System.Drawing.Point(41, 110);
             this.labelMaterialSkladka.Name = "labelMaterialSkladka";
             this.labelMaterialSkladka.Size = new System.Drawing.Size(105, 29);
             this.labelMaterialSkladka.TabIndex = 26;
@@ -457,7 +465,7 @@
             // labelSimTime
             // 
             this.labelSimTime.AutoSize = true;
-            this.labelSimTime.Location = new System.Drawing.Point(41, 710);
+            this.labelSimTime.Location = new System.Drawing.Point(26, 808);
             this.labelSimTime.Name = "labelSimTime";
             this.labelSimTime.Size = new System.Drawing.Size(184, 29);
             this.labelSimTime.TabIndex = 25;
@@ -466,7 +474,7 @@
             // labelQueueUnload
             // 
             this.labelQueueUnload.AutoSize = true;
-            this.labelQueueUnload.Location = new System.Drawing.Point(41, 347);
+            this.labelQueueUnload.Location = new System.Drawing.Point(25, 394);
             this.labelQueueUnload.Name = "labelQueueUnload";
             this.labelQueueUnload.Size = new System.Drawing.Size(222, 29);
             this.labelQueueUnload.TabIndex = 24;
@@ -485,7 +493,7 @@
             // 
             this.labelUnloaderB.AutoSize = true;
             this.labelUnloaderB.ForeColor = System.Drawing.Color.DarkGray;
-            this.labelUnloaderB.Location = new System.Drawing.Point(41, 518);
+            this.labelUnloaderB.Location = new System.Drawing.Point(41, 588);
             this.labelUnloaderB.Name = "labelUnloaderB";
             this.labelUnloaderB.Size = new System.Drawing.Size(152, 29);
             this.labelUnloaderB.TabIndex = 22;
@@ -494,7 +502,7 @@
             // labelUnloaderA
             // 
             this.labelUnloaderA.AutoSize = true;
-            this.labelUnloaderA.Location = new System.Drawing.Point(41, 461);
+            this.labelUnloaderA.Location = new System.Drawing.Point(41, 518);
             this.labelUnloaderA.Name = "labelUnloaderA";
             this.labelUnloaderA.Size = new System.Drawing.Size(152, 29);
             this.labelUnloaderA.TabIndex = 21;
@@ -503,7 +511,7 @@
             // labelLoaderB
             // 
             this.labelLoaderB.AutoSize = true;
-            this.labelLoaderB.Location = new System.Drawing.Point(154, 250);
+            this.labelLoaderB.Location = new System.Drawing.Point(154, 243);
             this.labelLoaderB.Name = "labelLoaderB";
             this.labelLoaderB.Size = new System.Drawing.Size(123, 29);
             this.labelLoaderB.TabIndex = 20;
@@ -512,7 +520,7 @@
             // labelLoaderA
             // 
             this.labelLoaderA.AutoSize = true;
-            this.labelLoaderA.Location = new System.Drawing.Point(154, 168);
+            this.labelLoaderA.Location = new System.Drawing.Point(154, 172);
             this.labelLoaderA.Name = "labelLoaderA";
             this.labelLoaderA.Size = new System.Drawing.Size(135, 29);
             this.labelLoaderA.TabIndex = 19;
@@ -522,7 +530,7 @@
             // 
             this.pictureUnloaderB.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureUnloaderB.BackgroundImage")));
             this.pictureUnloaderB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureUnloaderB.Location = new System.Drawing.Point(368, 502);
+            this.pictureUnloaderB.Location = new System.Drawing.Point(362, 559);
             this.pictureUnloaderB.MaximumSize = new System.Drawing.Size(103, 69);
             this.pictureUnloaderB.MinimumSize = new System.Drawing.Size(103, 69);
             this.pictureUnloaderB.Name = "pictureUnloaderB";
@@ -535,7 +543,7 @@
             this.pictureUnloaderA.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.pictureUnloaderA.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureUnloaderA.BackgroundImage")));
             this.pictureUnloaderA.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureUnloaderA.Location = new System.Drawing.Point(368, 427);
+            this.pictureUnloaderA.Location = new System.Drawing.Point(362, 484);
             this.pictureUnloaderA.Name = "pictureUnloaderA";
             this.pictureUnloaderA.Size = new System.Drawing.Size(103, 69);
             this.pictureUnloaderA.TabIndex = 17;
@@ -570,7 +578,7 @@
             this.buttonStop.FlatAppearance.BorderSize = 0;
             this.buttonStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonStop.ForeColor = System.Drawing.Color.White;
-            this.buttonStop.Location = new System.Drawing.Point(328, 607);
+            this.buttonStop.Location = new System.Drawing.Point(334, 874);
             this.buttonStop.Name = "buttonStop";
             this.buttonStop.Size = new System.Drawing.Size(49, 49);
             this.buttonStop.TabIndex = 4;
@@ -586,7 +594,7 @@
             this.buttonSlowUp.FlatAppearance.BorderSize = 0;
             this.buttonSlowUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonSlowUp.ForeColor = System.Drawing.Color.White;
-            this.buttonSlowUp.Location = new System.Drawing.Point(273, 607);
+            this.buttonSlowUp.Location = new System.Drawing.Point(279, 874);
             this.buttonSlowUp.Name = "buttonSlowUp";
             this.buttonSlowUp.Size = new System.Drawing.Size(49, 49);
             this.buttonSlowUp.TabIndex = 3;
@@ -602,7 +610,7 @@
             this.buttonRun.FlatAppearance.BorderSize = 0;
             this.buttonRun.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonRun.ForeColor = System.Drawing.Color.White;
-            this.buttonRun.Location = new System.Drawing.Point(108, 607);
+            this.buttonRun.Location = new System.Drawing.Point(114, 874);
             this.buttonRun.Name = "buttonRun";
             this.buttonRun.Size = new System.Drawing.Size(49, 49);
             this.buttonRun.TabIndex = 2;
@@ -618,7 +626,7 @@
             this.buttonPause.FlatAppearance.BorderSize = 0;
             this.buttonPause.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonPause.ForeColor = System.Drawing.Color.White;
-            this.buttonPause.Location = new System.Drawing.Point(218, 607);
+            this.buttonPause.Location = new System.Drawing.Point(224, 874);
             this.buttonPause.Name = "buttonPause";
             this.buttonPause.Size = new System.Drawing.Size(49, 49);
             this.buttonPause.TabIndex = 1;
@@ -634,7 +642,7 @@
             this.buttonSlowDown.FlatAppearance.BorderSize = 0;
             this.buttonSlowDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonSlowDown.ForeColor = System.Drawing.Color.White;
-            this.buttonSlowDown.Location = new System.Drawing.Point(163, 607);
+            this.buttonSlowDown.Location = new System.Drawing.Point(169, 874);
             this.buttonSlowDown.Name = "buttonSlowDown";
             this.buttonSlowDown.Size = new System.Drawing.Size(49, 49);
             this.buttonSlowDown.TabIndex = 0;
@@ -709,6 +717,43 @@
             this.labelUnloaderStatsTime.Size = new System.Drawing.Size(242, 29);
             this.labelUnloaderStatsTime.TabIndex = 0;
             this.labelUnloaderStatsTime.Text = "Average waiting time:";
+            // 
+            // labelSaveSettings
+            // 
+            this.labelSaveSettings.AutoSize = true;
+            this.labelSaveSettings.Location = new System.Drawing.Point(107, 395);
+            this.labelSaveSettings.Name = "labelSaveSettings";
+            this.labelSaveSettings.Size = new System.Drawing.Size(156, 29);
+            this.labelSaveSettings.TabIndex = 31;
+            this.labelSaveSettings.Text = "Save settings";
+            // 
+            // labelWayToUnloader
+            // 
+            this.labelWayToUnloader.AutoSize = true;
+            this.labelWayToUnloader.ForeColor = System.Drawing.Color.Black;
+            this.labelWayToUnloader.Location = new System.Drawing.Point(26, 336);
+            this.labelWayToUnloader.Name = "labelWayToUnloader";
+            this.labelWayToUnloader.Size = new System.Drawing.Size(196, 29);
+            this.labelWayToUnloader.TabIndex = 28;
+            this.labelWayToUnloader.Text = "Way to Unloader:";
+            // 
+            // labelWayToCrossing
+            // 
+            this.labelWayToCrossing.AutoSize = true;
+            this.labelWayToCrossing.Location = new System.Drawing.Point(25, 673);
+            this.labelWayToCrossing.Name = "labelWayToCrossing";
+            this.labelWayToCrossing.Size = new System.Drawing.Size(243, 29);
+            this.labelWayToCrossing.TabIndex = 29;
+            this.labelWayToCrossing.Text = "Way to road crossing:";
+            // 
+            // labelWayToLoader
+            // 
+            this.labelWayToLoader.AutoSize = true;
+            this.labelWayToLoader.Location = new System.Drawing.Point(25, 732);
+            this.labelWayToLoader.Name = "labelWayToLoader";
+            this.labelWayToLoader.Size = new System.Drawing.Size(173, 29);
+            this.labelWayToLoader.TabIndex = 30;
+            this.labelWayToLoader.Text = "Way to Loader:";
             // 
             // FormAgentSimulation
             // 
@@ -809,6 +854,10 @@
         private System.Windows.Forms.GroupBox groupBoxUnloaderStats;
         private System.Windows.Forms.Label labelUnloaderStatsLen;
         private System.Windows.Forms.Label labelUnloaderStatsTime;
+        private System.Windows.Forms.Label labelSaveSettings;
+        public System.Windows.Forms.Label labelWayToLoader;
+        public System.Windows.Forms.Label labelWayToCrossing;
+        public System.Windows.Forms.Label labelWayToUnloader;
     }
 }
 

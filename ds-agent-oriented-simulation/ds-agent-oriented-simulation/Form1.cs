@@ -56,48 +56,69 @@ namespace ds_agent_oriented_simulation
                 Constants.Seed = 0;
             }
 
-            System.Action<MySimulation> updateGuiAction = new System.Action<MySimulation>((s) => UpdateGui(s));
-            Sim = new MySimulation();
-            Sim.SetSimSpeed(0.5, 2);
 
-            Sim.OnRefreshUI(s => this.Invoke(updateGuiAction, s)); 
+            Sim = new MySimulation();
+            Sim.SetSimSpeed(0.5,2);
+            
+            System.Action<MySimulation> updateGuiAction = new System.Action<MySimulation>((s) => UpdateGui(s));
+            Sim.OnRefreshUI(s => this.Invoke(updateGuiAction, s));
+
             // 777 600
-            Sim.SimulateAsync(1, 200);
+            Sim.SimulateAsync(1, 788400);
+
         }
 
         private void UpdateGui(MySimulation mySimulation)
         {
-            this.labelSimTime.Text = "Simulation time: " + Sim.CurrentTime.ToString("#.000");
-            this.labelQueueLoad.Text = "Queue at Loader: ";
-            if (Sim.AgentSkladky.AutaSkladkaQueue != null && Sim.AgentSkladky.AutaSkladkaQueue.First != null)
+            if (!this.checkBoxVizual.Checked)
             {
-                foreach (var vehicle in Sim.AgentSkladky.AutaSkladkaQueue)
-                {
-                    this.labelQueueLoad.Text += vehicle.Name + " ";
-                }
-                 
+                this.labelSimTime.Text = "Simulation time: " + Sim.CurrentTime.ToString("#.000");
             }
-            this.labelLoaderA.Text = Sim.AgentSkladky.CarAtLoaderA != null ? "Loads Car: " + Sim.AgentSkladky.CarAtLoaderA.ToString() : "Loads Car: empty";
-            this.labelLoaderB.Text = Sim.AgentSkladky.CarAtLoaderB != null ? "Loads Car: " + Sim.AgentSkladky.CarAtLoaderB.ToString() : "Loads Car: empty";
-            this.labelUnloaderA.Text = Sim.AgentStavby.CarAtUnloaderA != null ? "Unloads Car: " + Sim.AgentStavby.CarAtUnloaderA.ToString() : "Unloads Car: empty";
-            this.labelUnloaderB.Text = Sim.AgentStavby.CarAtUnloaderB != null ? "Unloads Car: " + Sim.AgentStavby.CarAtUnloaderB.ToString() : "Unloads Car: empty";
-
-            this.labelQueueUnload.Text = "Queue at Unloader: ";
-            if (Sim.AgentStavby.AutaStavbaQueue != null && Sim.AgentStavby.AutaStavbaQueue.First != null)
+            else
             {
-                foreach (var vehicle in Sim.AgentStavby.AutaStavbaQueue)
+                this.labelSimTime.Text = "Simulation time: " + Sim.CurrentTime.ToString("#.000");
+                this.labelQueueLoad.Text = "Queue at Loader: ";
+                if (Sim.AgentSkladky.AutaSkladkaQueue != null && Sim.AgentSkladky.AutaSkladkaQueue.First != null)
                 {
-                    labelQueueUnload.Text += vehicle.Name + " ";
+                    foreach (var vehicle in Sim.AgentSkladky.AutaSkladkaQueue)
+                    {
+                        this.labelQueueLoad.Text += vehicle.Name + " ";
+                    }
+
+                }
+                this.labelLoaderA.Text = Sim.AgentSkladky.CarAtLoaderA != null
+                    ? "Loads Car: " + Sim.AgentSkladky.CarAtLoaderA.ToString()
+                    : "Loads Car: empty";
+                this.labelLoaderB.Text = Sim.AgentSkladky.CarAtLoaderB != null
+                    ? "Loads Car: " + Sim.AgentSkladky.CarAtLoaderB.ToString()
+                    : "Loads Car: empty";
+                this.labelUnloaderA.Text = Sim.AgentStavby.CarAtUnloaderA != null
+                    ? "Unloads Car: " + Sim.AgentStavby.CarAtUnloaderA.ToString()
+                    : "Unloads Car: empty";
+                this.labelUnloaderB.Text = Sim.AgentStavby.CarAtUnloaderB != null
+                    ? "Unloads Car: " + Sim.AgentStavby.CarAtUnloaderB.ToString()
+                    : "Unloads Car: empty";
+
+                this.labelQueueUnload.Text = "Queue at Unloader: ";
+                if (Sim.AgentStavby.AutaStavbaQueue != null && Sim.AgentStavby.AutaStavbaQueue.First != null)
+                {
+                    foreach (var vehicle in Sim.AgentStavby.AutaStavbaQueue)
+                    {
+                        labelQueueUnload.Text += vehicle.Name + " ";
+                    }
+
                 }
 
+                this.labelMaterialSkladka.Text = Sim.AgentSkladky.MaterialNaSkladke.ToString("####.0");
+                this.labelMaterialStavba.Text = Sim.AgentStavby.MaterialNaStavbe.ToString("####.0");
+
+                this.labelLoaderStatsTime.Text = "Average waiting time: " +
+                                                 mySimulation.AgentSkladky.SkladkaWStat.Mean().ToString("####.00");
+                this.labelUnloaderStatsTime.Text = "Average waiting time: " +
+                                                   mySimulation.AgentStavby.WaitingTimePerCar.Mean().ToString("####.00");
+                this.labelUnloaderStatsLen.Text = "Average length of queue: " +
+                                                  mySimulation.AgentStavby.LengthOfQueue.Mean().ToString("####.00");
             }
-
-            this.labelMaterialSkladka.Text = Sim.AgentSkladky.MaterialNaSkladke.ToString("####.0");
-            this.labelMaterialStavba.Text = Sim.AgentStavby.MaterialNaStavbe.ToString("####.0");
-
-            this.labelLoaderStatsTime.Text = "Average waiting time: " + mySimulation.AgentSkladky.SkladkaWStat.Mean().ToString("####.00");
-            this.labelUnloaderStatsTime.Text = "Average waiting time: " + mySimulation.AgentStavby.WaitingTimePerCar.Mean().ToString("####.00");
-            this.labelUnloaderStatsLen.Text = "Average length of queue: " + mySimulation.AgentStavby.LengthOfQueue.Mean().ToString("####.00");
         }
 
         private void buttonSlowUp_Click(object sender, System.EventArgs e)
@@ -137,7 +158,7 @@ namespace ds_agent_oriented_simulation
             this.labelLoaderB.Text = "Loads Car: ";
             this.labelUnloaderA.Text = "Unloads Car: ";
             this.labelUnloaderB.Text = "Unloads Car: ";
-            this.labelQueueLoad.Text = "Queue at Unoader: ";
+            this.labelQueueLoad.Text = "Queue at Unloader: ";
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -147,12 +168,16 @@ namespace ds_agent_oriented_simulation
                 pictureUnloaderB.Image = ds_agent_oriented_simulation.Properties.Resources.l_Vykladac_A;
                 pictureUnloaderB.SizeMode = PictureBoxSizeMode.StretchImage;
                 labelUnloaderB.ForeColor = Color.Black;
+                Sim.AgentStavby.VykladacBIsDisabled = false;
+                Sim.AgentStavby.VykladacBIsWorking = false;
             }
             else
             {
                 pictureUnloaderB.Image = ds_agent_oriented_simulation.Properties.Resources.l_Vykladac_A_grey;
                 pictureUnloaderB.SizeMode = PictureBoxSizeMode.StretchImage;
                 labelUnloaderB.ForeColor = Color.DarkGray;
+                Sim.AgentStavby.VykladacBIsDisabled = true;
+                Sim.AgentStavby.VykladacBIsWorking = true; // bude stale obsadeny
             }
         }
 

@@ -1,4 +1,5 @@
-﻿using ds_agent_oriented_simulation.Agents;
+﻿using System.Collections.Generic;
+using ds_agent_oriented_simulation.Agents;
 using ds_agent_oriented_simulation.Entities;
 using ds_agent_oriented_simulation.Entities.Vehicles;
 using ds_agent_oriented_simulation.Settings;
@@ -11,11 +12,13 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
     public class ProcessPresunNaStavbu : Process
     {
         private OneLaneRoad cesta;
+        public LinkedList<Vehicle> CarsOnWay;
 
         public ProcessPresunNaStavbu(int id, OSPABA.Simulation mySim, CommonAgent myAgent) :
             base(id, mySim, myAgent)
         {
             cesta = new OneLaneRoad(Constants.AbLength);
+            CarsOnWay = new LinkedList<Vehicle>();
         }
 
         override public void PrepareReplication()
@@ -28,6 +31,7 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
         public void ProcessStart(MessageForm message)
         {
             Vehicle naVylozenie = ((MyMessage)message).Car;
+            CarsOnWay.AddLast(naVylozenie);
 
             double holdTime = cesta.AddCar(naVylozenie, MySim.CurrentTime);
             if (holdTime != -1)
@@ -51,6 +55,7 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
         private void ProcessPrejazdUkonceny(MessageForm message)
         {
             ((MyMessage)message).cars = cesta.GetFirstLane().cars;
+            CarsOnWay.RemoveFirst();
             AssistantFinished(message);
         }
 

@@ -47,7 +47,7 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
             {
                 case Mc.VylozenieUkoncene:
                     _naVylozenie.JeVykladane = false;
-                    MyAgent.MaterialNaStavbe += MyAgent.CarAtUnloaderB.RealVolume;
+                    MyAgent.MaterialNaStavbe += _naVylozenie.RealVolume;
                     MyAgent.CarAtUnloaderB = null;
                     _naVylozenie.RealVolume = 0;
                     AssistantFinished(message);

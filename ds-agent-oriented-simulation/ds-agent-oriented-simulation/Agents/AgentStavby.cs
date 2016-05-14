@@ -23,6 +23,7 @@ namespace ds_agent_oriented_simulation.Agents
         public bool VykladacAIsWorking { get; internal set; }
         public bool VykladacBIsWorking { get; internal set; }
         public double MaterialNaStavbe { get; set; }
+        public bool VykladacBIsDisabled { get; set; }
 
         public AgentStavby(int id, OSPABA.Simulation mySim, Agent parent) :
             base(id, mySim, parent)
@@ -32,6 +33,7 @@ namespace ds_agent_oriented_simulation.Agents
             LengthOfQueue = new WStat(mySim);
             AutaStavbaQueue = new SimQueue<Vehicle>(LengthOfQueue);
             MessageStavbaQueue = new SimQueue<MyMessage>(LengthOfQueue);
+            VykladacBIsDisabled = true;
         }
 
         override public void PrepareReplication()

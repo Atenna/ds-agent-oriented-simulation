@@ -35,6 +35,14 @@
         public const int TimeOfRepairOfVehicleD = 44;
         public const int TimeOfRepairOfVehicleE = 170;
 
+        public const int PriceCarA = 30000;
+        public const int PriceCarB = 55000;
+        public const int PriceCarC = 40000;
+        public const int PriceCarD = 60000;
+        public const int PriceCarE = 10000;
+
+        public const int PriceForSecondUnloader = 130000; // €
+
         public const int MaxNumberOfCarsA = 3;
         public const int MaxNumberOfCarsE = 2;
 
