@@ -42,12 +42,15 @@ namespace ds_agent_oriented_simulation.Managers
                     naVylozenie = MyAgent.AutaStavbaQueue.First.Value;
                     MyAgent.AutaStavbaQueue.RemoveFirst();
                 }
-                MyMessage msg = MyAgent.MessageSkladkaQueue.First.Value;
-                MyAgent.MessageSkladkaQueue.RemoveFirst();
+                MyMessage msg = MyAgent.MessageStavbaQueue.First.Value;
+                MyAgent.MessageStavbaQueue.RemoveFirst();
+                msg.Addressee = MyAgent.FindAssistant(SimId.ProcesVykladacA);
                 msg.Car = naVylozenie;
-                msg.Code = Mc.NalozAuto;
-                msg.Addressee = MySim.FindAgent(SimId.AgentSkladky);
-                Request(msg);
+                msg.Code = Mc.VylozAuto;
+                //msg.Addressee = MySim.FindAgent(SimId.AgentStavby);
+                //Request(msg);
+                MyAgent.VykladacAIsWorking = true;
+                StartContinualAssistant(msg);
             }
         }
 
@@ -67,12 +70,15 @@ namespace ds_agent_oriented_simulation.Managers
                     naVylozenie = MyAgent.AutaStavbaQueue.First.Value;
                     MyAgent.AutaStavbaQueue.RemoveFirst();
                 }
-                MyMessage msg = MyAgent.MessageSkladkaQueue.First.Value;
-                MyAgent.MessageSkladkaQueue.RemoveFirst();
+                MyMessage msg = MyAgent.MessageStavbaQueue.First.Value;
+                MyAgent.MessageStavbaQueue.RemoveFirst();
+                msg.Addressee = MyAgent.FindAssistant(SimId.ProcesVykladacB);
                 msg.Car = naVylozenie;
-                msg.Code = Mc.NalozAuto;
-                msg.Addressee = MySim.FindAgent(SimId.AgentSkladky);
-                Request(msg);
+                msg.Code = Mc.VylozAuto;
+                //msg.Addressee = MySim.FindAgent(SimId.AgentStavby);
+                //Request(msg);
+                MyAgent.VykladacBIsWorking = true;
+                StartContinualAssistant(msg);
             }
         }
 
@@ -87,7 +93,7 @@ namespace ds_agent_oriented_simulation.Managers
             if (MyAgent.VykladacAIsWorking && MyAgent.VykladacBIsWorking)
             {
                 MyAgent.AutaStavbaQueue.AddLast(naVylozenie);
-                MyAgent.MessageSkladkaQueue.AddLast((MyMessage)message);
+                MyAgent.MessageStavbaQueue.AddLast((MyMessage)message);
             }
             else
             {
