@@ -27,7 +27,7 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
             double casPrejazdu = (Constants.BcLength / (double)(naVylozenie.Speed / 60.0));
             if (naVylozenie.HasFailed())
             {
-                casPrejazdu += naVylozenie.GetTimeOfRepair();
+                casPrejazdu += naVylozenie.TimeOfRepair;
             }
             message.Code = Mc.PrejazdUkonceny;
             Hold(casPrejazdu, message);

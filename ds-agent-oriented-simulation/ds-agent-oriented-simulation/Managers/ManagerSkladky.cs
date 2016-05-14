@@ -49,6 +49,12 @@ namespace ds_agent_oriented_simulation.Managers
                 MyAgent.MessageSkladkaQueue.RemoveFirst();
                 zFrontu.Addressee = MyAgent.FindAssistant(SimId.ProcesNakladacA);
                 zFrontu.Code = Mc.NalozAuto;
+
+                // ukoncenie cakania
+                naNalozenie.CasCakaniaNaSkladke = (MySim.CurrentTime - naNalozenie.ZaciatokCakania);
+                // pridanie casu cakania na skladke do statistik
+                MyAgent.SkladkaWStat.AddSample(naNalozenie.CasCakaniaNaSkladke);
+
                 zFrontu.Car = naNalozenie;
                 MyAgent.NakladacAIsWorking = true;
                 StartContinualAssistant(zFrontu);
@@ -59,6 +65,7 @@ namespace ds_agent_oriented_simulation.Managers
         public void ProcessFinishProcesNakladacB(MessageForm message)
         {
             MyAgent.NakladacBIsWorking = false;
+
             message.Addressee = MySim.FindAgent(SimId.AgentDopravy);
             message.Code = Mc.NalozAuto;
             Response(message);
@@ -75,6 +82,12 @@ namespace ds_agent_oriented_simulation.Managers
                 MyAgent.MessageSkladkaQueue.RemoveFirst();
                 zFrontu.Addressee = MyAgent.FindAssistant(SimId.ProcesNakladacB);
                 zFrontu.Code = Mc.NalozAuto;
+
+                // ukoncenie cakania
+                naNalozenie.CasCakaniaNaSkladke = (MySim.CurrentTime - naNalozenie.ZaciatokCakania);
+                // pridanie casu cakania na skladke do statistik
+                MyAgent.SkladkaWStat.AddSample(naNalozenie.CasCakaniaNaSkladke);
+
                 zFrontu.Car = naNalozenie;
                 MyAgent.NakladacBIsWorking = true;
                 StartContinualAssistant(zFrontu);
@@ -85,6 +98,8 @@ namespace ds_agent_oriented_simulation.Managers
         public void ProcessNalozAuto(MessageForm message)
         {
             Vehicle naNalozenie = ((MyMessage)message).Car;
+            // zaciatok cakania
+            naNalozenie.ZaciatokCakania = MySim.CurrentTime;
 
             // TO=DO - KOLKO SA BUDE NAKLADAT NA AUTO ak bude na skladke menej materialu? Pocka na dovoz????
 
@@ -102,12 +117,20 @@ namespace ds_agent_oriented_simulation.Managers
                 {
                     message.Addressee = MyAgent.FindAssistant(SimId.ProcesNakladacB);
                     MyAgent.NakladacBIsWorking = true;
+                    // koniec cakania
+                    naNalozenie.CasCakaniaNaSkladke = (MySim.CurrentTime - naNalozenie.ZaciatokCakania);
+                    // pridanie casu cakania na skladke do statistik
+                    MyAgent.SkladkaWStat.AddSample(naNalozenie.CasCakaniaNaSkladke);
                     StartContinualAssistant(message);
                 }
                 else
                 {
                     message.Addressee = MyAgent.FindAssistant(SimId.ProcesNakladacA);
                     MyAgent.NakladacAIsWorking = true;
+                    // koniec cakania
+                    naNalozenie.CasCakaniaNaSkladke = (MySim.CurrentTime - naNalozenie.ZaciatokCakania);
+                    // pridanie casu cakania na skladke do statistik
+                    MyAgent.SkladkaWStat.AddSample(naNalozenie.CasCakaniaNaSkladke);
                     StartContinualAssistant(message);
                 }
             }

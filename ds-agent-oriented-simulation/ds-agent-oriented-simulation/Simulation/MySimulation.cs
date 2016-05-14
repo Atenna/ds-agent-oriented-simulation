@@ -2,6 +2,7 @@ using System;
 using ds_agent_oriented_simulation.Agents;
 using ds_agent_oriented_simulation.Entities;
 using ds_agent_oriented_simulation.Settings;
+using OSPStat;
 
 namespace ds_agent_oriented_simulation.Simulation
 {
@@ -10,7 +11,7 @@ namespace ds_agent_oriented_simulation.Simulation
 
         private Statistics _statistics;
         public Random SeedGenerator { get; private set; }
-
+        public WStat SkladkaWStat { get; private set; }
         public MySimulation()
         {
             Init();
@@ -27,6 +28,7 @@ namespace ds_agent_oriented_simulation.Simulation
             // inicializacia aut
             // 
             //AgentDopravy.PrepareCars(SeedGenerator);
+            SkladkaWStat = new WStat(this);
         }
 
         protected override void PrepareReplication()
@@ -39,6 +41,7 @@ namespace ds_agent_oriented_simulation.Simulation
         {
             // Collect local statistics into global, update UI, etc...
             base.ReplicationFinished();
+            //SkladkaWStat = AgentSkladky.SkladkaWStat;
         }
 
         protected override void SimulationFinished()

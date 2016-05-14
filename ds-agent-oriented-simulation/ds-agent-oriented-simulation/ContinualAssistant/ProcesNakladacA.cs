@@ -31,7 +31,7 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
         {
             MyAgent.NakladacAIsWorking = true;
             _naNalozenie = ((MyMessage)message).Car;
-            _naNalozenie.jeNakladane = true;
+            _naNalozenie.JeNakladane = true;
             MyAgent.CarAtLoaderA = _naNalozenie;
             _naNalozenie.RealVolume = _naNalozenie.Volume;
             double timeOfLoading = _naNalozenie.Volume / Constants.LoadMachinePerformance;
@@ -45,7 +45,7 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
             switch (message.Code)
             {
                 case Mc.NalozenieUkoncene:
-                    _naNalozenie.jeNakladane = false;
+                    _naNalozenie.JeNakladane = false;
                     MyAgent.MaterialNaSkladke -= MyAgent.CarAtLoaderA.RealVolume;
                     MyAgent.CarAtLoaderA = null;
                     AssistantFinished(message);

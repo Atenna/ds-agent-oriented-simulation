@@ -5,22 +5,22 @@ namespace ds_agent_oriented_simulation.Entities.Vehicles
 {
     public class Vehicle
     {
-        private Random _failureGenerator;
+        private readonly Random _failureGenerator;
         public string Name { get; set; }
         public int Volume { get; set; }
         public double RealVolume { get; set; }
         public int Speed { get; set; }
         private readonly double _probabilityOfCrash;
-        private readonly int _timeOfRepair;
+        public int TimeOfRepair;
 
-        private double _timeOfWaitingOnDepo = 0;
-        private double _timeOfWaitingOnBuilding = 0;
-        private double _startOfWaiting = 0;
+        public double CasCakaniaNaSkladke { get; set; }
+        public double CasCakaniaNaStavbe { get; set; }
+        public double ZaciatokCakania { get; set; }
 
-        private double _numberOfWaitingOnDepo = 0;
-        private double _numberOfWaitingOnBuilding = 0;
-        public bool jeNakladane { get; set; }
-        public bool jeVykladane { get; set; }
+        public double PocetAutVoFronteNaSkladke { get; set; }
+        public double PocetAutVoFronteNaStavbe { get; set; }
+        public bool JeNakladane { get; set; }
+        public bool JeVykladane { get; set; }
 
         public Vehicle(string name, int pVolume, int pSpeed, double pProbability, int pTime, Random generator)
         {
@@ -28,33 +28,19 @@ namespace ds_agent_oriented_simulation.Entities.Vehicles
             this.Volume = pVolume;
             this.Speed = pSpeed;
             this._probabilityOfCrash = pProbability;
-            this._timeOfRepair = pTime;
+            this.TimeOfRepair = pTime;
             this._failureGenerator = generator;
             this.RealVolume = 0;
-            this.jeNakladane = false;
-            this.jeVykladane = false;
-        }
-
-        public int GetTimeOfRepair()
-        {
-            return _timeOfRepair;
-        }
-
-        public double GetWaitingOnDepo()
-        {
-            return _timeOfWaitingOnDepo;
-        }
-        public double GetWaitingOnBuilding()
-        {
-            return _timeOfWaitingOnBuilding;
+            this.JeNakladane = false;
+            this.JeVykladane = false;
         }
         public double GetMeanWaitingOnDepo()
         {
-            return _timeOfWaitingOnDepo / _numberOfWaitingOnDepo;
+            return CasCakaniaNaSkladke / PocetAutVoFronteNaSkladke;
         }
         public double GetMeanWaitingOnBuilding()
         {
-            return _timeOfWaitingOnBuilding / _numberOfWaitingOnBuilding;
+            return CasCakaniaNaStavbe / PocetAutVoFronteNaStavbe;
         }
 
         public bool HasFailed()

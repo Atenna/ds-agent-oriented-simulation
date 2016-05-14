@@ -45,7 +45,7 @@ namespace ds_agent_oriented_simulation.Entities
         {
             this._unload = unload;
         }
-
+        /*
         public void UpdateStatistics(double simulationTime)
         {
             _simulationTimeCumulative += simulationTime;
@@ -65,7 +65,7 @@ namespace ds_agent_oriented_simulation.Entities
 
             _iterator++;
         }
-
+        */
         public double GetStatsMeanSimulationTime()
         {
             return _simulationTimeCumulative/_iterator;

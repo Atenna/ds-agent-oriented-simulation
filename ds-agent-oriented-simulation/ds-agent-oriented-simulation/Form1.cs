@@ -60,7 +60,8 @@ namespace ds_agent_oriented_simulation
             Sim = new MySimulation();
             Sim.SetSimSpeed(0.5, 2);
             Sim.OnRefreshUI(s => this.Invoke(updateGuiAction, s));
-            Sim.SimulateAsync(1);
+            // 777 600
+            Sim.SimulateAsync(1, 100);
         }
 
         private void UpdateGui(MySimulation mySimulation)
@@ -71,7 +72,7 @@ namespace ds_agent_oriented_simulation
             {
                 foreach (var vehicle in Sim.AgentSkladky.AutaSkladkaQueue)
                 {
-                    labelQueueLoad.Text += vehicle.Name + " ";
+                    this.labelQueueLoad.Text += vehicle.Name + " ";
                 }
                  
             }
@@ -92,6 +93,8 @@ namespace ds_agent_oriented_simulation
 
             this.labelMaterialSkladka.Text = Sim.AgentSkladky.MaterialNaSkladke.ToString("####.0");
             this.labelMaterialStavba.Text = Sim.AgentStavby.MaterialNaStavbe.ToString("####.0");
+
+            this.labelQueueLoaderStats.Text = "Queue at Loader: " + mySimulation.AgentSkladky.SkladkaWStat.Mean();
         }
 
         private void buttonSlowUp_Click(object sender, System.EventArgs e)

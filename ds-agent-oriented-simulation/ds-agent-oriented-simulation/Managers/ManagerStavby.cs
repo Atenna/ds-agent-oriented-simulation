@@ -86,6 +86,8 @@ namespace ds_agent_oriented_simulation.Managers
         public void ProcessVylozAuto(MessageForm message)
         {
             Vehicle naVylozenie = ((MyMessage)message).Car;
+            // zaciatok cakania v rade
+            naVylozenie.ZaciatokCakania = MySim.CurrentTime;
 
             // to-do
             double volumeToUnload = naVylozenie.RealVolume;
@@ -101,12 +103,16 @@ namespace ds_agent_oriented_simulation.Managers
                 {
                     message.Addressee = MyAgent.FindAssistant(SimId.ProcesVykladacB);
                     MyAgent.VykladacBIsWorking = true;
+                    // koniec cakania
+                    naVylozenie.CasCakaniaNaStavbe = (MySim.CurrentTime - naVylozenie.ZaciatokCakania);
                     StartContinualAssistant(message);
                 }
                 else
                 {
                     message.Addressee = MyAgent.FindAssistant(SimId.ProcesVykladacA);
                     MyAgent.VykladacAIsWorking = true;
+                    // koniec cakania
+                    naVylozenie.CasCakaniaNaStavbe = (MySim.CurrentTime - naVylozenie.ZaciatokCakania);
                     StartContinualAssistant(message);
                 }
 
