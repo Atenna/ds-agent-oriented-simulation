@@ -77,7 +77,11 @@
             this.buttonSlowDown = new System.Windows.Forms.Button();
             this.groupBoxStats = new System.Windows.Forms.GroupBox();
             this.groupBoxLoaderStats = new System.Windows.Forms.GroupBox();
-            this.labelQueueLoaderStats = new System.Windows.Forms.Label();
+            this.labelLoaderStatsTime = new System.Windows.Forms.Label();
+            this.labelLoaderStatsLen = new System.Windows.Forms.Label();
+            this.groupBoxUnloaderStats = new System.Windows.Forms.GroupBox();
+            this.labelUnloaderStatsLen = new System.Windows.Forms.Label();
+            this.labelUnloaderStatsTime = new System.Windows.Forms.Label();
             this.groupBoxVehicles.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
@@ -99,6 +103,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureLoaderA)).BeginInit();
             this.groupBoxStats.SuspendLayout();
             this.groupBoxLoaderStats.SuspendLayout();
+            this.groupBoxUnloaderStats.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBoxVehicles
@@ -434,7 +439,7 @@
             // labelMaterialStavba
             // 
             this.labelMaterialStavba.AutoSize = true;
-            this.labelMaterialStavba.Location = new System.Drawing.Point(29, 336);
+            this.labelMaterialStavba.Location = new System.Drawing.Point(41, 404);
             this.labelMaterialStavba.Name = "labelMaterialStavba";
             this.labelMaterialStavba.Size = new System.Drawing.Size(105, 29);
             this.labelMaterialStavba.TabIndex = 27;
@@ -443,7 +448,7 @@
             // labelMaterialSkladka
             // 
             this.labelMaterialSkladka.AutoSize = true;
-            this.labelMaterialSkladka.Location = new System.Drawing.Point(25, 64);
+            this.labelMaterialSkladka.Location = new System.Drawing.Point(25, 105);
             this.labelMaterialSkladka.Name = "labelMaterialSkladka";
             this.labelMaterialSkladka.Size = new System.Drawing.Size(105, 29);
             this.labelMaterialSkladka.TabIndex = 26;
@@ -461,7 +466,7 @@
             // labelQueueUnload
             // 
             this.labelQueueUnload.AutoSize = true;
-            this.labelQueueUnload.Location = new System.Drawing.Point(29, 376);
+            this.labelQueueUnload.Location = new System.Drawing.Point(41, 347);
             this.labelQueueUnload.Name = "labelQueueUnload";
             this.labelQueueUnload.Size = new System.Drawing.Size(222, 29);
             this.labelQueueUnload.TabIndex = 24;
@@ -470,7 +475,7 @@
             // labelQueueLoad
             // 
             this.labelQueueLoad.AutoSize = true;
-            this.labelQueueLoad.Location = new System.Drawing.Point(25, 105);
+            this.labelQueueLoad.Location = new System.Drawing.Point(26, 52);
             this.labelQueueLoad.Name = "labelQueueLoad";
             this.labelQueueLoad.Size = new System.Drawing.Size(199, 29);
             this.labelQueueLoad.TabIndex = 23;
@@ -480,7 +485,7 @@
             // 
             this.labelUnloaderB.AutoSize = true;
             this.labelUnloaderB.ForeColor = System.Drawing.Color.DarkGray;
-            this.labelUnloaderB.Location = new System.Drawing.Point(41, 520);
+            this.labelUnloaderB.Location = new System.Drawing.Point(41, 518);
             this.labelUnloaderB.Name = "labelUnloaderB";
             this.labelUnloaderB.Size = new System.Drawing.Size(152, 29);
             this.labelUnloaderB.TabIndex = 22;
@@ -489,7 +494,7 @@
             // labelUnloaderA
             // 
             this.labelUnloaderA.AutoSize = true;
-            this.labelUnloaderA.Location = new System.Drawing.Point(41, 454);
+            this.labelUnloaderA.Location = new System.Drawing.Point(41, 461);
             this.labelUnloaderA.Name = "labelUnloaderA";
             this.labelUnloaderA.Size = new System.Drawing.Size(152, 29);
             this.labelUnloaderA.TabIndex = 21;
@@ -638,6 +643,7 @@
             // 
             // groupBoxStats
             // 
+            this.groupBoxStats.Controls.Add(this.groupBoxUnloaderStats);
             this.groupBoxStats.Controls.Add(this.groupBoxLoaderStats);
             this.groupBoxStats.Location = new System.Drawing.Point(904, 12);
             this.groupBoxStats.Name = "groupBoxStats";
@@ -648,22 +654,61 @@
             // 
             // groupBoxLoaderStats
             // 
-            this.groupBoxLoaderStats.Controls.Add(this.labelQueueLoaderStats);
-            this.groupBoxLoaderStats.Location = new System.Drawing.Point(21, 64);
+            this.groupBoxLoaderStats.Controls.Add(this.labelLoaderStatsLen);
+            this.groupBoxLoaderStats.Controls.Add(this.labelLoaderStatsTime);
+            this.groupBoxLoaderStats.Location = new System.Drawing.Point(37, 52);
             this.groupBoxLoaderStats.Name = "groupBoxLoaderStats";
-            this.groupBoxLoaderStats.Size = new System.Drawing.Size(662, 100);
+            this.groupBoxLoaderStats.Size = new System.Drawing.Size(662, 256);
             this.groupBoxLoaderStats.TabIndex = 0;
             this.groupBoxLoaderStats.TabStop = false;
             this.groupBoxLoaderStats.Text = "Loader Statistics";
             // 
-            // labelQueueLoaderStats
+            // labelLoaderStatsTime
             // 
-            this.labelQueueLoaderStats.AutoSize = true;
-            this.labelQueueLoaderStats.Location = new System.Drawing.Point(17, 58);
-            this.labelQueueLoaderStats.Name = "labelQueueLoaderStats";
-            this.labelQueueLoaderStats.Size = new System.Drawing.Size(199, 29);
-            this.labelQueueLoaderStats.TabIndex = 0;
-            this.labelQueueLoaderStats.Text = "Queue at Loader:";
+            this.labelLoaderStatsTime.AutoSize = true;
+            this.labelLoaderStatsTime.Location = new System.Drawing.Point(17, 58);
+            this.labelLoaderStatsTime.Name = "labelLoaderStatsTime";
+            this.labelLoaderStatsTime.Size = new System.Drawing.Size(242, 29);
+            this.labelLoaderStatsTime.TabIndex = 0;
+            this.labelLoaderStatsTime.Text = "Average waiting time:";
+            // 
+            // labelLoaderStatsLen
+            // 
+            this.labelLoaderStatsLen.AutoSize = true;
+            this.labelLoaderStatsLen.Location = new System.Drawing.Point(17, 104);
+            this.labelLoaderStatsLen.Name = "labelLoaderStatsLen";
+            this.labelLoaderStatsLen.Size = new System.Drawing.Size(280, 29);
+            this.labelLoaderStatsLen.TabIndex = 1;
+            this.labelLoaderStatsLen.Text = "Average length of queue:";
+            // 
+            // groupBoxUnloaderStats
+            // 
+            this.groupBoxUnloaderStats.Controls.Add(this.labelUnloaderStatsLen);
+            this.groupBoxUnloaderStats.Controls.Add(this.labelUnloaderStatsTime);
+            this.groupBoxUnloaderStats.Location = new System.Drawing.Point(37, 347);
+            this.groupBoxUnloaderStats.Name = "groupBoxUnloaderStats";
+            this.groupBoxUnloaderStats.Size = new System.Drawing.Size(662, 224);
+            this.groupBoxUnloaderStats.TabIndex = 2;
+            this.groupBoxUnloaderStats.TabStop = false;
+            this.groupBoxUnloaderStats.Text = "Unloader Statistics";
+            // 
+            // labelUnloaderStatsLen
+            // 
+            this.labelUnloaderStatsLen.AutoSize = true;
+            this.labelUnloaderStatsLen.Location = new System.Drawing.Point(17, 104);
+            this.labelUnloaderStatsLen.Name = "labelUnloaderStatsLen";
+            this.labelUnloaderStatsLen.Size = new System.Drawing.Size(280, 29);
+            this.labelUnloaderStatsLen.TabIndex = 1;
+            this.labelUnloaderStatsLen.Text = "Average length of queue:";
+            // 
+            // labelUnloaderStatsTime
+            // 
+            this.labelUnloaderStatsTime.AutoSize = true;
+            this.labelUnloaderStatsTime.Location = new System.Drawing.Point(17, 58);
+            this.labelUnloaderStatsTime.Name = "labelUnloaderStatsTime";
+            this.labelUnloaderStatsTime.Size = new System.Drawing.Size(242, 29);
+            this.labelUnloaderStatsTime.TabIndex = 0;
+            this.labelUnloaderStatsTime.Text = "Average waiting time:";
             // 
             // FormAgentSimulation
             // 
@@ -704,6 +749,8 @@
             this.groupBoxStats.ResumeLayout(false);
             this.groupBoxLoaderStats.ResumeLayout(false);
             this.groupBoxLoaderStats.PerformLayout();
+            this.groupBoxUnloaderStats.ResumeLayout(false);
+            this.groupBoxUnloaderStats.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -757,7 +804,11 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button buttonSaveSettings;
         private System.Windows.Forms.GroupBox groupBoxLoaderStats;
-        private System.Windows.Forms.Label labelQueueLoaderStats;
+        private System.Windows.Forms.Label labelLoaderStatsTime;
+        private System.Windows.Forms.Label labelLoaderStatsLen;
+        private System.Windows.Forms.GroupBox groupBoxUnloaderStats;
+        private System.Windows.Forms.Label labelUnloaderStatsLen;
+        private System.Windows.Forms.Label labelUnloaderStatsTime;
     }
 }
 

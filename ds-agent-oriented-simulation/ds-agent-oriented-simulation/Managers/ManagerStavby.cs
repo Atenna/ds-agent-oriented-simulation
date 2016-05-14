@@ -45,10 +45,14 @@ namespace ds_agent_oriented_simulation.Managers
                 MyMessage msg = MyAgent.MessageStavbaQueue.First.Value;
                 MyAgent.MessageStavbaQueue.RemoveFirst();
                 msg.Addressee = MyAgent.FindAssistant(SimId.ProcesVykladacA);
-                msg.Car = naVylozenie;
                 msg.Code = Mc.VylozAuto;
-                //msg.Addressee = MySim.FindAgent(SimId.AgentStavby);
-                //Request(msg);
+
+                // ukoncenie cakania
+                naVylozenie.CasCakaniaNaSkladke = (MySim.CurrentTime - naVylozenie.ZaciatokCakania);
+                // pridanie casu cakania na skladke do statistik
+                MyAgent.WaitingTimePerCar.AddSample(naVylozenie.CasCakaniaNaSkladke);
+
+                msg.Car = naVylozenie;
                 MyAgent.VykladacAIsWorking = true;
                 StartContinualAssistant(msg);
             }
@@ -73,10 +77,16 @@ namespace ds_agent_oriented_simulation.Managers
                 MyMessage msg = MyAgent.MessageStavbaQueue.First.Value;
                 MyAgent.MessageStavbaQueue.RemoveFirst();
                 msg.Addressee = MyAgent.FindAssistant(SimId.ProcesVykladacB);
-                msg.Car = naVylozenie;
                 msg.Code = Mc.VylozAuto;
                 //msg.Addressee = MySim.FindAgent(SimId.AgentStavby);
                 //Request(msg);
+
+                // ukoncenie cakania
+                naVylozenie.CasCakaniaNaSkladke = (MySim.CurrentTime - naVylozenie.ZaciatokCakania);
+                // pridanie casu cakania na skladke do statistik
+                MyAgent.WaitingTimePerCar.AddSample(naVylozenie.CasCakaniaNaSkladke);
+
+                msg.Car = naVylozenie;
                 MyAgent.VykladacBIsWorking = true;
                 StartContinualAssistant(msg);
             }
@@ -105,6 +115,8 @@ namespace ds_agent_oriented_simulation.Managers
                     MyAgent.VykladacBIsWorking = true;
                     // koniec cakania
                     naVylozenie.CasCakaniaNaStavbe = (MySim.CurrentTime - naVylozenie.ZaciatokCakania);
+                    // pridanie do statistik
+                    MyAgent.WaitingTimePerCar.AddSample(naVylozenie.CasCakaniaNaSkladke);
                     StartContinualAssistant(message);
                 }
                 else
@@ -113,6 +125,8 @@ namespace ds_agent_oriented_simulation.Managers
                     MyAgent.VykladacAIsWorking = true;
                     // koniec cakania
                     naVylozenie.CasCakaniaNaStavbe = (MySim.CurrentTime - naVylozenie.ZaciatokCakania);
+                    // pridanie do statistik
+                    MyAgent.WaitingTimePerCar.AddSample(naVylozenie.CasCakaniaNaSkladke);
                     StartContinualAssistant(message);
                 }
 

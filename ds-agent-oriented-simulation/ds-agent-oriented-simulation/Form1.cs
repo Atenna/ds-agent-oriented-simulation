@@ -59,9 +59,10 @@ namespace ds_agent_oriented_simulation
             System.Action<MySimulation> updateGuiAction = new System.Action<MySimulation>((s) => UpdateGui(s));
             Sim = new MySimulation();
             Sim.SetSimSpeed(0.5, 2);
-            Sim.OnRefreshUI(s => this.Invoke(updateGuiAction, s));
+
+            Sim.OnRefreshUI(s => this.Invoke(updateGuiAction, s)); 
             // 777 600
-            Sim.SimulateAsync(1, 100);
+            Sim.SimulateAsync(1, 200);
         }
 
         private void UpdateGui(MySimulation mySimulation)
@@ -94,7 +95,9 @@ namespace ds_agent_oriented_simulation
             this.labelMaterialSkladka.Text = Sim.AgentSkladky.MaterialNaSkladke.ToString("####.0");
             this.labelMaterialStavba.Text = Sim.AgentStavby.MaterialNaStavbe.ToString("####.0");
 
-            this.labelQueueLoaderStats.Text = "Queue at Loader: " + mySimulation.AgentSkladky.SkladkaWStat.Mean();
+            this.labelLoaderStatsTime.Text = "Average waiting time: " + mySimulation.AgentSkladky.SkladkaWStat.Mean().ToString("####.00");
+            this.labelUnloaderStatsTime.Text = "Average waiting time: " + mySimulation.AgentStavby.WaitingTimePerCar.Mean().ToString("####.00");
+            this.labelUnloaderStatsLen.Text = "Average length of queue: " + mySimulation.AgentStavby.LengthOfQueue.Mean().ToString("####.00");
         }
 
         private void buttonSlowUp_Click(object sender, System.EventArgs e)

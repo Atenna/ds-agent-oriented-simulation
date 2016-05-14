@@ -15,7 +15,7 @@ namespace ds_agent_oriented_simulation.Agents
 
         public SimQueue<Vehicle> AutaSkladkaQueue { get; private set; }
         public SimQueue<MyMessage> MessageSkladkaQueue { get; private set; }
-        public WStat SkladkaWStat { get; internal set; }
+        public Stat SkladkaWStat { get; internal set; }
         public bool NakladacAIsWorking { get; internal set; }
         public bool NakladacBIsWorking { get; internal set; }
         public Vehicle CarAtLoaderA { get; set; }
@@ -29,9 +29,9 @@ namespace ds_agent_oriented_simulation.Agents
             base(id, mySim, parent)
         {
             Init();
-            SkladkaWStat = new WStat(mySim);
-            AutaSkladkaQueue = new SimQueue<Vehicle>(SkladkaWStat);
-            MessageSkladkaQueue = new SimQueue<MyMessage>(SkladkaWStat);
+            SkladkaWStat = new Stat();
+            AutaSkladkaQueue = new SimQueue<Vehicle>();
+            MessageSkladkaQueue = new SimQueue<MyMessage>();
             MaterialNaSkladke = Constants.MaterialAtDepo;
             MaterialNaStavbe = Constants.MaterialAtBuilding;
         }

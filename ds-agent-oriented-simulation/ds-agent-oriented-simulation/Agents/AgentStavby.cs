@@ -17,9 +17,9 @@ namespace ds_agent_oriented_simulation.Agents
         public Vehicle CarAtUnloaderA { get; set; }
         public SimQueue<Vehicle> AutaStavbaQueue { get; private set; }
         public SimQueue<MyMessage> MessageStavbaQueue { get; private set; }
+        public Stat WaitingTimePerCar { get; internal set; }
         public WStat WaitingTimeInQueue { get; internal set; }
-        public WStat WaitingTimePerCar { get; internal set; }
-        public Stat LengthOfQueue { get; internal set; }
+        public WStat LengthOfQueue { get; internal set; }
         public bool VykladacAIsWorking { get; internal set; }
         public bool VykladacBIsWorking { get; internal set; }
         public double MaterialNaStavbe { get; set; }
@@ -28,9 +28,10 @@ namespace ds_agent_oriented_simulation.Agents
             base(id, mySim, parent)
         {
             Init();
-            WaitingTimeInQueue = new WStat(MySim);
-            AutaStavbaQueue = new SimQueue<Vehicle>(WaitingTimeInQueue);
-            MessageStavbaQueue = new SimQueue<MyMessage>(WaitingTimeInQueue);
+            WaitingTimePerCar = new Stat();
+            LengthOfQueue = new WStat(mySim);
+            AutaStavbaQueue = new SimQueue<Vehicle>(LengthOfQueue);
+            MessageStavbaQueue = new SimQueue<MyMessage>(LengthOfQueue);
         }
 
         override public void PrepareReplication()
@@ -47,6 +48,10 @@ namespace ds_agent_oriented_simulation.Agents
             }
 
             MaterialNaStavbe = Constants.MaterialAtBuilding;
+            WaitingTimePerCar.Clear();
+            LengthOfQueue.Clear();
+            AutaStavbaQueue.Clear();
+            MessageStavbaQueue.Clear();
         }
 
         //meta! userInfo="Generated code: do not modify", tag="begin"
