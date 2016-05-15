@@ -1,6 +1,5 @@
 using System;
 using ds_agent_oriented_simulation.Agents;
-using ds_agent_oriented_simulation.Settings;
 using ds_agent_oriented_simulation.Simulation;
 using OSPABA;
 using OSPRNG;
@@ -18,8 +17,8 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
         public OSPRNG.ExponentialRNG GenCasC;
         public OSPRNG.EmpiricRNG<int> GenMaterialC;
 
-        private double volumeA, volumeB, volumeC;
-        private double timeA, timeB, timeC;
+        //private double volumeA, volumeB, volumeC;
+        //private double timeA, timeB, timeC;
 
         public PlanovacDovozMaterialu(int id, OSPABA.Simulation mySim, CommonAgent myAgent) :
             base(id, mySim, myAgent)

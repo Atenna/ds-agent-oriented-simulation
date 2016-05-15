@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using ds_agent_oriented_simulation.Agents;
 using ds_agent_oriented_simulation.Entities.Vehicles;
 using ds_agent_oriented_simulation.Simulation;
@@ -31,7 +29,6 @@ namespace ds_agent_oriented_simulation.Managers
         //meta! sender="ProcessPresunNaPrejazd", id="110", type="Finish"
         public void ProcessFinishProcessPresunNaPrejazd(MessageForm message)
         {
-            Console.WriteLine("Auto na prejazde");
             message.Addressee = MyAgent.FindAssistant(SimId.ProcessPresunNaSkladku);
             message.Code = Mc.NalozAuto;
             StartContinualAssistant(message);
@@ -82,7 +79,6 @@ namespace ds_agent_oriented_simulation.Managers
         public void ProcessNalozAuto(MessageForm message)
         {
             // auto skoncilo nakladanie 
-            Console.WriteLine("Auto nalozene");
 
             MyMessage sprava = new MyMessage(MySim);
             sprava.Volume = ((MyMessage) message).Volume;
@@ -94,7 +90,6 @@ namespace ds_agent_oriented_simulation.Managers
         //meta! sender="AgentStavby", id="37", type="Response"
         public void ProcessVylozAuto(MessageForm message)
         {
-            Console.WriteLine("Auto vylozene");
             // vykladanie skoncilo, auto pojde na prejazd
             message.Addressee = MyAgent.FindAssistant(SimId.ProcessPresunNaPrejazd);
             StartContinualAssistant(message);

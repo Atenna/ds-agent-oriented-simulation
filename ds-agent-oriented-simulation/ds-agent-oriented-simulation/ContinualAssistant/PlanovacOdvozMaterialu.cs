@@ -1,4 +1,3 @@
-using System.Windows.Forms;
 using ds_agent_oriented_simulation.Agents;
 using ds_agent_oriented_simulation.Settings;
 using ds_agent_oriented_simulation.Simulation;

@@ -10,6 +10,7 @@ namespace ds_agent_oriented_simulation.Entities
         private List<Vehicle> _cars;
         private Queue _load;
         private Queue _unload;
+        
         private int _iterator;
         private double _loadSize; // kumulativne sa tam bude ukladat priemerna dlzka radu 
         private double _unloadSize;

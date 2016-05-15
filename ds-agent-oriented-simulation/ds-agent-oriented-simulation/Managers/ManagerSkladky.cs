@@ -1,4 +1,3 @@
-using System.Windows.Forms.VisualStyles;
 using ds_agent_oriented_simulation.Agents;
 using ds_agent_oriented_simulation.Entities.Vehicles;
 using ds_agent_oriented_simulation.Settings;

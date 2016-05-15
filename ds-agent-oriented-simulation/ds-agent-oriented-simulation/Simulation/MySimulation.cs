@@ -42,6 +42,7 @@ namespace ds_agent_oriented_simulation.Simulation
             // Collect local statistics into global, update UI, etc...
             base.ReplicationFinished();
             //SkladkaWStat = AgentSkladky.SkladkaWStat;
+            Console.WriteLine("Koniec replikacie");
         }
 
         protected override void SimulationFinished()
