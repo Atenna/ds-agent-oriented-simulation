@@ -86,6 +86,9 @@
             this.groupBoxLoaderStats = new System.Windows.Forms.GroupBox();
             this.labelLoaderStatsLen = new System.Windows.Forms.Label();
             this.labelLoaderStatsTime = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.labelCostVehicles = new System.Windows.Forms.Label();
+            this.labelCostUnloaders = new System.Windows.Forms.Label();
             this.groupBoxVehicles.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
@@ -108,6 +111,7 @@
             this.groupBoxStats.SuspendLayout();
             this.groupBoxUnloaderStats.SuspendLayout();
             this.groupBoxLoaderStats.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBoxVehicles
@@ -230,6 +234,7 @@
             this.checkBoxCarE.Size = new System.Drawing.Size(28, 27);
             this.checkBoxCarE.TabIndex = 4;
             this.checkBoxCarE.UseVisualStyleBackColor = true;
+            this.checkBoxCarE.CheckedChanged += new System.EventHandler(this.checkBoxCarE_CheckedChanged);
             // 
             // pictureCarD
             // 
@@ -259,6 +264,7 @@
             this.checkBoxCarD.Size = new System.Drawing.Size(28, 27);
             this.checkBoxCarD.TabIndex = 3;
             this.checkBoxCarD.UseVisualStyleBackColor = true;
+            this.checkBoxCarD.CheckedChanged += new System.EventHandler(this.checkBoxCarD_CheckedChanged);
             // 
             // pictureCarC
             // 
@@ -278,6 +284,7 @@
             this.checkBoxCarC.Size = new System.Drawing.Size(28, 27);
             this.checkBoxCarC.TabIndex = 2;
             this.checkBoxCarC.UseVisualStyleBackColor = true;
+            this.checkBoxCarC.CheckedChanged += new System.EventHandler(this.checkBoxCarC_CheckedChanged);
             // 
             // pictureCarB
             // 
@@ -307,6 +314,7 @@
             this.checkBoxCarB.Size = new System.Drawing.Size(28, 27);
             this.checkBoxCarB.TabIndex = 1;
             this.checkBoxCarB.UseVisualStyleBackColor = true;
+            this.checkBoxCarB.CheckedChanged += new System.EventHandler(this.checkBoxCarB_CheckedChanged);
             // 
             // checkBoxCarA
             // 
@@ -316,6 +324,7 @@
             this.checkBoxCarA.Size = new System.Drawing.Size(28, 27);
             this.checkBoxCarA.TabIndex = 0;
             this.checkBoxCarA.UseVisualStyleBackColor = true;
+            this.checkBoxCarA.CheckedChanged += new System.EventHandler(this.checkBoxCarA_CheckedChanged);
             // 
             // groupBoxSetup
             // 
@@ -689,6 +698,7 @@
             // 
             // groupBoxStats
             // 
+            this.groupBoxStats.Controls.Add(this.groupBox1);
             this.groupBoxStats.Controls.Add(this.groupBoxUnloaderStats);
             this.groupBoxStats.Controls.Add(this.groupBoxLoaderStats);
             this.groupBoxStats.Location = new System.Drawing.Point(904, 12);
@@ -702,7 +712,7 @@
             // 
             this.groupBoxUnloaderStats.Controls.Add(this.labelUnloaderStatsLen);
             this.groupBoxUnloaderStats.Controls.Add(this.labelUnloaderStatsTime);
-            this.groupBoxUnloaderStats.Location = new System.Drawing.Point(22, 347);
+            this.groupBoxUnloaderStats.Location = new System.Drawing.Point(22, 314);
             this.groupBoxUnloaderStats.Name = "groupBoxUnloaderStats";
             this.groupBoxUnloaderStats.Size = new System.Drawing.Size(662, 224);
             this.groupBoxUnloaderStats.TabIndex = 2;
@@ -756,6 +766,35 @@
             this.labelLoaderStatsTime.TabIndex = 0;
             this.labelLoaderStatsTime.Text = "Average waiting time:";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.labelCostUnloaders);
+            this.groupBox1.Controls.Add(this.labelCostVehicles);
+            this.groupBox1.Location = new System.Drawing.Point(22, 544);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(662, 399);
+            this.groupBox1.TabIndex = 3;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Expenditures";
+            // 
+            // labelCostVehicles
+            // 
+            this.labelCostVehicles.AutoSize = true;
+            this.labelCostVehicles.Location = new System.Drawing.Point(17, 55);
+            this.labelCostVehicles.Name = "labelCostVehicles";
+            this.labelCostVehicles.Size = new System.Drawing.Size(196, 29);
+            this.labelCostVehicles.TabIndex = 0;
+            this.labelCostVehicles.Text = "Cost for vehicles:";
+            // 
+            // labelCostUnloaders
+            // 
+            this.labelCostUnloaders.AutoSize = true;
+            this.labelCostUnloaders.Location = new System.Drawing.Point(17, 97);
+            this.labelCostUnloaders.Name = "labelCostUnloaders";
+            this.labelCostUnloaders.Size = new System.Drawing.Size(215, 29);
+            this.labelCostUnloaders.TabIndex = 1;
+            this.labelCostUnloaders.Text = "Cost for unloaders:";
+            // 
             // FormAgentSimulation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
@@ -797,6 +836,8 @@
             this.groupBoxUnloaderStats.PerformLayout();
             this.groupBoxLoaderStats.ResumeLayout(false);
             this.groupBoxLoaderStats.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -859,6 +900,9 @@
         public System.Windows.Forms.Label labelWayToLoader;
         public System.Windows.Forms.Label labelWayToCrossing;
         public System.Windows.Forms.Label labelWayToUnloader;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label labelCostUnloaders;
+        private System.Windows.Forms.Label labelCostVehicles;
     }
 }
 
