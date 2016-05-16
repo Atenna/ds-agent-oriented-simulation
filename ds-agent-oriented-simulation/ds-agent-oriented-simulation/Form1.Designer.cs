@@ -702,7 +702,7 @@
             // 
             this.groupBoxUnloaderStats.Controls.Add(this.labelUnloaderStatsLen);
             this.groupBoxUnloaderStats.Controls.Add(this.labelUnloaderStatsTime);
-            this.groupBoxUnloaderStats.Location = new System.Drawing.Point(37, 347);
+            this.groupBoxUnloaderStats.Location = new System.Drawing.Point(22, 347);
             this.groupBoxUnloaderStats.Name = "groupBoxUnloaderStats";
             this.groupBoxUnloaderStats.Size = new System.Drawing.Size(662, 224);
             this.groupBoxUnloaderStats.TabIndex = 2;
@@ -731,7 +731,7 @@
             // 
             this.groupBoxLoaderStats.Controls.Add(this.labelLoaderStatsLen);
             this.groupBoxLoaderStats.Controls.Add(this.labelLoaderStatsTime);
-            this.groupBoxLoaderStats.Location = new System.Drawing.Point(37, 52);
+            this.groupBoxLoaderStats.Location = new System.Drawing.Point(22, 52);
             this.groupBoxLoaderStats.Name = "groupBoxLoaderStats";
             this.groupBoxLoaderStats.Size = new System.Drawing.Size(662, 256);
             this.groupBoxLoaderStats.TabIndex = 0;
