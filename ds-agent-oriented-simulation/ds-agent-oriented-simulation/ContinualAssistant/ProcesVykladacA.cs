@@ -32,6 +32,7 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
         public void ProcessStart(MessageForm message)
         {
             MyAgent.VykladacAIsWorking = true;
+            ((MyMessage)message).Car.ZaciatokVykladania = MySim.CurrentTime;
             _naVylozenie = ((MyMessage)message).Car;
             _naVylozenie.JeVykladane = true;
             MyAgent.CarAtUnloaderA = _naVylozenie;

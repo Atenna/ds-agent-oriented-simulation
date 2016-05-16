@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using ds_agent_oriented_simulation.Entities.Vehicles;
 using ds_agent_oriented_simulation.Settings;
 using ds_agent_oriented_simulation.Simulation;
 
@@ -10,15 +11,20 @@ namespace ds_agent_oriented_simulation
     {
         public MySimulation Sim { get; private set; }
         public static int[] SelectedCars { get; private set; }
+        public static int NumberOfReplications { get; private set; }
+        public static long GeneratorSeed { get; private set; }
         public FormAgentSimulation()
         {
             InitializeComponent();
             InitializeToolTips();
             SelectedCars = new int[5];
+            NumberOfReplications = 1;
+            GeneratorSeed = 22;
         }
 
         private Color ArrowHoverButtonsColor { get; set; }
         private Color ArrowButtonsColor { get; set; }
+        public static bool UnloaderBDisabled { get; private set; }
 
 
         private void InitializeToolTips()
@@ -45,6 +51,8 @@ namespace ds_agent_oriented_simulation
 
         private void buttonRun_Click(object sender, System.EventArgs e)
         {
+            NumberOfReplications = Int32.Parse(TextBoxReplications.Text);
+            GeneratorSeed = Int32.Parse(textBoxSeed.Text);
             // simulation start
             int userSeed = 0;
             if (userSeed > 0 || textBoxSeed.Text != "")
@@ -55,7 +63,7 @@ namespace ds_agent_oriented_simulation
             {
                 Constants.Seed = 0;
             }
-
+            DisableChanges();
 
             Sim = new MySimulation();
             Sim.SetSimSpeed(0.5,2);
@@ -66,6 +74,33 @@ namespace ds_agent_oriented_simulation
             // 777 600
             Sim.SimulateAsync(1, 788400);
 
+            System.Action<MySimulation> enableChangesAction = new Action<MySimulation>((s) => EnableChanges());
+            // nefunguje
+            //Sim.OnSimulationDidFinish(s => this.Invoke(enableChangesAction));
+        }
+
+        private void DisableChanges()
+        {
+            checkBox1.Enabled = false;
+            checkBoxCarA.Enabled = false;
+            checkBoxCarB.Enabled = false;
+            checkBoxCarC.Enabled = false;
+            checkBoxCarD.Enabled = false;
+            checkBoxCarE.Enabled = false;
+            TextBoxReplications.Enabled = false;
+            textBoxSeed.Enabled = false;
+        }
+
+        private void EnableChanges()
+        {
+            checkBox1.Enabled = true;
+            checkBoxCarA.Enabled = true;
+            checkBoxCarB.Enabled = true;
+            checkBoxCarC.Enabled = true;
+            checkBoxCarD.Enabled = true;
+            checkBoxCarE.Enabled = true;
+            TextBoxReplications.Enabled = true;
+            textBoxSeed.Enabled = true;
         }
 
         private void UpdateGui(MySimulation mySimulation)
@@ -87,16 +122,16 @@ namespace ds_agent_oriented_simulation
 
                 }
                 this.labelLoaderA.Text = Sim.AgentSkladky.CarAtLoaderA != null
-                    ? "Loads Car: " + Sim.AgentSkladky.CarAtLoaderA.ToString()
+                    ? ("Loads Car: " + Sim.AgentSkladky.CarAtLoaderA.Name+ ": [" + GetProgressOfLoading(Sim.AgentSkladky.CarAtLoaderA)[0].ToString("##.0") + "/" + GetProgressOfLoading(Sim.AgentSkladky.CarAtLoaderA)[1] + "] ")
                     : "Loads Car: empty";
                 this.labelLoaderB.Text = Sim.AgentSkladky.CarAtLoaderB != null
-                    ? "Loads Car: " + Sim.AgentSkladky.CarAtLoaderB.ToString()
+                    ? ("Loads Car: " + Sim.AgentSkladky.CarAtLoaderB.Name + ": [" + GetProgressOfLoading(Sim.AgentSkladky.CarAtLoaderB)[0].ToString("##.0") + "/" + GetProgressOfLoading(Sim.AgentSkladky.CarAtLoaderB)[1] + "] ")
                     : "Loads Car: empty";
                 this.labelUnloaderA.Text = Sim.AgentStavby.CarAtUnloaderA != null
-                    ? "Unloads Car: " + Sim.AgentStavby.CarAtUnloaderA.ToString()
+                    ? ("Unloads Car: " + Sim.AgentStavby.CarAtUnloaderA.Name + ": [" + GetProgressOfUnloading(Sim.AgentStavby.CarAtUnloaderA)[0].ToString("##.0") + "/" + GetProgressOfLoading(Sim.AgentStavby.CarAtUnloaderA)[1] + "] ")
                     : "Unloads Car: empty";
                 this.labelUnloaderB.Text = Sim.AgentStavby.CarAtUnloaderB != null
-                    ? "Unloads Car: " + Sim.AgentStavby.CarAtUnloaderB.ToString()
+                    ? ("Unloads Car: " + Sim.AgentStavby.CarAtUnloaderB.Name + ": [" + GetProgressOfUnloading(Sim.AgentStavby.CarAtUnloaderB)[0].ToString("##.0") + "/" + GetProgressOfLoading(Sim.AgentStavby.CarAtUnloaderB)[1] + "] ")
                     : "Unloads Car: empty";
 
                 this.labelQueueUnload.Text = "Queue at Unloader: ";
@@ -114,6 +149,8 @@ namespace ds_agent_oriented_simulation
 
                 this.labelLoaderStatsTime.Text = "Average waiting time: " +
                                                  mySimulation.AgentSkladky.SkladkaWStat.Mean().ToString("####.00");
+                this.labelLoaderStatsLen.Text = "Average length of queue: " +
+                                                mySimulation.AgentSkladky.LengthOfQueue.Mean().ToString("####.00");
                 this.labelUnloaderStatsTime.Text = "Average waiting time: " +
                                                    mySimulation.AgentStavby.WaitingTimePerCar.Mean().ToString("####.00");
                 this.labelUnloaderStatsLen.Text = "Average length of queue: " +
@@ -121,7 +158,24 @@ namespace ds_agent_oriented_simulation
             }
         }
 
-        private void buttonSlowUp_Click(object sender, System.EventArgs e)
+        public double[] GetProgressOfLoading(Vehicle car)
+        {
+            double[] pole = new double[2];
+            pole[0] = (Sim.CurrentTime - car.ZaciatokNakladania) * Constants.LoadMachinePerformance;
+            pole[1] = car.Volume;
+            return pole;
+        }
+
+        public double[] GetProgressOfUnloading(Vehicle car)
+        {
+            double[] pole = new double[2];
+            pole[0] = (Sim.CurrentTime - car.ZaciatokVykladania) * Constants.LoadMachinePerformance;
+            pole[1] = car.Volume;
+            return pole;
+        }
+
+
+        private void buttonSpeedUp_Click(object sender, System.EventArgs e)
         {
             Sim.SetSimSpeed(0.5,0.2);
         }
@@ -140,16 +194,19 @@ namespace ds_agent_oriented_simulation
 
         private void buttonStop_Click(object sender, System.EventArgs e)
         {
+            
+            Sim.StopReplication();
             Sim.StopSimulation();
-            resetGUI();
+            EnableChanges();
+            ResetGui();
         }
 
         private void buttonSlowDown_Click(object sender, System.EventArgs e)
         {
-            Sim.SetSimSpeed(0.2, 10);
+            Sim.SetSimSpeed(0.2, 2);
         }
 
-        private void resetGUI()
+        private void ResetGui()
         {
             this.labelSimTime.Text = "Simulation time: ";
             this.labelQueueLoad.Text = "Queue at Loader: ";
@@ -168,16 +225,14 @@ namespace ds_agent_oriented_simulation
                 pictureUnloaderB.Image = ds_agent_oriented_simulation.Properties.Resources.l_Vykladac_A;
                 pictureUnloaderB.SizeMode = PictureBoxSizeMode.StretchImage;
                 labelUnloaderB.ForeColor = Color.Black;
-                Sim.AgentStavby.VykladacBIsDisabled = false;
-                Sim.AgentStavby.VykladacBIsWorking = false;
+                UnloaderBDisabled = false;
             }
             else
             {
                 pictureUnloaderB.Image = ds_agent_oriented_simulation.Properties.Resources.l_Vykladac_A_grey;
                 pictureUnloaderB.SizeMode = PictureBoxSizeMode.StretchImage;
                 labelUnloaderB.ForeColor = Color.DarkGray;
-                Sim.AgentStavby.VykladacBIsDisabled = true;
-                Sim.AgentStavby.VykladacBIsWorking = true; // bude stale obsadeny
+                UnloaderBDisabled = true;
             }
         }
 
@@ -248,6 +303,14 @@ namespace ds_agent_oriented_simulation
             else
             {
                 checkBoxCarE.Checked = false;
+            }
+        }
+
+        private void checkBoxVizual_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxVizual.Enabled && Sim!=null)
+            {
+                Sim.SetMaxSimSpeed();
             }
         }
     }

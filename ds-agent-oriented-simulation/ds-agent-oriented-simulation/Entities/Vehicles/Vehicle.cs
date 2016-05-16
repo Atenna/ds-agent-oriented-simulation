@@ -1,4 +1,5 @@
 ﻿using System;
+using ds_agent_oriented_simulation.Settings;
 
 namespace ds_agent_oriented_simulation.Entities.Vehicles
 {
@@ -20,6 +21,8 @@ namespace ds_agent_oriented_simulation.Entities.Vehicles
         public double PocetAutVoFronteNaStavbe { get; set; }
         public bool JeNakladane { get; set; }
         public bool JeVykladane { get; set; }
+        public double ZaciatokNakladania { get; set; }
+        public double ZaciatokVykladania { get; set; }
 
         public Vehicle(string name, int pVolume, int pSpeed, double pProbability, int pTime, Random generator)
         {
@@ -53,6 +56,8 @@ namespace ds_agent_oriented_simulation.Entities.Vehicles
         {
             return Name + ": [" + RealVolume + "/" + Volume + "], " + Speed + " ";
         }
+
+        
     }
 }
 

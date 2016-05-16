@@ -17,14 +17,15 @@ namespace ds_agent_oriented_simulation.Agents
         {
             base.PrepareReplication();
             // Setup component for the next replication
+            /* Hard setup of cars
             int[] selectedCars = new int[5];
             selectedCars[0] = 1;
             selectedCars[1] = 1;
             selectedCars[2] = 1;
             selectedCars[3] = 1;
             selectedCars[4] = 1;
-
-            MyMessage sprava = new MyMessage(MySim, selectedCars);
+            */
+            MyMessage sprava = new MyMessage(MySim, FormAgentSimulation.SelectedCars);
             sprava.Code = Mc.Inicializacia;
             sprava.Addressee = MySim.FindAgent(SimId.AgentModelu);
             MyManager.Call(sprava);

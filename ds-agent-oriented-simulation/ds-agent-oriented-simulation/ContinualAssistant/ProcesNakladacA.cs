@@ -30,6 +30,7 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
         public void ProcessStart(MessageForm message)
         {
             MyAgent.NakladacAIsWorking = true;
+            ((MyMessage) message).Car.ZaciatokNakladania = MySim.CurrentTime;
             _naNalozenie = ((MyMessage)message).Car;
             _naNalozenie.JeNakladane = true;
             MyAgent.CarAtLoaderA = _naNalozenie;

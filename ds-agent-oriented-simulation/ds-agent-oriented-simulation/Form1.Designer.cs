@@ -48,6 +48,7 @@
             this.checkBoxCarB = new System.Windows.Forms.CheckBox();
             this.checkBoxCarA = new System.Windows.Forms.CheckBox();
             this.groupBoxSetup = new System.Windows.Forms.GroupBox();
+            this.labelSaveSettings = new System.Windows.Forms.Label();
             this.buttonSaveSettings = new System.Windows.Forms.Button();
             this.numericUpDown6 = new System.Windows.Forms.NumericUpDown();
             this.textBoxSeed = new System.Windows.Forms.TextBox();
@@ -57,6 +58,9 @@
             this.labelReplications = new System.Windows.Forms.Label();
             this.TextBoxReplications = new System.Windows.Forms.TextBox();
             this.groupBoxSim = new System.Windows.Forms.GroupBox();
+            this.labelWayToLoader = new System.Windows.Forms.Label();
+            this.labelWayToCrossing = new System.Windows.Forms.Label();
+            this.labelWayToUnloader = new System.Windows.Forms.Label();
             this.labelMaterialStavba = new System.Windows.Forms.Label();
             this.labelMaterialSkladka = new System.Windows.Forms.Label();
             this.labelSimTime = new System.Windows.Forms.Label();
@@ -76,16 +80,12 @@
             this.buttonPause = new System.Windows.Forms.Button();
             this.buttonSlowDown = new System.Windows.Forms.Button();
             this.groupBoxStats = new System.Windows.Forms.GroupBox();
-            this.groupBoxLoaderStats = new System.Windows.Forms.GroupBox();
-            this.labelLoaderStatsTime = new System.Windows.Forms.Label();
-            this.labelLoaderStatsLen = new System.Windows.Forms.Label();
             this.groupBoxUnloaderStats = new System.Windows.Forms.GroupBox();
             this.labelUnloaderStatsLen = new System.Windows.Forms.Label();
             this.labelUnloaderStatsTime = new System.Windows.Forms.Label();
-            this.labelSaveSettings = new System.Windows.Forms.Label();
-            this.labelWayToUnloader = new System.Windows.Forms.Label();
-            this.labelWayToCrossing = new System.Windows.Forms.Label();
-            this.labelWayToLoader = new System.Windows.Forms.Label();
+            this.groupBoxLoaderStats = new System.Windows.Forms.GroupBox();
+            this.labelLoaderStatsLen = new System.Windows.Forms.Label();
+            this.labelLoaderStatsTime = new System.Windows.Forms.Label();
             this.groupBoxVehicles.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
@@ -106,8 +106,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureLoaderB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureLoaderA)).BeginInit();
             this.groupBoxStats.SuspendLayout();
-            this.groupBoxLoaderStats.SuspendLayout();
             this.groupBoxUnloaderStats.SuspendLayout();
+            this.groupBoxLoaderStats.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBoxVehicles
@@ -335,6 +335,15 @@
             this.groupBoxSetup.TabStop = false;
             this.groupBoxSetup.Text = "Simulation Setup";
             // 
+            // labelSaveSettings
+            // 
+            this.labelSaveSettings.AutoSize = true;
+            this.labelSaveSettings.Location = new System.Drawing.Point(107, 395);
+            this.labelSaveSettings.Name = "labelSaveSettings";
+            this.labelSaveSettings.Size = new System.Drawing.Size(156, 29);
+            this.labelSaveSettings.TabIndex = 31;
+            this.labelSaveSettings.Text = "Save settings";
+            // 
             // buttonSaveSettings
             // 
             this.buttonSaveSettings.BackColor = System.Drawing.Color.White;
@@ -397,6 +406,7 @@
             this.checkBoxVizual.TabIndex = 2;
             this.checkBoxVizual.Text = "Vizualize";
             this.checkBoxVizual.UseVisualStyleBackColor = true;
+            this.checkBoxVizual.CheckedChanged += new System.EventHandler(this.checkBoxVizual_CheckedChanged);
             // 
             // labelReplications
             // 
@@ -443,6 +453,34 @@
             this.groupBoxSim.TabIndex = 3;
             this.groupBoxSim.TabStop = false;
             this.groupBoxSim.Text = "Simulation";
+            // 
+            // labelWayToLoader
+            // 
+            this.labelWayToLoader.AutoSize = true;
+            this.labelWayToLoader.Location = new System.Drawing.Point(25, 732);
+            this.labelWayToLoader.Name = "labelWayToLoader";
+            this.labelWayToLoader.Size = new System.Drawing.Size(173, 29);
+            this.labelWayToLoader.TabIndex = 30;
+            this.labelWayToLoader.Text = "Way to Loader:";
+            // 
+            // labelWayToCrossing
+            // 
+            this.labelWayToCrossing.AutoSize = true;
+            this.labelWayToCrossing.Location = new System.Drawing.Point(25, 673);
+            this.labelWayToCrossing.Name = "labelWayToCrossing";
+            this.labelWayToCrossing.Size = new System.Drawing.Size(243, 29);
+            this.labelWayToCrossing.TabIndex = 29;
+            this.labelWayToCrossing.Text = "Way to road crossing:";
+            // 
+            // labelWayToUnloader
+            // 
+            this.labelWayToUnloader.AutoSize = true;
+            this.labelWayToUnloader.ForeColor = System.Drawing.Color.Black;
+            this.labelWayToUnloader.Location = new System.Drawing.Point(26, 336);
+            this.labelWayToUnloader.Name = "labelWayToUnloader";
+            this.labelWayToUnloader.Size = new System.Drawing.Size(196, 29);
+            this.labelWayToUnloader.TabIndex = 28;
+            this.labelWayToUnloader.Text = "Way to Unloader:";
             // 
             // labelMaterialStavba
             // 
@@ -599,7 +637,7 @@
             this.buttonSlowUp.Size = new System.Drawing.Size(49, 49);
             this.buttonSlowUp.TabIndex = 3;
             this.buttonSlowUp.UseVisualStyleBackColor = false;
-            this.buttonSlowUp.Click += new System.EventHandler(this.buttonSlowUp_Click);
+            this.buttonSlowUp.Click += new System.EventHandler(this.buttonSpeedUp_Click);
             // 
             // buttonRun
             // 
@@ -660,35 +698,6 @@
             this.groupBoxStats.TabStop = false;
             this.groupBoxStats.Text = "Statistics";
             // 
-            // groupBoxLoaderStats
-            // 
-            this.groupBoxLoaderStats.Controls.Add(this.labelLoaderStatsLen);
-            this.groupBoxLoaderStats.Controls.Add(this.labelLoaderStatsTime);
-            this.groupBoxLoaderStats.Location = new System.Drawing.Point(37, 52);
-            this.groupBoxLoaderStats.Name = "groupBoxLoaderStats";
-            this.groupBoxLoaderStats.Size = new System.Drawing.Size(662, 256);
-            this.groupBoxLoaderStats.TabIndex = 0;
-            this.groupBoxLoaderStats.TabStop = false;
-            this.groupBoxLoaderStats.Text = "Loader Statistics";
-            // 
-            // labelLoaderStatsTime
-            // 
-            this.labelLoaderStatsTime.AutoSize = true;
-            this.labelLoaderStatsTime.Location = new System.Drawing.Point(17, 58);
-            this.labelLoaderStatsTime.Name = "labelLoaderStatsTime";
-            this.labelLoaderStatsTime.Size = new System.Drawing.Size(242, 29);
-            this.labelLoaderStatsTime.TabIndex = 0;
-            this.labelLoaderStatsTime.Text = "Average waiting time:";
-            // 
-            // labelLoaderStatsLen
-            // 
-            this.labelLoaderStatsLen.AutoSize = true;
-            this.labelLoaderStatsLen.Location = new System.Drawing.Point(17, 104);
-            this.labelLoaderStatsLen.Name = "labelLoaderStatsLen";
-            this.labelLoaderStatsLen.Size = new System.Drawing.Size(280, 29);
-            this.labelLoaderStatsLen.TabIndex = 1;
-            this.labelLoaderStatsLen.Text = "Average length of queue:";
-            // 
             // groupBoxUnloaderStats
             // 
             this.groupBoxUnloaderStats.Controls.Add(this.labelUnloaderStatsLen);
@@ -718,42 +727,34 @@
             this.labelUnloaderStatsTime.TabIndex = 0;
             this.labelUnloaderStatsTime.Text = "Average waiting time:";
             // 
-            // labelSaveSettings
+            // groupBoxLoaderStats
             // 
-            this.labelSaveSettings.AutoSize = true;
-            this.labelSaveSettings.Location = new System.Drawing.Point(107, 395);
-            this.labelSaveSettings.Name = "labelSaveSettings";
-            this.labelSaveSettings.Size = new System.Drawing.Size(156, 29);
-            this.labelSaveSettings.TabIndex = 31;
-            this.labelSaveSettings.Text = "Save settings";
+            this.groupBoxLoaderStats.Controls.Add(this.labelLoaderStatsLen);
+            this.groupBoxLoaderStats.Controls.Add(this.labelLoaderStatsTime);
+            this.groupBoxLoaderStats.Location = new System.Drawing.Point(37, 52);
+            this.groupBoxLoaderStats.Name = "groupBoxLoaderStats";
+            this.groupBoxLoaderStats.Size = new System.Drawing.Size(662, 256);
+            this.groupBoxLoaderStats.TabIndex = 0;
+            this.groupBoxLoaderStats.TabStop = false;
+            this.groupBoxLoaderStats.Text = "Loader Statistics";
             // 
-            // labelWayToUnloader
+            // labelLoaderStatsLen
             // 
-            this.labelWayToUnloader.AutoSize = true;
-            this.labelWayToUnloader.ForeColor = System.Drawing.Color.Black;
-            this.labelWayToUnloader.Location = new System.Drawing.Point(26, 336);
-            this.labelWayToUnloader.Name = "labelWayToUnloader";
-            this.labelWayToUnloader.Size = new System.Drawing.Size(196, 29);
-            this.labelWayToUnloader.TabIndex = 28;
-            this.labelWayToUnloader.Text = "Way to Unloader:";
+            this.labelLoaderStatsLen.AutoSize = true;
+            this.labelLoaderStatsLen.Location = new System.Drawing.Point(17, 104);
+            this.labelLoaderStatsLen.Name = "labelLoaderStatsLen";
+            this.labelLoaderStatsLen.Size = new System.Drawing.Size(280, 29);
+            this.labelLoaderStatsLen.TabIndex = 1;
+            this.labelLoaderStatsLen.Text = "Average length of queue:";
             // 
-            // labelWayToCrossing
+            // labelLoaderStatsTime
             // 
-            this.labelWayToCrossing.AutoSize = true;
-            this.labelWayToCrossing.Location = new System.Drawing.Point(25, 673);
-            this.labelWayToCrossing.Name = "labelWayToCrossing";
-            this.labelWayToCrossing.Size = new System.Drawing.Size(243, 29);
-            this.labelWayToCrossing.TabIndex = 29;
-            this.labelWayToCrossing.Text = "Way to road crossing:";
-            // 
-            // labelWayToLoader
-            // 
-            this.labelWayToLoader.AutoSize = true;
-            this.labelWayToLoader.Location = new System.Drawing.Point(25, 732);
-            this.labelWayToLoader.Name = "labelWayToLoader";
-            this.labelWayToLoader.Size = new System.Drawing.Size(173, 29);
-            this.labelWayToLoader.TabIndex = 30;
-            this.labelWayToLoader.Text = "Way to Loader:";
+            this.labelLoaderStatsTime.AutoSize = true;
+            this.labelLoaderStatsTime.Location = new System.Drawing.Point(17, 58);
+            this.labelLoaderStatsTime.Name = "labelLoaderStatsTime";
+            this.labelLoaderStatsTime.Size = new System.Drawing.Size(242, 29);
+            this.labelLoaderStatsTime.TabIndex = 0;
+            this.labelLoaderStatsTime.Text = "Average waiting time:";
             // 
             // FormAgentSimulation
             // 
@@ -792,10 +793,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureLoaderB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureLoaderA)).EndInit();
             this.groupBoxStats.ResumeLayout(false);
-            this.groupBoxLoaderStats.ResumeLayout(false);
-            this.groupBoxLoaderStats.PerformLayout();
             this.groupBoxUnloaderStats.ResumeLayout(false);
             this.groupBoxUnloaderStats.PerformLayout();
+            this.groupBoxLoaderStats.ResumeLayout(false);
+            this.groupBoxLoaderStats.PerformLayout();
             this.ResumeLayout(false);
 
         }
