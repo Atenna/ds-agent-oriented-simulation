@@ -161,6 +161,12 @@ namespace ds_agent_oriented_simulation
                 this.labelUnloaderStatsLen.Text = "Average length of queue: " +
                                                   mySimulation.AgentStavby.LengthOfQueue.Mean().ToString("####.00");
             }
+            if (movingPicture.Location.X < 280)
+            {
+                movingPicture.Location = new Point(
+                    movingPicture.Location.X + 5,
+                    this.movingPicture.Location.Y);
+            }
         }
 
         public double[] GetProgressOfLoading(Vehicle car)
