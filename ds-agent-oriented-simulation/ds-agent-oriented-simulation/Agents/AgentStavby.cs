@@ -1,4 +1,5 @@
 using ds_agent_oriented_simulation.ContinualAssistant;
+using ds_agent_oriented_simulation.Entities;
 using ds_agent_oriented_simulation.Entities.Vehicles;
 using ds_agent_oriented_simulation.Managers;
 using ds_agent_oriented_simulation.Settings;
@@ -20,10 +21,10 @@ namespace ds_agent_oriented_simulation.Agents
         public Stat WaitingTimePerCar { get; internal set; }
         public WStat WaitingTimeInQueue { get; internal set; }
         public WStat LengthOfQueue { get; internal set; }
-        public bool VykladacAIsWorking { get; internal set; }
-        public bool VykladacBIsWorking { get; internal set; }
         public double MaterialNaStavbe { get; set; }
         public bool VykladacBIsDisabled { get; set; }
+        public bool VykladacAIsOccupied { get; set; }
+        public bool VykladacBIsOccupied { get; set; }
 
         public AgentStavby(int id, OSPABA.Simulation mySim, Agent parent) :
             base(id, mySim, parent)
@@ -34,14 +35,16 @@ namespace ds_agent_oriented_simulation.Agents
             AutaStavbaQueue = new SimQueue<Vehicle>(LengthOfQueue);
             MessageStavbaQueue = new SimQueue<MyMessage>(LengthOfQueue);
             VykladacBIsDisabled = FormAgentSimulation.UnloaderBDisabled;
+            VykladacAIsOccupied = false;
+            VykladacAIsOccupied = false;
         }
 
         override public void PrepareReplication()
         {
             base.PrepareReplication();
             // Setup component for the next replication
-            VykladacBIsWorking = false;
-            VykladacAIsWorking = false;
+            //VykladacBIsWorking = false;
+            //VykladacAIsWorking = false;
 
             // odobratie prvkov z radu
             if (!AutaStavbaQueue.IsEmpty())
@@ -54,6 +57,26 @@ namespace ds_agent_oriented_simulation.Agents
             LengthOfQueue.Clear();
             AutaStavbaQueue.Clear();
             MessageStavbaQueue.Clear();
+        }
+
+        public bool VykladacAIsWorking()
+        {
+            bool pracuje = Timer.IsWorking(MySim.CurrentTime, Constants.VykladacAStartsAt, Constants.VykladacAEndsAt);
+            if (!pracuje)
+            {
+                VykladacAIsOccupied = true;
+            }
+            return pracuje;
+        }
+
+        public bool VykladacBIsWorking()
+        {
+            bool pracuje = Timer.IsWorking(MySim.CurrentTime, Constants.VykladacBStartsAt, Constants.VykladacBEndsAt);
+            if (!pracuje)
+            {
+                VykladacBIsOccupied = true;
+            }
+            return pracuje;
         }
 
         //meta! userInfo="Generated code: do not modify", tag="begin"

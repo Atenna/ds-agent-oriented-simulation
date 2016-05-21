@@ -31,7 +31,7 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
         //meta! sender="AgentStavby", id="72", type="Start"
         public void ProcessStart(MessageForm message)
         {
-            MyAgent.VykladacBIsWorking = true;
+            MyAgent.VykladacBIsOccupied = true;
             ((MyMessage)message).Car.ZaciatokVykladania = MySim.CurrentTime;
             _naVylozenie = ((MyMessage)message).Car;
             _naVylozenie.JeVykladane = true;

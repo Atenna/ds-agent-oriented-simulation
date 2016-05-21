@@ -29,7 +29,7 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
         //meta! sender="AgentSkladky", id="64", type="Start"
         public void ProcessStart(MessageForm message)
         {
-            MyAgent.NakladacAIsWorking = true;
+            MyAgent.NakladacAIsOccupied = true;
             ((MyMessage) message).Car.ZaciatokNakladania = MySim.CurrentTime;
             _naNalozenie = ((MyMessage)message).Car;
             _naNalozenie.JeNakladane = true;

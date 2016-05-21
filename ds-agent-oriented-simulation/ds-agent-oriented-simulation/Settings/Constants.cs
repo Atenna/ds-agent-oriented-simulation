@@ -46,18 +46,18 @@
         public const int MaxNumberOfCarsA = 3;
         public const int MaxNumberOfCarsE = 2;
 
-        public static readonly object queueLock = new object();
-        public static readonly object queue2Lock = new object();
+        public static readonly object QueueLock = new object();
+        public static readonly object Queue2Lock = new object();
         public static int Seed { get; set; }
         
 
         public static double NakladacAStartsAt = 7;
-        public static double NakladacAEndsAt = 22;
-        public static double NakladacBStartsAt = 7;
+        public static double NakladacAEndsAt = 18;
+        public static double NakladacBStartsAt = 9;
         public static double NakladacBEndsAt = 22;
-        public static double VykladacAStartsAt = 8;
+        public static double VykladacAStartsAt = 7.5;
         public static double VykladacAEndsAt = 22;
-        public static double VykladacBStartsAt = 8;
+        public static double VykladacBStartsAt = 7.5;
         public static double VykladacBEndsAt = 22;
 
         public static double MaterialAtDepo = 3500;

@@ -41,5 +41,15 @@ namespace ds_agent_oriented_simulation.Entities
         {
             return ((currentTime/60)%24);
         }
+
+        public static bool IsWorking(double simTime, double startsAt, double finishAt)
+        {
+            double hours = (simTime/60)%24; // minuty => hodiny, % 24 hodinovy format
+            if (hours >= startsAt && hours <= finishAt)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

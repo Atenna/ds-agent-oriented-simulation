@@ -1,4 +1,5 @@
 using ds_agent_oriented_simulation.ContinualAssistant;
+using ds_agent_oriented_simulation.Entities;
 using ds_agent_oriented_simulation.Entities.Vehicles;
 using ds_agent_oriented_simulation.Managers;
 using ds_agent_oriented_simulation.Settings;
@@ -16,15 +17,15 @@ namespace ds_agent_oriented_simulation.Agents
         public SimQueue<Vehicle> AutaSkladkaQueue { get; private set; }
         public SimQueue<MyMessage> MessageSkladkaQueue { get; private set; }
         public Stat SkladkaWStat { get; internal set; }
-        public bool NakladacAIsWorking { get; internal set; }
-        public bool NakladacBIsWorking { get; internal set; }
         public Vehicle CarAtLoaderA { get; set; }
         public Vehicle CarAtLoaderB { get; set; }
         public WStat LengthOfQueue { get; internal set; }
         public double MaterialNaSkladke { get; set; }
         public double MaterialNaStavbe { get; set; }
+        public bool NakladacAIsOccupied { get; set; }
+        public bool NakladacBIsOccupied { get; set; }
 
-        private double _material = Settings.Constants.MaterialToLoad;
+        public double Material;
 
         public AgentSkladky(int id, OSPABA.Simulation mySim, Agent parent) :
             base(id, mySim, parent)
@@ -36,14 +37,14 @@ namespace ds_agent_oriented_simulation.Agents
             MessageSkladkaQueue = new SimQueue<MyMessage>();
             MaterialNaSkladke = Constants.MaterialAtDepo;
             MaterialNaStavbe = Constants.MaterialAtBuilding;
+            Material = Settings.Constants.MaterialToLoad;
+            NakladacAIsOccupied = false;
+            NakladacBIsOccupied = false;
         }
 
-        override public void PrepareReplication()
+        public override void PrepareReplication()
         {
             base.PrepareReplication();
-            // Setup component for the next replication
-            NakladacAIsWorking = false;
-            NakladacBIsWorking = false;
             // odoberie vozidla z radu
             if (!AutaSkladkaQueue.IsEmpty())
             {
@@ -62,5 +63,25 @@ namespace ds_agent_oriented_simulation.Agents
             AddOwnMessage(Mc.DovozMaterialu);
         }
         //meta! tag="end"
+
+        public bool NakladacAIsWorking()
+        {
+            bool pracuje = Timer.IsWorking(MySim.CurrentTime, Constants.NakladacAStartsAt, Constants.NakladacAEndsAt);
+            if (!pracuje)
+            {
+                NakladacAIsOccupied = true;
+            }
+            return pracuje;
+        }
+
+        public bool NakladacBIsWorking()
+        {
+            bool pracuje = Timer.IsWorking(MySim.CurrentTime, Constants.NakladacBStartsAt, Constants.NakladacBEndsAt);
+            if (!pracuje)
+            {
+                NakladacBIsOccupied = true;
+            }
+            return pracuje;
+        }
     }
 }

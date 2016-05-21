@@ -14,17 +14,18 @@ namespace ds_agent_oriented_simulation
         public static int NumberOfReplications { get; private set; }
         public static long GeneratorSeed { get; private set; }
 
-        private static decimal CostForCars;
-        private static decimal CostForUnloaders;
+        private static decimal _costForCars;
+        public static decimal CostForUnloaders;
         public FormAgentSimulation()
         {
             InitializeComponent();
             InitializeToolTips();
             SelectedCars = new int[5];
             NumberOfReplications = 1;
-            CostForCars = 0;
+            _costForCars = 0;
             CostForUnloaders = 0;
             GeneratorSeed = 22;
+            UnloaderBDisabled = true;
         }
 
         private Color ArrowHoverButtonsColor { get; set; }
@@ -262,7 +263,7 @@ namespace ds_agent_oriented_simulation
             if (numericUpDown1.Value > 0)
             {
                 checkBoxCarA.Checked = true;
-                CostForCars += Constants.PriceCarA;
+                _costForCars += Constants.PriceCarA;
                 ChangeCostOfVehicles();
             }
             else
@@ -277,7 +278,7 @@ namespace ds_agent_oriented_simulation
             if (numericUpDown2.Value > 0)
             {
                 checkBoxCarB.Checked = true;
-                CostForCars += Constants.PriceCarB;
+                _costForCars += Constants.PriceCarB;
                 ChangeCostOfVehicles();
             }
             else
@@ -291,7 +292,7 @@ namespace ds_agent_oriented_simulation
             if (numericUpDown3.Value > 0)
             {
                 checkBoxCarC.Checked = true;
-                CostForCars += Constants.PriceCarC;
+                _costForCars += Constants.PriceCarC;
                 ChangeCostOfVehicles();
             }
             else
@@ -305,7 +306,7 @@ namespace ds_agent_oriented_simulation
             if (numericUpDown4.Value > 0)
             {
                 checkBoxCarD.Checked = true;
-                CostForCars += Constants.PriceCarD;
+                _costForCars += Constants.PriceCarD;
                 ChangeCostOfVehicles();
             }
             else
@@ -319,7 +320,7 @@ namespace ds_agent_oriented_simulation
             if (numericUpDown5.Value > 0)
             {
                 checkBoxCarE.Checked = true;
-                CostForCars += Constants.PriceCarE;
+                _costForCars += Constants.PriceCarE;
                 ChangeCostOfVehicles();
             }
             else
@@ -330,14 +331,14 @@ namespace ds_agent_oriented_simulation
 
         private void ChangeCostOfVehicles()
         {
-            CostForCars = 0;
+            _costForCars = 0;
             labelCostVehicles.Text = "Cost for vehicles: ";
-            CostForCars = numericUpDown1.Value*Constants.PriceCarA
+            _costForCars = numericUpDown1.Value*Constants.PriceCarA
                           + numericUpDown2.Value*Constants.PriceCarB
                           + numericUpDown3.Value*Constants.PriceCarC
                           + numericUpDown4.Value*Constants.PriceCarD
                           + numericUpDown5.Value*Constants.PriceCarE;
-            labelCostVehicles.Text += CostForCars.ToString("C");
+            labelCostVehicles.Text += _costForCars.ToString("C");
         }
 
         private void checkBoxVizual_CheckedChanged(object sender, EventArgs e)
