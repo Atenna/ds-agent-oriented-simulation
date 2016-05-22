@@ -61,22 +61,12 @@ namespace ds_agent_oriented_simulation.Agents
 
         public bool VykladacAIsWorking()
         {
-            bool pracuje = Timer.IsWorking(MySim.CurrentTime, Constants.VykladacAStartsAt, Constants.VykladacAEndsAt);
-            if (!pracuje)
-            {
-                VykladacAIsOccupied = true;
-            }
-            return pracuje;
+            return Timer.IsWorking(MySim.CurrentTime, Constants.VykladacAStartsAt, Constants.VykladacAEndsAt);
         }
 
         public bool VykladacBIsWorking()
         {
-            bool pracuje = Timer.IsWorking(MySim.CurrentTime, Constants.VykladacBStartsAt, Constants.VykladacBEndsAt);
-            if (!pracuje)
-            {
-                VykladacBIsOccupied = true;
-            }
-            return pracuje;
+            return Timer.IsWorking(MySim.CurrentTime, Constants.VykladacBStartsAt, Constants.VykladacBEndsAt);
         }
 
         //meta! userInfo="Generated code: do not modify", tag="begin"

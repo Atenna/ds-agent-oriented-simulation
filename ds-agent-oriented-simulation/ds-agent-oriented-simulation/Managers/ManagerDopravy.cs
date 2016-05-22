@@ -1,4 +1,6 @@
+using System;
 using ds_agent_oriented_simulation.Agents;
+using ds_agent_oriented_simulation.Entities;
 using ds_agent_oriented_simulation.Entities.Vehicles;
 using ds_agent_oriented_simulation.Simulation;
 using OSPABA;
@@ -73,6 +75,8 @@ namespace ds_agent_oriented_simulation.Managers
                 sprava.Code = Mc.NalozAuto;
                 Request(sprava);
             }
+
+            //ProcessNaplanujZaciatok();
         }
 
         //meta! sender="AgentSkladky", id="36", type="Response"

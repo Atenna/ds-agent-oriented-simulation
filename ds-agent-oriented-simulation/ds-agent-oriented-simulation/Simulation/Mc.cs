@@ -18,5 +18,7 @@ namespace ds_agent_oriented_simulation.Simulation
         public const int PrejazdUkonceny = 300;
         public const int ExportUkonceny = 400;
         public const int ExportZacaty = 500;
+        public const int ZaciatokPracovnejDoby = 600;
+        public const int KoniecPracovnejDoby = 700;
     }
 }

@@ -27,6 +27,8 @@ namespace ds_agent_oriented_simulation.Agents
 
         public double Material;
 
+        public PlanovacPracovnejDoby PlanovacPracovnejDoby { get; set; }
+
         public AgentSkladky(int id, OSPABA.Simulation mySim, Agent parent) :
             base(id, mySim, parent)
         {
@@ -56,32 +58,26 @@ namespace ds_agent_oriented_simulation.Agents
         private void Init()
         {
             new ManagerSkladky(SimId.ManagerSkladky, MySim, this);
+            PlanovacPracovnejDoby = new PlanovacPracovnejDoby(SimId.PlanovacPracovnejDoby, MySim, this);
+            //PlanovacPracovnejDoby.PrepareReplication();
             new ProcesNakladacA(SimId.ProcesNakladacA, MySim, this);
             new ProcesNakladacB(SimId.ProcesNakladacB, MySim, this);
             AddOwnMessage(Mc.NalozAuto);
             AddOwnMessage(Mc.NalozenieUkoncene);
             AddOwnMessage(Mc.DovozMaterialu);
+            AddOwnMessage(Mc.ZaciatokPracovnejDoby);
+            AddOwnMessage(Mc.KoniecPracovnejDoby);
         }
         //meta! tag="end"
 
         public bool NakladacAIsWorking()
         {
-            bool pracuje = Timer.IsWorking(MySim.CurrentTime, Constants.NakladacAStartsAt, Constants.NakladacAEndsAt);
-            if (!pracuje)
-            {
-                NakladacAIsOccupied = true;
-            }
-            return pracuje;
+            return Timer.IsWorking(MySim.CurrentTime, Constants.NakladacAStartsAt, Constants.NakladacAEndsAt);
         }
 
         public bool NakladacBIsWorking()
         {
-            bool pracuje = Timer.IsWorking(MySim.CurrentTime, Constants.NakladacBStartsAt, Constants.NakladacBEndsAt);
-            if (!pracuje)
-            {
-                NakladacBIsOccupied = true;
-            }
-            return pracuje;
+            return Timer.IsWorking(MySim.CurrentTime, Constants.NakladacBStartsAt, Constants.NakladacBEndsAt);
         }
     }
 }

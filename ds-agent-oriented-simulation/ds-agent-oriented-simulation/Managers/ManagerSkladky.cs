@@ -35,6 +35,7 @@ namespace ds_agent_oriented_simulation.Managers
             message.Code = Mc.NalozAuto;
             Response(message);
 
+            
             // ak v rade niekto dalsi caka, zacne sa znova nakladanie
             Vehicle naNalozenie;
             if (!MyAgent.AutaSkladkaQueue.IsEmpty())
@@ -58,6 +59,7 @@ namespace ds_agent_oriented_simulation.Managers
                 MyAgent.NakladacAIsOccupied = true;
                 StartContinualAssistant(zFrontu);
             }
+            
         }
 
         //meta! sender="ProcesNakladacB", id="70", type="Finish"
@@ -68,7 +70,7 @@ namespace ds_agent_oriented_simulation.Managers
             message.Addressee = MySim.FindAgent(SimId.AgentDopravy);
             message.Code = Mc.NalozAuto;
             Response(message);
-
+            
             Vehicle naNalozenie;
             if (!MyAgent.AutaSkladkaQueue.IsEmpty())
             {
@@ -90,19 +92,21 @@ namespace ds_agent_oriented_simulation.Managers
                 zFrontu.Car = naNalozenie;
                 StartContinualAssistant(zFrontu);
             }
+            
         }
 
         //meta! sender="AgentDopravy", id="36", type="Request"
         public void ProcessNalozAuto(MessageForm message)
         {
             Vehicle naNalozenie = ((MyMessage)message).Car;
-            // zaciatok cakania
+            // zaciatok cakania 
+            // to do dorobit ak cakalo cez noc tak +=
             naNalozenie.ZaciatokCakania = MySim.CurrentTime;
 
             // TO=DO - KOLKO SA BUDE NAKLADAT NA AUTO ak bude na skladke menej materialu? Pocka na dovoz????
 
-            // ak nakladac A nema pracovnu dobu alebo naklada a zaroven ak nakladac B nema pracovnu dobu alebo naklada - do radu
-            if ((MyAgent.NakladacAIsOccupied) && MyAgent.NakladacBIsOccupied)
+            // ak nakladace prave niekoho nakladaju alebo nemaju pracovnu dobu
+            if ((MyAgent.NakladacAIsOccupied && MyAgent.NakladacBIsOccupied) || (!MyAgent.NakladacAIsWorking() && !MyAgent.NakladacBIsWorking()))
             {
                 lock (naNalozenie)
                 {
@@ -113,7 +117,7 @@ namespace ds_agent_oriented_simulation.Managers
             else
             {
                 // ak  B ma pracovnu dobu a nenaklada nikoho
-                if (!MyAgent.NakladacBIsOccupied)
+                if (!MyAgent.NakladacBIsOccupied && MyAgent.NakladacBIsWorking())
                 {
                     message.Addressee = MyAgent.FindAssistant(SimId.ProcesNakladacB);
                     MyAgent.NakladacBIsOccupied = true;
@@ -123,7 +127,7 @@ namespace ds_agent_oriented_simulation.Managers
                     MyAgent.SkladkaWStat.AddSample(naNalozenie.CasCakaniaNaSkladke);
                     StartContinualAssistant(message);
                 }
-                else if(!MyAgent.NakladacAIsOccupied)
+                else if(!MyAgent.NakladacAIsOccupied && MyAgent.NakladacAIsWorking())
                 {
                     message.Addressee = MyAgent.FindAssistant(SimId.ProcesNakladacA);
                     MyAgent.NakladacAIsOccupied = true;
@@ -147,7 +151,21 @@ namespace ds_agent_oriented_simulation.Managers
                 case Mc.OdvozMaterialu:
                     ProcessOdvozMaterialu((MyMessage)message);
                     break;
+                case Mc.ZaciatokPracovnejDoby:
+                    ProcessStartWorkDay(message);
+                    break;
+                case Mc.KoniecPracovnejDoby:
+                    ProcessEndWorkDay(message);
+                    break;
             }
+        }
+
+        private void ProcessEndWorkDay(MessageForm message)
+        {
+            MyMessage naplanujZaciatokPrace = new MyMessage(MySim);
+            naplanujZaciatokPrace.Addressee = MyAgent.FindAssistant(SimId.PlanovacPracovnejDoby);
+            naplanujZaciatokPrace.Code = Mc.Start;
+            StartContinualAssistant(naplanujZaciatokPrace);
         }
 
         private void ProcessOdvozMaterialu(MyMessage message)
@@ -163,6 +181,7 @@ namespace ds_agent_oriented_simulation.Managers
         //meta! userInfo="Generated code: do not modify", tag="begin"
         public void Init()
         {
+            
         }
 
         override public void ProcessMessage(MessageForm message)
@@ -179,6 +198,9 @@ namespace ds_agent_oriented_simulation.Managers
                         case SimId.ProcesNakladacB:
                             ProcessFinishProcesNakladacB(message);
                             break;
+                        case SimId.PlanovacPracovnejDoby:
+                            ProcessStartWorkDay(message);
+                            break;
                     }
                     break;
 
@@ -191,6 +213,32 @@ namespace ds_agent_oriented_simulation.Managers
                     break;
             }
         }
+
+        private void ProcessStartWorkDay(MessageForm message)
+        {
+            Vehicle naNalozenie;
+            if (!MyAgent.AutaSkladkaQueue.IsEmpty())
+            {
+                lock (Constants.QueueLock)
+                {
+                    naNalozenie = MyAgent.AutaSkladkaQueue.First.Value;
+                    MyAgent.AutaSkladkaQueue.RemoveFirst();
+                }
+                MyMessage zFrontu = MyAgent.MessageSkladkaQueue.First.Value;
+                MyAgent.MessageSkladkaQueue.RemoveFirst();
+                zFrontu.Addressee = MyAgent.FindAssistant(SimId.ProcesNakladacA);
+                zFrontu.Code = Mc.NalozAuto;
+
+                // ukoncenie cakania
+                naNalozenie.CasCakaniaNaSkladke = (MySim.CurrentTime - naNalozenie.ZaciatokCakania);
+                // pridanie casu cakania na skladke do statistik
+                MyAgent.SkladkaWStat.AddSample(naNalozenie.CasCakaniaNaSkladke);
+
+                zFrontu.Car = naNalozenie;
+                StartContinualAssistant(zFrontu);
+            }
+        }
+
         //meta! tag="end"
         public new AgentSkladky MyAgent
         {

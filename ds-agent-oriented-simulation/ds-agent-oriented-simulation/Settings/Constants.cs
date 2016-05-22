@@ -51,9 +51,9 @@
         public static int Seed { get; set; }
         
 
-        public static double NakladacAStartsAt = 7;
+        public static double NakladacAStartsAt = 1; // 7 ... 120
         public static double NakladacAEndsAt = 18;
-        public static double NakladacBStartsAt = 9;
+        public static double NakladacBStartsAt = 3; // 9 ... 180
         public static double NakladacBEndsAt = 22;
         public static double VykladacAStartsAt = 7.5;
         public static double VykladacAEndsAt = 22;

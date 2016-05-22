@@ -113,7 +113,7 @@ namespace ds_agent_oriented_simulation.Managers
             else
             {
                 // ak B pracuje, nie je zakazany a nenaklada
-                if (!MyAgent.VykladacBIsOccupied && !MyAgent.VykladacBIsDisabled)
+                if (!MyAgent.VykladacBIsOccupied && !MyAgent.VykladacBIsDisabled && MyAgent.VykladacBIsWorking())
                 {
                     message.Addressee = MyAgent.FindAssistant(SimId.ProcesVykladacB);
                     MyAgent.VykladacBIsOccupied = true;
@@ -124,7 +124,7 @@ namespace ds_agent_oriented_simulation.Managers
                     StartContinualAssistant(message);
                 }
                 // ak A pracuje a nenaklada
-                else if(!MyAgent.VykladacAIsOccupied)
+                else if(!MyAgent.VykladacAIsOccupied && MyAgent.VykladacAIsWorking())
                 {
                     message.Addressee = MyAgent.FindAssistant(SimId.ProcesVykladacA);
                     MyAgent.VykladacAIsOccupied = true;
