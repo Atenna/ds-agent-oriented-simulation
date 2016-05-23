@@ -167,9 +167,10 @@ namespace ds_agent_oriented_simulation.Managers
             Vehicle naNalozenie = null; 
             
             // ak  B ma pracovnu dobu a nenaklada nikoho
-            if (!MyAgent.NakladacBIsOccupied && MyAgent.NakladacBIsWorking())
+            if (!MyAgent.NakladacBIsOccupied && MyAgent.NakladacBIsWorking() && MyAgent.MaterialNaSkladke!=0)
             {
-                MyMessage sprava = new MyMessage(MySim);
+                MyMessage sprava = MyAgent.MessageSkladkaQueue.First.Value;
+                MyAgent.MessageSkladkaQueue.RemoveFirst();
 
                 naNalozenie = MyAgent.AutaSkladkaQueue.First.Value;
                 MyAgent.AutaSkladkaQueue.RemoveFirst();
@@ -188,7 +189,8 @@ namespace ds_agent_oriented_simulation.Managers
             }
             else if (!MyAgent.NakladacAIsOccupied && MyAgent.NakladacAIsWorking())
             {
-                MyMessage sprava = new MyMessage(MySim);
+                MyMessage sprava = MyAgent.MessageSkladkaQueue.First.Value;
+                MyAgent.MessageSkladkaQueue.RemoveFirst();
 
                 naNalozenie = MyAgent.AutaSkladkaQueue.First.Value;
                 MyAgent.AutaSkladkaQueue.RemoveFirst();
