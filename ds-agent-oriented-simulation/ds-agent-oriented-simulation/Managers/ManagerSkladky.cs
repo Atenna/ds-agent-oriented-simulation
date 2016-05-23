@@ -38,7 +38,7 @@ namespace ds_agent_oriented_simulation.Managers
             
             // ak v rade niekto dalsi caka, zacne sa znova nakladanie
             Vehicle naNalozenie;
-            if (!MyAgent.AutaSkladkaQueue.IsEmpty())
+            if (!MyAgent.AutaSkladkaQueue.IsEmpty() && MyAgent.NakladacAIsWorking())
             {
                 lock (Constants.QueueLock)
                 {
@@ -72,7 +72,7 @@ namespace ds_agent_oriented_simulation.Managers
             Response(message);
             
             Vehicle naNalozenie;
-            if (!MyAgent.AutaSkladkaQueue.IsEmpty())
+            if (!MyAgent.AutaSkladkaQueue.IsEmpty() && MyAgent.NakladacBIsWorking())
             {
                 lock (Constants.QueueLock)
                 {
@@ -226,7 +226,16 @@ namespace ds_agent_oriented_simulation.Managers
                 }
                 MyMessage zFrontu = MyAgent.MessageSkladkaQueue.First.Value;
                 MyAgent.MessageSkladkaQueue.RemoveFirst();
-                zFrontu.Addressee = MyAgent.FindAssistant(SimId.ProcesNakladacA);
+
+                if (((MyMessage) message).Name == "A")
+                {
+                    zFrontu.Addressee = MyAgent.FindAssistant(SimId.ProcesNakladacA);
+                }
+                else
+                {
+                    zFrontu.Addressee = MyAgent.FindAssistant(SimId.ProcesNakladacB);
+                }
+                
                 zFrontu.Code = Mc.NalozAuto;
 
                 // ukoncenie cakania

@@ -54,7 +54,7 @@
         public static double NakladacAStartsAt = 1; // 7 ... 60
         public static double NakladacAEndsAt = 2; // 18 ... 120
         public static double NakladacBStartsAt = 3; // 9 ... 180
-        public static double NakladacBEndsAt = 22;
+        public static double NakladacBEndsAt = 4; // 22
         public static double VykladacAStartsAt = 7.5;
         public static double VykladacAEndsAt = 22;
         public static double VykladacBStartsAt = 7.5;

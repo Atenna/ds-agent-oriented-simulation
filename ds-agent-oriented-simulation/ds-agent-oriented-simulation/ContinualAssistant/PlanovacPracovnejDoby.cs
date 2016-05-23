@@ -19,12 +19,18 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
         public override void PrepareReplication()
         {
             MyMessage sprava = new MyMessage(MySim);
-            double delTime =
-                    Math.Min(Timer.NewWorkDayStartsAt(MySim.CurrentTime, Settings.Constants.NakladacAStartsAt),
-                        Timer.NewWorkDayStartsAt(MySim.CurrentTime, Settings.Constants.NakladacBStartsAt));
+            double delTime = Timer.NewWorkDayStartsAt(MySim.CurrentTime, Settings.Constants.NakladacAStartsAt);
+            sprava.Name = "A";
             sprava.Code = Mc.KoniecPracovnejDoby;
             sprava.Addressee = MyAgent.FindAssistant(SimId.PlanovacPracovnejDoby);
             Hold(delTime, sprava);
+
+            MyMessage sprava2 = new MyMessage(MySim);
+            double delTime2 = Timer.NewWorkDayStartsAt(MySim.CurrentTime, Settings.Constants.NakladacBStartsAt);
+            sprava2.Name = "B";
+            sprava2.Code = Mc.KoniecPracovnejDoby;
+            sprava2.Addressee = MyAgent.FindAssistant(SimId.PlanovacPracovnejDoby);
+            Hold(delTime2, sprava2);
         }
 
         public override void ProcessMessage(MessageForm message)
@@ -43,19 +49,27 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
 
         public void ProcessStart(MessageForm message)
         {
-            MessageForm zaciatokPracovnejDobyA = new MyMessage(MySim);
+            MyMessage zaciatokPracovnejDobyA = new MyMessage(MySim);
             zaciatokPracovnejDobyA.Addressee = MyAgent;
             zaciatokPracovnejDobyA.Code = Mc.ZaciatokPracovnejDoby;
+            zaciatokPracovnejDobyA.Name = ((MyMessage) message).Name;
             Notice(zaciatokPracovnejDobyA);
-            /*
+
+
             MyMessage sprava = new MyMessage(MySim);
-            double delTime =
-                    Math.Min(Timer.NewWorkDayStartsAt(MySim.CurrentTime, Settings.Constants.NakladacAStartsAt),
-                        Timer.NewWorkDayStartsAt(MySim.CurrentTime, Settings.Constants.NakladacBStartsAt));
+            sprava.Name = ((MyMessage)message).Name;
+            double delTime;
+            if (sprava.Name == "A")
+            {
+                delTime = Timer.NewWorkDayStartsAt(MySim.CurrentTime, Settings.Constants.NakladacAStartsAt);
+            }
+            else
+            {
+                delTime = Timer.NewWorkDayStartsAt(MySim.CurrentTime, Settings.Constants.NakladacBStartsAt);
+            }
             sprava.Code = Mc.KoniecPracovnejDoby;
             sprava.Addressee = MyAgent.FindAssistant(SimId.PlanovacPracovnejDoby);
             Hold(delTime, sprava);
-            */
         }
 
         public void ProcessDefault(MessageForm message)
