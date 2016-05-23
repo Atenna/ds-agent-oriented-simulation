@@ -105,7 +105,7 @@ namespace ds_agent_oriented_simulation.Managers
             double volumeToUnload = naVylozenie.RealVolume;
 
             // ak A nepracuje alebo naklada a B nepracuje alebo naklada alebo je zakazany
-            if ((MyAgent.VykladacAIsOccupied && MyAgent.VykladacBIsOccupied || MyAgent.VykladacBIsDisabled) || (!MyAgent.VykladacAIsWorking() && !MyAgent.VykladacBIsWorking() || MyAgent.VykladacBIsDisabled))
+            if ((MyAgent.VykladacAIsOccupied && (MyAgent.VykladacBIsOccupied || MyAgent.VykladacBIsDisabled)) || (!MyAgent.VykladacAIsWorking() && (!MyAgent.VykladacBIsWorking() || MyAgent.VykladacBIsDisabled)))
             {
                 MyAgent.AutaStavbaQueue.AddLast(naVylozenie);
                 MyAgent.MessageStavbaQueue.AddLast((MyMessage)message);
@@ -200,7 +200,16 @@ namespace ds_agent_oriented_simulation.Managers
         private void ProcessOdvozMaterialu(MessageForm message)
         {
             // tu sa od materialu odpocita objem a posle sa spat sprava, kolko je materialu
-            MyAgent.MaterialNaStavbe -= ((MyMessage) message).Volume;
+            if (MyAgent.MaterialNaStavbe < ((MyMessage) message).Volume)
+            {
+                MyAgent.MaterialNaStavbe = 0;
+                // neuspesny pokus 
+            }
+            else
+            {
+                MyAgent.MaterialNaStavbe -= ((MyMessage)message).Volume;
+            }
+            
         }
 
         //meta! userInfo="Generated code: do not modify", tag="begin"
