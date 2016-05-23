@@ -80,7 +80,7 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
         {
             double future = Timer.NewWorkDayStartsAt(MySim.CurrentTime, Constants.ExportStartsAt);
 
-            return (future-currentTime);
+            return (future);
         }
 
         private bool IsWorking(double currentTime)
@@ -94,7 +94,7 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
         }
 
         //meta! userInfo="Generated code: do not modify", tag="begin"
-        override public void ProcessMessage(MessageForm message)
+        public override void ProcessMessage(MessageForm message)
         {
             switch (message.Code)
             {

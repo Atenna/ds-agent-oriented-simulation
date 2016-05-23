@@ -35,7 +35,7 @@ namespace ds_agent_oriented_simulation.Agents
             LengthOfQueue = new WStat(mySim);
             AutaStavbaQueue = new SimQueue<Vehicle>(LengthOfQueue);
             MessageStavbaQueue = new SimQueue<MyMessage>(LengthOfQueue);
-            VykladacBIsDisabled = FormAgentSimulation.UnloaderBDisabled;
+            VykladacBIsDisabled = true;
             VykladacAIsOccupied = false;
             VykladacAIsOccupied = false;
         }
@@ -58,6 +58,8 @@ namespace ds_agent_oriented_simulation.Agents
             LengthOfQueue.Clear();
             AutaStavbaQueue.Clear();
             MessageStavbaQueue.Clear();
+
+            VykladacBIsDisabled = FormAgentSimulation.UnloaderBDisabled;
         }
 
         public bool VykladacAIsWorking()

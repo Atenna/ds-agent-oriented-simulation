@@ -16,6 +16,8 @@ namespace ds_agent_oriented_simulation
 
         private static decimal _costForCars;
         public static decimal CostForUnloaders;
+
+        public static bool UnloaderBDisabled { get; private set; }
         public FormAgentSimulation()
         {
             InitializeComponent();
@@ -27,11 +29,6 @@ namespace ds_agent_oriented_simulation
             GeneratorSeed = 22;
             UnloaderBDisabled = true;
         }
-
-        private Color ArrowHoverButtonsColor { get; set; }
-        private Color ArrowButtonsColor { get; set; }
-        public static bool UnloaderBDisabled { get; private set; }
-
 
         private void InitializeToolTips()
         {
