@@ -62,6 +62,7 @@
 
         public static double MaterialAtDepo = 50; //3500;
         public static double MaterialAtBuilding = 50; //1500;
+        public static double MaxMaterialAtBuilding = 60;  // 10000;
 
         public const double TimeBetweenExports = 0.5;
         public static double ExportStartsAt = 1;

@@ -9,6 +9,8 @@ namespace ds_agent_oriented_simulation.Entities.Vehicles
         public string Name { get; set; }
         public int Volume { get; set; }
         public double RealVolume { get; set; }
+
+        public double ToUnload { get; set; }
         public int Speed { get; set; }
         private readonly double _probabilityOfCrash;
         public int TimeOfRepair;
@@ -33,6 +35,7 @@ namespace ds_agent_oriented_simulation.Entities.Vehicles
             this.TimeOfRepair = pTime;
             this._failureGenerator = generator;
             this.RealVolume = 0;
+            this.ToUnload = 0;
             this.JeNakladane = false;
             this.JeVykladane = false;
         }

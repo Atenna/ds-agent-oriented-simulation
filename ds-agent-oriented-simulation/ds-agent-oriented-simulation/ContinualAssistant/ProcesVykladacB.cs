@@ -36,7 +36,7 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
             _naVylozenie = ((MyMessage)message).Car;
             _naVylozenie.JeVykladane = true;
             MyAgent.CarAtUnloaderB = _naVylozenie;
-            double timeOfUnloading = _naVylozenie.RealVolume / Constants.UnloadMachinePerformance;
+            double timeOfUnloading = _naVylozenie.ToUnload / Constants.UnloadMachinePerformance;
             message.Code = Mc.VylozenieUkoncene;
             Hold(timeOfUnloading, message);
         }
@@ -48,9 +48,10 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
             {
                 case Mc.VylozenieUkoncene:
                     _naVylozenie.JeVykladane = false;
-                    MyAgent.MaterialNaStavbe += _naVylozenie.RealVolume;
+                    //MyAgent.MaterialNaStavbe += _naVylozenie.RealVolume;
                     MyAgent.CarAtUnloaderB = null;
-                    _naVylozenie.RealVolume = 0;
+                    _naVylozenie.RealVolume -= _naVylozenie.ToUnload;
+                    _naVylozenie.ToUnload = 0;
                     AssistantFinished(message);
                     break;
             }

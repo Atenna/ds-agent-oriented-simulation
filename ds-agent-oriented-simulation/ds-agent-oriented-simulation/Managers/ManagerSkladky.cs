@@ -238,7 +238,10 @@ namespace ds_agent_oriented_simulation.Managers
         {
             MyAgent.MaterialNaSkladke += message.Volume;
             //
-            NejakaMetoda(message);
+            if (!MyAgent.AutaSkladkaQueue.IsEmpty())
+            {
+                NejakaMetoda(message);
+            }
         }
 
         //meta! userInfo="Generated code: do not modify", tag="begin"
