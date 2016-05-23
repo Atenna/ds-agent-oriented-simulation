@@ -35,8 +35,8 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
             _naNalozenie = ((MyMessage)message).Car;
             _naNalozenie.JeNakladane = true;
             MyAgent.CarAtLoaderB = _naNalozenie;
-            _naNalozenie.RealVolume = _naNalozenie.Volume;
-            double timeOfLoading = _naNalozenie.Volume / Constants.LoadMachine2Performance;
+            //_naNalozenie.RealVolume = _naNalozenie.Volume;
+            double timeOfLoading = _naNalozenie.RealVolume / Constants.LoadMachine2Performance;
             message.Code = Mc.NalozenieUkoncene;
             Hold(timeOfLoading, message);
         }

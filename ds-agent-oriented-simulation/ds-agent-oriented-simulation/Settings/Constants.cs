@@ -60,8 +60,8 @@
         public static double VykladacBStartsAt = 1; // 7.5;
         public static double VykladacBEndsAt = 3; // 22;
 
-        public static double MaterialAtDepo = 3500;
-        public static double MaterialAtBuilding = 1500;
+        public static double MaterialAtDepo = 50; //3500;
+        public static double MaterialAtBuilding = 50; //1500;
 
         public const double TimeBetweenExports = 0.5;
         public static double ExportStartsAt = 1;

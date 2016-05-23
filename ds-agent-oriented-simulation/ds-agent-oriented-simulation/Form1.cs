@@ -72,7 +72,15 @@ namespace ds_agent_oriented_simulation
             Sim.SetSimSpeed(0.5,2);
             
             System.Action<MySimulation> updateGuiAction = new System.Action<MySimulation>((s) => UpdateGui(s));
-            Sim.OnRefreshUI(s => this.Invoke(updateGuiAction, s));
+            try
+            {
+                Sim.OnRefreshUI(s => this.Invoke(updateGuiAction, s));
+            }
+            catch (System.ObjectDisposedException ex)
+            {
+                throw ex;
+            }
+            
 
             // 777 600
             Sim.SimulateAsync(1, 788400);

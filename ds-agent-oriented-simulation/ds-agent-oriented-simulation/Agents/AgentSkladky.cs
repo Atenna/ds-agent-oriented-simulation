@@ -38,7 +38,6 @@ namespace ds_agent_oriented_simulation.Agents
             AutaSkladkaQueue = new SimQueue<Vehicle>(LengthOfQueue);
             MessageSkladkaQueue = new SimQueue<MyMessage>();
             MaterialNaSkladke = Constants.MaterialAtDepo;
-            MaterialNaStavbe = Constants.MaterialAtBuilding;
             Material = Settings.Constants.MaterialToLoad;
             NakladacAIsOccupied = false;
             NakladacBIsOccupied = false;
