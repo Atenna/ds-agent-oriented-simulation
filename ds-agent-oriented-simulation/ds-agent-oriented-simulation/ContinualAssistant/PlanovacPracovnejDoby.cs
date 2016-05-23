@@ -47,7 +47,15 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
             zaciatokPracovnejDobyA.Addressee = MyAgent;
             zaciatokPracovnejDobyA.Code = Mc.ZaciatokPracovnejDoby;
             Notice(zaciatokPracovnejDobyA);
-            
+            /*
+            MyMessage sprava = new MyMessage(MySim);
+            double delTime =
+                    Math.Min(Timer.NewWorkDayStartsAt(MySim.CurrentTime, Settings.Constants.NakladacAStartsAt),
+                        Timer.NewWorkDayStartsAt(MySim.CurrentTime, Settings.Constants.NakladacBStartsAt));
+            sprava.Code = Mc.KoniecPracovnejDoby;
+            sprava.Addressee = MyAgent.FindAssistant(SimId.PlanovacPracovnejDoby);
+            Hold(delTime, sprava);
+            */
         }
 
         public void ProcessDefault(MessageForm message)

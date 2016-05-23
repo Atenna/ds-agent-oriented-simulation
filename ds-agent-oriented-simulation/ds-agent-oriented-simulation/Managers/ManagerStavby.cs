@@ -105,7 +105,7 @@ namespace ds_agent_oriented_simulation.Managers
             double volumeToUnload = naVylozenie.RealVolume;
 
             // ak A nepracuje alebo naklada a B nepracuje alebo naklada alebo je zakazany
-            if (MyAgent.VykladacAIsOccupied && (MyAgent.VykladacBIsDisabled || MyAgent.VykladacBIsOccupied))
+            if ((MyAgent.VykladacAIsOccupied && MyAgent.VykladacBIsOccupied || MyAgent.VykladacBIsDisabled) || (!MyAgent.VykladacAIsWorking() && !MyAgent.VykladacBIsWorking() || MyAgent.VykladacBIsDisabled))
             {
                 MyAgent.AutaStavbaQueue.AddLast(naVylozenie);
                 MyAgent.MessageStavbaQueue.AddLast((MyMessage)message);
