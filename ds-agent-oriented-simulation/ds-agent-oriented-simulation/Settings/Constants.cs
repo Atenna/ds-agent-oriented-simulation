@@ -51,14 +51,14 @@
         public static int Seed { get; set; }
         
 
-        public static double NakladacAStartsAt = 1; // 7 ... 60
+        public static double NakladacAStartsAt = 0; // 7 ... 60
         public static double NakladacAEndsAt = 2; // 18 ... 120
-        public static double NakladacBStartsAt = 3; // 9 ... 180
+        public static double NakladacBStartsAt = 0; // 9 ... 180
         public static double NakladacBEndsAt = 4; // 22
-        public static double VykladacAStartsAt = 7.5;
-        public static double VykladacAEndsAt = 22;
-        public static double VykladacBStartsAt = 7.5;
-        public static double VykladacBEndsAt = 22;
+        public static double VykladacAStartsAt = 0; // 7.5;
+        public static double VykladacAEndsAt = 2; //22;
+        public static double VykladacBStartsAt = 1; // 7.5;
+        public static double VykladacBEndsAt = 3; // 22;
 
         public static double MaterialAtDepo = 3500;
         public static double MaterialAtBuilding = 1500;

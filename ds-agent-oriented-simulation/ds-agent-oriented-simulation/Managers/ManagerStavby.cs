@@ -34,7 +34,7 @@ namespace ds_agent_oriented_simulation.Managers
             message.Addressee = MySim.FindAgent(SimId.AgentDopravy);
             Response(message);
 
-            if (!MyAgent.AutaStavbaQueue.IsEmpty())
+            if (!MyAgent.AutaStavbaQueue.IsEmpty() && MyAgent.VykladacAIsWorking())
             {
                 Vehicle naVylozenie;
                 lock (Constants.Queue2Lock)
@@ -66,7 +66,7 @@ namespace ds_agent_oriented_simulation.Managers
             message.Addressee = MySim.FindAgent(SimId.AgentDopravy);
             Response(message);
 
-            if (!MyAgent.AutaStavbaQueue.IsEmpty())
+            if (!MyAgent.AutaStavbaQueue.IsEmpty() && MyAgent.VykladacBIsWorking())
             {
                 Vehicle naVylozenie;
                 lock (Constants.Queue2Lock)
@@ -146,6 +146,54 @@ namespace ds_agent_oriented_simulation.Managers
                 case Mc.OdvozMaterialu:
                     ProcessOdvozMaterialu(message);
                     break;
+                case Mc.ZaciatokPracovnejDoby:
+                    ProcessStartWorkDay(message);
+                    break;
+                case Mc.KoniecPracovnejDoby:
+                    ProcessEndWorkDay(message);
+                    break;
+            }
+        }
+
+        private void ProcessEndWorkDay(MessageForm message)
+        {
+            MyMessage naplanujZaciatokPrace = new MyMessage(MySim);
+            naplanujZaciatokPrace.Addressee = MyAgent.FindAssistant(SimId.PlanovacPracovnejDoby2);
+            naplanujZaciatokPrace.Code = Mc.Start;
+            StartContinualAssistant(naplanujZaciatokPrace);
+        }
+
+        private void ProcessStartWorkDay(MessageForm message)
+        {
+            Vehicle naVylozenie;
+            if (!MyAgent.AutaStavbaQueue.IsEmpty())
+            {
+                lock (Constants.QueueLock)
+                {
+                    naVylozenie = MyAgent.AutaStavbaQueue.First.Value;
+                    MyAgent.AutaStavbaQueue.RemoveFirst();
+                }
+                MyMessage zFrontu = MyAgent.MessageStavbaQueue.First.Value;
+                MyAgent.MessageStavbaQueue.RemoveFirst();
+
+                if (((MyMessage)message).Name == "A")
+                {
+                    zFrontu.Addressee = MyAgent.FindAssistant(SimId.ProcesVykladacA);
+                }
+                else
+                {
+                    zFrontu.Addressee = MyAgent.FindAssistant(SimId.ProcesVykladacB);
+                }
+
+                zFrontu.Code = Mc.VylozAuto;
+
+                // ukoncenie cakania
+                naVylozenie.CasCakaniaNaSkladke = (MySim.CurrentTime - naVylozenie.ZaciatokCakania);
+                // pridanie casu cakania na skladke do statistik
+                MyAgent.WaitingTimePerCar.AddSample(naVylozenie.CasCakaniaNaSkladke);
+
+                zFrontu.Car = naVylozenie;
+                StartContinualAssistant(zFrontu);
             }
         }
 

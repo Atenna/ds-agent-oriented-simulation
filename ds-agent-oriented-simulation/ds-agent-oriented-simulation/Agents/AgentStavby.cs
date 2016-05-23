@@ -25,6 +25,7 @@ namespace ds_agent_oriented_simulation.Agents
         public bool VykladacBIsDisabled { get; set; }
         public bool VykladacAIsOccupied { get; set; }
         public bool VykladacBIsOccupied { get; set; }
+        public PlanovacPracovnejDoby2 PlanovacPracovnejDoby { get; set; }
 
         public AgentStavby(int id, OSPABA.Simulation mySim, Agent parent) :
             base(id, mySim, parent)
@@ -75,9 +76,12 @@ namespace ds_agent_oriented_simulation.Agents
             new ManagerStavby(SimId.ManagerStavby, MySim, this);
             new ProcesVykladacA(SimId.ProcesVykladacA, MySim, this);
             new ProcesVykladacB(SimId.ProcesVykladacB, MySim, this);
+            new PlanovacPracovnejDoby2(SimId.PlanovacPracovnejDoby2, MySim, this);
             AddOwnMessage(Mc.VylozAuto);
             AddOwnMessage(Mc.VylozenieUkoncene);
             AddOwnMessage(Mc.OdvozMaterialu);
+            AddOwnMessage(Mc.ZaciatokPracovnejDoby);
+            AddOwnMessage(Mc.KoniecPracovnejDoby);
         }
         //meta! tag="end"
     }

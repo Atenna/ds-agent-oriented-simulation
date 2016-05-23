@@ -63,6 +63,7 @@
     <Compile Include="ContinualAssistant\PlanovacDovozMaterialu.cs" />
     <Compile Include="ContinualAssistant\PlanovacOdvozMaterialu.cs" />
     <Compile Include="ContinualAssistant\PlanovacPracovnejDoby.cs" />
+    <Compile Include="ContinualAssistant\PlanovacPracovnejDoby2.cs" />
     <Compile Include="ContinualAssistant\ProcessPresunNaPrejazd.cs" />
     <Compile Include="ContinualAssistant\ProcessPresunNaSkladku.cs" />
     <Compile Include="ContinualAssistant\ProcessPresunNaStavbu.cs" />
