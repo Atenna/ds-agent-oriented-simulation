@@ -10,40 +10,41 @@ namespace ds_agent_oriented_simulation.Agents
     //meta! id="19"
     public class AgentDopravy : Agent
     {
-
         public List<Vehicle> EnabledCars;
         private readonly MySimulation _mine;
         public AgentDopravy(int id, OSPABA.Simulation mySim, Agent parent) :
             base(id, mySim, parent)
         {
             Init();
-            _mine = (MySimulation) mySim;
+            _mine = (MySimulation)mySim;
         }
 
         public void PrepareCars(int count, int type)
         {
+            int IDCar = 0;
             for (int i = 0; i < count; i++)
             {
                 if (type == 0)
                 {
-                    EnabledCars.Add(new CarA(_mine.SeedGenerator));
+                    EnabledCars.Add(new CarA(_mine.SeedGenerator, IDCar));
                 }
-                if (type == 1) 
+                if (type == 1)
                 {
-                    EnabledCars.Add(new CarB(_mine.SeedGenerator));
+                    EnabledCars.Add(new CarB(_mine.SeedGenerator, IDCar));
                 }
                 if (type == 2)
                 {
-                    EnabledCars.Add(new CarC(_mine.SeedGenerator));
+                    EnabledCars.Add(new CarC(_mine.SeedGenerator, IDCar));
                 }
                 if (type == 3)
                 {
-                    EnabledCars.Add(new CarD(_mine.SeedGenerator));
+                    EnabledCars.Add(new CarD(_mine.SeedGenerator, IDCar));
                 }
                 if (type == 4)
                 {
-                    EnabledCars.Add(new CarE(_mine.SeedGenerator));
+                    EnabledCars.Add(new CarE(_mine.SeedGenerator, IDCar));
                 }
+                IDCar++;
             }
         }
 

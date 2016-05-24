@@ -24,6 +24,7 @@ namespace ds_agent_oriented_simulation.Agents
         public double MaterialNaStavbe { get; set; }
         public bool NakladacAIsOccupied { get; set; }
         public bool NakladacBIsOccupied { get; set; }
+        public bool fullLoad { get; internal set; }
 
         public double Material;
 
@@ -41,6 +42,7 @@ namespace ds_agent_oriented_simulation.Agents
             Material = Settings.Constants.MaterialToLoad;
             NakladacAIsOccupied = false;
             NakladacBIsOccupied = false;
+            fullLoad = false;
         }
 
         public override void PrepareReplication()

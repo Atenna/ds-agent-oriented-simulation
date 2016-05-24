@@ -25,6 +25,11 @@ namespace ds_agent_oriented_simulation.Agents
         public bool VykladacBIsDisabled { get; set; }
         public bool VykladacAIsOccupied { get; set; }
         public bool VykladacBIsOccupied { get; set; }
+
+        public Stat OdoberMaterial { get; private set; }
+        public double PocetUspesnyExport { get; set; } // per replikacia
+        public double PocetExport { get; set; } // per replikacia - attempts
+        public Stat OdoberMaterialKumulativny { get; private set; }
         public PlanovacPracovnejDoby2 PlanovacPracovnejDoby { get; set; }
 
         public AgentStavby(int id, OSPABA.Simulation mySim, Agent parent) :
@@ -35,12 +40,16 @@ namespace ds_agent_oriented_simulation.Agents
             LengthOfQueue = new WStat(mySim);
             AutaStavbaQueue = new SimQueue<Vehicle>(LengthOfQueue);
             MessageStavbaQueue = new SimQueue<MyMessage>(LengthOfQueue);
-            VykladacBIsDisabled = true;
+            VykladacBIsDisabled = !((MySimulation)MySim).buyUnloader;
             VykladacAIsOccupied = false;
             VykladacAIsOccupied = false;
+            //OdoberMaterial = new Stat();
+            OdoberMaterialKumulativny = new Stat();
+            PocetUspesnyExport = 0;
+            PocetExport = 0;
         }
 
-        override public void PrepareReplication()
+        public override void PrepareReplication()
         {
             base.PrepareReplication();
             // Setup component for the next replication
@@ -59,7 +68,12 @@ namespace ds_agent_oriented_simulation.Agents
             AutaStavbaQueue.Clear();
             MessageStavbaQueue.Clear();
 
-            VykladacBIsDisabled = FormAgentSimulation.UnloaderBDisabled;
+            //VykladacBIsDisabled = FormAgentSimulation.UnloaderBDisabled;
+
+            // vycisti statistiku odoberania materialu
+            //OdoberMaterial = new Stat();
+            PocetUspesnyExport = 0;
+            PocetExport = 0;
         }
 
         public bool VykladacAIsWorking()
@@ -86,5 +100,7 @@ namespace ds_agent_oriented_simulation.Agents
             AddOwnMessage(Mc.KoniecPracovnejDoby);
         }
         //meta! tag="end"
+
+        
     }
 }
