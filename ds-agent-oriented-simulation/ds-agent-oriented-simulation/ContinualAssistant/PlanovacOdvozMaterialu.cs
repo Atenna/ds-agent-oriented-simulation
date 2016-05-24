@@ -1,3 +1,4 @@
+using System;
 using ds_agent_oriented_simulation.Agents;
 using ds_agent_oriented_simulation.Settings;
 using ds_agent_oriented_simulation.Simulation;
@@ -14,7 +15,8 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
         public PlanovacOdvozMaterialu(int id, OSPABA.Simulation mySim, CommonAgent myAgent) :
             base(id, mySim, myAgent)
         {
-            GenCas =    new EmpiricRNG<int>(new EmpiricPair<int>(new UniformDiscreteRNG(10, 20), 0.02),
+            GenCas = new EmpiricRNG<int>(new Random(((MySimulation)MySim).SeedGenerator.Next()),
+                        new EmpiricPair<int>(new UniformDiscreteRNG(10, 20), 0.02),
                         new EmpiricPair<int>(new UniformDiscreteRNG(21, 48), 0.2),
                         new EmpiricPair<int>(new UniformDiscreteRNG(49, 65), 0.33),
                         new EmpiricPair<int>(new UniformDiscreteRNG(66, 79), 0.3),

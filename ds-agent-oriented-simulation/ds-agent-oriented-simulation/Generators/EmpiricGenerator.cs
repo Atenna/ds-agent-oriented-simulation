@@ -2,26 +2,26 @@
 
 namespace ds_agent_oriented_simulation.Generators
 {
-    class EmpiricGenerator
+    class EmpiricGeneratoa
     {
         // generator nasad
-        private static  Random seeder;
+        private static Random seeder;
         private static double number;
 
         public static void InitializeSeed(Random seed)
         {
             seeder = seed;
-            
         }
 
         public int GetSampleA()
         {
             number = seeder.NextDouble();
 
-            if (number >= 0 &&  number < 0.0033085)
+            if (number >= 0 && number < 0.0033085)
             {
                 return 5;
-            } else if (number >= 0.0033085 && number < 0.0128205)
+            }
+            else if (number >= 0.0033085 && number < 0.0128205)
             {
                 return 6;
             }
@@ -65,7 +65,7 @@ namespace ds_agent_oriented_simulation.Generators
             {
                 return 16;
             }
-                return 19;
+            return 19;
         }
         public int GetSampleB()
         {
@@ -131,7 +131,7 @@ namespace ds_agent_oriented_simulation.Generators
             {
                 return 20;
             }
-                return 21;
+            return 21;
         }
         public int GgetSampleC()
         {

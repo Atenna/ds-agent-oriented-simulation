@@ -29,11 +29,11 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
         {
             base.PrepareReplication();
             // Setup component for the next replication
-            GenCasA = new ExponentialRNG(46.9, 0.99);
-            GenCasB = new ExponentialRNG(36.8, 3);
-            GenCasC = new ExponentialRNG(25.8, 0.99);
+            GenCasA = new ExponentialRNG(46.9, new Random(((MySimulation)MySim).SeedGenerator.Next()), 0.99);
+            GenCasB = new ExponentialRNG(36.8, new Random(((MySimulation)MySim).SeedGenerator.Next()), 3);
+            GenCasC = new ExponentialRNG(25.8, new Random(((MySimulation)MySim).SeedGenerator.Next()), 0.99);
 
-            GenMaterialA = new EmpiricRNG<int>(
+            GenMaterialA = new EmpiricRNG<int>(new Random(((MySimulation)MySim).SeedGenerator.Next()),
                 new EmpiricPair<int>(new UniformDiscreteRNG(4, 4), 0),
                 new EmpiricPair<int>(new UniformDiscreteRNG(5, 5), 0.0033085),
                 new EmpiricPair<int>(new UniformDiscreteRNG(6, 6), 0.0128205),
@@ -50,7 +50,7 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
                 new EmpiricPair<int>(new UniformDiscreteRNG(19, 19), 0.0004136));
 
 
-            GenMaterialB = new EmpiricRNG<int>(
+            GenMaterialB = new EmpiricRNG<int>(new Random(((MySimulation)MySim).SeedGenerator.Next()),
                 new EmpiricPair<int>(new UniformDiscreteRNG(6, 6), 0.0003509),
                     new EmpiricPair<int>(new UniformDiscreteRNG(7, 7), 0.0010526),
                     new EmpiricPair<int>(new UniformDiscreteRNG(8, 8), 0.0028070),
@@ -68,7 +68,7 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
                     new EmpiricPair<int>(new UniformDiscreteRNG(20, 20), 0.2224561),
                     new EmpiricPair<int>(new UniformDiscreteRNG(21, 21), 0.0708772));
 
-            GenMaterialC = new EmpiricRNG<int>(
+            GenMaterialC = new EmpiricRNG<int>(new Random(((MySimulation)MySim).SeedGenerator.Next()),
                 new EmpiricPair<int>(new UniformDiscreteRNG(5, 5), 0.0004735),
                     new EmpiricPair<int>(new UniformDiscreteRNG(6, 6), 0.0030777),
                     new EmpiricPair<int>(new UniformDiscreteRNG(7, 7), 0.0037879),
@@ -88,12 +88,13 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
                     new EmpiricPair<int>(new UniformDiscreteRNG(21, 21), 0.1439394),
                     new EmpiricPair<int>(new UniformDiscreteRNG(22, 22), 0.2057292),
                     new EmpiricPair<int>(new UniformDiscreteRNG(23, 23), 0.2249053),
-                    new EmpiricPair<int>(new UniformDiscreteRNG(24, 24), 0.1870265));        }
+                    new EmpiricPair<int>(new UniformDiscreteRNG(24, 24), 0.1870265));
+        }
 
         //meta! sender="AgentOkolia", id="55", type="Start"
         public void ProcessStart(MessageForm message)
         {
-            string comp = ((MyMessage) message).Name;
+            string comp = ((MyMessage)message).Name;
             switch (comp)
             {
                 case "A":
@@ -150,7 +151,7 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
 
         private void ProcessDovozMaterialu(MyMessage message)
         {
-            
+
         }
 
         //meta! userInfo="Generated code: do not modify", tag="begin"
