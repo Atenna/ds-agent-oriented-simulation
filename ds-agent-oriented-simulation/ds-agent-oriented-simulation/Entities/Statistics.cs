@@ -10,7 +10,7 @@ namespace ds_agent_oriented_simulation.Entities
         private List<Vehicle> _cars;
         private Queue _load;
         private Queue _unload;
-        
+
         private int _iterator;
         private double _loadSize; // kumulativne sa tam bude ukladat priemerna dlzka radu 
         private double _unloadSize;
@@ -69,49 +69,49 @@ namespace ds_agent_oriented_simulation.Entities
         */
         public double GetStatsMeanSimulationTime()
         {
-            return _simulationTimeCumulative/_iterator;
+            return _simulationTimeCumulative / _iterator;
         }
 
         public double GetStatsMeanLoadQueueLength()
         {
-            return _loadSize/_iterator;
+            return _loadSize / _iterator;
         }
 
         public double GetStatsMeanUnloadQueueLength()
         {
-            return _unloadSize/_iterator;
+            return _unloadSize / _iterator;
         }
 
         // statistika pre vsetky auta - priemerna dlza cakania pred nakladacom
         public double GetStatsSumMeanLoadQueueTime()
         {
             // asi nebude fungovat hned
-            return (_timeOfWaitingOnDepo/_iterator);
+            return (_timeOfWaitingOnDepo / _iterator);
         }
 
         // statistika pre jedno auto - priemerna dlzka cakania pred nakladacom
         public double GetStatsMeanLoadQueueTime()
         {
-            return (_meanWaitingOnDepo/_iterator)/_cars.Count;
+            return (_meanWaitingOnDepo / _iterator) / _cars.Count;
         }
 
         // statistika pre vsetky auta - priemerna dlzka cakania pred vykladacom
         public double GetStatsSumMeanUnloadQueueTime()
         {
-            return (_timeOfWaitingOnBuilding/_iterator);
+            return (_timeOfWaitingOnBuilding / _iterator);
         }
 
         public double GetStatsMeanUnloadQueueTime()
         {
-            return (_meanWaitingOnBuilding/_iterator)/_cars.Count;
+            return (_meanWaitingOnBuilding / _iterator) / _cars.Count;
         }
 
         public double[] ConfidenceIntervalSimulationTime(double confidence)
         {
-            confidence = 1 - ((1 - confidence)/2);
+            confidence = 1 - ((1 - confidence) / 2);
             double[] interval = new double[2];
-            double avg = _simulationTimeCumulative/_iterator;
-            double standardDeviation = Math.Sqrt((_simulationTimePower/_iterator) - Math.Pow(avg, 2));
+            double avg = _simulationTimeCumulative / _iterator;
+            double standardDeviation = Math.Sqrt((_simulationTimePower / _iterator) - Math.Pow(avg, 2));
 
             double value = 0;
 
@@ -124,8 +124,8 @@ namespace ds_agent_oriented_simulation.Entities
                 value = Normal.InvCDF(0, 1, confidence);
             }
 
-            interval[0] = avg - (value*standardDeviation/Math.Sqrt((_iterator - 1)));
-            interval[1] = avg + (value*standardDeviation/Math.Sqrt((_iterator - 1)));
+            interval[0] = avg - (value * standardDeviation / Math.Sqrt((_iterator - 1)));
+            interval[1] = avg + (value * standardDeviation / Math.Sqrt((_iterator - 1)));
 
             return interval;
         }

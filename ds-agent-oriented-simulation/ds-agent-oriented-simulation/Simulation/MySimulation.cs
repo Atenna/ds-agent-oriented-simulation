@@ -12,9 +12,16 @@ namespace ds_agent_oriented_simulation.Simulation
         private Statistics _statistics;
         public Random SeedGenerator { get; private set; }
         public WStat SkladkaWStat { get; private set; }
+        public bool buyUnloader { get; private set; }
+
+        public double ExportSuccessRate { get; set; }
         public MySimulation()
         {
+            SeedGenerator = new Random(Constants.Seed);
             Init();
+
+            buyUnloader = false;
+            ExportSuccessRate = 0.0;
         }
 
         protected override void PrepareSimulation()
@@ -22,9 +29,8 @@ namespace ds_agent_oriented_simulation.Simulation
             base.PrepareSimulation();
             // Create global statistcis
             CurrentRun.initializeCurrentRun();
-
             _statistics = new Statistics();
-            SeedGenerator = new Random(Constants.Seed);
+
             // inicializacia aut
             // 
             //AgentDopravy.PrepareCars(SeedGenerator);
@@ -43,6 +49,12 @@ namespace ds_agent_oriented_simulation.Simulation
             base.ReplicationFinished();
             //SkladkaWStat = AgentSkladky.SkladkaWStat;
             Console.WriteLine("Koniec replikacie");
+
+
+            // prida do kumulativnych statistik v Agentovi stavby statistiku z aktualnej replikacie
+            ExportSuccessRate = AgentStavby.PocetUspesnyExport/AgentStavby.PocetExport;
+            AgentStavby.OdoberMaterialKumulativny.AddSample(ExportSuccessRate);
+            
         }
 
         protected override void SimulationFinished()

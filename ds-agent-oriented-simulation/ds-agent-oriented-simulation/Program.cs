@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using ds_agent_oriented_simulation.Simulation;
+using MathNet.Numerics;
 
 namespace ds_agent_oriented_simulation
 {
@@ -12,6 +13,11 @@ namespace ds_agent_oriented_simulation
         [STAThread]
         public static void Main()
         {
+            /*int[] SelectedCars = new int[]{0,20,0,0,0};
+            
+            MySimulation ms = new MySimulation();
+            ms.Simulate(1, 788400);*/
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FormAgentSimulation());

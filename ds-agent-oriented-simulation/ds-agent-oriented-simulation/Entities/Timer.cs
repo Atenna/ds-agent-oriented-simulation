@@ -30,7 +30,7 @@ namespace ds_agent_oriented_simulation.Entities
 
         public static double ToMinutes(double hours)
         {
-            return hours*60;
+            return hours * 60;
         }
 
         public static double LengthOfOneDay()
@@ -40,12 +40,12 @@ namespace ds_agent_oriented_simulation.Entities
 
         public static double ToHours(double currentTime)
         {
-            return ((currentTime/60)%24);
+            return ((currentTime / 60) % 24);
         }
 
         public static bool IsWorking(double simTime, double startsAt, double finishAt)
         {
-            double hours = (simTime/60)%24; // minuty => hodiny, % 24 hodinovy format
+            double hours = (simTime / 60) % 24; // minuty => hodiny, % 24 hodinovy format
             if (hours >= startsAt && hours <= finishAt)
             {
                 return true;

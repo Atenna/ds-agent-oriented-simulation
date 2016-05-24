@@ -1,3 +1,4 @@
+using System;
 using ds_agent_oriented_simulation.Agents;
 using ds_agent_oriented_simulation.Entities.Vehicles;
 using ds_agent_oriented_simulation.Settings;
@@ -9,6 +10,8 @@ namespace ds_agent_oriented_simulation.Managers
     //meta! id="18"
     public class ManagerStavby : Manager
     {
+
+
         public ManagerStavby(int id, OSPABA.Simulation mySim, Agent myAgent) :
             base(id, mySim, myAgent)
         {
@@ -76,7 +79,8 @@ namespace ds_agent_oriented_simulation.Managers
                 else
                 {
                     MyAgent.AutaStavbaQueue.AddFirst(((MyMessage)message).Car);
-                    MyAgent.MessageStavbaQueue.AddLast((MyMessage)message);
+                    MyAgent.MessageStavbaQueue.AddFirst((MyMessage)message);
+                    MyAgent.VykladacAIsOccupied = false;
                 }
             }
         }
@@ -124,7 +128,7 @@ namespace ds_agent_oriented_simulation.Managers
                 // je volna kapacita?
                 if (MyAgent.VykladacBIsWorking() && MyAgent.MaterialNaStavbe < Constants.MaxMaterialAtBuilding)
                 {
-                    ((MyMessage) message).Car.ToUnload = LoadCarWith(auto.RealVolume);
+                    ((MyMessage)message).Car.ToUnload = LoadCarWith(auto.RealVolume);
                     message.Code = Mc.VylozAuto;
                     message.Addressee = MyAgent.FindAssistant(SimId.ProcesVykladacB);
                     MyAgent.VykladacBIsOccupied = true;
@@ -132,8 +136,9 @@ namespace ds_agent_oriented_simulation.Managers
                 }
                 else
                 {
-                    MyAgent.AutaStavbaQueue.AddFirst(((MyMessage) message).Car);
-                    MyAgent.MessageStavbaQueue.AddLast((MyMessage)message);
+                    MyAgent.AutaStavbaQueue.AddFirst(((MyMessage)message).Car);
+                    MyAgent.MessageStavbaQueue.AddFirst((MyMessage)message);
+                    MyAgent.VykladacBIsOccupied = false;
                 }
             }
         }
@@ -142,13 +147,14 @@ namespace ds_agent_oriented_simulation.Managers
         public void ProcessVylozAuto(MessageForm message)
         {
             Vehicle naVylozenie = ((MyMessage)message).Car;
+
             // zaciatok cakania v rade
 
             // to do - podmienka aby sa cakalo iba do konca pracovnej doby Vykladaca a potom sa prirataval cas od zaciatku pracovnej doby
             naVylozenie.ZaciatokCakania = MySim.CurrentTime;
 
             // ak A nepracuje alebo naklada a B nepracuje alebo naklada alebo je zakazany
-            if (!(!MyAgent.VykladacBIsOccupied && !MyAgent.VykladacBIsDisabled && MyAgent.VykladacBIsWorking()) && !(!MyAgent.VykladacAIsOccupied && MyAgent.VykladacAIsWorking()) && MyAgent.MaterialNaStavbe < Constants.MaxMaterialAtBuilding)
+            if ((!(!MyAgent.VykladacBIsOccupied && !MyAgent.VykladacBIsDisabled && MyAgent.VykladacBIsWorking()) && !(!MyAgent.VykladacAIsOccupied && MyAgent.VykladacAIsWorking())) || MyAgent.MaterialNaStavbe == Constants.MaxMaterialAtBuilding)
             {
                 MyAgent.AutaStavbaQueue.AddLast(naVylozenie);
                 MyAgent.MessageStavbaQueue.AddLast((MyMessage)message);
@@ -169,7 +175,7 @@ namespace ds_agent_oriented_simulation.Managers
                     StartContinualAssistant(message);
                 }
                 // ak A pracuje a nenaklada
-                else if(!MyAgent.VykladacAIsOccupied && MyAgent.VykladacAIsWorking())
+                else if (!MyAgent.VykladacAIsOccupied && MyAgent.VykladacAIsWorking())
                 {
                     message.Addressee = MyAgent.FindAssistant(SimId.ProcesVykladacA);
                     MyAgent.VykladacAIsOccupied = true;
@@ -181,7 +187,6 @@ namespace ds_agent_oriented_simulation.Managers
                     MyAgent.WaitingTimePerCar.AddSample(naVylozenie.CasCakaniaNaStavbe);
                     StartContinualAssistant(message);
                 }
-
             }
         }
 
@@ -191,7 +196,7 @@ namespace ds_agent_oriented_simulation.Managers
             switch (message.Code)
             {
                 case Mc.OdvozMaterialu:
-                    ProcessOdvozMaterialu((MyMessage) message);
+                    ProcessOdvozMaterialu((MyMessage)message);
                     break;
                 case Mc.ZaciatokPracovnejDoby:
                     ProcessStartWorkDay(message);
@@ -219,7 +224,7 @@ namespace ds_agent_oriented_simulation.Managers
             Vehicle naNalozenie = null;
 
             // ak  B ma pracovnu dobu a nenaklada nikoho
-            if (!MyAgent.AutaStavbaQueue.IsEmpty() && MyAgent.VykladacBIsWorking() && MyAgent.MaterialNaStavbe < Constants.MaxMaterialAtBuilding && !MyAgent.VykladacBIsDisabled)
+            if (!MyAgent.VykladacBIsOccupied && !MyAgent.AutaStavbaQueue.IsEmpty() && MyAgent.VykladacBIsWorking() && MyAgent.MaterialNaStavbe < Constants.MaxMaterialAtBuilding && !MyAgent.VykladacBIsDisabled)
             {
                 MyMessage sprava = MyAgent.MessageStavbaQueue.First.Value;
                 MyAgent.MessageStavbaQueue.RemoveFirst();
@@ -227,19 +232,19 @@ namespace ds_agent_oriented_simulation.Managers
                 naNalozenie = MyAgent.AutaStavbaQueue.First.Value;
                 MyAgent.AutaStavbaQueue.RemoveFirst();
 
-                sprava.Addressee = MyAgent.FindAssistant(SimId.ProcesNakladacB);
+                sprava.Addressee = MyAgent.FindAssistant(SimId.ProcesVykladacB);
                 MyAgent.VykladacBIsOccupied = true;
                 // koniec cakania
                 naNalozenie.CasCakaniaNaSkladke = (MySim.CurrentTime - naNalozenie.ZaciatokCakania);
                 // nalozime mnozstvo ktore je aktualne na skladke
-                naNalozenie.ToUnload = (int)LoadCarWith(naNalozenie.Volume);
+                naNalozenie.ToUnload = (int)LoadCarWith(naNalozenie.RealVolume);
                 // pridanie casu cakania na skladke do statistik
 
                 sprava.Car = naNalozenie;
                 MyAgent.WaitingTimePerCar.AddSample(naNalozenie.CasCakaniaNaSkladke);
                 StartContinualAssistant(sprava);
             }
-            else if (!MyAgent.AutaStavbaQueue.IsEmpty() && MyAgent.VykladacAIsWorking() && MyAgent.MaterialNaStavbe < Constants.MaxMaterialAtBuilding)
+            else if (!MyAgent.VykladacAIsOccupied && !MyAgent.AutaStavbaQueue.IsEmpty() && MyAgent.VykladacAIsWorking() && MyAgent.MaterialNaStavbe < Constants.MaxMaterialAtBuilding)
             {
                 MyMessage sprava = MyAgent.MessageStavbaQueue.First.Value;
                 MyAgent.MessageStavbaQueue.RemoveFirst();
@@ -247,12 +252,12 @@ namespace ds_agent_oriented_simulation.Managers
                 naNalozenie = MyAgent.AutaStavbaQueue.First.Value;
                 MyAgent.AutaStavbaQueue.RemoveFirst();
 
-                sprava.Addressee = MyAgent.FindAssistant(SimId.ProcesNakladacA);
+                sprava.Addressee = MyAgent.FindAssistant(SimId.ProcesVykladacA);
                 MyAgent.VykladacAIsOccupied = true;
                 // koniec cakania
                 naNalozenie.CasCakaniaNaSkladke = (MySim.CurrentTime - naNalozenie.ZaciatokCakania);
                 // nalozime mnozstvo ktore je aktualne na skladke
-                naNalozenie.ToUnload = (int)LoadCarWith(naNalozenie.Volume);
+                naNalozenie.ToUnload = (int)LoadCarWith(naNalozenie.RealVolume);
                 // pridanie casu cakania na skladke do statistik
 
                 sprava.Car = naNalozenie;
@@ -292,7 +297,7 @@ namespace ds_agent_oriented_simulation.Managers
                 }
 
                 zFrontu.Code = Mc.VylozAuto;
-
+                naVylozenie.ToUnload = (int)LoadCarWith(naVylozenie.RealVolume);
                 // ukoncenie cakania
                 naVylozenie.CasCakaniaNaSkladke = (MySim.CurrentTime - naVylozenie.ZaciatokCakania);
                 // pridanie casu cakania na skladke do statistik
@@ -305,8 +310,10 @@ namespace ds_agent_oriented_simulation.Managers
 
         private void ProcessOdvozMaterialu(MyMessage message)
         {
+            MyAgent.PocetExport++;
+
             // tu sa od materialu odpocita objem a posle sa spat sprava, kolko je materialu
-            if (MyAgent.MaterialNaStavbe < ((MyMessage) message).Volume)
+            if (MyAgent.MaterialNaStavbe < ((MyMessage)message).Volume)
             {
                 MyAgent.MaterialNaStavbe = 0;
                 // neuspesny pokus 
@@ -314,9 +321,12 @@ namespace ds_agent_oriented_simulation.Managers
             else
             {
                 MyAgent.MaterialNaStavbe -= ((MyMessage)message).Volume;
+                // uspesny pokus, pridanie do statistik
+                MyAgent.PocetUspesnyExport++;
             }
             if (!MyAgent.AutaStavbaQueue.IsEmpty())
             {
+                // ak je opat miesto na skladke stavby :D tak moze auto, ktore caka, opat nakladat material
                 NejakaMetoda(message);
             }
         }
@@ -360,5 +370,7 @@ namespace ds_agent_oriented_simulation.Managers
                 return (AgentStavby)base.MyAgent;
             }
         }
+
+        
     }
 }

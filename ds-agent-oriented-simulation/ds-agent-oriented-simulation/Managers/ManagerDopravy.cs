@@ -46,6 +46,11 @@ namespace ds_agent_oriented_simulation.Managers
                 sprava.Car = car;
                 sprava.Addressee = MySim.FindAgent(SimId.AgentStavby);
                 Request(sprava);
+
+                /*car.RealVolume = 0;
+                message.Addressee = MyAgent.FindAssistant(SimId.ProcessPresunNaPrejazd);
+                sprava.Car = car;
+                StartContinualAssistant(sprava);*/
             }
         }
 
@@ -85,7 +90,7 @@ namespace ds_agent_oriented_simulation.Managers
             // auto skoncilo nakladanie 
 
             MyMessage sprava = new MyMessage(MySim);
-            sprava.Volume = ((MyMessage) message).Volume;
+            sprava.Volume = ((MyMessage)message).Volume;
             sprava.Car = ((MyMessage)message).Car;
             sprava.Addressee = MyAgent.FindAssistant(SimId.ProcessPresunNaStavbu);
             StartContinualAssistant(sprava);
@@ -117,7 +122,7 @@ namespace ds_agent_oriented_simulation.Managers
         {
             MyMessage spravaDolava = new MyMessage(MySim);
             spravaDolava.Code = Mc.OdvozMaterialu;
-            spravaDolava.Volume = ((MyMessage) message).Volume;
+            spravaDolava.Volume = ((MyMessage)message).Volume;
             spravaDolava.Addressee = MySim.FindAgent(SimId.AgentStavby);
             Notice(spravaDolava);
         }
