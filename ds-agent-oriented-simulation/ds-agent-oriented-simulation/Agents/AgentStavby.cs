@@ -53,8 +53,9 @@ namespace ds_agent_oriented_simulation.Agents
         {
             base.PrepareReplication();
             // Setup component for the next replication
-            //VykladacBIsWorking = false;
-            //VykladacAIsWorking = false;
+            VykladacBIsDisabled = !((MySimulation)MySim).buyUnloader;
+            VykladacAIsOccupied = false;
+            VykladacAIsOccupied = false;
 
             // odobratie prvkov z radu
             if (!AutaStavbaQueue.IsEmpty())
@@ -74,6 +75,9 @@ namespace ds_agent_oriented_simulation.Agents
             OdoberMaterial = new Stat();
             PocetUspesnyExport = 0;
             PocetExport = 0;
+
+            CarAtUnloaderA = null;
+            CarAtUnloaderB = null;
         }
 
         public bool VykladacAIsWorking()

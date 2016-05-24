@@ -25,7 +25,9 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
         {
             base.PrepareReplication();
             // Setup component for the next replication
-
+            _naVylozenie = null;
+            StartsAt = Constants.VykladacBStartsAt;
+            EndsAt = Constants.VykladacBEndsAt;
         }
 
         //meta! sender="AgentStavby", id="72", type="Start"

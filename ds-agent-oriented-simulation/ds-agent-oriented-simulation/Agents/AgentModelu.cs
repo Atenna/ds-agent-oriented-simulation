@@ -7,6 +7,8 @@ namespace ds_agent_oriented_simulation.Agents
     //meta! id="13"
     public class AgentModelu : Agent
     {
+        public int[] SelectedCars { get; set; }
+
         public AgentModelu(int id, OSPABA.Simulation mySim, Agent parent) :
             base(id, mySim, parent)
         {
@@ -18,7 +20,9 @@ namespace ds_agent_oriented_simulation.Agents
             base.PrepareReplication();
             // Setup component for the next replication
 
-            MyMessage sprava = new MyMessage(MySim, FormAgentSimulation.SelectedCars);
+
+            SelectedCars = FormAgentSimulation.SelectedCars;
+            MyMessage sprava = new MyMessage(MySim, SelectedCars);
 
             /* Hard setup of cars
             int[] selectedCars = new int[5];
@@ -42,6 +46,7 @@ namespace ds_agent_oriented_simulation.Agents
         //meta! userInfo="Generated code: do not modify", tag="begin"
         private void Init()
         {
+            //SelectedCars = Program.CarConfig();
             new ManagerModelu(SimId.ManagerModelu, MySim, this);
             AddOwnMessage(Mc.OdvozMaterialu);
             AddOwnMessage(Mc.DovozMaterialu);

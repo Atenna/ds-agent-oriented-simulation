@@ -22,8 +22,10 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
         override public void PrepareReplication()
         {
             base.PrepareReplication();
-            // Setup component for the next replication
 
+            _naNalozenie = null;
+            StartsAt = Constants.NakladacAStartsAt;
+            EndsAt = Constants.NakladacAEndsAt;
         }
 
         //meta! sender="AgentSkladky", id="64", type="Start"

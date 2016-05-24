@@ -53,6 +53,17 @@ namespace ds_agent_oriented_simulation.Agents
             {
                 AutaSkladkaQueue.Dequeue();
             }
+
+            SkladkaWStat.Clear();
+            LengthOfQueue.Clear();
+            AutaSkladkaQueue.Clear();
+            MessageSkladkaQueue.Clear();
+
+            MaterialNaSkladke = Constants.MaterialAtDepo;
+            Material = Settings.Constants.MaterialToLoad;
+            NakladacAIsOccupied = false;
+            NakladacBIsOccupied = false;
+            fullLoad = false;
         }
 
         //meta! userInfo="Generated code: do not modify", tag="begin"

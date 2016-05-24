@@ -71,7 +71,7 @@ namespace ds_agent_oriented_simulation
 
             Sim = new MySimulation();
             Sim.SetSimSpeed(0.5, 2);
-            
+            Sim.AgentModelu.SelectedCars = SelectedCars;
 
             System.Action<MySimulation> updateGuiAction = new System.Action<MySimulation>((s) => UpdateGui(s));
             try
@@ -85,7 +85,7 @@ namespace ds_agent_oriented_simulation
 
 
             // 777 600
-            Sim.SimulateAsync(3, 788400);
+            Sim.SimulateAsync(5, 788400);
 
             System.Action<MySimulation> enableChangesAction = new Action<MySimulation>((s) => EnableChanges());
             // nefunguje
@@ -184,7 +184,7 @@ namespace ds_agent_oriented_simulation
             }
             if (mySimulation.ReplicationCount > 1 && mySimulation.AgentStavby.OdoberMaterialKumulativny.SampleSize >= 2)
             {
-                labelConfInterval.Text = "Confidence interval: <" + mySimulation.AgentStavby.OdoberMaterialKumulativny.ConfidenceInterval90[0] + ", " + mySimulation.AgentStavby.OdoberMaterialKumulativny.ConfidenceInterval90[1] + ">";
+                labelConfInterval.Text = "Confidence interval: <" + mySimulation.AgentStavby.OdoberMaterialKumulativny.ConfidenceInterval90[0].ToString("P") + ", " + mySimulation.AgentStavby.OdoberMaterialKumulativny.ConfidenceInterval90[1].ToString("P") + ">";
             }
 
             if (movingPicture.Location.X < 280)

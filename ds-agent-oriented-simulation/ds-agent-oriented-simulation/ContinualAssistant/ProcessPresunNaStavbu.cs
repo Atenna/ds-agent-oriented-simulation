@@ -25,6 +25,8 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
         {
             base.PrepareReplication();
             // Setup component for the next replication
+            cesta = new OneLaneRoad(Constants.AbLength);
+            CarsOnWay = new LinkedList<Vehicle>();
         }
 
         //meta! sender="AgentDopravy", id="108", type="Start"
