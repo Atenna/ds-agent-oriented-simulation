@@ -67,5 +67,7 @@
         public const double TimeBetweenExports = 0.5;
         public static double ExportStartsAt = 7;
         public static double ExportEndsAt = 22;
+
+        public static int LengthOfReplication = 777600;
     }
 }

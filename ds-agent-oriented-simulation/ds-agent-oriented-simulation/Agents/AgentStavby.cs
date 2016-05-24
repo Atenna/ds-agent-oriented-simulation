@@ -43,7 +43,7 @@ namespace ds_agent_oriented_simulation.Agents
             VykladacBIsDisabled = !((MySimulation)MySim).buyUnloader;
             VykladacAIsOccupied = false;
             VykladacAIsOccupied = false;
-            //OdoberMaterial = new Stat();
+            OdoberMaterial = new Stat();
             OdoberMaterialKumulativny = new Stat();
             PocetUspesnyExport = 0;
             PocetExport = 0;
@@ -71,7 +71,7 @@ namespace ds_agent_oriented_simulation.Agents
             //VykladacBIsDisabled = FormAgentSimulation.UnloaderBDisabled;
 
             // vycisti statistiku odoberania materialu
-            //OdoberMaterial = new Stat();
+            OdoberMaterial = new Stat();
             PocetUspesnyExport = 0;
             PocetExport = 0;
         }

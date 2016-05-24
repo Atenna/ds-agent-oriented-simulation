@@ -54,7 +54,6 @@ namespace ds_agent_oriented_simulation.Simulation
             // prida do kumulativnych statistik v Agentovi stavby statistiku z aktualnej replikacie
             ExportSuccessRate = AgentStavby.PocetUspesnyExport/AgentStavby.PocetExport;
             AgentStavby.OdoberMaterialKumulativny.AddSample(ExportSuccessRate);
-            
         }
 
         protected override void SimulationFinished()

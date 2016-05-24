@@ -71,6 +71,7 @@ namespace ds_agent_oriented_simulation
 
             Sim = new MySimulation();
             Sim.SetSimSpeed(0.5, 2);
+            
 
             System.Action<MySimulation> updateGuiAction = new System.Action<MySimulation>((s) => UpdateGui(s));
             try
@@ -84,7 +85,7 @@ namespace ds_agent_oriented_simulation
 
 
             // 777 600
-            Sim.SimulateAsync(2);
+            Sim.SimulateAsync(3, 788400);
 
             System.Action<MySimulation> enableChangesAction = new Action<MySimulation>((s) => EnableChanges());
             // nefunguje
