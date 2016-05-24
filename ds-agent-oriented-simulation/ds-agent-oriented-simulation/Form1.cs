@@ -16,7 +16,7 @@ namespace ds_agent_oriented_simulation
 
         private static decimal _costForCars;
         public static decimal CostForUnloaders;
-
+        private double exportRate;
         public static bool UnloaderBDisabled { get; private set; }
         public FormAgentSimulation()
         {
@@ -28,6 +28,7 @@ namespace ds_agent_oriented_simulation
             CostForUnloaders = 0;
             GeneratorSeed = 22;
             UnloaderBDisabled = true;
+            exportRate = 0.0;
         }
 
         private void InitializeToolTips()
@@ -69,21 +70,21 @@ namespace ds_agent_oriented_simulation
             DisableChanges();
 
             Sim = new MySimulation();
-            Sim.SetSimSpeed(0.5,2);
-            
+            Sim.SetSimSpeed(0.5, 2);
+
             System.Action<MySimulation> updateGuiAction = new System.Action<MySimulation>((s) => UpdateGui(s));
             try
             {
                 Sim.OnRefreshUI(s => this.Invoke(updateGuiAction, s));
             }
-            catch (System.ObjectDisposedException ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
-            
+
 
             // 777 600
-            Sim.SimulateAsync(1, 788400);
+            Sim.SimulateAsync(2);
 
             System.Action<MySimulation> enableChangesAction = new Action<MySimulation>((s) => EnableChanges());
             // nefunguje
@@ -132,18 +133,24 @@ namespace ds_agent_oriented_simulation
                     }
 
                 }
-                this.labelLoaderA.Text = Sim.AgentSkladky.CarAtLoaderA != null
-                    ? ("Loads Car: " + Sim.AgentSkladky.CarAtLoaderA.Name+ ": [" + GetProgressOfLoading(Sim.AgentSkladky.CarAtLoaderA)[0].ToString("##.0") + "/" + GetProgressOfLoading(Sim.AgentSkladky.CarAtLoaderA)[1] + "] ")
-                    : "Loads Car: empty";
-                this.labelLoaderB.Text = Sim.AgentSkladky.CarAtLoaderB != null
+
+                this.labelLoaderA.Text = !Sim.AgentSkladky.NakladacAIsWorking() ?
+                    "Loads Car: Not working" : Sim.AgentSkladky.CarAtLoaderA != null
+                    ? ("Loads Car: " + Sim.AgentSkladky.CarAtLoaderA.Name + ": [" + GetProgressOfLoading(Sim.AgentSkladky.CarAtLoaderA)[0].ToString("##.0") + "/" + GetProgressOfLoading(Sim.AgentSkladky.CarAtLoaderA)[1] + "] ")
+                    : "Loads Car: Empty";
+                this.labelLoaderB.Text = !Sim.AgentSkladky.NakladacBIsWorking() ?
+                    "Loads Car: Not working" : Sim.AgentSkladky.CarAtLoaderB != null
                     ? ("Loads Car: " + Sim.AgentSkladky.CarAtLoaderB.Name + ": [" + GetProgressOfLoading(Sim.AgentSkladky.CarAtLoaderB)[0].ToString("##.0") + "/" + GetProgressOfLoading(Sim.AgentSkladky.CarAtLoaderB)[1] + "] ")
-                    : "Loads Car: empty";
-                this.labelUnloaderA.Text = Sim.AgentStavby.CarAtUnloaderA != null
+                    : "Loads Car: Empty";
+                this.labelUnloaderA.Text = !Sim.AgentStavby.VykladacAIsWorking() ?
+                    "Unloads Car: Not working" : Sim.AgentStavby.CarAtUnloaderA != null
                     ? ("Unloads Car: " + Sim.AgentStavby.CarAtUnloaderA.Name + ": [" + GetProgressOfUnloading(Sim.AgentStavby.CarAtUnloaderA)[0].ToString("##.0") + "/" + GetProgressOfLoading(Sim.AgentStavby.CarAtUnloaderA)[1] + "] ")
-                    : "Unloads Car: empty";
-                this.labelUnloaderB.Text = Sim.AgentStavby.CarAtUnloaderB != null
+                    : "Unloads Car: Empty";
+                this.labelUnloaderB.Text = Sim.AgentStavby.VykladacBIsDisabled ?
+                    "Unloads Car: Disabled" : !Sim.AgentStavby.VykladacBIsWorking() ?
+                    "Unloads Car: Not working" : Sim.AgentStavby.CarAtUnloaderB != null
                     ? ("Unloads Car: " + Sim.AgentStavby.CarAtUnloaderB.Name + ": [" + GetProgressOfUnloading(Sim.AgentStavby.CarAtUnloaderB)[0].ToString("##.0") + "/" + GetProgressOfLoading(Sim.AgentStavby.CarAtUnloaderB)[1] + "] ")
-                    : "Unloads Car: empty";
+                    : "Unloads Car: Empty";
 
                 this.labelQueueUnload.Text = "Queue at Unloader: ";
                 if (Sim.AgentStavby.AutaStavbaQueue != null && Sim.AgentStavby.AutaStavbaQueue.First != null)
@@ -167,6 +174,18 @@ namespace ds_agent_oriented_simulation
                 this.labelUnloaderStatsLen.Text = "Average length of queue: " +
                                                   mySimulation.AgentStavby.LengthOfQueue.Mean().ToString("####.00");
             }
+
+            labelTotalAttempts.Text = "Total attempts: " + mySimulation.AgentStavby.PocetExport;
+            if(mySimulation.AgentStavby.PocetExport > 0)
+            {
+                exportRate = mySimulation.AgentStavby.PocetUspesnyExport/mySimulation.AgentStavby.PocetExport;
+                labelExportRate.Text = "Successful export rate: " + exportRate.ToString("P");
+            }
+            if (mySimulation.ReplicationCount > 1 && mySimulation.AgentStavby.OdoberMaterialKumulativny.SampleSize >= 2)
+            {
+                labelConfInterval.Text = "Confidence interval: <" + mySimulation.AgentStavby.OdoberMaterialKumulativny.ConfidenceInterval90[0] + ", " + mySimulation.AgentStavby.OdoberMaterialKumulativny.ConfidenceInterval90[1] + ">";
+            }
+
             if (movingPicture.Location.X < 280)
             {
                 movingPicture.Location = new Point(
@@ -194,7 +213,7 @@ namespace ds_agent_oriented_simulation
 
         private void buttonSpeedUp_Click(object sender, System.EventArgs e)
         {
-            Sim.SetSimSpeed(0.5,0.2);
+            Sim.SetSimSpeed(10000, 0.0001);
         }
 
         private void buttonPause_Click(object sender, System.EventArgs e)
@@ -211,7 +230,7 @@ namespace ds_agent_oriented_simulation
 
         private void buttonStop_Click(object sender, System.EventArgs e)
         {
-            
+
             Sim.StopReplication();
             Sim.StopSimulation();
             EnableChanges();
@@ -256,11 +275,11 @@ namespace ds_agent_oriented_simulation
         private void buttonSaveSettings_Click(object sender, EventArgs e)
         {
             // save settings
-            SelectedCars[0] = (int) numericUpDown1.Value;
-            SelectedCars[1] = (int) numericUpDown2.Value;
-            SelectedCars[2] = (int) numericUpDown3.Value;
-            SelectedCars[3] = (int) numericUpDown4.Value;
-            SelectedCars[4] = (int) numericUpDown5.Value;
+            SelectedCars[0] = (int)numericUpDown1.Value;
+            SelectedCars[1] = (int)numericUpDown2.Value;
+            SelectedCars[2] = (int)numericUpDown3.Value;
+            SelectedCars[3] = (int)numericUpDown4.Value;
+            SelectedCars[4] = (int)numericUpDown5.Value;
         }
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
@@ -338,11 +357,11 @@ namespace ds_agent_oriented_simulation
         {
             _costForCars = 0;
             labelCostVehicles.Text = "Cost for vehicles: ";
-            _costForCars = numericUpDown1.Value*Constants.PriceCarA
-                          + numericUpDown2.Value*Constants.PriceCarB
-                          + numericUpDown3.Value*Constants.PriceCarC
-                          + numericUpDown4.Value*Constants.PriceCarD
-                          + numericUpDown5.Value*Constants.PriceCarE;
+            _costForCars = numericUpDown1.Value * Constants.PriceCarA
+                          + numericUpDown2.Value * Constants.PriceCarB
+                          + numericUpDown3.Value * Constants.PriceCarC
+                          + numericUpDown4.Value * Constants.PriceCarD
+                          + numericUpDown5.Value * Constants.PriceCarE;
             labelCostVehicles.Text += _costForCars.ToString("C");
         }
 
@@ -351,7 +370,10 @@ namespace ds_agent_oriented_simulation
             if (checkBoxVizual.Enabled)
             {
                 // if not null
-                Sim?.SetMaxSimSpeed();
+                if (Sim != null)
+                {
+                    Sim.SetMaxSimSpeed();
+                }
             }
         }
 
@@ -418,6 +440,11 @@ namespace ds_agent_oriented_simulation
                 numericUpDown5.Value = 0;
             }
             ChangeCostOfVehicles();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Sim.SetMaxSimSpeed();
         }
     }
 }
