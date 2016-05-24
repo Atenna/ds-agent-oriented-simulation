@@ -5,8 +5,8 @@ namespace ds_agent_oriented_simulation.Entities.Vehicles
 {
     class CarB : Vehicle
     {
-        public CarB(Random generator) :
-            base("B", Constants.VolumeOfVehicleB, Constants.SpeedOfVehicleB, Constants.ProbabilityOfCrashOfVehicleB, Constants.TimeOfRepairOfVehicleB, generator)
+        public CarB(Random generator, int ID) :
+            base("B" + ID, Constants.VolumeOfVehicleB, Constants.SpeedOfVehicleB, Constants.ProbabilityOfCrashOfVehicleB, Constants.TimeOfRepairOfVehicleB, generator)
         {
 
         }

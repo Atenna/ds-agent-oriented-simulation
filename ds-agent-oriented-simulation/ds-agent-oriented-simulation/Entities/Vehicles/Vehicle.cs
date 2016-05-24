@@ -1,5 +1,6 @@
 ﻿using System;
 using ds_agent_oriented_simulation.Settings;
+using MathNet.Numerics.Random;
 
 namespace ds_agent_oriented_simulation.Entities.Vehicles
 {
@@ -33,7 +34,7 @@ namespace ds_agent_oriented_simulation.Entities.Vehicles
             this.Speed = pSpeed;
             this._probabilityOfCrash = pProbability;
             this.TimeOfRepair = pTime;
-            this._failureGenerator = generator;
+            this._failureGenerator = new Random(generator.Next());
             this.RealVolume = 0;
             this.ToUnload = 0;
             this.JeNakladane = false;
@@ -60,7 +61,7 @@ namespace ds_agent_oriented_simulation.Entities.Vehicles
             return Name + ": [" + RealVolume + "/" + Volume + "], " + Speed + " ";
         }
 
-        
+
     }
 }
 
