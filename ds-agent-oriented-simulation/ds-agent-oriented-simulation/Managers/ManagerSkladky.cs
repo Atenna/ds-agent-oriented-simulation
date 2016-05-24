@@ -1,3 +1,4 @@
+using System;
 using ds_agent_oriented_simulation.Agents;
 using ds_agent_oriented_simulation.Entities.Vehicles;
 using ds_agent_oriented_simulation.Settings;
@@ -29,76 +30,123 @@ namespace ds_agent_oriented_simulation.Managers
         //meta! sender="ProcesNakladacA", id="64", type="Finish"
         public void ProcessFinishProcesNakladacA(MessageForm message)
         {
-            MyAgent.NakladacAIsOccupied = false;
-
-            message.Addressee = MySim.FindAgent(SimId.AgentDopravy);
-            message.Code = Mc.NalozAuto;
-            Response(message);
-
-            
-            // ak v rade niekto dalsi caka, zacne sa znova nakladanie
-            Vehicle naNalozenie;
-            if (!MyAgent.AutaSkladkaQueue.IsEmpty() && MyAgent.NakladacAIsWorking() && MyAgent.MaterialNaSkladke!=0)
+            //ak je spusteny mod fullLoad
+            if (((MyMessage)message).Car.RealVolume != ((MyMessage)message).Car.Volume &&
+                MyAgent.MaterialNaSkladke == 0 && MyAgent.fullLoad)
             {
-                lock (Constants.QueueLock)
-                {
-                    naNalozenie = MyAgent.AutaSkladkaQueue.First.Value;
-                    MyAgent.AutaSkladkaQueue.RemoveFirst();
-                }
-                MyMessage zFrontu = MyAgent.MessageSkladkaQueue.First.Value;
-                MyAgent.MessageSkladkaQueue.RemoveFirst();
-                zFrontu.Addressee = MyAgent.FindAssistant(SimId.ProcesNakladacA);
-                zFrontu.Code = Mc.NalozAuto;
-
-                // nalozime mnozstvo ktore je aktualne na skladke
-                naNalozenie.RealVolume = (int) LoadCarWith(naNalozenie.Volume);
-
-                // ukoncenie cakania
-                naNalozenie.CasCakaniaNaSkladke = (MySim.CurrentTime - naNalozenie.ZaciatokCakania);
-                // pridanie casu cakania na skladke do statistik
-                MyAgent.SkladkaWStat.AddSample(naNalozenie.CasCakaniaNaSkladke);
-
-                zFrontu.Car = naNalozenie;
-                MyAgent.NakladacAIsOccupied = true;
-                StartContinualAssistant(zFrontu);
+                MyAgent.AutaSkladkaQueue.AddFirst(((MyMessage)message).Car);
+                MyAgent.MessageSkladkaQueue.AddFirst((MyMessage)message);
+                MyAgent.NakladacAIsOccupied = false;
+                return;
             }
-            
+
+            //ak je plny, na skladne nic nie je alebo je vypnuty, tak auto posle dalej
+            if (((MyMessage)message).Car.RealVolume == ((MyMessage)message).Car.Volume ||
+                MyAgent.MaterialNaSkladke == 0 || !MyAgent.NakladacAIsWorking())
+            {
+                MyAgent.NakladacAIsOccupied = false;
+
+                message.Addressee = MySim.FindAgent(SimId.AgentDopravy);
+                message.Code = Mc.NalozAuto;
+                Response(message);
+
+
+                // ak v rade niekto dalsi caka, zacne sa znova nakladanie
+                Vehicle naNalozenie;
+                if (!MyAgent.AutaSkladkaQueue.IsEmpty() && MyAgent.NakladacAIsWorking() &&
+                    MyAgent.MaterialNaSkladke != 0)
+                {
+                    lock (Constants.QueueLock)
+                    {
+                        naNalozenie = MyAgent.AutaSkladkaQueue.First.Value;
+                        MyAgent.AutaSkladkaQueue.RemoveFirst();
+                    }
+                    MyMessage zFrontu = MyAgent.MessageSkladkaQueue.First.Value;
+                    MyAgent.MessageSkladkaQueue.RemoveFirst();
+                    zFrontu.Addressee = MyAgent.FindAssistant(SimId.ProcesNakladacA);
+                    zFrontu.Code = Mc.NalozAuto;
+
+                    // nalozime mnozstvo ktore je aktualne na skladke
+                    naNalozenie.ToUnload = (int)LoadCarWith(naNalozenie.Volume - naNalozenie.RealVolume);
+
+                    // ukoncenie cakania
+                    naNalozenie.CasCakaniaNaSkladke = (MySim.CurrentTime - naNalozenie.ZaciatokCakania);
+                    // pridanie casu cakania na skladke do statistik
+                    MyAgent.SkladkaWStat.AddSample(naNalozenie.CasCakaniaNaSkladke);
+
+                    zFrontu.Car = naNalozenie;
+                    MyAgent.NakladacAIsOccupied = true;
+                    StartContinualAssistant(zFrontu);
+                }
+            }
+            else
+            {
+                //auto odoslane naspat na doplnenie
+                ((MyMessage)message).Car.ToUnload = LoadCarWith(((MyMessage)message).Car.Volume -
+                    ((MyMessage)message).Car.RealVolume);
+                MyAgent.NakladacAIsOccupied = true;
+                message.Addressee = MyAgent.FindAssistant(SimId.ProcesNakladacA);
+                message.Code = Mc.NalozAuto;
+                StartContinualAssistant(message);
+            }
         }
 
         //meta! sender="ProcesNakladacB", id="70", type="Finish"
         public void ProcessFinishProcesNakladacB(MessageForm message)
         {
-            MyAgent.NakladacBIsOccupied = false;
-
-            message.Addressee = MySim.FindAgent(SimId.AgentDopravy);
-            message.Code = Mc.NalozAuto;
-            Response(message);
-            
-            Vehicle naNalozenie;
-            if (!MyAgent.AutaSkladkaQueue.IsEmpty() && MyAgent.NakladacBIsWorking() && MyAgent.MaterialNaSkladke != 0)
+            if (((MyMessage)message).Car.RealVolume != ((MyMessage)message).Car.Volume &&
+                MyAgent.MaterialNaSkladke == 0 && MyAgent.fullLoad)
             {
-                lock (Constants.QueueLock)
-                {
-                    naNalozenie = MyAgent.AutaSkladkaQueue.First.Value;
-                    MyAgent.AutaSkladkaQueue.RemoveFirst();
-                }
-                MyMessage zFrontu = MyAgent.MessageSkladkaQueue.First.Value;
-                MyAgent.MessageSkladkaQueue.RemoveFirst();
-                zFrontu.Addressee = MyAgent.FindAssistant(SimId.ProcesNakladacB);
-                zFrontu.Code = Mc.NalozAuto;
-
-                // nalozime mnozstvo ktore je aktualne na skladke
-                naNalozenie.RealVolume = (int)LoadCarWith(naNalozenie.Volume);
-
-                // ukoncenie cakania
-                naNalozenie.CasCakaniaNaSkladke = (MySim.CurrentTime - naNalozenie.ZaciatokCakania);
-                // pridanie casu cakania na skladke do statistik
-                MyAgent.SkladkaWStat.AddSample(naNalozenie.CasCakaniaNaSkladke);
-
-                zFrontu.Car = naNalozenie;
-                StartContinualAssistant(zFrontu);
+                MyAgent.AutaSkladkaQueue.AddFirst(((MyMessage)message).Car);
+                MyAgent.MessageSkladkaQueue.AddFirst((MyMessage)message);
+                MyAgent.NakladacBIsOccupied = false;
+                return;
             }
-            
+
+            if (((MyMessage)message).Car.RealVolume == ((MyMessage)message).Car.Volume ||
+                MyAgent.MaterialNaSkladke == 0 || !MyAgent.NakladacBIsWorking())
+            {
+                MyAgent.NakladacBIsOccupied = false;
+
+                message.Addressee = MySim.FindAgent(SimId.AgentDopravy);
+                message.Code = Mc.NalozAuto;
+                Response(message);
+
+                Vehicle naNalozenie;
+                if (!MyAgent.AutaSkladkaQueue.IsEmpty() && MyAgent.NakladacBIsWorking() &&
+                    MyAgent.MaterialNaSkladke != 0)
+                {
+                    lock (Constants.QueueLock)
+                    {
+                        naNalozenie = MyAgent.AutaSkladkaQueue.First.Value;
+                        MyAgent.AutaSkladkaQueue.RemoveFirst();
+                    }
+                    MyMessage zFrontu = MyAgent.MessageSkladkaQueue.First.Value;
+                    MyAgent.MessageSkladkaQueue.RemoveFirst();
+                    zFrontu.Addressee = MyAgent.FindAssistant(SimId.ProcesNakladacB);
+                    zFrontu.Code = Mc.NalozAuto;
+
+                    // nalozime mnozstvo ktore je aktualne na skladke
+                    naNalozenie.ToUnload = (int)LoadCarWith(naNalozenie.Volume - naNalozenie.RealVolume);
+
+                    // ukoncenie cakania
+                    naNalozenie.CasCakaniaNaSkladke = (MySim.CurrentTime - naNalozenie.ZaciatokCakania);
+                    // pridanie casu cakania na skladke do statistik
+                    MyAgent.SkladkaWStat.AddSample(naNalozenie.CasCakaniaNaSkladke);
+
+                    zFrontu.Car = naNalozenie;
+                    StartContinualAssistant(zFrontu);
+                }
+            }
+            else
+            {
+                ((MyMessage)message).Car.ToUnload = LoadCarWith(((MyMessage)message).Car.Volume -
+                                                                 ((MyMessage)message).Car.RealVolume);
+                MyAgent.NakladacBIsOccupied = true;
+                message.Addressee = MyAgent.FindAssistant(SimId.ProcesNakladacB);
+                message.Code = Mc.NalozAuto;
+                StartContinualAssistant(message);
+            }
         }
 
         //meta! sender="AgentDopravy", id="36", type="Request"
@@ -112,7 +160,7 @@ namespace ds_agent_oriented_simulation.Managers
             // TO=DO - KOLKO SA BUDE NAKLADAT NA AUTO ak bude na skladke menej materialu? Pocka na dovoz????
 
             // ak nakladace prave niekoho nakladaju alebo nemaju pracovnu dobu
-            if (!(!MyAgent.NakladacBIsOccupied && MyAgent.NakladacBIsWorking()) && !(!MyAgent.NakladacAIsOccupied && MyAgent.NakladacAIsWorking()) && MyAgent.MaterialNaSkladke != 0)
+            if ((!(!MyAgent.NakladacBIsOccupied && MyAgent.NakladacBIsWorking()) && !(!MyAgent.NakladacAIsOccupied && MyAgent.NakladacAIsWorking())) || MyAgent.MaterialNaSkladke == 0)
             {
                 lock (naNalozenie)
                 {
@@ -130,19 +178,19 @@ namespace ds_agent_oriented_simulation.Managers
                     // koniec cakania
                     naNalozenie.CasCakaniaNaSkladke = (MySim.CurrentTime - naNalozenie.ZaciatokCakania);
                     // nalozime mnozstvo ktore je aktualne na skladke
-                    naNalozenie.RealVolume = (int)LoadCarWith(naNalozenie.Volume);
+                    naNalozenie.ToUnload = (int)LoadCarWith(naNalozenie.Volume - naNalozenie.RealVolume);
                     // pridanie casu cakania na skladke do statistik
                     MyAgent.SkladkaWStat.AddSample(naNalozenie.CasCakaniaNaSkladke);
                     StartContinualAssistant(message);
                 }
-                else if(!MyAgent.NakladacAIsOccupied && MyAgent.NakladacAIsWorking())
+                else if (!MyAgent.NakladacAIsOccupied && MyAgent.NakladacAIsWorking())
                 {
                     message.Addressee = MyAgent.FindAssistant(SimId.ProcesNakladacA);
                     MyAgent.NakladacAIsOccupied = true;
                     // koniec cakania
                     naNalozenie.CasCakaniaNaSkladke = (MySim.CurrentTime - naNalozenie.ZaciatokCakania);
                     // nalozime mnozstvo ktore je aktualne na skladke
-                    naNalozenie.RealVolume = (int)LoadCarWith(naNalozenie.Volume);
+                    naNalozenie.ToUnload = (int)LoadCarWith(naNalozenie.Volume - naNalozenie.RealVolume);
                     // pridanie casu cakania na skladke do statistik
                     MyAgent.SkladkaWStat.AddSample(naNalozenie.CasCakaniaNaSkladke);
                     StartContinualAssistant(message);
@@ -164,10 +212,10 @@ namespace ds_agent_oriented_simulation.Managers
 
         public void NejakaMetoda(MyMessage message)
         {
-            Vehicle naNalozenie = null; 
-            
+            Vehicle naNalozenie = null;
+
             // ak  B ma pracovnu dobu a nenaklada nikoho
-            if (!MyAgent.NakladacBIsOccupied && MyAgent.NakladacBIsWorking() && MyAgent.MaterialNaSkladke!=0)
+            if (!MyAgent.NakladacBIsOccupied && MyAgent.NakladacBIsWorking() && MyAgent.MaterialNaSkladke != 0)
             {
                 MyMessage sprava = MyAgent.MessageSkladkaQueue.First.Value;
                 MyAgent.MessageSkladkaQueue.RemoveFirst();
@@ -180,7 +228,7 @@ namespace ds_agent_oriented_simulation.Managers
                 // koniec cakania
                 naNalozenie.CasCakaniaNaSkladke = (MySim.CurrentTime - naNalozenie.ZaciatokCakania);
                 // nalozime mnozstvo ktore je aktualne na skladke
-                naNalozenie.RealVolume = (int)LoadCarWith(naNalozenie.Volume);
+                naNalozenie.ToUnload = (int)LoadCarWith(naNalozenie.Volume - naNalozenie.RealVolume);
                 // pridanie casu cakania na skladke do statistik
 
                 sprava.Car = naNalozenie;
@@ -200,7 +248,7 @@ namespace ds_agent_oriented_simulation.Managers
                 // koniec cakania
                 naNalozenie.CasCakaniaNaSkladke = (MySim.CurrentTime - naNalozenie.ZaciatokCakania);
                 // nalozime mnozstvo ktore je aktualne na skladke
-                naNalozenie.RealVolume = (int)LoadCarWith(naNalozenie.Volume);
+                naNalozenie.ToUnload = (int)LoadCarWith(naNalozenie.Volume - naNalozenie.RealVolume);
                 // pridanie casu cakania na skladke do statistik
 
                 sprava.Car = naNalozenie;
@@ -247,7 +295,7 @@ namespace ds_agent_oriented_simulation.Managers
         //meta! userInfo="Generated code: do not modify", tag="begin"
         public void Init()
         {
-            
+
         }
 
         override public void ProcessMessage(MessageForm message)
@@ -283,6 +331,7 @@ namespace ds_agent_oriented_simulation.Managers
         private void ProcessStartWorkDay(MessageForm message)
         {
             Vehicle naNalozenie;
+
             if (!MyAgent.AutaSkladkaQueue.IsEmpty())
             {
                 lock (Constants.QueueLock)
@@ -293,7 +342,7 @@ namespace ds_agent_oriented_simulation.Managers
                 MyMessage zFrontu = MyAgent.MessageSkladkaQueue.First.Value;
                 MyAgent.MessageSkladkaQueue.RemoveFirst();
 
-                if (((MyMessage) message).Name == "A")
+                if (((MyMessage)message).Name == "A")
                 {
                     zFrontu.Addressee = MyAgent.FindAssistant(SimId.ProcesNakladacA);
                 }
@@ -301,8 +350,9 @@ namespace ds_agent_oriented_simulation.Managers
                 {
                     zFrontu.Addressee = MyAgent.FindAssistant(SimId.ProcesNakladacB);
                 }
-                
+
                 zFrontu.Code = Mc.NalozAuto;
+                naNalozenie.ToUnload = (int)LoadCarWith(naNalozenie.Volume - naNalozenie.RealVolume);
 
                 // ukoncenie cakania
                 naNalozenie.CasCakaniaNaSkladke = (MySim.CurrentTime - naNalozenie.ZaciatokCakania);
