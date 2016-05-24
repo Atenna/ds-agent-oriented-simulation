@@ -23,19 +23,19 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
         {
             base.PrepareReplication();
             // Setup component for the next replication
-            
+
         }
 
         //meta! sender="AgentSkladky", id="64", type="Start"
         public void ProcessStart(MessageForm message)
         {
             MyAgent.NakladacAIsOccupied = true;
-            ((MyMessage) message).Car.ZaciatokNakladania = MySim.CurrentTime;
+            ((MyMessage)message).Car.ZaciatokNakladania = MySim.CurrentTime;
             _naNalozenie = ((MyMessage)message).Car;
             _naNalozenie.JeNakladane = true;
             MyAgent.CarAtLoaderA = _naNalozenie;
-            //_naNalozenie.RealVolume = _naNalozenie.Volume;
-            double timeOfLoading = _naNalozenie.RealVolume / Constants.LoadMachinePerformance;
+            double timeOfLoading = _naNalozenie.ToUnload / Constants.LoadMachinePerformance;
+            _naNalozenie.RealVolume += _naNalozenie.ToUnload;
             message.Code = Mc.NalozenieUkoncene;
             Hold(timeOfLoading, message);
         }
@@ -47,10 +47,9 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
             {
                 case Mc.NalozenieUkoncene:
                     _naNalozenie.JeNakladane = false;
-                    
                     MyAgent.CarAtLoaderA = null;
                     AssistantFinished(message);
-                break;
+                    break;
             }
         }
 

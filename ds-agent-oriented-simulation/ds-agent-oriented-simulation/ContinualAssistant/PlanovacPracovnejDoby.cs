@@ -47,7 +47,7 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
             MyMessage zaciatokPracovnejDobyA = new MyMessage(MySim);
             zaciatokPracovnejDobyA.Addressee = MyAgent;
             zaciatokPracovnejDobyA.Code = Mc.ZaciatokPracovnejDoby;
-            zaciatokPracovnejDobyA.Name = ((MyMessage) message).Name;
+            zaciatokPracovnejDobyA.Name = ((MyMessage)message).Name;
             Notice(zaciatokPracovnejDobyA);
 
 

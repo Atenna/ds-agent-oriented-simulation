@@ -24,7 +24,7 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
         {
             base.PrepareReplication();
             // Setup component for the next replication
-            
+
         }
 
         //meta! sender="AgentSkladky", id="70", type="Start"
@@ -35,8 +35,8 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
             _naNalozenie = ((MyMessage)message).Car;
             _naNalozenie.JeNakladane = true;
             MyAgent.CarAtLoaderB = _naNalozenie;
-            //_naNalozenie.RealVolume = _naNalozenie.Volume;
-            double timeOfLoading = _naNalozenie.RealVolume / Constants.LoadMachine2Performance;
+            double timeOfLoading = _naNalozenie.ToUnload / Constants.LoadMachinePerformance;
+            _naNalozenie.RealVolume += _naNalozenie.ToUnload;
             message.Code = Mc.NalozenieUkoncene;
             Hold(timeOfLoading, message);
         }

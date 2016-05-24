@@ -7,7 +7,8 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
 {
     public class PlanovacPracovnejDoby2 : Scheduler
     {
-        public PlanovacPracovnejDoby2(int id, OSPABA.Simulation mySim, CommonAgent myAgent) : base(id, mySim, myAgent)
+        public PlanovacPracovnejDoby2(int id, OSPABA.Simulation mySim, CommonAgent myAgent)
+            : base(id, mySim, myAgent)
         {
         }
 
@@ -20,12 +21,15 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
             sprava.Addressee = MyAgent.FindAssistant(SimId.PlanovacPracovnejDoby2);
             Hold(delTime, sprava);
 
-            MyMessage sprava2 = new MyMessage(MySim);
-            double delTime2 = Timer.NewWorkDayStartsAt(MySim.CurrentTime, Settings.Constants.VykladacBStartsAt);
-            sprava2.Name = "B";
-            sprava2.Code = Mc.KoniecPracovnejDoby;
-            sprava2.Addressee = MyAgent.FindAssistant(SimId.PlanovacPracovnejDoby2);
-            Hold(delTime2, sprava2);
+            if (((MySimulation)MySim).buyUnloader)
+            {
+                MyMessage sprava2 = new MyMessage(MySim);
+                double delTime2 = Timer.NewWorkDayStartsAt(MySim.CurrentTime, Settings.Constants.VykladacBStartsAt);
+                sprava2.Name = "B";
+                sprava2.Code = Mc.KoniecPracovnejDoby;
+                sprava2.Addressee = MyAgent.FindAssistant(SimId.PlanovacPracovnejDoby2);
+                Hold(delTime2, sprava2);
+            }
         }
 
         public override void ProcessMessage(MessageForm message)
