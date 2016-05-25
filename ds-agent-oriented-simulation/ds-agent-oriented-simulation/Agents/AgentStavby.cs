@@ -38,6 +38,10 @@ namespace ds_agent_oriented_simulation.Agents
         public PlanovacPracovnejDoby2 PlanovacPracovnejDoby { get; set; }
         public double StartedWorkingA { get; set; }
         public double StartedWorkingB { get; set; }
+        public Stat WaitingTimeSimulacia { get; set; }
+        public Stat LengthOfQueueSimulacia { get; set; }
+        public Stat RealWorkingTimeASimulacia { get; set; }
+        public Stat RealWorkingTimeBSimulacia { get; set; }
 
         public AgentStavby(int id, OSPABA.Simulation mySim, Agent parent) :
             base(id, mySim, parent)
@@ -49,7 +53,7 @@ namespace ds_agent_oriented_simulation.Agents
             UsageUnloaderB = new WStat(mySim);
             AutaStavbaQueue = new SimQueue<Vehicle>(LengthOfQueue);
             MessageStavbaQueue = new SimQueue<MyMessage>(LengthOfQueue);
-            VykladacBIsDisabled = !((MySimulation)MySim).buyUnloader;
+            VykladacBIsDisabled = !((MySimulation)MySim).BuyUnloader;
             VykladacAIsOccupied = false;
             VykladacAIsOccupied = false;
             OdoberMaterial = new Stat();
@@ -62,13 +66,17 @@ namespace ds_agent_oriented_simulation.Agents
             RealWorkingB = 0;
             StartedWorkingA = 0;
             StartedWorkingB = 0;
+            WaitingTimeSimulacia = new Stat();
+            LengthOfQueueSimulacia = new Stat();
+            RealWorkingTimeASimulacia = new Stat();
+            RealWorkingTimeBSimulacia = new Stat();
         }
 
         public override void PrepareReplication()
         {
             base.PrepareReplication();
             // Setup component for the next replication
-            VykladacBIsDisabled = !((MySimulation)MySim).buyUnloader;
+            VykladacBIsDisabled = !((MySimulation)MySim).BuyUnloader;
             VykladacAIsOccupied = false;
             VykladacAIsOccupied = false;
 

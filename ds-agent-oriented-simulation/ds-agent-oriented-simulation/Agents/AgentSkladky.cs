@@ -16,7 +16,7 @@ namespace ds_agent_oriented_simulation.Agents
 
         public SimQueue<Vehicle> AutaSkladkaQueue { get; private set; }
         public SimQueue<MyMessage> MessageSkladkaQueue { get; private set; }
-        public Stat SkladkaWStat { get; internal set; }
+        public Stat WaitingTimePerCar { get; internal set; }
         public WStat UsageLoaderA { get; set; }
         public WStat RealWorkingTimeA { get; set; }
         public WStat RealWorkingTimeB { get; set; }
@@ -31,6 +31,10 @@ namespace ds_agent_oriented_simulation.Agents
         public bool NakladacAIsOccupied { get; set; }
         public bool NakladacBIsOccupied { get; set; }
         public bool fullLoad { get; internal set; }
+        public Stat WaitingTimeSimulacia { get; set; }
+        public Stat LengthOfQueueSimulacia { get; set; }
+        public Stat RealWorkingTimeASimulacia { get; set; }
+        public Stat RealWorkingTimeBSimulacia { get; set; }
 
         public double Material;
 
@@ -42,7 +46,7 @@ namespace ds_agent_oriented_simulation.Agents
             base(id, mySim, parent)
         {
             Init();
-            SkladkaWStat = new Stat();
+            WaitingTimePerCar = new Stat();
             LengthOfQueue = new WStat(mySim);
             UsageLoaderA = new WStat(mySim);
             RealWorkingTimeA = new WStat(mySim);
@@ -59,6 +63,10 @@ namespace ds_agent_oriented_simulation.Agents
             fullLoad = true;
             StartedWorkingA = 0;
             StartedWorkingB = 0;
+            WaitingTimeSimulacia = new Stat();
+            LengthOfQueueSimulacia = new Stat();
+            RealWorkingTimeASimulacia = new Stat();
+            RealWorkingTimeBSimulacia = new Stat();
         }
 
         public override void PrepareReplication()
@@ -75,7 +83,7 @@ namespace ds_agent_oriented_simulation.Agents
             StartedWorkingA = 0;
             StartedWorkingB = 0;
 
-            SkladkaWStat.Clear();
+            WaitingTimePerCar.Clear();
             LengthOfQueue.Clear();
             AutaSkladkaQueue.Clear();
             MessageSkladkaQueue.Clear();

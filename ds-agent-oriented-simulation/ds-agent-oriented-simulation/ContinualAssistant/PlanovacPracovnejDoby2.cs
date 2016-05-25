@@ -21,7 +21,7 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
             sprava.Addressee = MyAgent.FindAssistant(SimId.PlanovacPracovnejDoby2);
             Hold(delTime, sprava);
 
-            if (((MySimulation)MySim).buyUnloader)
+            if (((MySimulation)MySim).BuyUnloader)
             {
                 MyMessage sprava2 = new MyMessage(MySim);
                 double delTime2 = Timer.NewWorkDayStartsAt(MySim.CurrentTime, Settings.Constants.VykladacBStartsAt);
