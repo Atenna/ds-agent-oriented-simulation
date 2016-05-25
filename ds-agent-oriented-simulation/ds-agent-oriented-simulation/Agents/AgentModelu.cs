@@ -1,4 +1,5 @@
 using ds_agent_oriented_simulation.Managers;
+using ds_agent_oriented_simulation.Settings;
 using ds_agent_oriented_simulation.Simulation;
 using OSPABA;
 
@@ -21,7 +22,7 @@ namespace ds_agent_oriented_simulation.Agents
             // Setup component for the next replication
 
 
-            SelectedCars = FormAgentSimulation.SelectedCars;
+            //SelectedCars = FormAgentSimulation.SelectedCars;
             MyMessage sprava = new MyMessage(MySim, SelectedCars);
 
             /* Hard setup of cars
@@ -41,6 +42,17 @@ namespace ds_agent_oriented_simulation.Agents
             sprava.Code = Mc.Inicializacia;
             sprava.Addressee = MySim.FindAgent(SimId.AgentModelu);
             MyManager.Call(sprava);
+        }
+
+        public double CostOfVehicles()
+        {
+            double cost = 0;
+            cost = SelectedCars[0] * Constants.PriceCarA
+                          + SelectedCars[1] * Constants.PriceCarB
+                          + SelectedCars[2] * Constants.PriceCarC
+                          + SelectedCars[3] * Constants.PriceCarD
+                          + SelectedCars[4] * Constants.PriceCarE;
+            return cost;
         }
 
         //meta! userInfo="Generated code: do not modify", tag="begin"

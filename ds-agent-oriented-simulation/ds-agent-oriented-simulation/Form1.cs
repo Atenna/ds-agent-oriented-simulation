@@ -184,7 +184,7 @@ namespace ds_agent_oriented_simulation
             }
             if (mySimulation.ReplicationCount > 1 && mySimulation.AgentStavby.OdoberMaterialKumulativny.SampleSize >= 2)
             {
-                labelConfInterval.Text = "Confidence interval: <" + mySimulation.AgentStavby.OdoberMaterialKumulativny.ConfidenceInterval90[0].ToString("P") + ", " + mySimulation.AgentStavby.OdoberMaterialKumulativny.ConfidenceInterval90[1].ToString("P") + ">";
+                labelConfInterval.Text = "Confidence interval: <" + mySimulation.AgentStavby.OdoberMaterialKumulativny.ConfidenceInterval95[0].ToString("P") + ", " + mySimulation.AgentStavby.OdoberMaterialKumulativny.ConfidenceInterval95[1].ToString("P") + ">";
             }
 
             if (movingPicture.Location.X < 280)
