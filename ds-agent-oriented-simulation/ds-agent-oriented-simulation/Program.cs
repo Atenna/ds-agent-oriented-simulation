@@ -25,14 +25,15 @@ namespace ds_agent_oriented_simulation
             ms.Simulate(1, 788400);
             */
 
-            /*
+            
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FormAgentSimulation());
-            */
+            
 
             //Combiner.Combine();
-            CarConfig();
+
+            //CarConfig();
         }
 
         public static void CarConfig()
@@ -51,7 +52,7 @@ namespace ds_agent_oriented_simulation
 
                 using (StreamWriter w = File.AppendText("results.txt"))
                 {
-                    w.WriteLine(line + " " + ms.AgentStavby.OdoberMaterialKumulativny.Mean().ToString("P") + " ");
+                    w.WriteLine(line + ", " + ms.AgentStavby.OdoberMaterialKumulativny.Mean().ToString("P") + " ");
                 }
 
                 using (StreamWriter w = File.AppendText("resultsTop.txt"))
