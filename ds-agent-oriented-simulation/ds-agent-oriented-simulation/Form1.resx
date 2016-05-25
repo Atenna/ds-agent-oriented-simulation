@@ -955,6 +955,18 @@
         FMhBdOGAAAAAAElFTkSuQmCC
 </value>
   </data>
+  <data name="buttonMaxSpeed.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAh
+        OAAAITgBRZYxYAAAAXdJREFUWEftlrGqglAYx68ItTg4VcMdLw2+ge9QOdQDNEWP4eQLhC/gbkg0JC4N
+        vYINQdASTReEBsHlu3z6mVw7khoc7wV/8F++83G+H3jwnA9omFagFfibArZtg6ZpYFkWVdisVqu4z/M8
+        qlTnSSAMQ+h2u/D9+RVnuVxCFEW0muH7/qNHFEUwDINWqvEkEATBY+M0qqrC7XajjoT9fv/UN5vN4H6/
+        U0c5SglgBoMBHA4H6mILYBRFgdPpRF2vKS2A6XQ6YJpm3FckgJFlGTabTdz3ikoCaebzOex2O+ZaGkEQ
+        QNd12rWYWgKYfr/PrOczHo/jPYuoLVAlw+EQjscjTfgNFwGMJEngOA5NyeAmgMFDfD6faVICd4HL5UKT
+        Erh+gu12S1My/u8h7PV6zHo+o9Eo3rOIWgKN/YjwEOEVjHD/FTd6GeF1fL1eqSOBJTCdTt+/jvMPksVi
+        wfdBgqzXa5hMJqWfZK7rUqU6TAGetAKtQMMCAD8J6Jv8quHOmgAAAABJRU5ErkJggg==
+</value>
+  </data>
   <data name="pictureLoaderB.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAANMAAACZCAMAAACCGv/hAAAABGdBTUEAALGOfPtRkwAAACBjSFJNAACH

@@ -42,7 +42,7 @@ namespace ds_agent_oriented_simulation.Agents
             Material = Settings.Constants.MaterialToLoad;
             NakladacAIsOccupied = false;
             NakladacBIsOccupied = false;
-            fullLoad = false;
+            fullLoad = true;
         }
 
         public override void PrepareReplication()

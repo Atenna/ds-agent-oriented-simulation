@@ -16,7 +16,9 @@ namespace ds_agent_oriented_simulation
 
         private static decimal _costForCars;
         public static decimal CostForUnloaders;
-        private double exportRate;
+        private double _exportRate;
+        private double interval, duration;
+
         public static bool UnloaderBDisabled { get; private set; }
         public FormAgentSimulation()
         {
@@ -28,7 +30,9 @@ namespace ds_agent_oriented_simulation
             CostForUnloaders = 0;
             GeneratorSeed = 22;
             UnloaderBDisabled = true;
-            exportRate = 0.0;
+            _exportRate = 0.0;
+            interval = 0.5;
+            duration = 2;
         }
 
         private void InitializeToolTips()
@@ -55,22 +59,43 @@ namespace ds_agent_oriented_simulation
 
         private void buttonRun_Click(object sender, System.EventArgs e)
         {
-            NumberOfReplications = Int32.Parse(TextBoxReplications.Text);
-            GeneratorSeed = Int32.Parse(textBoxSeed.Text);
-            // simulation start
-            int userSeed = 0;
-            if (userSeed > 0 || textBoxSeed.Text != "")
+            try
             {
-                Constants.Seed = userSeed;
+                NumberOfReplications = Int32.Parse(TextBoxReplications.Text);
             }
-            else
+            catch (Exception ex)
             {
-                Constants.Seed = 0;
+
+                MessageBox.Show("Enter a valid number of replications", "Invalid format", MessageBoxButtons.OK);
+                return;
             }
+
+            try
+            {
+                GeneratorSeed = Int32.Parse(textBoxSeed.Text);
+                // simulation start
+                int userSeed = 0;
+                if (userSeed > 0 || textBoxSeed.Text != "")
+                {
+                    Constants.Seed = userSeed;
+                }
+                else
+                {
+                    Constants.Seed = 0;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Enter a valid generator seed", "Invalid format", MessageBoxButtons.OK);
+                return;
+            }
+
+            
             DisableChanges();
 
             Sim = new MySimulation();
-            Sim.SetSimSpeed(0.5, 2);
+            Sim.SetSimSpeed(interval, duration);
             Sim.AgentModelu.SelectedCars = SelectedCars;
 
             System.Action<MySimulation> updateGuiAction = new System.Action<MySimulation>((s) => UpdateGui(s));
@@ -102,6 +127,12 @@ namespace ds_agent_oriented_simulation
             checkBoxCarE.Enabled = false;
             TextBoxReplications.Enabled = false;
             textBoxSeed.Enabled = false;
+
+            buttonMaxSpeed.Enabled = true;
+            buttonPause.Enabled = true;
+            buttonSlowDown.Enabled = true;
+            buttonSlowUp.Enabled = true;
+            buttonStop.Enabled = true;
         }
 
         private void EnableChanges()
@@ -114,6 +145,12 @@ namespace ds_agent_oriented_simulation
             checkBoxCarE.Enabled = true;
             TextBoxReplications.Enabled = true;
             textBoxSeed.Enabled = true;
+
+            buttonMaxSpeed.Enabled = false;
+            buttonPause.Enabled = false;
+            buttonSlowDown.Enabled = false;
+            buttonSlowUp.Enabled = false;
+            buttonStop.Enabled = false;
         }
 
         private void UpdateGui(MySimulation mySimulation)
@@ -179,8 +216,8 @@ namespace ds_agent_oriented_simulation
             labelTotalAttempts.Text = "Total attempts: " + mySimulation.AgentStavby.PocetExport;
             if(mySimulation.AgentStavby.PocetExport > 0)
             {
-                exportRate = mySimulation.AgentStavby.PocetUspesnyExport/mySimulation.AgentStavby.PocetExport;
-                labelExportRate.Text = "Successful export rate: " + exportRate.ToString("P");
+                _exportRate = mySimulation.AgentStavby.PocetUspesnyExport/mySimulation.AgentStavby.PocetExport;
+                labelExportRate.Text = "Successful export rate: " + _exportRate.ToString("P");
             }
             if (mySimulation.ReplicationCount > 1 && mySimulation.AgentStavby.OdoberMaterialKumulativny.SampleSize >= 2)
             {
@@ -214,7 +251,9 @@ namespace ds_agent_oriented_simulation
 
         private void buttonSpeedUp_Click(object sender, System.EventArgs e)
         {
-            Sim.SetSimSpeed(10000, 0.0001);
+            interval += 2;
+            duration -= 0.5;
+            Sim.SetSimSpeed(interval, duration);
         }
 
         private void buttonPause_Click(object sender, System.EventArgs e)
@@ -240,7 +279,9 @@ namespace ds_agent_oriented_simulation
 
         private void buttonSlowDown_Click(object sender, System.EventArgs e)
         {
-            Sim.SetSimSpeed(0.2, 2);
+            interval -= 2;
+            duration += 0.5;
+            Sim.SetSimSpeed(interval, duration);
         }
 
         private void ResetGui()
