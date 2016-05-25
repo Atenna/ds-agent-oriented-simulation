@@ -261,7 +261,9 @@ namespace ds_agent_oriented_simulation.Managers
                 MyAgent.AutaSkladkaQueue.RemoveFirst();
 
                 sprava.Addressee = MyAgent.FindAssistant(SimId.ProcesNakladacB);
+
                 MyAgent.NakladacBIsOccupied = true;
+                BStartedWorking = MySim.CurrentTime;
                 // koniec cakania
                 naNalozenie.CasCakaniaNaSkladke = (MySim.CurrentTime - naNalozenie.ZaciatokCakania);
                 // nalozime mnozstvo ktore je aktualne na skladke
@@ -282,6 +284,8 @@ namespace ds_agent_oriented_simulation.Managers
 
                 sprava.Addressee = MyAgent.FindAssistant(SimId.ProcesNakladacA);
                 MyAgent.NakladacAIsOccupied = true;
+                AStartedWorking = MySim.CurrentTime;
+
                 // koniec cakania
                 naNalozenie.CasCakaniaNaSkladke = (MySim.CurrentTime - naNalozenie.ZaciatokCakania);
                 // nalozime mnozstvo ktore je aktualne na skladke
