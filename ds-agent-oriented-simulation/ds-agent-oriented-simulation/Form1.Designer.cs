@@ -100,10 +100,13 @@
             this.labelCostUnloaders = new System.Windows.Forms.Label();
             this.labelCostVehicles = new System.Windows.Forms.Label();
             this.groupBoxUnloaderStats = new System.Windows.Forms.GroupBox();
+            this.labelUsageUB = new System.Windows.Forms.Label();
+            this.labelUsageUA = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.labelUnloaderStatsLen = new System.Windows.Forms.Label();
             this.labelUnloaderStatsTime = new System.Windows.Forms.Label();
             this.groupBoxLoaderStats = new System.Windows.Forms.GroupBox();
+            this.labelUsageLB = new System.Windows.Forms.Label();
             this.labelUsageLA = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.labelLoaderStatsLen = new System.Windows.Forms.Label();
@@ -122,9 +125,7 @@
             this.pictureTrackedCar = new System.Windows.Forms.PictureBox();
             this.labelTracking = new System.Windows.Forms.Label();
             this.comboBoxTracking = new System.Windows.Forms.ComboBox();
-            this.labelUsageLB = new System.Windows.Forms.Label();
-            this.labelUsageUB = new System.Windows.Forms.Label();
-            this.labelUsageUA = new System.Windows.Forms.Label();
+            this.labelReplication = new System.Windows.Forms.Label();
             this.groupBoxVehicles.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
@@ -526,6 +527,7 @@
             // groupBoxSim
             // 
             this.groupBoxSim.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.groupBoxSim.Controls.Add(this.labelReplication);
             this.groupBoxSim.Controls.Add(this.buttonMaxSpeed);
             this.groupBoxSim.Controls.Add(this.movingPicture);
             this.groupBoxSim.Controls.Add(this.groupBoxLoader);
@@ -954,6 +956,26 @@
             this.groupBoxUnloaderStats.TabStop = false;
             this.groupBoxUnloaderStats.Text = "Unloader Statistics";
             // 
+            // labelUsageUB
+            // 
+            this.labelUsageUB.AutoSize = true;
+            this.labelUsageUB.Location = new System.Drawing.Point(330, 198);
+            this.labelUsageUB.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelUsageUB.Name = "labelUsageUB";
+            this.labelUsageUB.Size = new System.Drawing.Size(111, 29);
+            this.labelUsageUB.TabIndex = 6;
+            this.labelUsageUB.Text = "Usage B:";
+            // 
+            // labelUsageUA
+            // 
+            this.labelUsageUA.AutoSize = true;
+            this.labelUsageUA.Location = new System.Drawing.Point(16, 198);
+            this.labelUsageUA.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelUsageUA.Name = "labelUsageUA";
+            this.labelUsageUA.Size = new System.Drawing.Size(110, 29);
+            this.labelUsageUA.TabIndex = 5;
+            this.labelUsageUA.Text = "Usage A:";
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -999,6 +1021,16 @@
             this.groupBoxLoaderStats.TabIndex = 4;
             this.groupBoxLoaderStats.TabStop = false;
             this.groupBoxLoaderStats.Text = "Loader Statistics";
+            // 
+            // labelUsageLB
+            // 
+            this.labelUsageLB.AutoSize = true;
+            this.labelUsageLB.Location = new System.Drawing.Point(330, 205);
+            this.labelUsageLB.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelUsageLB.Name = "labelUsageLB";
+            this.labelUsageLB.Size = new System.Drawing.Size(111, 29);
+            this.labelUsageLB.TabIndex = 4;
+            this.labelUsageLB.Text = "Usage B:";
             // 
             // labelUsageLA
             // 
@@ -1204,35 +1236,15 @@
             this.comboBoxTracking.Size = new System.Drawing.Size(296, 37);
             this.comboBoxTracking.TabIndex = 0;
             // 
-            // labelUsageLB
+            // labelReplication
             // 
-            this.labelUsageLB.AutoSize = true;
-            this.labelUsageLB.Location = new System.Drawing.Point(330, 205);
-            this.labelUsageLB.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelUsageLB.Name = "labelUsageLB";
-            this.labelUsageLB.Size = new System.Drawing.Size(111, 29);
-            this.labelUsageLB.TabIndex = 4;
-            this.labelUsageLB.Text = "Usage B:";
-            // 
-            // labelUsageUB
-            // 
-            this.labelUsageUB.AutoSize = true;
-            this.labelUsageUB.Location = new System.Drawing.Point(330, 198);
-            this.labelUsageUB.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelUsageUB.Name = "labelUsageUB";
-            this.labelUsageUB.Size = new System.Drawing.Size(111, 29);
-            this.labelUsageUB.TabIndex = 6;
-            this.labelUsageUB.Text = "Usage B:";
-            // 
-            // labelUsageUA
-            // 
-            this.labelUsageUA.AutoSize = true;
-            this.labelUsageUA.Location = new System.Drawing.Point(16, 198);
-            this.labelUsageUA.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelUsageUA.Name = "labelUsageUA";
-            this.labelUsageUA.Size = new System.Drawing.Size(110, 29);
-            this.labelUsageUA.TabIndex = 5;
-            this.labelUsageUA.Text = "Usage A:";
+            this.labelReplication.AutoSize = true;
+            this.labelReplication.Location = new System.Drawing.Point(21, 919);
+            this.labelReplication.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelReplication.Name = "labelReplication";
+            this.labelReplication.Size = new System.Drawing.Size(140, 29);
+            this.labelReplication.TabIndex = 35;
+            this.labelReplication.Text = "Replication:";
             // 
             // FormAgentSimulation
             // 
@@ -1386,6 +1398,7 @@
         private System.Windows.Forms.Label labelUsageLB;
         private System.Windows.Forms.Label labelUsageUB;
         private System.Windows.Forms.Label labelUsageUA;
+        public System.Windows.Forms.Label labelReplication;
     }
 }
 
