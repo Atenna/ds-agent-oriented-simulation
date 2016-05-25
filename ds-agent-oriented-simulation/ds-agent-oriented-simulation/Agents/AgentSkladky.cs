@@ -35,6 +35,8 @@ namespace ds_agent_oriented_simulation.Agents
         public double Material;
 
         public PlanovacPracovnejDoby PlanovacPracovnejDoby { get; set; }
+        public double StartedWorkingA { get; set; }
+        public double StartedWorkingB { get; set; }
 
         public AgentSkladky(int id, OSPABA.Simulation mySim, Agent parent) :
             base(id, mySim, parent)
@@ -55,6 +57,8 @@ namespace ds_agent_oriented_simulation.Agents
             NakladacAIsOccupied = false;
             NakladacBIsOccupied = false;
             fullLoad = true;
+            StartedWorkingA = 0;
+            StartedWorkingB = 0;
         }
 
         public override void PrepareReplication()
@@ -65,8 +69,11 @@ namespace ds_agent_oriented_simulation.Agents
             {
                 AutaSkladkaQueue.Dequeue();
             }
+
             RealWorkingA = 0;
             RealWorkingB = 0;
+            StartedWorkingA = 0;
+            StartedWorkingB = 0;
 
             SkladkaWStat.Clear();
             LengthOfQueue.Clear();

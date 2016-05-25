@@ -112,7 +112,7 @@ namespace ds_agent_oriented_simulation
             }
 
             // 777 600
-            Sim.SimulateAsync(5, 788400);
+            Sim.SimulateAsync(10, 788400);
 
             
             System.Action<MySimulation> enableChangesAction = new Action<MySimulation>((s) => EnableChanges());
@@ -251,6 +251,11 @@ namespace ds_agent_oriented_simulation
                 SetupTracing();
                 first = false;
             }
+
+            labelUsageLA.Text = "Usage A: " + mySimulation.AgentSkladky.RealWorkingTimeA.Mean().ToString("p");
+            labelUsageLB.Text = "Usage B: " + mySimulation.AgentSkladky.RealWorkingTimeB.Mean().ToString("p");
+            labelUsageUA.Text = "Usage A: " + mySimulation.AgentStavby.RealWorkingTimeA.Mean().ToString("p");
+            labelUsageUB.Text = "Usage B: " + mySimulation.AgentStavby.RealWorkingTimeB.Mean().ToString("p");
         }
 
         public double[] GetProgressOfLoading(Vehicle car)
@@ -328,7 +333,7 @@ namespace ds_agent_oriented_simulation
                 pictureUnloaderB.SizeMode = PictureBoxSizeMode.StretchImage;
                 labelUnloaderB.ForeColor = Color.Black;
                 UnloaderBDisabled = false;
-                labelCostUnloaders.Text = "Cost for unloaders: " + Constants.PriceForSecondUnloader;
+                labelCostUnloaders.Text = "Cost for unloaders: " + Constants.PriceForSecondUnloader.ToString("c");
             }
             else
             {
@@ -512,7 +517,7 @@ namespace ds_agent_oriented_simulation
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Sim.SetMaxSimSpeed();
+            Sim.SetSimSpeed(1000000, 0.0000000001);
         }
     }
 }

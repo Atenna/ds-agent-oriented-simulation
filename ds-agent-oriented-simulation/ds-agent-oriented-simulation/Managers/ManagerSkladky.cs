@@ -11,14 +11,18 @@ namespace ds_agent_oriented_simulation.Managers
 
     public class ManagerSkladky : Manager
     {
-        private double AStartedWorking;
-        private double BStartedWorking;
+        public double AStartedWorking { get; set; }
+        public double BStartedWorking { get; set; }
+        public double realWorkingA { get; set; }
+        public double realWorkingB { get; set; }
         public ManagerSkladky(int id, OSPABA.Simulation mySim, Agent myAgent) :
             base(id, mySim, myAgent)
         {
             Init();
             AStartedWorking = 0;
             BStartedWorking = 0;
+            realWorkingA = 0;
+            realWorkingB = 0;
         }
 
         override public void PrepareReplication()
@@ -32,6 +36,8 @@ namespace ds_agent_oriented_simulation.Managers
             }
             AStartedWorking = 0;
             BStartedWorking = 0;
+            realWorkingA = 0;
+            realWorkingB = 0;
         }
 
         //meta! sender="ProcesNakladacA", id="64", type="Finish"
@@ -45,9 +51,6 @@ namespace ds_agent_oriented_simulation.Managers
                 MyAgent.MessageSkladkaQueue.AddFirst((MyMessage)message);
 
                 MyAgent.NakladacAIsOccupied = false;
-                double wasWorking = MySim.CurrentTime - AStartedWorking;
-                MyAgent.UsageLoaderA.AddSample(wasWorking);
-                MyAgent.RealWorkingA += wasWorking;
                 
                 return;
             }
@@ -57,9 +60,6 @@ namespace ds_agent_oriented_simulation.Managers
                 MyAgent.MaterialNaSkladke == 0 || !MyAgent.NakladacAIsWorking())
             {
                 MyAgent.NakladacAIsOccupied = false;
-                double wasWorking = MySim.CurrentTime - AStartedWorking;
-                MyAgent.RealWorkingA += wasWorking;
-                MyAgent.UsageLoaderA.AddSample(wasWorking);
 
                 message.Addressee = MySim.FindAgent(SimId.AgentDopravy);
                 message.Code = Mc.NalozAuto;
@@ -120,9 +120,6 @@ namespace ds_agent_oriented_simulation.Managers
                 MyAgent.AutaSkladkaQueue.AddFirst(((MyMessage)message).Car);
                 MyAgent.MessageSkladkaQueue.AddFirst((MyMessage)message);
                 MyAgent.NakladacBIsOccupied = false;
-                double wasWorking = MySim.CurrentTime - BStartedWorking;
-                MyAgent.RealWorkingB += wasWorking;
-                MyAgent.UsageLoaderB.AddSample(wasWorking);
 
                 return;
             }
@@ -131,9 +128,6 @@ namespace ds_agent_oriented_simulation.Managers
                 MyAgent.MaterialNaSkladke == 0 || !MyAgent.NakladacBIsWorking())
             {
                 MyAgent.NakladacBIsOccupied = false;
-                double wasWorking = MySim.CurrentTime - BStartedWorking;
-                MyAgent.RealWorkingB += wasWorking;
-                MyAgent.UsageLoaderB.AddSample(wasWorking);
 
                 message.Addressee = MySim.FindAgent(SimId.AgentDopravy);
                 message.Code = Mc.NalozAuto;
@@ -421,7 +415,7 @@ namespace ds_agent_oriented_simulation.Managers
                 }
                 if (((MyMessage)msg).Name == "B")
                 {
-                    double workingB = MyAgent.RealWorkingB / 660;
+                    double workingB = MyAgent.RealWorkingB/ 780;
                     MyAgent.RealWorkingTimeB.AddSample(workingB);
                     MyAgent.RealWorkingB = 0;
                 }

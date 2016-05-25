@@ -100,29 +100,31 @@
             this.labelCostUnloaders = new System.Windows.Forms.Label();
             this.labelCostVehicles = new System.Windows.Forms.Label();
             this.groupBoxUnloaderStats = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.labelUnloaderStatsLen = new System.Windows.Forms.Label();
             this.labelUnloaderStatsTime = new System.Windows.Forms.Label();
             this.groupBoxLoaderStats = new System.Windows.Forms.GroupBox();
+            this.labelUsageLA = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.labelLoaderStatsLen = new System.Windows.Forms.Label();
             this.labelLoaderStatsTime = new System.Windows.Forms.Label();
             this.tabGraphs = new System.Windows.Forms.TabPage();
             this.chart3 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.tabPositions = new System.Windows.Forms.TabPage();
-            this.comboBoxTracking = new System.Windows.Forms.ComboBox();
-            this.labelTracking = new System.Windows.Forms.Label();
-            this.pictureTrackedCar = new System.Windows.Forms.PictureBox();
-            this.labelPosition = new System.Windows.Forms.Label();
-            this.labelAction = new System.Windows.Forms.Label();
-            this.labelProgres = new System.Windows.Forms.Label();
-            this.labelWaiting = new System.Windows.Forms.Label();
-            this.labelVolume = new System.Windows.Forms.Label();
             this.labelUsage = new System.Windows.Forms.Label();
+            this.labelVolume = new System.Windows.Forms.Label();
+            this.labelWaiting = new System.Windows.Forms.Label();
+            this.labelProgres = new System.Windows.Forms.Label();
+            this.labelAction = new System.Windows.Forms.Label();
+            this.labelPosition = new System.Windows.Forms.Label();
+            this.pictureTrackedCar = new System.Windows.Forms.PictureBox();
+            this.labelTracking = new System.Windows.Forms.Label();
+            this.comboBoxTracking = new System.Windows.Forms.ComboBox();
+            this.labelUsageLB = new System.Windows.Forms.Label();
+            this.labelUsageUB = new System.Windows.Forms.Label();
+            this.labelUsageUA = new System.Windows.Forms.Label();
             this.groupBoxVehicles.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
@@ -938,7 +940,8 @@
             // 
             // groupBoxUnloaderStats
             // 
-            this.groupBoxUnloaderStats.Controls.Add(this.label6);
+            this.groupBoxUnloaderStats.Controls.Add(this.labelUsageUB);
+            this.groupBoxUnloaderStats.Controls.Add(this.labelUsageUA);
             this.groupBoxUnloaderStats.Controls.Add(this.label2);
             this.groupBoxUnloaderStats.Controls.Add(this.labelUnloaderStatsLen);
             this.groupBoxUnloaderStats.Controls.Add(this.labelUnloaderStatsTime);
@@ -950,6 +953,16 @@
             this.groupBoxUnloaderStats.TabIndex = 5;
             this.groupBoxUnloaderStats.TabStop = false;
             this.groupBoxUnloaderStats.Text = "Unloader Statistics";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(16, 152);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(323, 29);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Average waiting time per car:";
             // 
             // labelUnloaderStatsLen
             // 
@@ -973,7 +986,8 @@
             // 
             // groupBoxLoaderStats
             // 
-            this.groupBoxLoaderStats.Controls.Add(this.label5);
+            this.groupBoxLoaderStats.Controls.Add(this.labelUsageLB);
+            this.groupBoxLoaderStats.Controls.Add(this.labelUsageLA);
             this.groupBoxLoaderStats.Controls.Add(this.label1);
             this.groupBoxLoaderStats.Controls.Add(this.labelLoaderStatsLen);
             this.groupBoxLoaderStats.Controls.Add(this.labelLoaderStatsTime);
@@ -985,6 +999,26 @@
             this.groupBoxLoaderStats.TabIndex = 4;
             this.groupBoxLoaderStats.TabStop = false;
             this.groupBoxLoaderStats.Text = "Loader Statistics";
+            // 
+            // labelUsageLA
+            // 
+            this.labelUsageLA.AutoSize = true;
+            this.labelUsageLA.Location = new System.Drawing.Point(16, 205);
+            this.labelUsageLA.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelUsageLA.Name = "labelUsageLA";
+            this.labelUsageLA.Size = new System.Drawing.Size(110, 29);
+            this.labelUsageLA.TabIndex = 3;
+            this.labelUsageLA.Text = "Usage A:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(16, 154);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(323, 29);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Average waiting time per car:";
             // 
             // labelLoaderStatsLen
             // 
@@ -1071,46 +1105,6 @@
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(16, 154);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(323, 29);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Average waiting time per car:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 152);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(323, 29);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Average waiting time per car:";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(16, 205);
-            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(89, 29);
-            this.label5.TabIndex = 3;
-            this.label5.Text = "Usage:";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(16, 198);
-            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(89, 29);
-            this.label6.TabIndex = 4;
-            this.label6.Text = "Usage:";
-            // 
             // tabPositions
             // 
             this.tabPositions.Controls.Add(this.labelUsage);
@@ -1129,22 +1123,59 @@
             this.tabPositions.Text = "Track";
             this.tabPositions.UseVisualStyleBackColor = true;
             // 
-            // comboBoxTracking
+            // labelUsage
             // 
-            this.comboBoxTracking.FormattingEnabled = true;
-            this.comboBoxTracking.Location = new System.Drawing.Point(92, 171);
-            this.comboBoxTracking.Name = "comboBoxTracking";
-            this.comboBoxTracking.Size = new System.Drawing.Size(296, 37);
-            this.comboBoxTracking.TabIndex = 0;
+            this.labelUsage.AutoSize = true;
+            this.labelUsage.Location = new System.Drawing.Point(87, 657);
+            this.labelUsage.Name = "labelUsage";
+            this.labelUsage.Size = new System.Drawing.Size(89, 29);
+            this.labelUsage.TabIndex = 8;
+            this.labelUsage.Text = "Usage:";
             // 
-            // labelTracking
+            // labelVolume
             // 
-            this.labelTracking.AutoSize = true;
-            this.labelTracking.Location = new System.Drawing.Point(78, 120);
-            this.labelTracking.Name = "labelTracking";
-            this.labelTracking.Size = new System.Drawing.Size(458, 29);
-            this.labelTracking.TabIndex = 1;
-            this.labelTracking.Text = "Select a vehicle you want to keep tracking";
+            this.labelVolume.AutoSize = true;
+            this.labelVolume.Location = new System.Drawing.Point(87, 411);
+            this.labelVolume.Name = "labelVolume";
+            this.labelVolume.Size = new System.Drawing.Size(101, 29);
+            this.labelVolume.TabIndex = 7;
+            this.labelVolume.Text = "Volume:";
+            // 
+            // labelWaiting
+            // 
+            this.labelWaiting.AutoSize = true;
+            this.labelWaiting.Location = new System.Drawing.Point(87, 600);
+            this.labelWaiting.Name = "labelWaiting";
+            this.labelWaiting.Size = new System.Drawing.Size(151, 29);
+            this.labelWaiting.TabIndex = 6;
+            this.labelWaiting.Text = "Waiting time:";
+            // 
+            // labelProgres
+            // 
+            this.labelProgres.AutoSize = true;
+            this.labelProgres.Location = new System.Drawing.Point(87, 537);
+            this.labelProgres.Name = "labelProgres";
+            this.labelProgres.Size = new System.Drawing.Size(117, 29);
+            this.labelProgres.TabIndex = 5;
+            this.labelProgres.Text = "Progress:";
+            // 
+            // labelAction
+            // 
+            this.labelAction.AutoSize = true;
+            this.labelAction.Location = new System.Drawing.Point(87, 474);
+            this.labelAction.Name = "labelAction";
+            this.labelAction.Size = new System.Drawing.Size(85, 29);
+            this.labelAction.TabIndex = 4;
+            this.labelAction.Text = "Action:";
+            // 
+            // labelPosition
+            // 
+            this.labelPosition.AutoSize = true;
+            this.labelPosition.Location = new System.Drawing.Point(87, 348);
+            this.labelPosition.Name = "labelPosition";
+            this.labelPosition.Size = new System.Drawing.Size(106, 29);
+            this.labelPosition.TabIndex = 3;
+            this.labelPosition.Text = "Position:";
             // 
             // pictureTrackedCar
             // 
@@ -1156,59 +1187,52 @@
             this.pictureTrackedCar.TabIndex = 2;
             this.pictureTrackedCar.TabStop = false;
             // 
-            // labelPosition
+            // labelTracking
             // 
-            this.labelPosition.AutoSize = true;
-            this.labelPosition.Location = new System.Drawing.Point(87, 348);
-            this.labelPosition.Name = "labelPosition";
-            this.labelPosition.Size = new System.Drawing.Size(106, 29);
-            this.labelPosition.TabIndex = 3;
-            this.labelPosition.Text = "Position:";
+            this.labelTracking.AutoSize = true;
+            this.labelTracking.Location = new System.Drawing.Point(78, 120);
+            this.labelTracking.Name = "labelTracking";
+            this.labelTracking.Size = new System.Drawing.Size(458, 29);
+            this.labelTracking.TabIndex = 1;
+            this.labelTracking.Text = "Select a vehicle you want to keep tracking";
             // 
-            // labelAction
+            // comboBoxTracking
             // 
-            this.labelAction.AutoSize = true;
-            this.labelAction.Location = new System.Drawing.Point(87, 474);
-            this.labelAction.Name = "labelAction";
-            this.labelAction.Size = new System.Drawing.Size(85, 29);
-            this.labelAction.TabIndex = 4;
-            this.labelAction.Text = "Action:";
+            this.comboBoxTracking.FormattingEnabled = true;
+            this.comboBoxTracking.Location = new System.Drawing.Point(92, 171);
+            this.comboBoxTracking.Name = "comboBoxTracking";
+            this.comboBoxTracking.Size = new System.Drawing.Size(296, 37);
+            this.comboBoxTracking.TabIndex = 0;
             // 
-            // labelProgres
+            // labelUsageLB
             // 
-            this.labelProgres.AutoSize = true;
-            this.labelProgres.Location = new System.Drawing.Point(87, 537);
-            this.labelProgres.Name = "labelProgres";
-            this.labelProgres.Size = new System.Drawing.Size(117, 29);
-            this.labelProgres.TabIndex = 5;
-            this.labelProgres.Text = "Progress:";
+            this.labelUsageLB.AutoSize = true;
+            this.labelUsageLB.Location = new System.Drawing.Point(330, 205);
+            this.labelUsageLB.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelUsageLB.Name = "labelUsageLB";
+            this.labelUsageLB.Size = new System.Drawing.Size(111, 29);
+            this.labelUsageLB.TabIndex = 4;
+            this.labelUsageLB.Text = "Usage B:";
             // 
-            // labelWaiting
+            // labelUsageUB
             // 
-            this.labelWaiting.AutoSize = true;
-            this.labelWaiting.Location = new System.Drawing.Point(87, 600);
-            this.labelWaiting.Name = "labelWaiting";
-            this.labelWaiting.Size = new System.Drawing.Size(151, 29);
-            this.labelWaiting.TabIndex = 6;
-            this.labelWaiting.Text = "Waiting time:";
+            this.labelUsageUB.AutoSize = true;
+            this.labelUsageUB.Location = new System.Drawing.Point(330, 198);
+            this.labelUsageUB.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelUsageUB.Name = "labelUsageUB";
+            this.labelUsageUB.Size = new System.Drawing.Size(111, 29);
+            this.labelUsageUB.TabIndex = 6;
+            this.labelUsageUB.Text = "Usage B:";
             // 
-            // labelVolume
+            // labelUsageUA
             // 
-            this.labelVolume.AutoSize = true;
-            this.labelVolume.Location = new System.Drawing.Point(87, 411);
-            this.labelVolume.Name = "labelVolume";
-            this.labelVolume.Size = new System.Drawing.Size(101, 29);
-            this.labelVolume.TabIndex = 7;
-            this.labelVolume.Text = "Volume:";
-            // 
-            // labelUsage
-            // 
-            this.labelUsage.AutoSize = true;
-            this.labelUsage.Location = new System.Drawing.Point(87, 657);
-            this.labelUsage.Name = "labelUsage";
-            this.labelUsage.Size = new System.Drawing.Size(89, 29);
-            this.labelUsage.TabIndex = 8;
-            this.labelUsage.Text = "Usage:";
+            this.labelUsageUA.AutoSize = true;
+            this.labelUsageUA.Location = new System.Drawing.Point(16, 198);
+            this.labelUsageUA.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelUsageUA.Name = "labelUsageUA";
+            this.labelUsageUA.Size = new System.Drawing.Size(110, 29);
+            this.labelUsageUA.TabIndex = 5;
+            this.labelUsageUA.Text = "Usage A:";
             // 
             // FormAgentSimulation
             // 
@@ -1346,9 +1370,8 @@
         private System.Windows.Forms.Label labelExportRate;
         private System.Windows.Forms.Label labelConfInterval;
         private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label labelUsageLA;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TabPage tabPositions;
         private System.Windows.Forms.PictureBox pictureTrackedCar;
@@ -1360,6 +1383,9 @@
         private System.Windows.Forms.Label labelAction;
         private System.Windows.Forms.Label labelPosition;
         private System.Windows.Forms.Label labelUsage;
+        private System.Windows.Forms.Label labelUsageLB;
+        private System.Windows.Forms.Label labelUsageUB;
+        private System.Windows.Forms.Label labelUsageUA;
     }
 }
 

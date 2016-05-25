@@ -25,7 +25,10 @@ namespace ds_agent_oriented_simulation.Agents
         public bool VykladacBIsDisabled { get; set; }
         public bool VykladacAIsOccupied { get; set; }
         public bool VykladacBIsOccupied { get; set; }
-
+        public WStat RealWorkingTimeA { get; set; }
+        public WStat RealWorkingTimeB { get; set; }
+        public double RealWorkingA { get; set; }
+        public double RealWorkingB { get; set; }
         public WStat UsageUnloaderA { get; set; }
         public WStat UsageUnloaderB { get; set; }
         public Stat OdoberMaterial { get; private set; }
@@ -33,6 +36,8 @@ namespace ds_agent_oriented_simulation.Agents
         public double PocetExport { get; set; } // per replikacia - attempts
         public Stat OdoberMaterialKumulativny { get; private set; }
         public PlanovacPracovnejDoby2 PlanovacPracovnejDoby { get; set; }
+        public double StartedWorkingA { get; set; }
+        public double StartedWorkingB { get; set; }
 
         public AgentStavby(int id, OSPABA.Simulation mySim, Agent parent) :
             base(id, mySim, parent)
@@ -51,6 +56,12 @@ namespace ds_agent_oriented_simulation.Agents
             OdoberMaterialKumulativny = new Stat();
             PocetUspesnyExport = 0;
             PocetExport = 0;
+            RealWorkingTimeA = new WStat(mySim);
+            RealWorkingTimeB = new WStat(mySim);
+            RealWorkingA = 0;
+            RealWorkingB = 0;
+            StartedWorkingA = 0;
+            StartedWorkingB = 0;
         }
 
         public override void PrepareReplication()
@@ -60,6 +71,11 @@ namespace ds_agent_oriented_simulation.Agents
             VykladacBIsDisabled = !((MySimulation)MySim).buyUnloader;
             VykladacAIsOccupied = false;
             VykladacAIsOccupied = false;
+
+            RealWorkingA = 0;
+            RealWorkingB = 0;
+            StartedWorkingA = 0;
+            StartedWorkingB = 0;
 
             // odobratie prvkov z radu
             if (!AutaStavbaQueue.IsEmpty())

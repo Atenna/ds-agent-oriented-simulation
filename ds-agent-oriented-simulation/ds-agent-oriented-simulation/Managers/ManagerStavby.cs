@@ -276,6 +276,8 @@ namespace ds_agent_oriented_simulation.Managers
 
         private void ProcessStartWorkDay(MessageForm message)
         {
+            AddUsageStats(message);
+
             Vehicle naVylozenie;
             if (!MyAgent.AutaStavbaQueue.IsEmpty())
             {
@@ -307,7 +309,24 @@ namespace ds_agent_oriented_simulation.Managers
                 StartContinualAssistant(zFrontu);
             }
         }
-
+        private void AddUsageStats(MessageForm msg)
+        {
+            if (MySim.CurrentTime > 1440)
+            {
+                if (((MyMessage)msg).Name == "A")
+                {
+                    double workingA = MyAgent.RealWorkingA / 870;
+                    MyAgent.RealWorkingTimeA.AddSample(workingA);
+                    MyAgent.RealWorkingA = 0;
+                }
+                if (((MyMessage)msg).Name == "B")
+                {
+                    double workingB = MyAgent.RealWorkingB / 870;
+                    MyAgent.RealWorkingTimeB.AddSample(workingB);
+                    MyAgent.RealWorkingB = 0;
+                }
+            }
+        }
         private void ProcessOdvozMaterialu(MyMessage message)
         {
             MyAgent.PocetExport++;

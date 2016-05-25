@@ -33,6 +33,9 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
         {
             MyAgent.NakladacAIsOccupied = true;
             ((MyMessage)message).Car.ZaciatokNakladania = MySim.CurrentTime;
+
+            MyAgent.StartedWorkingA = MySim.CurrentTime;
+            
             _naNalozenie = ((MyMessage)message).Car;
             _naNalozenie.JeNakladane = true;
             MyAgent.CarAtLoaderA = _naNalozenie;
@@ -50,6 +53,10 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
                 case Mc.NalozenieUkoncene:
                     _naNalozenie.JeNakladane = false;
                     MyAgent.CarAtLoaderA = null;
+                    if(MySim.CurrentTime - MyAgent.StartedWorkingA >= 0)
+                    {
+                    MyAgent.RealWorkingA += (MySim.CurrentTime - MyAgent.StartedWorkingA);
+                    }
                     AssistantFinished(message);
                     break;
             }

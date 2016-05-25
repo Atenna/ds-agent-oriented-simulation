@@ -35,6 +35,9 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
         {
             MyAgent.VykladacBIsOccupied = true;
             ((MyMessage)message).Car.ZaciatokVykladania = MySim.CurrentTime;
+
+            MyAgent.StartedWorkingB = MySim.CurrentTime;
+
             _naVylozenie = ((MyMessage)message).Car;
             _naVylozenie.JeVykladane = true;
             MyAgent.CarAtUnloaderB = _naVylozenie;
@@ -54,6 +57,10 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
                     MyAgent.CarAtUnloaderB = null;
                     _naVylozenie.RealVolume -= _naVylozenie.ToUnload;
                     _naVylozenie.ToUnload = 0;
+                    if (MySim.CurrentTime - MyAgent.StartedWorkingB >= 0)
+                    {
+                        MyAgent.RealWorkingB += (MySim.CurrentTime - MyAgent.StartedWorkingB);
+                    }
                     AssistantFinished(message);
                     break;
             }
