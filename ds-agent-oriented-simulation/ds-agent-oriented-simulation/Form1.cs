@@ -635,6 +635,7 @@ namespace ds_agent_oriented_simulation
         }
         private void UpdateUIAfterSimulation()
         {
+            EnableChanges();
             Invoke((MethodInvoker)delegate {
                 this.labelSimTime.Text = "Simulation time: " + Sim.CurrentTime.ToString("#.000");
                 this.labelQueueLoad.Text = "Queue at Loader: ";
