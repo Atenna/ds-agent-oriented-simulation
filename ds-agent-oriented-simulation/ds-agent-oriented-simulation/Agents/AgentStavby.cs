@@ -26,6 +26,8 @@ namespace ds_agent_oriented_simulation.Agents
         public bool VykladacAIsOccupied { get; set; }
         public bool VykladacBIsOccupied { get; set; }
 
+        public WStat UsageUnloaderA { get; set; }
+        public WStat UsageUnloaderB { get; set; }
         public Stat OdoberMaterial { get; private set; }
         public double PocetUspesnyExport { get; set; } // per replikacia
         public double PocetExport { get; set; } // per replikacia - attempts
@@ -38,6 +40,8 @@ namespace ds_agent_oriented_simulation.Agents
             Init();
             WaitingTimePerCar = new Stat();
             LengthOfQueue = new WStat(mySim);
+            UsageUnloaderA = new WStat(mySim);
+            UsageUnloaderB = new WStat(mySim);
             AutaStavbaQueue = new SimQueue<Vehicle>(LengthOfQueue);
             MessageStavbaQueue = new SimQueue<MyMessage>(LengthOfQueue);
             VykladacBIsDisabled = !((MySimulation)MySim).buyUnloader;

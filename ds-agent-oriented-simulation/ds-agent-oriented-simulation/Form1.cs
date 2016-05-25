@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using ds_agent_oriented_simulation.Agents;
 using ds_agent_oriented_simulation.Entities.Vehicles;
 using ds_agent_oriented_simulation.Settings;
 using ds_agent_oriented_simulation.Simulation;
@@ -18,6 +20,7 @@ namespace ds_agent_oriented_simulation
         public static decimal CostForUnloaders;
         private double _exportRate;
         private double interval, duration;
+        private bool first;
 
         public static bool UnloaderBDisabled { get; private set; }
         public FormAgentSimulation()
@@ -90,14 +93,14 @@ namespace ds_agent_oriented_simulation
                 MessageBox.Show("Enter a valid generator seed", "Invalid format", MessageBoxButtons.OK);
                 return;
             }
+            first = true;
 
-            
             DisableChanges();
 
             Sim = new MySimulation();
             Sim.SetSimSpeed(interval, duration);
             Sim.AgentModelu.SelectedCars = SelectedCars;
-
+            
             System.Action<MySimulation> updateGuiAction = new System.Action<MySimulation>((s) => UpdateGui(s));
             try
             {
@@ -108,13 +111,22 @@ namespace ds_agent_oriented_simulation
                 throw ex;
             }
 
-
             // 777 600
             Sim.SimulateAsync(5, 788400);
 
+            
             System.Action<MySimulation> enableChangesAction = new Action<MySimulation>((s) => EnableChanges());
             // nefunguje
             //Sim.OnSimulationDidFinish(s => this.Invoke(enableChangesAction));
+        }
+
+        private void SetupTracing()
+        {
+            List<Vehicle> vehicles = ((AgentDopravy)Sim.FindAgent(SimId.AgentDopravy)).EnabledCars;
+
+            comboBoxTracking.DataSource = vehicles;
+            comboBoxTracking.DisplayMember = "Name";
+            comboBoxTracking.ValueMember = "Name";
         }
 
         private void DisableChanges()
@@ -153,6 +165,7 @@ namespace ds_agent_oriented_simulation
             buttonStop.Enabled = false;
         }
 
+        
         private void UpdateGui(MySimulation mySimulation)
         {
             if (!this.checkBoxVizual.Checked)
@@ -224,11 +237,19 @@ namespace ds_agent_oriented_simulation
                 labelConfInterval.Text = "Confidence interval: <" + mySimulation.AgentStavby.OdoberMaterialKumulativny.ConfidenceInterval95[0].ToString("P") + ", " + mySimulation.AgentStavby.OdoberMaterialKumulativny.ConfidenceInterval95[1].ToString("P") + ">";
             }
 
+            //mySimulation.AgentSkladky.UsageLoaderA.
+
             if (movingPicture.Location.X < 280)
             {
                 movingPicture.Location = new Point(
                     movingPicture.Location.X + 5,
                     this.movingPicture.Location.Y);
+            }
+
+            if (first)
+            {
+                SetupTracing();
+                first = false;
             }
         }
 
@@ -251,9 +272,9 @@ namespace ds_agent_oriented_simulation
 
         private void buttonSpeedUp_Click(object sender, System.EventArgs e)
         {
-            interval += 2;
-            duration -= 0.5;
-            Sim.SetSimSpeed(interval, duration);
+            interval += 1;
+            //duration -= 0.001;
+            Sim.SetSimSpeed(interval, 0.1);
         }
 
         private void buttonPause_Click(object sender, System.EventArgs e)
@@ -279,9 +300,12 @@ namespace ds_agent_oriented_simulation
 
         private void buttonSlowDown_Click(object sender, System.EventArgs e)
         {
-            interval -= 2;
-            duration += 0.5;
-            Sim.SetSimSpeed(interval, duration);
+            if (interval - 1 >= 0)
+            {
+                interval -= 1;
+                //duration += 0.2;
+                Sim.SetSimSpeed(interval, 0.1);
+            }
         }
 
         private void ResetGui()
@@ -304,6 +328,7 @@ namespace ds_agent_oriented_simulation
                 pictureUnloaderB.SizeMode = PictureBoxSizeMode.StretchImage;
                 labelUnloaderB.ForeColor = Color.Black;
                 UnloaderBDisabled = false;
+                labelCostUnloaders.Text = "Cost for unloaders: " + Constants.PriceForSecondUnloader;
             }
             else
             {
@@ -311,6 +336,7 @@ namespace ds_agent_oriented_simulation
                 pictureUnloaderB.SizeMode = PictureBoxSizeMode.StretchImage;
                 labelUnloaderB.ForeColor = Color.DarkGray;
                 UnloaderBDisabled = true;
+                labelCostUnloaders.Text = "Cost for unloaders: ";
             }
         }
 

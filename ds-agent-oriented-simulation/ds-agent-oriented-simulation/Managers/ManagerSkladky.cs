@@ -8,12 +8,17 @@ using OSPABA;
 namespace ds_agent_oriented_simulation.Managers
 {
     //meta! id="17"
+
     public class ManagerSkladky : Manager
     {
+        private double AStartedWorking;
+        private double BStartedWorking;
         public ManagerSkladky(int id, OSPABA.Simulation mySim, Agent myAgent) :
             base(id, mySim, myAgent)
         {
             Init();
+            AStartedWorking = 0;
+            BStartedWorking = 0;
         }
 
         override public void PrepareReplication()
@@ -25,6 +30,8 @@ namespace ds_agent_oriented_simulation.Managers
             {
                 PetriNet.Clear();
             }
+            AStartedWorking = 0;
+            BStartedWorking = 0;
         }
 
         //meta! sender="ProcesNakladacA", id="64", type="Finish"
@@ -36,7 +43,12 @@ namespace ds_agent_oriented_simulation.Managers
             {
                 MyAgent.AutaSkladkaQueue.AddFirst(((MyMessage)message).Car);
                 MyAgent.MessageSkladkaQueue.AddFirst((MyMessage)message);
+
                 MyAgent.NakladacAIsOccupied = false;
+                double wasWorking = MySim.CurrentTime - AStartedWorking;
+                MyAgent.UsageLoaderA.AddSample(wasWorking);
+                MyAgent.RealWorkingA += wasWorking;
+                
                 return;
             }
 
@@ -45,6 +57,9 @@ namespace ds_agent_oriented_simulation.Managers
                 MyAgent.MaterialNaSkladke == 0 || !MyAgent.NakladacAIsWorking())
             {
                 MyAgent.NakladacAIsOccupied = false;
+                double wasWorking = MySim.CurrentTime - AStartedWorking;
+                MyAgent.RealWorkingA += wasWorking;
+                MyAgent.UsageLoaderA.AddSample(wasWorking);
 
                 message.Addressee = MySim.FindAgent(SimId.AgentDopravy);
                 message.Code = Mc.NalozAuto;
@@ -76,6 +91,8 @@ namespace ds_agent_oriented_simulation.Managers
 
                     zFrontu.Car = naNalozenie;
                     MyAgent.NakladacAIsOccupied = true;
+                    AStartedWorking = MySim.CurrentTime;
+
                     StartContinualAssistant(zFrontu);
                 }
             }
@@ -84,7 +101,10 @@ namespace ds_agent_oriented_simulation.Managers
                 //auto odoslane naspat na doplnenie
                 ((MyMessage)message).Car.ToUnload = LoadCarWith(((MyMessage)message).Car.Volume -
                     ((MyMessage)message).Car.RealVolume);
+
                 MyAgent.NakladacAIsOccupied = true;
+                AStartedWorking = MySim.CurrentTime;
+
                 message.Addressee = MyAgent.FindAssistant(SimId.ProcesNakladacA);
                 message.Code = Mc.NalozAuto;
                 StartContinualAssistant(message);
@@ -100,6 +120,10 @@ namespace ds_agent_oriented_simulation.Managers
                 MyAgent.AutaSkladkaQueue.AddFirst(((MyMessage)message).Car);
                 MyAgent.MessageSkladkaQueue.AddFirst((MyMessage)message);
                 MyAgent.NakladacBIsOccupied = false;
+                double wasWorking = MySim.CurrentTime - BStartedWorking;
+                MyAgent.RealWorkingB += wasWorking;
+                MyAgent.UsageLoaderB.AddSample(wasWorking);
+
                 return;
             }
 
@@ -107,6 +131,9 @@ namespace ds_agent_oriented_simulation.Managers
                 MyAgent.MaterialNaSkladke == 0 || !MyAgent.NakladacBIsWorking())
             {
                 MyAgent.NakladacBIsOccupied = false;
+                double wasWorking = MySim.CurrentTime - BStartedWorking;
+                MyAgent.RealWorkingB += wasWorking;
+                MyAgent.UsageLoaderB.AddSample(wasWorking);
 
                 message.Addressee = MySim.FindAgent(SimId.AgentDopravy);
                 message.Code = Mc.NalozAuto;
@@ -135,6 +162,8 @@ namespace ds_agent_oriented_simulation.Managers
                     MyAgent.SkladkaWStat.AddSample(naNalozenie.CasCakaniaNaSkladke);
 
                     zFrontu.Car = naNalozenie;
+                    MyAgent.NakladacBIsOccupied = true;
+                    BStartedWorking = MySim.CurrentTime;
                     StartContinualAssistant(zFrontu);
                 }
             }
@@ -143,6 +172,8 @@ namespace ds_agent_oriented_simulation.Managers
                 ((MyMessage)message).Car.ToUnload = LoadCarWith(((MyMessage)message).Car.Volume -
                                                                  ((MyMessage)message).Car.RealVolume);
                 MyAgent.NakladacBIsOccupied = true;
+                BStartedWorking = MySim.CurrentTime;
+
                 message.Addressee = MyAgent.FindAssistant(SimId.ProcesNakladacB);
                 message.Code = Mc.NalozAuto;
                 StartContinualAssistant(message);
@@ -174,7 +205,10 @@ namespace ds_agent_oriented_simulation.Managers
                 if (!MyAgent.NakladacBIsOccupied && MyAgent.NakladacBIsWorking())
                 {
                     message.Addressee = MyAgent.FindAssistant(SimId.ProcesNakladacB);
+
                     MyAgent.NakladacBIsOccupied = true;
+                    BStartedWorking = MySim.CurrentTime;
+
                     // koniec cakania
                     naNalozenie.CasCakaniaNaSkladke = (MySim.CurrentTime - naNalozenie.ZaciatokCakania);
                     // nalozime mnozstvo ktore je aktualne na skladke
@@ -186,7 +220,10 @@ namespace ds_agent_oriented_simulation.Managers
                 else if (!MyAgent.NakladacAIsOccupied && MyAgent.NakladacAIsWorking())
                 {
                     message.Addressee = MyAgent.FindAssistant(SimId.ProcesNakladacA);
+
                     MyAgent.NakladacAIsOccupied = true;
+                    AStartedWorking = MySim.CurrentTime;
+
                     // koniec cakania
                     naNalozenie.CasCakaniaNaSkladke = (MySim.CurrentTime - naNalozenie.ZaciatokCakania);
                     // nalozime mnozstvo ktore je aktualne na skladke
@@ -280,6 +317,8 @@ namespace ds_agent_oriented_simulation.Managers
             naplanujZaciatokPrace.Addressee = MyAgent.FindAssistant(SimId.PlanovacPracovnejDoby);
             naplanujZaciatokPrace.Code = Mc.Start;
             StartContinualAssistant(naplanujZaciatokPrace);
+
+            // statistiky z jedneho dna sa zapisu
         }
 
         private void ProcessDovozMaterialu(MyMessage message)
@@ -330,6 +369,8 @@ namespace ds_agent_oriented_simulation.Managers
 
         private void ProcessStartWorkDay(MessageForm message)
         {
+            AddUsageStats(message);
+
             Vehicle naNalozenie;
 
             if (!MyAgent.AutaSkladkaQueue.IsEmpty())
@@ -361,6 +402,25 @@ namespace ds_agent_oriented_simulation.Managers
 
                 zFrontu.Car = naNalozenie;
                 StartContinualAssistant(zFrontu);
+            }
+        }
+
+        private void AddUsageStats(MessageForm msg)
+        {
+            if (MySim.CurrentTime > 1440)
+            {
+                if (((MyMessage) msg).Name == "A")
+                {
+                    double workingA = MyAgent.RealWorkingA/660;
+                    MyAgent.RealWorkingTimeA.AddSample(workingA);
+                    MyAgent.RealWorkingA = 0;
+                }
+                if (((MyMessage)msg).Name == "B")
+                {
+                    double workingB = MyAgent.RealWorkingB / 660;
+                    MyAgent.RealWorkingTimeB.AddSample(workingB);
+                    MyAgent.RealWorkingB = 0;
+                }
             }
         }
 

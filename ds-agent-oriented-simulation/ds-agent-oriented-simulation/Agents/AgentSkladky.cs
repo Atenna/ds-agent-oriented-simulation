@@ -17,6 +17,12 @@ namespace ds_agent_oriented_simulation.Agents
         public SimQueue<Vehicle> AutaSkladkaQueue { get; private set; }
         public SimQueue<MyMessage> MessageSkladkaQueue { get; private set; }
         public Stat SkladkaWStat { get; internal set; }
+        public WStat UsageLoaderA { get; set; }
+        public WStat RealWorkingTimeA { get; set; }
+        public WStat RealWorkingTimeB { get; set; }
+        public double RealWorkingA { get; set; }
+        public double RealWorkingB { get; set; }
+        public WStat UsageLoaderB { get; set; }
         public Vehicle CarAtLoaderA { get; set; }
         public Vehicle CarAtLoaderB { get; set; }
         public WStat LengthOfQueue { get; internal set; }
@@ -36,6 +42,12 @@ namespace ds_agent_oriented_simulation.Agents
             Init();
             SkladkaWStat = new Stat();
             LengthOfQueue = new WStat(mySim);
+            UsageLoaderA = new WStat(mySim);
+            RealWorkingTimeA = new WStat(mySim);
+            RealWorkingTimeB = new WStat(mySim);
+            RealWorkingA = 0;
+            RealWorkingB = 0;
+            UsageLoaderB = new WStat(mySim);
             AutaSkladkaQueue = new SimQueue<Vehicle>(LengthOfQueue);
             MessageSkladkaQueue = new SimQueue<MyMessage>();
             MaterialNaSkladke = Constants.MaterialAtDepo;
@@ -53,6 +65,8 @@ namespace ds_agent_oriented_simulation.Agents
             {
                 AutaSkladkaQueue.Dequeue();
             }
+            RealWorkingA = 0;
+            RealWorkingB = 0;
 
             SkladkaWStat.Clear();
             LengthOfQueue.Clear();
