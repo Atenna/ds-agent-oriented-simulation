@@ -1,4 +1,3 @@
-using System;
 using ds_agent_oriented_simulation.Agents;
 using ds_agent_oriented_simulation.Entities.Vehicles;
 using ds_agent_oriented_simulation.Settings;
@@ -158,6 +157,8 @@ namespace ds_agent_oriented_simulation.Managers
             {
                 MyAgent.AutaStavbaQueue.AddLast(naVylozenie);
                 MyAgent.MessageStavbaQueue.AddLast((MyMessage)message);
+                naVylozenie.Activity = "Waiting";
+                naVylozenie.Position = "Queue at unloader";
             }
             else
             {
@@ -166,6 +167,8 @@ namespace ds_agent_oriented_simulation.Managers
                 {
                     message.Addressee = MyAgent.FindAssistant(SimId.ProcesVykladacB);
                     MyAgent.VykladacBIsOccupied = true;
+                    naVylozenie.Activity = "Being unloaded";
+                    naVylozenie.Position = "Unloader B";
                     // koniec cakania
                     naVylozenie.CasCakaniaNaStavbe = (MySim.CurrentTime - naVylozenie.ZaciatokCakania);
                     // pridanie do statistik
@@ -179,6 +182,8 @@ namespace ds_agent_oriented_simulation.Managers
                 {
                     message.Addressee = MyAgent.FindAssistant(SimId.ProcesVykladacA);
                     MyAgent.VykladacAIsOccupied = true;
+                    naVylozenie.Activity = "Being unloaded";
+                    naVylozenie.Position = "Unloader A";
                     // koniec cakania
                     naVylozenie.CasCakaniaNaStavbe = (MySim.CurrentTime - naVylozenie.ZaciatokCakania);
                     // pridanie do statistik

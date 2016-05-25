@@ -24,6 +24,8 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
         public void ProcessStart(MessageForm message)
         {
             Vehicle naVylozenie = ((MyMessage)message).Car;
+            naVylozenie.Activity = "Going";
+            naVylozenie.Position = "From Building to Crossroad";
             double casPrejazdu = (Constants.BcLength / (double)(naVylozenie.Speed / 60.0));
             if (naVylozenie.HasFailed())
             {

@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using ds_agent_oriented_simulation.ContinualAssistant;
 using ds_agent_oriented_simulation.Entities.Vehicles;
 using ds_agent_oriented_simulation.Managers;
-using ds_agent_oriented_simulation.Settings;
 using ds_agent_oriented_simulation.Simulation;
 using OSPABA;
 

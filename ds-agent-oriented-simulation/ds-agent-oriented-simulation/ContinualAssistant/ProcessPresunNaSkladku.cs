@@ -32,6 +32,8 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
         public void ProcessStart(MessageForm message)
         {
             Vehicle naNalozenie = ((MyMessage)message).Car;
+            naNalozenie.Activity = "Going";
+            naNalozenie.Position = "From Crossroad do Depo";
             CarsOnWay.AddLast(naNalozenie);
 
             double holdTime = cesta.AddCar(naNalozenie, MySim.CurrentTime);

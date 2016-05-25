@@ -1,4 +1,3 @@
-using System;
 using ds_agent_oriented_simulation.Agents;
 using ds_agent_oriented_simulation.Entities.Vehicles;
 using ds_agent_oriented_simulation.Settings;
@@ -189,6 +188,8 @@ namespace ds_agent_oriented_simulation.Managers
             {
                 lock (naNalozenie)
                 {
+                    naNalozenie.Activity = "Waiting";
+                    naNalozenie.Position = "Queue at Loader";
                     MyAgent.AutaSkladkaQueue.AddLast(naNalozenie);
                     MyAgent.MessageSkladkaQueue.AddLast((MyMessage)message);
                 }
@@ -201,6 +202,8 @@ namespace ds_agent_oriented_simulation.Managers
                     message.Addressee = MyAgent.FindAssistant(SimId.ProcesNakladacB);
 
                     MyAgent.NakladacBIsOccupied = true;
+                    naNalozenie.Activity = "Being loaded";
+                    naNalozenie.Position = "Loader B";
                     BStartedWorking = MySim.CurrentTime;
 
                     // koniec cakania
@@ -216,6 +219,8 @@ namespace ds_agent_oriented_simulation.Managers
                     message.Addressee = MyAgent.FindAssistant(SimId.ProcesNakladacA);
 
                     MyAgent.NakladacAIsOccupied = true;
+                    naNalozenie.Activity = "Being loaded";
+                    naNalozenie.Position = "Loader A";
                     AStartedWorking = MySim.CurrentTime;
 
                     // koniec cakania

@@ -68,6 +68,7 @@
             this.labelReplications = new System.Windows.Forms.Label();
             this.TextBoxReplications = new System.Windows.Forms.TextBox();
             this.groupBoxSim = new System.Windows.Forms.GroupBox();
+            this.labelReplication = new System.Windows.Forms.Label();
             this.buttonMaxSpeed = new System.Windows.Forms.Button();
             this.movingPicture = new System.Windows.Forms.PictureBox();
             this.groupBoxLoader = new System.Windows.Forms.GroupBox();
@@ -125,7 +126,6 @@
             this.pictureTrackedCar = new System.Windows.Forms.PictureBox();
             this.labelTracking = new System.Windows.Forms.Label();
             this.comboBoxTracking = new System.Windows.Forms.ComboBox();
-            this.labelReplication = new System.Windows.Forms.Label();
             this.groupBoxVehicles.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
@@ -546,6 +546,16 @@
             this.groupBoxSim.TabIndex = 3;
             this.groupBoxSim.TabStop = false;
             this.groupBoxSim.Text = "Simulation";
+            // 
+            // labelReplication
+            // 
+            this.labelReplication.AutoSize = true;
+            this.labelReplication.Location = new System.Drawing.Point(21, 919);
+            this.labelReplication.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelReplication.Name = "labelReplication";
+            this.labelReplication.Size = new System.Drawing.Size(140, 29);
+            this.labelReplication.TabIndex = 35;
+            this.labelReplication.Text = "Replication:";
             // 
             // buttonMaxSpeed
             // 
@@ -1235,16 +1245,7 @@
             this.comboBoxTracking.Name = "comboBoxTracking";
             this.comboBoxTracking.Size = new System.Drawing.Size(296, 37);
             this.comboBoxTracking.TabIndex = 0;
-            // 
-            // labelReplication
-            // 
-            this.labelReplication.AutoSize = true;
-            this.labelReplication.Location = new System.Drawing.Point(21, 919);
-            this.labelReplication.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelReplication.Name = "labelReplication";
-            this.labelReplication.Size = new System.Drawing.Size(140, 29);
-            this.labelReplication.TabIndex = 35;
-            this.labelReplication.Text = "Replication:";
+            this.comboBoxTracking.SelectedIndexChanged += new System.EventHandler(this.comboBoxTracking_SelectedIndexChanged);
             // 
             // FormAgentSimulation
             // 

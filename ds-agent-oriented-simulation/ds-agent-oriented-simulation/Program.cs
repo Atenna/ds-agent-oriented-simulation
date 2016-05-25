@@ -1,10 +1,7 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 using System.Windows.Forms;
-using ds_agent_oriented_simulation.Entities;
 using ds_agent_oriented_simulation.Simulation;
-using MathNet.Numerics;
 
 namespace ds_agent_oriented_simulation
 {

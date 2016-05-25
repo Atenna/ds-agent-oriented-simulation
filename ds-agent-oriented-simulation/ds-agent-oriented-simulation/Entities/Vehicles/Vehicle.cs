@@ -1,6 +1,4 @@
 ﻿using System;
-using ds_agent_oriented_simulation.Settings;
-using MathNet.Numerics.Random;
 
 namespace ds_agent_oriented_simulation.Entities.Vehicles
 {
@@ -27,6 +25,11 @@ namespace ds_agent_oriented_simulation.Entities.Vehicles
         public double ZaciatokNakladania { get; set; }
         public double ZaciatokVykladania { get; set; }
 
+        public string Position { get; set; }
+        public string Activity { get; set; }
+        public double Waiting { get; set; }
+        public double Progress { get; set; }
+
         public Vehicle(string name, int pVolume, int pSpeed, double pProbability, int pTime, Random generator)
         {
             this.Name = name;
@@ -39,6 +42,10 @@ namespace ds_agent_oriented_simulation.Entities.Vehicles
             this.ToUnload = 0;
             this.JeNakladane = false;
             this.JeVykladane = false;
+            Position = "";
+            Activity = "";
+            Waiting = 0;
+            Progress = 0;
         }
         public double GetMeanWaitingOnDepo()
         {
