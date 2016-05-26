@@ -318,7 +318,7 @@ namespace ds_agent_oriented_simulation
 
 
             storageAStat += Sim.AgentSkladky.MaterialNaSkladke;
-            storageBStat += Sim.AgentSkladky.MaterialNaStavbe;
+            storageBStat += Sim.AgentStavby.MaterialNaStavbe;
             count++;
             if (maxA < storageAStat / count)
             {

@@ -131,10 +131,13 @@ namespace ds_agent_oriented_simulation.ContinualAssistant
 
         private void NaplanujA(MyMessage message)
         {
-            message.Volume = GeneratorSample(GenMaterialA);
-            message.Time = GeneratorTimeSample(GenCasA);
-            message.Code = Mc.DovozMaterialu;
-            Hold(message.Time, message);
+            //if (MySim.CurrentTime < 3*30*24*60)
+            
+                message.Volume = GeneratorSample(GenMaterialA);
+                message.Time = GeneratorTimeSample(GenCasA);
+                message.Code = Mc.DovozMaterialu;
+                Hold(message.Time, message);
+            
         }
 
         //meta! userInfo="Process messages defined in code", id="0"
