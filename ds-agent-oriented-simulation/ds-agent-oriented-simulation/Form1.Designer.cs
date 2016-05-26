@@ -29,15 +29,15 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAgentSimulation));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.groupBoxVehicles = new System.Windows.Forms.GroupBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
@@ -93,13 +93,11 @@
             this.buttonRun = new System.Windows.Forms.Button();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabStats = new System.Windows.Forms.TabPage();
+            this.label5 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.labelConfInterval = new System.Windows.Forms.Label();
             this.labelTotalAttempts = new System.Windows.Forms.Label();
             this.labelExportRate = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.labelCostUnloaders = new System.Windows.Forms.Label();
-            this.labelCostVehicles = new System.Windows.Forms.Label();
             this.groupBoxUnloaderStats = new System.Windows.Forms.GroupBox();
             this.labelUsageUB = new System.Windows.Forms.Label();
             this.labelUsageUA = new System.Windows.Forms.Label();
@@ -112,6 +110,20 @@
             this.label1 = new System.Windows.Forms.Label();
             this.labelLoaderStatsLen = new System.Windows.Forms.Label();
             this.labelLoaderStatsTime = new System.Windows.Forms.Label();
+            this.tabStats2 = new System.Windows.Forms.TabPage();
+            this.label6 = new System.Windows.Forms.Label();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.labelSimUsageUB = new System.Windows.Forms.Label();
+            this.labelSimUsageUA = new System.Windows.Forms.Label();
+            this.labelSimUnloadWaitingTimeCar = new System.Windows.Forms.Label();
+            this.labelSimUnloaderQueue = new System.Windows.Forms.Label();
+            this.labelSimUnloaderWaiting = new System.Windows.Forms.Label();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.labelSimUsageLB = new System.Windows.Forms.Label();
+            this.labelSimUsageLA = new System.Windows.Forms.Label();
+            this.labelSimLoadWaitingCar = new System.Windows.Forms.Label();
+            this.labelSimLoaderQueue = new System.Windows.Forms.Label();
+            this.labelSimLoaderWaiting = new System.Windows.Forms.Label();
             this.tabGraphs = new System.Windows.Forms.TabPage();
             this.chart3 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -126,6 +138,17 @@
             this.pictureTrackedCar = new System.Windows.Forms.PictureBox();
             this.labelTracking = new System.Windows.Forms.Label();
             this.comboBoxTracking = new System.Windows.Forms.ComboBox();
+            this.labelCILB = new System.Windows.Forms.Label();
+            this.labelCILA = new System.Windows.Forms.Label();
+            this.labelCILlength = new System.Windows.Forms.Label();
+            this.labelCILavg = new System.Windows.Forms.Label();
+            this.labelCIUB = new System.Windows.Forms.Label();
+            this.labelCIUA = new System.Windows.Forms.Label();
+            this.labelCIUlength = new System.Windows.Forms.Label();
+            this.labelCIUavg = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.labelCostVehicles = new System.Windows.Forms.Label();
+            this.labelCostUnloaders = new System.Windows.Forms.Label();
             this.groupBoxVehicles.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
@@ -151,15 +174,18 @@
             this.tabControl.SuspendLayout();
             this.tabStats.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.groupBoxUnloaderStats.SuspendLayout();
             this.groupBoxLoaderStats.SuspendLayout();
+            this.tabStats2.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             this.tabGraphs.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.tabPositions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureTrackedCar)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBoxVehicles
@@ -849,6 +875,7 @@
             // tabControl
             // 
             this.tabControl.Controls.Add(this.tabStats);
+            this.tabControl.Controls.Add(this.tabStats2);
             this.tabControl.Controls.Add(this.tabGraphs);
             this.tabControl.Controls.Add(this.tabPositions);
             this.tabControl.Location = new System.Drawing.Point(1225, 11);
@@ -860,8 +887,9 @@
             // 
             // tabStats
             // 
-            this.tabStats.Controls.Add(this.groupBox2);
             this.tabStats.Controls.Add(this.groupBox1);
+            this.tabStats.Controls.Add(this.label5);
+            this.tabStats.Controls.Add(this.groupBox2);
             this.tabStats.Controls.Add(this.groupBoxUnloaderStats);
             this.tabStats.Controls.Add(this.groupBoxLoaderStats);
             this.tabStats.Location = new System.Drawing.Point(10, 47);
@@ -870,19 +898,29 @@
             this.tabStats.Padding = new System.Windows.Forms.Padding(2);
             this.tabStats.Size = new System.Drawing.Size(808, 1081);
             this.tabStats.TabIndex = 0;
-            this.tabStats.Text = "Statistics";
+            this.tabStats.Text = "Statistics 1/2";
             this.tabStats.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label5.Location = new System.Drawing.Point(51, 52);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(257, 29);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "Replication Statistics";
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.labelConfInterval);
             this.groupBox2.Controls.Add(this.labelTotalAttempts);
             this.groupBox2.Controls.Add(this.labelExportRate);
-            this.groupBox2.Location = new System.Drawing.Point(56, 738);
+            this.groupBox2.Location = new System.Drawing.Point(56, 827);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Size = new System.Drawing.Size(663, 307);
+            this.groupBox2.Size = new System.Drawing.Size(663, 206);
             this.groupBox2.TabIndex = 7;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Export";
@@ -917,39 +955,6 @@
             this.labelExportRate.TabIndex = 0;
             this.labelExportRate.Text = "Successful export rate:";
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.labelCostUnloaders);
-            this.groupBox1.Controls.Add(this.labelCostVehicles);
-            this.groupBox1.Location = new System.Drawing.Point(56, 575);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(663, 159);
-            this.groupBox1.TabIndex = 6;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Expenditures";
-            // 
-            // labelCostUnloaders
-            // 
-            this.labelCostUnloaders.AutoSize = true;
-            this.labelCostUnloaders.Location = new System.Drawing.Point(16, 96);
-            this.labelCostUnloaders.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelCostUnloaders.Name = "labelCostUnloaders";
-            this.labelCostUnloaders.Size = new System.Drawing.Size(215, 29);
-            this.labelCostUnloaders.TabIndex = 1;
-            this.labelCostUnloaders.Text = "Cost for unloaders:";
-            // 
-            // labelCostVehicles
-            // 
-            this.labelCostVehicles.AutoSize = true;
-            this.labelCostVehicles.Location = new System.Drawing.Point(16, 56);
-            this.labelCostVehicles.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelCostVehicles.Name = "labelCostVehicles";
-            this.labelCostVehicles.Size = new System.Drawing.Size(196, 29);
-            this.labelCostVehicles.TabIndex = 0;
-            this.labelCostVehicles.Text = "Cost for vehicles:";
-            // 
             // groupBoxUnloaderStats
             // 
             this.groupBoxUnloaderStats.Controls.Add(this.labelUsageUB);
@@ -957,11 +962,11 @@
             this.groupBoxUnloaderStats.Controls.Add(this.label2);
             this.groupBoxUnloaderStats.Controls.Add(this.labelUnloaderStatsLen);
             this.groupBoxUnloaderStats.Controls.Add(this.labelUnloaderStatsTime);
-            this.groupBoxUnloaderStats.Location = new System.Drawing.Point(56, 323);
+            this.groupBoxUnloaderStats.Location = new System.Drawing.Point(56, 379);
             this.groupBoxUnloaderStats.Margin = new System.Windows.Forms.Padding(2);
             this.groupBoxUnloaderStats.Name = "groupBoxUnloaderStats";
             this.groupBoxUnloaderStats.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBoxUnloaderStats.Size = new System.Drawing.Size(663, 248);
+            this.groupBoxUnloaderStats.Size = new System.Drawing.Size(663, 270);
             this.groupBoxUnloaderStats.TabIndex = 5;
             this.groupBoxUnloaderStats.TabStop = false;
             this.groupBoxUnloaderStats.Text = "Unloader Statistics";
@@ -1023,11 +1028,11 @@
             this.groupBoxLoaderStats.Controls.Add(this.label1);
             this.groupBoxLoaderStats.Controls.Add(this.labelLoaderStatsLen);
             this.groupBoxLoaderStats.Controls.Add(this.labelLoaderStatsTime);
-            this.groupBoxLoaderStats.Location = new System.Drawing.Point(56, 62);
+            this.groupBoxLoaderStats.Location = new System.Drawing.Point(56, 105);
             this.groupBoxLoaderStats.Margin = new System.Windows.Forms.Padding(2);
             this.groupBoxLoaderStats.Name = "groupBoxLoaderStats";
             this.groupBoxLoaderStats.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBoxLoaderStats.Size = new System.Drawing.Size(663, 257);
+            this.groupBoxLoaderStats.Size = new System.Drawing.Size(663, 270);
             this.groupBoxLoaderStats.TabIndex = 4;
             this.groupBoxLoaderStats.TabStop = false;
             this.groupBoxLoaderStats.Text = "Loader Statistics";
@@ -1082,6 +1087,168 @@
             this.labelLoaderStatsTime.TabIndex = 0;
             this.labelLoaderStatsTime.Text = "Average waiting time:";
             // 
+            // tabStats2
+            // 
+            this.tabStats2.Controls.Add(this.label6);
+            this.tabStats2.Controls.Add(this.groupBox5);
+            this.tabStats2.Controls.Add(this.groupBox6);
+            this.tabStats2.Location = new System.Drawing.Point(10, 47);
+            this.tabStats2.Name = "tabStats2";
+            this.tabStats2.Size = new System.Drawing.Size(808, 1081);
+            this.tabStats2.TabIndex = 3;
+            this.tabStats2.Text = "Statistics 2/2";
+            this.tabStats2.UseVisualStyleBackColor = true;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label6.Location = new System.Drawing.Point(51, 52);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(248, 29);
+            this.label6.TabIndex = 13;
+            this.label6.Text = "Simulation Statistics";
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.labelCIUavg);
+            this.groupBox5.Controls.Add(this.labelCIUlength);
+            this.groupBox5.Controls.Add(this.labelCIUA);
+            this.groupBox5.Controls.Add(this.labelCIUB);
+            this.groupBox5.Controls.Add(this.labelSimUsageUB);
+            this.groupBox5.Controls.Add(this.labelSimUsageUA);
+            this.groupBox5.Controls.Add(this.labelSimUnloadWaitingTimeCar);
+            this.groupBox5.Controls.Add(this.labelSimUnloaderQueue);
+            this.groupBox5.Controls.Add(this.labelSimUnloaderWaiting);
+            this.groupBox5.Location = new System.Drawing.Point(56, 572);
+            this.groupBox5.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox5.Size = new System.Drawing.Size(663, 481);
+            this.groupBox5.TabIndex = 10;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Unloader Statistics";
+            // 
+            // labelSimUsageUB
+            // 
+            this.labelSimUsageUB.AutoSize = true;
+            this.labelSimUsageUB.Location = new System.Drawing.Point(18, 376);
+            this.labelSimUsageUB.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelSimUsageUB.Name = "labelSimUsageUB";
+            this.labelSimUsageUB.Size = new System.Drawing.Size(111, 29);
+            this.labelSimUsageUB.TabIndex = 6;
+            this.labelSimUsageUB.Text = "Usage B:";
+            // 
+            // labelSimUsageUA
+            // 
+            this.labelSimUsageUA.AutoSize = true;
+            this.labelSimUsageUA.Location = new System.Drawing.Point(18, 294);
+            this.labelSimUsageUA.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelSimUsageUA.Name = "labelSimUsageUA";
+            this.labelSimUsageUA.Size = new System.Drawing.Size(110, 29);
+            this.labelSimUsageUA.TabIndex = 5;
+            this.labelSimUsageUA.Text = "Usage A:";
+            // 
+            // labelSimUnloadWaitingTimeCar
+            // 
+            this.labelSimUnloadWaitingTimeCar.AutoSize = true;
+            this.labelSimUnloadWaitingTimeCar.Location = new System.Drawing.Point(18, 212);
+            this.labelSimUnloadWaitingTimeCar.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelSimUnloadWaitingTimeCar.Name = "labelSimUnloadWaitingTimeCar";
+            this.labelSimUnloadWaitingTimeCar.Size = new System.Drawing.Size(323, 29);
+            this.labelSimUnloadWaitingTimeCar.TabIndex = 2;
+            this.labelSimUnloadWaitingTimeCar.Text = "Average waiting time per car:";
+            // 
+            // labelSimUnloaderQueue
+            // 
+            this.labelSimUnloaderQueue.AutoSize = true;
+            this.labelSimUnloaderQueue.Location = new System.Drawing.Point(18, 130);
+            this.labelSimUnloaderQueue.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelSimUnloaderQueue.Name = "labelSimUnloaderQueue";
+            this.labelSimUnloaderQueue.Size = new System.Drawing.Size(280, 29);
+            this.labelSimUnloaderQueue.TabIndex = 1;
+            this.labelSimUnloaderQueue.Text = "Average length of queue:";
+            // 
+            // labelSimUnloaderWaiting
+            // 
+            this.labelSimUnloaderWaiting.AutoSize = true;
+            this.labelSimUnloaderWaiting.Location = new System.Drawing.Point(18, 48);
+            this.labelSimUnloaderWaiting.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelSimUnloaderWaiting.Name = "labelSimUnloaderWaiting";
+            this.labelSimUnloaderWaiting.Size = new System.Drawing.Size(242, 29);
+            this.labelSimUnloaderWaiting.TabIndex = 0;
+            this.labelSimUnloaderWaiting.Text = "Average waiting time:";
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.labelCILavg);
+            this.groupBox6.Controls.Add(this.labelCILlength);
+            this.groupBox6.Controls.Add(this.labelCILA);
+            this.groupBox6.Controls.Add(this.labelCILB);
+            this.groupBox6.Controls.Add(this.labelSimUsageLB);
+            this.groupBox6.Controls.Add(this.labelSimUsageLA);
+            this.groupBox6.Controls.Add(this.labelSimLoadWaitingCar);
+            this.groupBox6.Controls.Add(this.labelSimLoaderQueue);
+            this.groupBox6.Controls.Add(this.labelSimLoaderWaiting);
+            this.groupBox6.Location = new System.Drawing.Point(56, 105);
+            this.groupBox6.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox6.Size = new System.Drawing.Size(663, 463);
+            this.groupBox6.TabIndex = 9;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Loader Statistics";
+            // 
+            // labelSimUsageLB
+            // 
+            this.labelSimUsageLB.AutoSize = true;
+            this.labelSimUsageLB.Location = new System.Drawing.Point(18, 370);
+            this.labelSimUsageLB.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelSimUsageLB.Name = "labelSimUsageLB";
+            this.labelSimUsageLB.Size = new System.Drawing.Size(111, 29);
+            this.labelSimUsageLB.TabIndex = 4;
+            this.labelSimUsageLB.Text = "Usage B:";
+            // 
+            // labelSimUsageLA
+            // 
+            this.labelSimUsageLA.AutoSize = true;
+            this.labelSimUsageLA.Location = new System.Drawing.Point(18, 292);
+            this.labelSimUsageLA.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelSimUsageLA.Name = "labelSimUsageLA";
+            this.labelSimUsageLA.Size = new System.Drawing.Size(110, 29);
+            this.labelSimUsageLA.TabIndex = 3;
+            this.labelSimUsageLA.Text = "Usage A:";
+            // 
+            // labelSimLoadWaitingCar
+            // 
+            this.labelSimLoadWaitingCar.AutoSize = true;
+            this.labelSimLoadWaitingCar.Location = new System.Drawing.Point(18, 214);
+            this.labelSimLoadWaitingCar.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelSimLoadWaitingCar.Name = "labelSimLoadWaitingCar";
+            this.labelSimLoadWaitingCar.Size = new System.Drawing.Size(323, 29);
+            this.labelSimLoadWaitingCar.TabIndex = 2;
+            this.labelSimLoadWaitingCar.Text = "Average waiting time per car:";
+            // 
+            // labelSimLoaderQueue
+            // 
+            this.labelSimLoaderQueue.AutoSize = true;
+            this.labelSimLoaderQueue.Location = new System.Drawing.Point(18, 136);
+            this.labelSimLoaderQueue.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelSimLoaderQueue.Name = "labelSimLoaderQueue";
+            this.labelSimLoaderQueue.Size = new System.Drawing.Size(280, 29);
+            this.labelSimLoaderQueue.TabIndex = 1;
+            this.labelSimLoaderQueue.Text = "Average length of queue:";
+            // 
+            // labelSimLoaderWaiting
+            // 
+            this.labelSimLoaderWaiting.AutoSize = true;
+            this.labelSimLoaderWaiting.Location = new System.Drawing.Point(18, 58);
+            this.labelSimLoaderWaiting.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelSimLoaderWaiting.Name = "labelSimLoaderWaiting";
+            this.labelSimLoaderWaiting.Size = new System.Drawing.Size(242, 29);
+            this.labelSimLoaderWaiting.TabIndex = 0;
+            this.labelSimLoaderWaiting.Text = "Average waiting time:";
+            // 
             // tabGraphs
             // 
             this.tabGraphs.Controls.Add(this.chart3);
@@ -1098,51 +1265,51 @@
             // 
             // chart3
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chart3.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chart3.Legends.Add(legend1);
+            chartArea4.Name = "ChartArea1";
+            this.chart3.ChartAreas.Add(chartArea4);
+            legend4.Name = "Legend1";
+            this.chart3.Legends.Add(legend4);
             this.chart3.Location = new System.Drawing.Point(40, 399);
             this.chart3.Margin = new System.Windows.Forms.Padding(2);
             this.chart3.Name = "chart3";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chart3.Series.Add(series1);
+            series4.ChartArea = "ChartArea1";
+            series4.Legend = "Legend1";
+            series4.Name = "Series1";
+            this.chart3.Series.Add(series4);
             this.chart3.Size = new System.Drawing.Size(730, 315);
             this.chart3.TabIndex = 2;
             this.chart3.Text = "chart3";
             // 
             // chart2
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chart2.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chart2.Legends.Add(legend2);
+            chartArea5.Name = "ChartArea1";
+            this.chart2.ChartAreas.Add(chartArea5);
+            legend5.Name = "Legend1";
+            this.chart2.Legends.Add(legend5);
             this.chart2.Location = new System.Drawing.Point(40, 761);
             this.chart2.Margin = new System.Windows.Forms.Padding(2);
             this.chart2.Name = "chart2";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chart2.Series.Add(series2);
+            series5.ChartArea = "ChartArea1";
+            series5.Legend = "Legend1";
+            series5.Name = "Series1";
+            this.chart2.Series.Add(series5);
             this.chart2.Size = new System.Drawing.Size(730, 286);
             this.chart2.TabIndex = 1;
             this.chart2.Text = "chart2";
             // 
             // chart1
             // 
-            chartArea3.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.chart1.Legends.Add(legend3);
+            chartArea6.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea6);
+            legend6.Name = "Legend1";
+            this.chart1.Legends.Add(legend6);
             this.chart1.Location = new System.Drawing.Point(40, 40);
             this.chart1.Margin = new System.Windows.Forms.Padding(2);
             this.chart1.Name = "chart1";
-            series3.ChartArea = "ChartArea1";
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            this.chart1.Series.Add(series3);
+            series6.ChartArea = "ChartArea1";
+            series6.Legend = "Legend1";
+            series6.Name = "Series1";
+            this.chart1.Series.Add(series6);
             this.chart1.Size = new System.Drawing.Size(730, 294);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
@@ -1247,6 +1414,117 @@
             this.comboBoxTracking.TabIndex = 0;
             this.comboBoxTracking.SelectedIndexChanged += new System.EventHandler(this.comboBoxTracking_SelectedIndexChanged);
             // 
+            // labelCILB
+            // 
+            this.labelCILB.AutoSize = true;
+            this.labelCILB.Location = new System.Drawing.Point(18, 409);
+            this.labelCILB.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelCILB.Name = "labelCILB";
+            this.labelCILB.Size = new System.Drawing.Size(225, 29);
+            this.labelCILB.TabIndex = 5;
+            this.labelCILB.Text = "Confidence interval:";
+            // 
+            // labelCILA
+            // 
+            this.labelCILA.AutoSize = true;
+            this.labelCILA.Location = new System.Drawing.Point(18, 331);
+            this.labelCILA.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelCILA.Name = "labelCILA";
+            this.labelCILA.Size = new System.Drawing.Size(225, 29);
+            this.labelCILA.TabIndex = 6;
+            this.labelCILA.Text = "Confidence interval:";
+            // 
+            // labelCILlength
+            // 
+            this.labelCILlength.AutoSize = true;
+            this.labelCILlength.Location = new System.Drawing.Point(18, 175);
+            this.labelCILlength.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelCILlength.Name = "labelCILlength";
+            this.labelCILlength.Size = new System.Drawing.Size(225, 29);
+            this.labelCILlength.TabIndex = 8;
+            this.labelCILlength.Text = "Confidence interval:";
+            // 
+            // labelCILavg
+            // 
+            this.labelCILavg.AutoSize = true;
+            this.labelCILavg.Location = new System.Drawing.Point(18, 97);
+            this.labelCILavg.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelCILavg.Name = "labelCILavg";
+            this.labelCILavg.Size = new System.Drawing.Size(225, 29);
+            this.labelCILavg.TabIndex = 9;
+            this.labelCILavg.Text = "Confidence interval:";
+            // 
+            // labelCIUB
+            // 
+            this.labelCIUB.AutoSize = true;
+            this.labelCIUB.Location = new System.Drawing.Point(18, 417);
+            this.labelCIUB.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelCIUB.Name = "labelCIUB";
+            this.labelCIUB.Size = new System.Drawing.Size(225, 29);
+            this.labelCIUB.TabIndex = 7;
+            this.labelCIUB.Text = "Confidence interval:";
+            // 
+            // labelCIUA
+            // 
+            this.labelCIUA.AutoSize = true;
+            this.labelCIUA.Location = new System.Drawing.Point(18, 335);
+            this.labelCIUA.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelCIUA.Name = "labelCIUA";
+            this.labelCIUA.Size = new System.Drawing.Size(225, 29);
+            this.labelCIUA.TabIndex = 8;
+            this.labelCIUA.Text = "Confidence interval:";
+            // 
+            // labelCIUlength
+            // 
+            this.labelCIUlength.AutoSize = true;
+            this.labelCIUlength.Location = new System.Drawing.Point(18, 171);
+            this.labelCIUlength.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelCIUlength.Name = "labelCIUlength";
+            this.labelCIUlength.Size = new System.Drawing.Size(225, 29);
+            this.labelCIUlength.TabIndex = 10;
+            this.labelCIUlength.Text = "Confidence interval:";
+            // 
+            // labelCIUavg
+            // 
+            this.labelCIUavg.AutoSize = true;
+            this.labelCIUavg.Location = new System.Drawing.Point(18, 89);
+            this.labelCIUavg.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelCIUavg.Name = "labelCIUavg";
+            this.labelCIUavg.Size = new System.Drawing.Size(225, 29);
+            this.labelCIUavg.TabIndex = 11;
+            this.labelCIUavg.Text = "Confidence interval:";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.labelCostUnloaders);
+            this.groupBox1.Controls.Add(this.labelCostVehicles);
+            this.groupBox1.Location = new System.Drawing.Point(56, 654);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(663, 168);
+            this.groupBox1.TabIndex = 9;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Expenditures";
+            // 
+            // labelCostVehicles
+            // 
+            this.labelCostVehicles.AutoSize = true;
+            this.labelCostVehicles.Location = new System.Drawing.Point(16, 62);
+            this.labelCostVehicles.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelCostVehicles.Name = "labelCostVehicles";
+            this.labelCostVehicles.Size = new System.Drawing.Size(196, 29);
+            this.labelCostVehicles.TabIndex = 7;
+            this.labelCostVehicles.Text = "Cost for vehicles:";
+            // 
+            // labelCostUnloaders
+            // 
+            this.labelCostUnloaders.AutoSize = true;
+            this.labelCostUnloaders.Location = new System.Drawing.Point(16, 105);
+            this.labelCostUnloaders.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelCostUnloaders.Name = "labelCostUnloaders";
+            this.labelCostUnloaders.Size = new System.Drawing.Size(215, 29);
+            this.labelCostUnloaders.TabIndex = 8;
+            this.labelCostUnloaders.Text = "Cost for unloaders:";
+            // 
             // FormAgentSimulation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
@@ -1292,14 +1570,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureUnloaderB)).EndInit();
             this.tabControl.ResumeLayout(false);
             this.tabStats.ResumeLayout(false);
+            this.tabStats.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.groupBoxUnloaderStats.ResumeLayout(false);
             this.groupBoxUnloaderStats.PerformLayout();
             this.groupBoxLoaderStats.ResumeLayout(false);
             this.groupBoxLoaderStats.PerformLayout();
+            this.tabStats2.ResumeLayout(false);
+            this.tabStats2.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
             this.tabGraphs.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chart3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).EndInit();
@@ -1307,6 +1590,8 @@
             this.tabPositions.ResumeLayout(false);
             this.tabPositions.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureTrackedCar)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1356,9 +1641,6 @@
         private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage tabStats;
         private System.Windows.Forms.TabPage tabGraphs;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label labelCostUnloaders;
-        private System.Windows.Forms.Label labelCostVehicles;
         private System.Windows.Forms.GroupBox groupBoxUnloaderStats;
         private System.Windows.Forms.Label labelUnloaderStatsLen;
         private System.Windows.Forms.Label labelUnloaderStatsTime;
@@ -1400,6 +1682,32 @@
         private System.Windows.Forms.Label labelUsageUB;
         private System.Windows.Forms.Label labelUsageUA;
         public System.Windows.Forms.Label labelReplication;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TabPage tabStats2;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Label labelSimUsageUB;
+        private System.Windows.Forms.Label labelSimUsageUA;
+        private System.Windows.Forms.Label labelSimUnloadWaitingTimeCar;
+        private System.Windows.Forms.Label labelSimUnloaderQueue;
+        private System.Windows.Forms.Label labelSimUnloaderWaiting;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.Label labelSimUsageLB;
+        private System.Windows.Forms.Label labelSimUsageLA;
+        private System.Windows.Forms.Label labelSimLoadWaitingCar;
+        private System.Windows.Forms.Label labelSimLoaderQueue;
+        private System.Windows.Forms.Label labelSimLoaderWaiting;
+        private System.Windows.Forms.Label labelCILavg;
+        private System.Windows.Forms.Label labelCILlength;
+        private System.Windows.Forms.Label labelCILA;
+        private System.Windows.Forms.Label labelCILB;
+        private System.Windows.Forms.Label labelCIUavg;
+        private System.Windows.Forms.Label labelCIUlength;
+        private System.Windows.Forms.Label labelCIUA;
+        private System.Windows.Forms.Label labelCIUB;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label labelCostUnloaders;
+        private System.Windows.Forms.Label labelCostVehicles;
     }
 }
 

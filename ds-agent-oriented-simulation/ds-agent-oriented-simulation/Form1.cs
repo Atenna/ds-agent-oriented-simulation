@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Threading;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 using ds_agent_oriented_simulation.Agents;
 using ds_agent_oriented_simulation.Entities.Vehicles;
 using ds_agent_oriented_simulation.Settings;
@@ -17,13 +17,17 @@ namespace ds_agent_oriented_simulation
         public static int NumberOfReplications { get; private set; }
         public static long GeneratorSeed { get; private set; }
 
+        private Vehicle _selectedVehicle;
+
         private static decimal _costForCars;
         public static decimal CostForUnloaders;
         private double _exportRate;
-        private double interval, duration;
-        private bool first;
+        private double _interval;
+        private readonly double _duration;
+        private bool _first;
 
         public static bool UnloaderBDisabled { get; private set; }
+
         public FormAgentSimulation()
         {
             InitializeComponent();
@@ -35,8 +39,8 @@ namespace ds_agent_oriented_simulation
             GeneratorSeed = 22;
             UnloaderBDisabled = true;
             _exportRate = 0.0;
-            interval = 0.5;
-            duration = 2;
+            _interval = 0.5;
+            _duration = 2;
         }
 
         private void InitializeToolTips()
@@ -53,11 +57,16 @@ namespace ds_agent_oriented_simulation
             toolTipOverCars.IsBalloon = true;
 
             // Set up the ToolTip text for the Button and Checkbox.
-            toolTipOverCars.SetToolTip(this.pictureCarA, "Volume: " + Constants.VolumeOfVehicleA + ", Speed: " + Constants.SpeedOfVehicleA);
-            toolTipOverCars.SetToolTip(this.pictureCarB, "Volume: " + Constants.VolumeOfVehicleB + ", Speed: " + Constants.SpeedOfVehicleB);
-            toolTipOverCars.SetToolTip(this.pictureCarC, "Volume: " + Constants.VolumeOfVehicleC + ", Speed: " + Constants.SpeedOfVehicleC);
-            toolTipOverCars.SetToolTip(this.pictureCarD, "Volume: " + Constants.VolumeOfVehicleD + ", Speed: " + Constants.SpeedOfVehicleD);
-            toolTipOverCars.SetToolTip(this.pictureCarE, "Volume: " + Constants.VolumeOfVehicleE + ", Speed: " + Constants.SpeedOfVehicleE);
+            toolTipOverCars.SetToolTip(this.pictureCarA,
+                "Volume: " + Constants.VolumeOfVehicleA + ", Speed: " + Constants.SpeedOfVehicleA);
+            toolTipOverCars.SetToolTip(this.pictureCarB,
+                "Volume: " + Constants.VolumeOfVehicleB + ", Speed: " + Constants.SpeedOfVehicleB);
+            toolTipOverCars.SetToolTip(this.pictureCarC,
+                "Volume: " + Constants.VolumeOfVehicleC + ", Speed: " + Constants.SpeedOfVehicleC);
+            toolTipOverCars.SetToolTip(this.pictureCarD,
+                "Volume: " + Constants.VolumeOfVehicleD + ", Speed: " + Constants.SpeedOfVehicleD);
+            toolTipOverCars.SetToolTip(this.pictureCarE,
+                "Volume: " + Constants.VolumeOfVehicleE + ", Speed: " + Constants.SpeedOfVehicleE);
         }
 
 
@@ -94,14 +103,14 @@ namespace ds_agent_oriented_simulation
                 MessageBox.Show("Enter a valid generator seed", "Invalid format", MessageBoxButtons.OK);
                 return;
             }
-            first = true;
+            _first = true;
 
             DisableChanges();
 
             Sim = new MySimulation();
-            Sim.SetSimSpeed(interval, duration);
+            Sim.SetSimSpeed(_interval, _duration);
             Sim.AgentModelu.SelectedCars = SelectedCars;
-            
+
             System.Action<MySimulation> updateGuiAction = new System.Action<MySimulation>((s) => UpdateGui(s));
             System.Action<MySimulation> ReplicationFinished = new Action<MySimulation>((s) => UpdateUIAfterReplication());
             System.Action<MySimulation> SimulationFinished = new Action<MySimulation>((s) => UpdateUIAfterSimulation());
@@ -120,7 +129,7 @@ namespace ds_agent_oriented_simulation
             // 777 600
             Sim.SimulateAsync(NumberOfReplications, 788400);
 
-            
+            DrawChart();
             System.Action<MySimulation> enableChangesAction = new Action<MySimulation>((s) => EnableChanges());
             // nefunguje
             //Sim.OnSimulationDidFinish(s => this.Invoke(enableChangesAction));
@@ -128,8 +137,8 @@ namespace ds_agent_oriented_simulation
 
         private void SetupTracing()
         {
-            List<Vehicle> vehicles = ((AgentDopravy)Sim.FindAgent(SimId.AgentDopravy)).EnabledCars;
-
+            List<Vehicle> vehicles = ((AgentDopravy) Sim.FindAgent(SimId.AgentDopravy)).EnabledCars;
+            _selectedVehicle = vehicles[0];
             comboBoxTracking.DataSource = vehicles;
             comboBoxTracking.DisplayMember = "Name";
             comboBoxTracking.ValueMember = "Name";
@@ -171,13 +180,18 @@ namespace ds_agent_oriented_simulation
             buttonStop.Enabled = false;
         }
 
-        
+        private void DrawChart()
+        {
+
+        }
+
         private void UpdateGui(MySimulation mySimulation)
         {
+            
             if (!this.checkBoxVizual.Checked)
             {
                 this.labelSimTime.Text = "Simulation time: " + Sim.CurrentTime.ToString("#.000");
-                this.labelReplication.Text = "Replication: " + (Sim.CurrentReplication+1);
+                this.labelReplication.Text = "Replication: " + (Sim.CurrentReplication + 1);
                 this.labelSimTime.Text = "Simulation time: " + Sim.CurrentTime.ToString("#.000");
             }
             else
@@ -194,23 +208,36 @@ namespace ds_agent_oriented_simulation
 
                 }
 
-                this.labelLoaderA.Text = !Sim.AgentSkladky.NakladacAIsWorking() ?
-                    "Loads Car: Not working" : Sim.AgentSkladky.CarAtLoaderA != null
-                    ? ("Loads Car: " + Sim.AgentSkladky.CarAtLoaderA.Name + ": [" + GetProgressOfLoading(Sim.AgentSkladky.CarAtLoaderA)[0].ToString("##.0") + "/" + GetProgressOfLoading(Sim.AgentSkladky.CarAtLoaderA)[1] + "] ")
-                    : "Loads Car: Empty";
-                this.labelLoaderB.Text = !Sim.AgentSkladky.NakladacBIsWorking() ?
-                    "Loads Car: Not working" : Sim.AgentSkladky.CarAtLoaderB != null
-                    ? ("Loads Car: " + Sim.AgentSkladky.CarAtLoaderB.Name + ": [" + GetProgressOfLoading(Sim.AgentSkladky.CarAtLoaderB)[0].ToString("##.0") + "/" + GetProgressOfLoading(Sim.AgentSkladky.CarAtLoaderB)[1] + "] ")
-                    : "Loads Car: Empty";
-                this.labelUnloaderA.Text = !Sim.AgentStavby.VykladacAIsWorking() ?
-                    "Unloads Car: Not working" : Sim.AgentStavby.CarAtUnloaderA != null
-                    ? ("Unloads Car: " + Sim.AgentStavby.CarAtUnloaderA.Name + ": [" + GetProgressOfUnloading(Sim.AgentStavby.CarAtUnloaderA)[0].ToString("##.0") + "/" + GetProgressOfLoading(Sim.AgentStavby.CarAtUnloaderA)[1] + "] ")
-                    : "Unloads Car: Empty";
-                this.labelUnloaderB.Text = Sim.AgentStavby.VykladacBIsDisabled ?
-                    "Unloads Car: Disabled" : !Sim.AgentStavby.VykladacBIsWorking() ?
-                    "Unloads Car: Not working" : Sim.AgentStavby.CarAtUnloaderB != null
-                    ? ("Unloads Car: " + Sim.AgentStavby.CarAtUnloaderB.Name + ": [" + GetProgressOfUnloading(Sim.AgentStavby.CarAtUnloaderB)[0].ToString("##.0") + "/" + GetProgressOfLoading(Sim.AgentStavby.CarAtUnloaderB)[1] + "] ")
-                    : "Unloads Car: Empty";
+                this.labelLoaderA.Text = !Sim.AgentSkladky.NakladacAIsWorking()
+                    ? "Loads Car: Not working"
+                    : Sim.AgentSkladky.CarAtLoaderA != null
+                        ? ("Loads Car: " + Sim.AgentSkladky.CarAtLoaderA.Name + ": [" +
+                           GetProgressOfLoading(Sim.AgentSkladky.CarAtLoaderA)[0].ToString("##.0") + "/" +
+                           GetProgressOfLoading(Sim.AgentSkladky.CarAtLoaderA)[1] + "] ")
+                        : "Loads Car: Empty";
+                this.labelLoaderB.Text = !Sim.AgentSkladky.NakladacBIsWorking()
+                    ? "Loads Car: Not working"
+                    : Sim.AgentSkladky.CarAtLoaderB != null
+                        ? ("Loads Car: " + Sim.AgentSkladky.CarAtLoaderB.Name + ": [" +
+                           GetProgressOfLoading(Sim.AgentSkladky.CarAtLoaderB)[0].ToString("##.0") + "/" +
+                           GetProgressOfLoading(Sim.AgentSkladky.CarAtLoaderB)[1] + "] ")
+                        : "Loads Car: Empty";
+                this.labelUnloaderA.Text = !Sim.AgentStavby.VykladacAIsWorking()
+                    ? "Unloads Car: Not working"
+                    : Sim.AgentStavby.CarAtUnloaderA != null
+                        ? ("Unloads Car: " + Sim.AgentStavby.CarAtUnloaderA.Name + ": [" +
+                           GetProgressOfUnloading(Sim.AgentStavby.CarAtUnloaderA)[0].ToString("##.0") + "/" +
+                           GetProgressOfLoading(Sim.AgentStavby.CarAtUnloaderA)[1] + "] ")
+                        : "Unloads Car: Empty";
+                this.labelUnloaderB.Text = Sim.AgentStavby.VykladacBIsDisabled
+                    ? "Unloads Car: Disabled"
+                    : !Sim.AgentStavby.VykladacBIsWorking()
+                        ? "Unloads Car: Not working"
+                        : Sim.AgentStavby.CarAtUnloaderB != null
+                            ? ("Unloads Car: " + Sim.AgentStavby.CarAtUnloaderB.Name + ": [" +
+                               GetProgressOfUnloading(Sim.AgentStavby.CarAtUnloaderB)[0].ToString("##.0") + "/" +
+                               GetProgressOfLoading(Sim.AgentStavby.CarAtUnloaderB)[1] + "] ")
+                            : "Unloads Car: Empty";
 
                 this.labelQueueUnload.Text = "Queue at Unloader: ";
                 if (Sim.AgentStavby.AutaStavbaQueue != null && Sim.AgentStavby.AutaStavbaQueue.First != null)
@@ -226,7 +253,7 @@ namespace ds_agent_oriented_simulation
                 this.labelMaterialStavba.Text = Sim.AgentStavby.MaterialNaStavbe.ToString("####.0");
 
                 this.labelLoaderStatsTime.Text = "Average waiting time: " +
-                                                 Sim.AgentSkladky.SkladkaWStat.Mean().ToString("####.00");
+                                                 Sim.AgentSkladky.WaitingTimePerCar.Mean().ToString("####.00");
                 this.labelLoaderStatsLen.Text = "Average length of queue: " +
                                                 Sim.AgentSkladky.LengthOfQueue.Mean().ToString("####.00");
                 this.labelUnloaderStatsTime.Text = "Average waiting time: " +
@@ -236,14 +263,18 @@ namespace ds_agent_oriented_simulation
             }
 
             labelTotalAttempts.Text = "Total attempts: " + Sim.AgentStavby.PocetExport;
-            if(Sim.AgentStavby.PocetExport > 0)
+            if (Sim.AgentStavby.PocetExport > 0)
             {
-                _exportRate = Sim.AgentStavby.PocetUspesnyExport/ Sim.AgentStavby.PocetExport;
+                _exportRate = Sim.AgentStavby.PocetUspesnyExport/Sim.AgentStavby.PocetExport;
                 labelExportRate.Text = "Successful export rate: " + _exportRate.ToString("P");
             }
-            if (Sim.ReplicationCount > 1 && Sim.AgentStavby.OdoberMaterialKumulativny.SampleSize >= 2)
+            if (Sim.ReplicationCount > 1 && Sim.AgentStavby.OdoberMaterialKumulativny.SampleSize > 1)
             {
-                labelConfInterval.Text = "Confidence interval: <" + Sim.AgentStavby.OdoberMaterialKumulativny.ConfidenceInterval95[0].ToString("P") + ", " + mySimulation.AgentStavby.OdoberMaterialKumulativny.ConfidenceInterval95[1].ToString("P") + ">";
+                labelConfInterval.Text = "Confidence interval: <" +
+                                         Sim.AgentStavby.OdoberMaterialKumulativny.ConfidenceInterval95[0].ToString("P") +
+                                         ", " +
+                                         mySimulation.AgentStavby.OdoberMaterialKumulativny.ConfidenceInterval95[1]
+                                             .ToString("P") + ">";
             }
 
             //mySimulation.AgentSkladky.UsageLoaderA.
@@ -255,22 +286,72 @@ namespace ds_agent_oriented_simulation
                     this.movingPicture.Location.Y);
             }
 
-            if (first)
+            if (_first)
             {
                 SetupTracing();
-                first = false;
+                _first = false;
             }
 
             labelUsageLA.Text = "Usage A: " + Sim.AgentSkladky.RealWorkingTimeA.Mean().ToString("p");
             labelUsageLB.Text = "Usage B: " + Sim.AgentSkladky.RealWorkingTimeB.Mean().ToString("p");
             labelUsageUA.Text = "Usage A: " + Sim.AgentStavby.RealWorkingTimeA.Mean().ToString("p");
             labelUsageUB.Text = "Usage B: " + Sim.AgentStavby.RealWorkingTimeB.Mean().ToString("p");
+
+            UpdateCarInfo(_selectedVehicle);
+            UpdateSimulationStats(Sim);
+        }
+
+        private void UpdateSimulationStats(MySimulation sim)
+        {
+            labelSimLoaderWaiting.Text = "Average waiting time: " + sim.AgentSkladky.WaitingTimeSimulacia.Mean().ToString("####.00");
+            labelSimLoaderQueue.Text = "Average length of queue: " + sim.AgentSkladky.LengthOfQueueSimulacia.Mean().ToString("####.00");
+            labelSimLoadWaitingCar.Text = "Average waiting time per car: " + (sim.AgentSkladky.WaitingTimeSimulacia.Mean()/SelectedCars.Length).ToString("####.00");
+            labelSimUsageLA.Text = "Usage A: " + sim.AgentSkladky.RealWorkingTimeASimulacia.Mean().ToString("P");
+            labelSimUsageLB.Text = "Usage B: " + sim.AgentSkladky.RealWorkingTimeBSimulacia.Mean().ToString("P");
+
+            labelSimUnloaderWaiting.Text = "Average waiting time: " + sim.AgentStavby.WaitingTimeSimulacia.Mean().ToString("####.00");
+            labelSimUnloaderQueue.Text = "Average length of queue: " + sim.AgentStavby.LengthOfQueueSimulacia.Mean().ToString("####.00");
+            labelSimUnloadWaitingTimeCar.Text = "Average waiting time per car: " + (sim.AgentStavby.WaitingTimeSimulacia.Mean() / SelectedCars.Length).ToString("####.00");
+            labelSimUsageUA.Text = "Usage A: " + sim.AgentStavby.RealWorkingTimeASimulacia.Mean().ToString("P");
+            labelSimUsageUB.Text = "Usage B: " + sim.AgentStavby.RealWorkingTimeBSimulacia.Mean().ToString("P");
+
+
+            if (sim.AgentSkladky.WaitingTimeSimulacia.SampleSize > 2 && sim.AgentSkladky.RealWorkingTimeBSimulacia.SampleSize > 2 &&
+                sim.AgentStavby.LengthOfQueueSimulacia.SampleSize > 2 && sim.AgentSkladky.LengthOfQueueSimulacia.SampleSize > 2)
+            {
+
+                labelCILavg.Text = "Confidence interval: <" + sim.AgentSkladky.WaitingTimeSimulacia.ConfidenceInterval90[0].ToString("####.00") + ";" +sim.AgentSkladky.WaitingTimeSimulacia.ConfidenceInterval90[1].ToString("####.00") +">";
+                labelCIUlength.Text = "Confidence interval: <" +sim.AgentSkladky.LengthOfQueueSimulacia.ConfidenceInterval90[0].ToString("####.00") +";" +sim.AgentSkladky.LengthOfQueueSimulacia.ConfidenceInterval90[1].ToString("####.00") +">";
+                labelCILA.Text = "Confidence interval: <" +sim.AgentSkladky.RealWorkingTimeASimulacia.ConfidenceInterval90[0].ToString("####.00") +";" + sim.AgentSkladky.RealWorkingTimeASimulacia.ConfidenceInterval90[1].ToString("####.00") +">";
+                labelCILB.Text = "Confidence interval: <" +sim.AgentSkladky.RealWorkingTimeBSimulacia.ConfidenceInterval90[0].ToString("####.00") +";" +sim.AgentSkladky.RealWorkingTimeBSimulacia.ConfidenceInterval90[1].ToString("####.00") +">";
+
+                labelCIUavg.Text = "Confidence interval: <" +sim.AgentStavby.WaitingTimeSimulacia.ConfidenceInterval90[0].ToString("####.00") +";" +sim.AgentStavby.WaitingTimeSimulacia.ConfidenceInterval90[1].ToString("####.00") +">";
+                labelCILlength.Text = "Confidence interval: <" +sim.AgentStavby.LengthOfQueueSimulacia.ConfidenceInterval90[0].ToString("####.00") +";" +sim.AgentStavby.LengthOfQueueSimulacia.ConfidenceInterval90[1].ToString("####.00") +">";
+                labelCIUA.Text = "Confidence interval: <" +sim.AgentStavby.RealWorkingTimeASimulacia.ConfidenceInterval90[0].ToString("####.00") +";" +sim.AgentStavby.RealWorkingTimeASimulacia.ConfidenceInterval90[1].ToString("####.00") +">";
+            }
+
+            if (!sim.AgentStavby.VykladacBIsDisabled)
+            {
+                labelCIUB.Text = "Confidence interval: <" +sim.AgentStavby.RealWorkingTimeBSimulacia.ConfidenceInterval90[0].ToString("####.00") +";" + sim.AgentStavby.RealWorkingTimeBSimulacia.ConfidenceInterval90[1].ToString("####.00") +">";
+            }
+        }
+
+        public void UpdateCarInfo(Vehicle car)
+        {
+            Invoke((MethodInvoker) delegate
+            {
+                labelPosition.Text = "Position: " + car?.Position;
+                labelAction.Text = "Activity: " + car?.Activity;
+                labelVolume.Text = "Volume: " + car?.RealVolume + "/" + car?.Volume;
+                labelProgres.Text = "Progress: " + car?.Progress;
+                labelWaiting.Text = "Waiting: " + car?.Waiting;
+            });
         }
 
         public double[] GetProgressOfLoading(Vehicle car)
         {
             double[] pole = new double[2];
-            pole[0] = (Sim.CurrentTime - car.ZaciatokNakladania) * Constants.LoadMachinePerformance;
+            pole[0] = (Sim.CurrentTime - car.ZaciatokNakladania)*Constants.LoadMachinePerformance;
             pole[1] = car.Volume;
             return pole;
         }
@@ -278,7 +359,7 @@ namespace ds_agent_oriented_simulation
         public double[] GetProgressOfUnloading(Vehicle car)
         {
             double[] pole = new double[2];
-            pole[0] = (Sim.CurrentTime - car.ZaciatokVykladania) * Constants.LoadMachinePerformance;
+            pole[0] = (Sim.CurrentTime - car.ZaciatokVykladania)*Constants.LoadMachinePerformance;
             pole[1] = car.Volume;
             return pole;
         }
@@ -286,9 +367,9 @@ namespace ds_agent_oriented_simulation
 
         private void buttonSpeedUp_Click(object sender, System.EventArgs e)
         {
-            interval += 1;
+            _interval += 1;
             //duration -= 0.001;
-            Sim.SetSimSpeed(interval, 0.1);
+            Sim.SetSimSpeed(_interval, 0.1);
         }
 
         private void buttonPause_Click(object sender, System.EventArgs e)
@@ -314,11 +395,11 @@ namespace ds_agent_oriented_simulation
 
         private void buttonSlowDown_Click(object sender, System.EventArgs e)
         {
-            if (interval - 1 >= 0)
+            if (_interval - 1 >= 0)
             {
-                interval -= 1;
+                _interval -= 1;
                 //duration += 0.2;
-                Sim.SetSimSpeed(interval, 0.1);
+                Sim.SetSimSpeed(_interval, 0.1);
             }
         }
 
@@ -357,11 +438,11 @@ namespace ds_agent_oriented_simulation
         private void buttonSaveSettings_Click(object sender, EventArgs e)
         {
             // save settings
-            SelectedCars[0] = (int)numericUpDown1.Value;
-            SelectedCars[1] = (int)numericUpDown2.Value;
-            SelectedCars[2] = (int)numericUpDown3.Value;
-            SelectedCars[3] = (int)numericUpDown4.Value;
-            SelectedCars[4] = (int)numericUpDown5.Value;
+            SelectedCars[0] = (int) numericUpDown1.Value;
+            SelectedCars[1] = (int) numericUpDown2.Value;
+            SelectedCars[2] = (int) numericUpDown3.Value;
+            SelectedCars[3] = (int) numericUpDown4.Value;
+            SelectedCars[4] = (int) numericUpDown5.Value;
         }
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
@@ -439,11 +520,11 @@ namespace ds_agent_oriented_simulation
         {
             _costForCars = 0;
             labelCostVehicles.Text = "Cost for vehicles: ";
-            _costForCars = numericUpDown1.Value * Constants.PriceCarA
-                          + numericUpDown2.Value * Constants.PriceCarB
-                          + numericUpDown3.Value * Constants.PriceCarC
-                          + numericUpDown4.Value * Constants.PriceCarD
-                          + numericUpDown5.Value * Constants.PriceCarE;
+            _costForCars = numericUpDown1.Value*Constants.PriceCarA
+                           + numericUpDown2.Value*Constants.PriceCarB
+                           + numericUpDown3.Value*Constants.PriceCarC
+                           + numericUpDown4.Value*Constants.PriceCarD
+                           + numericUpDown5.Value*Constants.PriceCarE;
             labelCostVehicles.Text += _costForCars.ToString("C");
         }
 
@@ -531,7 +612,9 @@ namespace ds_agent_oriented_simulation
 
         private void UpdateUIAfterReplication()
         {
-            Invoke((MethodInvoker)delegate {
+            UpdateCarInfo(_selectedVehicle);
+            Invoke((MethodInvoker) delegate
+            {
                 this.labelSimTime.Text = "Simulation time: " + Sim.CurrentTime.ToString("#.000");
                 this.labelReplication.Text = "Replication: " + (Sim.CurrentReplication + 1);
                 this.labelQueueLoad.Text = "Queue at Loader: ";
@@ -588,7 +671,7 @@ namespace ds_agent_oriented_simulation
                 this.labelMaterialStavba.Text = Sim.AgentStavby.MaterialNaStavbe.ToString("####.0");
 
                 this.labelLoaderStatsTime.Text = "Average waiting time: " +
-                                                 Sim.AgentSkladky.SkladkaWStat.Mean().ToString("####.00");
+                                                 Sim.AgentSkladky.WaitingTimePerCar.Mean().ToString("####.00");
                 this.labelLoaderStatsLen.Text = "Average length of queue: " +
                                                 Sim.AgentSkladky.LengthOfQueue.Mean().ToString("####.00");
                 this.labelUnloaderStatsTime.Text = "Average waiting time: " +
@@ -600,7 +683,7 @@ namespace ds_agent_oriented_simulation
                 labelTotalAttempts.Text = "Total attempts: " + Sim.AgentStavby.PocetExport;
                 if (Sim.AgentStavby.PocetExport > 0)
                 {
-                    _exportRate = Sim.AgentStavby.PocetUspesnyExport / Sim.AgentStavby.PocetExport;
+                    _exportRate = Sim.AgentStavby.PocetUspesnyExport/Sim.AgentStavby.PocetExport;
                     labelExportRate.Text = "Successful export rate: " + _exportRate.ToString("P");
                 }
                 if (Sim.ReplicationCount > 1 && Sim.AgentStavby.OdoberMaterialKumulativny.SampleSize >= 2)
@@ -621,10 +704,10 @@ namespace ds_agent_oriented_simulation
                         this.movingPicture.Location.Y);
                 }
 
-                if (first)
+                if (_first)
                 {
                     SetupTracing();
-                    first = false;
+                    _first = false;
                 }
 
                 labelUsageLA.Text = "Usage A: " + Sim.AgentSkladky.RealWorkingTimeA.Mean().ToString("p");
@@ -633,10 +716,12 @@ namespace ds_agent_oriented_simulation
                 labelUsageUB.Text = "Usage B: " + Sim.AgentStavby.RealWorkingTimeB.Mean().ToString("p");
             });
         }
+
         private void UpdateUIAfterSimulation()
         {
             EnableChanges();
-            Invoke((MethodInvoker)delegate {
+            Invoke((MethodInvoker) delegate
+            {
                 this.labelSimTime.Text = "Simulation time: " + Sim.CurrentTime.ToString("#.000");
                 this.labelQueueLoad.Text = "Queue at Loader: ";
                 this.labelReplication.Text = "Replication: " + (Sim.CurrentReplication + 1);
@@ -693,7 +778,7 @@ namespace ds_agent_oriented_simulation
                 this.labelMaterialStavba.Text = Sim.AgentStavby.MaterialNaStavbe.ToString("####.0");
 
                 this.labelLoaderStatsTime.Text = "Average waiting time: " +
-                                                 Sim.AgentSkladky.SkladkaWStat.Mean().ToString("####.00");
+                                                 Sim.AgentSkladky.WaitingTimePerCar.Mean().ToString("####.00");
                 this.labelLoaderStatsLen.Text = "Average length of queue: " +
                                                 Sim.AgentSkladky.LengthOfQueue.Mean().ToString("####.00");
                 this.labelUnloaderStatsTime.Text = "Average waiting time: " +
@@ -705,7 +790,7 @@ namespace ds_agent_oriented_simulation
                 labelTotalAttempts.Text = "Total attempts: " + Sim.AgentStavby.PocetExport;
                 if (Sim.AgentStavby.PocetExport > 0)
                 {
-                    _exportRate = Sim.AgentStavby.PocetUspesnyExport / Sim.AgentStavby.PocetExport;
+                    _exportRate = Sim.AgentStavby.PocetUspesnyExport/Sim.AgentStavby.PocetExport;
                     labelExportRate.Text = "Successful export rate: " + _exportRate.ToString("P");
                 }
                 if (Sim.ReplicationCount > 1 && Sim.AgentStavby.OdoberMaterialKumulativny.SampleSize >= 2)
@@ -726,10 +811,10 @@ namespace ds_agent_oriented_simulation
                         this.movingPicture.Location.Y);
                 }
 
-                if (first)
+                if (_first)
                 {
                     SetupTracing();
-                    first = false;
+                    _first = false;
                 }
 
                 labelUsageLA.Text = "Usage A: " + Sim.AgentSkladky.RealWorkingTimeA.Mean().ToString("p");
@@ -737,6 +822,12 @@ namespace ds_agent_oriented_simulation
                 labelUsageUA.Text = "Usage A: " + Sim.AgentStavby.RealWorkingTimeA.Mean().ToString("p");
                 labelUsageUB.Text = "Usage B: " + Sim.AgentStavby.RealWorkingTimeB.Mean().ToString("p");
             });
+        }
+
+        private void comboBoxTracking_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _selectedVehicle = (Vehicle) comboBoxTracking.SelectedItem;
+            UpdateCarInfo(_selectedVehicle);
         }
     }
 }
