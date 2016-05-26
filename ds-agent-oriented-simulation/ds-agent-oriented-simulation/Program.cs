@@ -22,15 +22,15 @@ namespace ds_agent_oriented_simulation
             ms.Simulate(1, 788400);
             */
 
-            /*
+            
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FormAgentSimulation());
-            */
+            
 
             //Combiner.Combine();
 
-            CarConfig();
+            //CarConfig();
         }
 
         public static void CarConfig()
@@ -51,7 +51,7 @@ namespace ds_agent_oriented_simulation
                 MySimulation ms = new MySimulation();
                 ms.AgentModelu.SelectedCars = SelectedCars;
                 ms.SetMaxSimSpeed();
-                ms.Simulate(50, 788400);
+                ms.Simulate(5, 788400);
 
                 using (StreamWriter w = File.AppendText("resultsConfigurationA.txt"))
                 {

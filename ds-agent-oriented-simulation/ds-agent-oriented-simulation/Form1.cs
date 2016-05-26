@@ -26,6 +26,14 @@ namespace ds_agent_oriented_simulation
         private readonly double _duration;
         private bool _first;
 
+        private double storageAStat = 0;
+        private double storageBStat = 0;
+        private int count = 0;
+        private double maxA = 0;
+        private double minA = 90000;
+        private double maxB = 0;
+        private double minB = 90000;
+
         public static bool UnloaderBDisabled { get; private set; }
 
         public FormAgentSimulation()
@@ -41,6 +49,17 @@ namespace ds_agent_oriented_simulation
             _exportRate = 0.0;
             _interval = 0.5;
             _duration = 2;
+            chart1.ChartAreas[0].AxisX.LabelStyle.ForeColor = Color.White;
+            chart1.ChartAreas[0].AxisY.LabelStyle.Enabled = false;
+
+            chart1.ChartAreas[0].AxisY.MajorTickMark.Enabled = false;
+            chart1.ChartAreas[0].AxisY.MinorTickMark.Enabled = false;
+
+            chart3.ChartAreas[0].AxisX.LabelStyle.ForeColor = Color.White;
+            chart3.ChartAreas[0].AxisY.LabelStyle.Enabled = false;
+
+            chart3.ChartAreas[0].AxisY.MajorTickMark.Enabled = false;
+            chart3.ChartAreas[0].AxisY.MinorTickMark.Enabled = false;
         }
 
         private void InitializeToolTips()
@@ -297,6 +316,33 @@ namespace ds_agent_oriented_simulation
             labelUsageUA.Text = "Usage A: " + Sim.AgentStavby.RealWorkingTimeA.Mean().ToString("p");
             labelUsageUB.Text = "Usage B: " + Sim.AgentStavby.RealWorkingTimeB.Mean().ToString("p");
 
+
+            storageAStat += Sim.AgentSkladky.MaterialNaSkladke;
+            storageBStat += Sim.AgentSkladky.MaterialNaStavbe;
+            count++;
+            if (maxA < storageAStat / count)
+            {
+                maxA = storageAStat / count;
+            }
+            if (maxB < storageBStat / count)
+            {
+                maxB = storageBStat / count;
+            }
+            if (minA > storageAStat / count)
+            {
+                minA = storageAStat / count;
+            }
+            if (minB > storageBStat / count)
+            {
+                minB = storageBStat / count;
+            }
+            chart1.ChartAreas[0].AxisY.Maximum = maxA + 30;
+            chart1.ChartAreas[0].AxisY.Minimum = minA - 30;
+            chart1.Series["StorageA"].Points.AddXY(Sim.CurrentTime, storageAStat / count);
+            chart3.ChartAreas[0].AxisY.Maximum = maxB + 30;
+            chart3.ChartAreas[0].AxisY.Minimum = minB - 30;
+            chart3.Series["StorageB"].Points.AddXY(Sim.CurrentTime, storageBStat / count);
+
             UpdateCarInfo(_selectedVehicle);
             UpdateSimulationStats(Sim);
         }
@@ -322,12 +368,12 @@ namespace ds_agent_oriented_simulation
 
                 labelCILavg.Text = "Confidence interval: <" + sim.AgentSkladky.WaitingTimeSimulacia.ConfidenceInterval90[0].ToString("####.00") + ";" +sim.AgentSkladky.WaitingTimeSimulacia.ConfidenceInterval90[1].ToString("####.00") +">";
                 labelCIUlength.Text = "Confidence interval: <" +sim.AgentSkladky.LengthOfQueueSimulacia.ConfidenceInterval90[0].ToString("####.00") +";" +sim.AgentSkladky.LengthOfQueueSimulacia.ConfidenceInterval90[1].ToString("####.00") +">";
-                labelCILA.Text = "Confidence interval: <" +sim.AgentSkladky.RealWorkingTimeASimulacia.ConfidenceInterval90[0].ToString("####.00") +";" + sim.AgentSkladky.RealWorkingTimeASimulacia.ConfidenceInterval90[1].ToString("####.00") +">";
-                labelCILB.Text = "Confidence interval: <" +sim.AgentSkladky.RealWorkingTimeBSimulacia.ConfidenceInterval90[0].ToString("####.00") +";" +sim.AgentSkladky.RealWorkingTimeBSimulacia.ConfidenceInterval90[1].ToString("####.00") +">";
+                labelCILA.Text = "Confidence interval: <" +sim.AgentSkladky.RealWorkingTimeASimulacia.ConfidenceInterval90[0].ToString("P") +";" + sim.AgentSkladky.RealWorkingTimeASimulacia.ConfidenceInterval90[1].ToString("P") +">";
+                labelCILB.Text = "Confidence interval: <" +sim.AgentSkladky.RealWorkingTimeBSimulacia.ConfidenceInterval90[0].ToString("P") +";" +sim.AgentSkladky.RealWorkingTimeBSimulacia.ConfidenceInterval90[1].ToString("P") +">";
 
                 labelCIUavg.Text = "Confidence interval: <" +sim.AgentStavby.WaitingTimeSimulacia.ConfidenceInterval90[0].ToString("####.00") +";" +sim.AgentStavby.WaitingTimeSimulacia.ConfidenceInterval90[1].ToString("####.00") +">";
                 labelCILlength.Text = "Confidence interval: <" +sim.AgentStavby.LengthOfQueueSimulacia.ConfidenceInterval90[0].ToString("####.00") +";" +sim.AgentStavby.LengthOfQueueSimulacia.ConfidenceInterval90[1].ToString("####.00") +">";
-                labelCIUA.Text = "Confidence interval: <" +sim.AgentStavby.RealWorkingTimeASimulacia.ConfidenceInterval90[0].ToString("####.00") +";" +sim.AgentStavby.RealWorkingTimeASimulacia.ConfidenceInterval90[1].ToString("####.00") +">";
+                labelCIUA.Text = "Confidence interval: <" +sim.AgentStavby.RealWorkingTimeASimulacia.ConfidenceInterval90[0].ToString("P") +";" +sim.AgentStavby.RealWorkingTimeASimulacia.ConfidenceInterval90[1].ToString("P") +">";
             }
 
             if (!sim.AgentStavby.VykladacBIsDisabled)
@@ -714,6 +760,17 @@ namespace ds_agent_oriented_simulation
                 labelUsageLB.Text = "Usage B: " + Sim.AgentSkladky.RealWorkingTimeB.Mean().ToString("p");
                 labelUsageUA.Text = "Usage A: " + Sim.AgentStavby.RealWorkingTimeA.Mean().ToString("p");
                 labelUsageUB.Text = "Usage B: " + Sim.AgentStavby.RealWorkingTimeB.Mean().ToString("p");
+
+                storageAStat = 0;
+                storageBStat = 0;
+                count = 0;
+                maxA = 0;
+                minA = 9000;
+                maxB = 0;
+                minB = 9000;
+                chart1.Series["StorageA"].Points.Clear();
+                chart3.Series["StorageB"].Points.Clear();
+
             });
         }
 
